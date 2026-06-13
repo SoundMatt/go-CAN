@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.9",
+  "kind": "sbom",
+  "tool": "go-FuSa",
+  "toolVersion": "0.30.0",
+  "language": "go",
+  "generatedAt": "2026-06-13T18:54:51.564302945Z",
+  "format": "x-FuSa SBOM v1",
+  "module": "github.com/SoundMatt/go-CAN",
+  "goVersion": "1.25.0",
+  "components": [
+    {
+      "name": "golang.org/x/sys",
+      "version": "v0.46.0",
+      "hash": "sha256:9e849fd85aba17c0c1812f8bcac224c7bac8131a0d1c9b31380b4fa78aed857c"
+    }
+  ]
+}
