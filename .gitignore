@@ -12,15 +12,7 @@ coverage.out
 coverage.html
 *.cov.out
 
-# go-FuSa artifacts (regenerated on release)
-fmea.csv
-fmea.json
-safety-case.json
-safety-case.md
-safety-case.mermaid
-sbom.json
-provenance.json
-artifact-manifest.json
+# go-FuSa transient reports (not committed; safety artifacts are committed on release)
 check-report.json
 qualify-report.json
 vuln.json
