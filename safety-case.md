@@ -1,6 +1,6 @@
 # Safety Case: github.com/SoundMatt/go-CAN
 
-Generated: 2026-06-13T19:06:58Z  
+Generated: 2026-06-13T19:07:50Z  
 Standard: generic
 
 ## Top Claim
