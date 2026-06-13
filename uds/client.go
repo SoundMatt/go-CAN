@@ -24,6 +24,7 @@
 //fusa:req REQ-UDS-001
 //fusa:req REQ-UDS-002
 //fusa:req REQ-UDS-003
+//fusa:req REQ-UDS-004
 package uds
 
 import (
@@ -80,6 +81,8 @@ const (
 )
 
 // NegativeResponseError is returned when the ECU sends a negative response.
+//
+//fusa:req REQ-UDS-004
 type NegativeResponseError struct {
 	RequestSID byte
 	NRC        byte
@@ -118,6 +121,8 @@ func (c *Client) DiagnosticSessionControl(ctx context.Context, session SessionTy
 }
 
 // ECUReset requests an ECU reset.
+//
+//fusa:req REQ-UDS-002
 func (c *Client) ECUReset(ctx context.Context, resetType ResetType) error {
 	resp, err := c.request(ctx, []byte{SIDECUReset, byte(resetType)})
 	if err != nil {
@@ -154,6 +159,8 @@ func (c *Client) ReadDataByIdentifier(ctx context.Context, did uint16) ([]byte, 
 }
 
 // WriteDataByIdentifier writes data to a data identifier.
+//
+//fusa:req REQ-UDS-003
 func (c *Client) WriteDataByIdentifier(ctx context.Context, did uint16, data []byte) error {
 	req := make([]byte, 3+len(data))
 	req[0] = SIDWriteDataByIdentifier
@@ -172,6 +179,8 @@ func (c *Client) WriteDataByIdentifier(ctx context.Context, did uint16, data []b
 }
 
 // TesterPresent sends a keep-alive to prevent the ECU from timing out the session.
+//
+//fusa:req REQ-UDS-002
 func (c *Client) TesterPresent(ctx context.Context) error {
 	resp, err := c.request(ctx, []byte{SIDTesterPresent, 0x00})
 	if err != nil {
@@ -184,6 +193,9 @@ func (c *Client) TesterPresent(ctx context.Context) error {
 }
 
 // request sends a UDS request and returns the raw response payload.
+// Transparently retries on NRC 0x78 (responsePending).
+//
+//fusa:req REQ-UDS-004
 func (c *Client) request(ctx context.Context, req []byte) ([]byte, error) {
 	if err := c.conn.Send(ctx, req); err != nil {
 		return nil, fmt.Errorf("uds: send: %w", err)

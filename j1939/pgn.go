@@ -21,6 +21,7 @@
 //
 //fusa:req REQ-J1939-001
 //fusa:req REQ-J1939-002
+//fusa:req REQ-J1939-003
 package j1939
 
 import (
@@ -96,17 +97,23 @@ func EncodeID(priority Priority, pgn PGN, src byte) uint32 {
 }
 
 // Bus wraps a CAN bus with J1939-aware send/receive.
+//
+//fusa:req REQ-J1939-003
 type Bus struct {
 	can can.Bus
 	src byte
 }
 
 // NewBus creates a J1939 bus with the given source address.
+//
+//fusa:req REQ-J1939-003
 func NewBus(canBus can.Bus, srcAddr byte) *Bus {
 	return &Bus{can: canBus, src: srcAddr}
 }
 
 // Send transmits a J1939 frame.
+//
+//fusa:req REQ-J1939-003
 func (b *Bus) Send(ctx context.Context, f Frame) error {
 	id := EncodeID(f.Priority, f.PGN, b.src)
 	if f.PGN.IsPeerToPeer() {
@@ -121,6 +128,8 @@ func (b *Bus) Send(ctx context.Context, f Frame) error {
 
 // Subscribe returns a channel delivering decoded J1939 frames that match
 // the given PGNs. With no PGNs, all J1939 frames are delivered.
+//
+//fusa:req REQ-J1939-003
 func (b *Bus) Subscribe(pgns ...PGN) (<-chan Frame, error) {
 	raw, err := b.can.Subscribe()
 	if err != nil {

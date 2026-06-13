@@ -16,6 +16,7 @@ import (
 
 //fusa:test REQ-J1939-001
 //fusa:test REQ-J1939-002
+//fusa:test REQ-J1939-003
 
 func TestDecodeEncodeRoundTrip(t *testing.T) {
 	tests := []struct {

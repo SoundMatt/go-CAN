@@ -18,6 +18,7 @@ import (
 //fusa:test REQ-SCAN-001
 //fusa:test REQ-SCAN-002
 //fusa:test REQ-SCAN-003
+//fusa:test REQ-SCAN-004
 
 // requireVCAN skips the test if vcan0 is not available.
 // Set up with: modprobe vcan && ip link add dev vcan0 type vcan && ip link set up vcan0

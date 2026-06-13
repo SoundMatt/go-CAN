@@ -3,6 +3,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+// CAN FD constants and socket option helper.
+//
+//fusa:req REQ-SCAN-004
 package socketcan
 
 import (
@@ -17,6 +20,8 @@ const (
 
 // enableFD enables CAN FD frames on the given socket file descriptor.
 // After calling this, the socket can send and receive both classic and FD frames.
+//
+//fusa:req REQ-SCAN-004
 func enableFD(fd int) error {
 	return unix.SetsockoptInt(fd, unix.SOL_CAN_RAW, unix.CAN_RAW_FD_FRAMES, 1)
 }

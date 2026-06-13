@@ -115,6 +115,8 @@ type Receiver struct {
 }
 
 // NewReceiver creates an E2E receiver.
+//
+//fusa:req REQ-SAFETY-004
 func NewReceiver(cfg Config) *Receiver {
 	return &Receiver{cfg: cfg, first: true}
 }

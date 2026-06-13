@@ -13,6 +13,7 @@
 //fusa:req REQ-SCAN-001
 //fusa:req REQ-SCAN-002
 //fusa:req REQ-SCAN-003
+//fusa:req REQ-SCAN-004
 package socketcan
 
 import (

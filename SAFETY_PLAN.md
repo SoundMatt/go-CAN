@@ -61,11 +61,13 @@ Key requirement groups:
 |---|---|
 | REQ-CAN-* | Core Bus interface and Frame validation |
 | REQ-VIRT-* | Virtual bus correctness and isolation |
-| REQ-SCAN-* | SocketCAN frame fidelity |
+| REQ-SCAN-* | SocketCAN frame fidelity (REQ-SCAN-004: CAN FD encoding/decoding) |
 | REQ-DBC-* | DBC parser correctness |
 | REQ-ISOTP-* | ISO-TP segmentation and reassembly |
-| REQ-J1939-* | J1939 ID encoding/decoding |
+| REQ-J1939-* | J1939 ID encoding/decoding (REQ-J1939-003: J1939 Bus wrapper) |
 | REQ-SAFETY-* | E2E protection header |
+| REQ-UDS-* | UDS ISO 14229 diagnostic services (REQ-UDS-004: NRC and ResponsePending handling) |
+| REQ-OBD-* | OBD-II ISO 15031 / SAE J1979 PIDs and VIN |
 | REQ-SEOOC-* | SEOOC integration assumptions |
 
 ---

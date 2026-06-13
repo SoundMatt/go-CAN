@@ -11,9 +11,12 @@ import (
 	"github.com/SoundMatt/go-CAN/safety"
 )
 
+//fusa:test REQ-SAFETY-001
+//fusa:test REQ-SAFETY-002
 //fusa:test REQ-SAFETY-003
 //fusa:test REQ-SAFETY-004
 //fusa:test REQ-SAFETY-005
+//fusa:test REQ-SEOOC-001
 
 func TestRoundTrip(t *testing.T) {
 	cfg := safety.Config{DataID: 0x0001, SourceID: 0x0010}

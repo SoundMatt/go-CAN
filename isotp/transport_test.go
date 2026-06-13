@@ -14,6 +14,8 @@ import (
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
+//fusa:test REQ-ISOTP-001
+//fusa:test REQ-ISOTP-002
 //fusa:test REQ-ISOTP-003
 //fusa:test REQ-ISOTP-004
 
