@@ -1,0 +1,284 @@
+{
+  "requirements": [
+    {
+      "id": "REQ-CAN-001",
+      "title": "Frame struct with standard and extended arbitration IDs",
+      "text": "The Frame type shall represent a CAN frame with an arbitration ID field supporting both 11-bit standard (Ext=false) and 29-bit extended (Ext=true) addressing, a data payload up to 8 bytes for classic CAN, and flag fields for FD, BRS, RTR, and Ext modes.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-002",
+      "title": "CAN FD payload extension to 64 bytes",
+      "text": "The Frame type shall support CAN FD payloads of up to 64 bytes when the FD flag is set. The data field shall accommodate all valid CAN FD DLC values (0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 16, 20, 24, 32, 48, 64 bytes).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-003",
+      "title": "Frame RTR mode with no data payload",
+      "text": "The Frame type shall represent a Remote Transmission Request (RTR) frame when the RTR flag is set. An RTR frame shall carry no data payload. ValidateFrame shall reject RTR frames that carry a non-zero data payload.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-004",
+      "title": "Bus interface contract: Send, Subscribe, Close",
+      "text": "The Bus interface shall define three operations: Send(ctx, Frame) error to transmit a frame, Subscribe() (<-chan Frame, error) to receive an independent channel of all frames on the bus, and Close() error to release all associated resources and close all subscriber channels.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-005",
+      "title": "ValidateFrame protocol constraint enforcement",
+      "text": "The ValidateFrame function shall verify that a Frame conforms to CAN protocol constraints: the arbitration ID shall not exceed 0x7FF for standard frames or 0x1FFFFFFF for extended frames; the data payload shall not exceed 8 bytes for classic frames or 64 bytes for FD frames; RTR frames shall carry no data; FD frames shall not combine RTR and FD flags.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-VIRT-001",
+      "title": "In-process frame broadcast to all active subscribers",
+      "text": "The virtual Bus shall broadcast every sent Frame to all channels returned by active Subscribe calls. A frame sent via Send shall be delivered to every subscriber that has not been closed, including the sender's own channel if subscribed.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-VIRT-002",
+      "title": "Frame validation before broadcast",
+      "text": "The virtual Bus Send operation shall invoke ValidateFrame on the supplied Frame before broadcasting. If validation fails, Send shall return an error and no frame shall be delivered to any subscriber.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-VIRT-003",
+      "title": "Subscriber channel isolation",
+      "text": "Each call to Subscribe shall return an independent receive-only channel. Closing or blocking one subscriber channel shall not affect delivery to other subscriber channels. The virtual Bus shall drop frames on a full subscriber channel rather than blocking the sender.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-001",
+      "title": "Linux AF_CAN socket creation and interface binding",
+      "text": "The socketcan package shall create an AF_CAN socket of type SOCK_RAW with the CAN_RAW protocol and bind it to the named network interface. If the interface does not exist or the socket cannot be created, New shall return an error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-002",
+      "title": "CAN frame serialisation and kernel transmit",
+      "text": "The socketcan Bus Send operation shall serialise the Frame into the Linux kernel can_frame or canfd_frame structure and transmit it via the AF_CAN socket using a blocking write. Standard and extended arbitration ID bits shall be encoded correctly in the can_id field.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-003",
+      "title": "Frame receipt from kernel and subscriber delivery",
+      "text": "The socketcan Bus shall continuously read frames from the AF_CAN socket and deliver each received frame to all active subscriber channels. Frame fields (ID, Ext, FD, BRS, Data) shall be decoded faithfully from the kernel structure.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-004",
+      "title": "CAN FD frame encoding and decoding",
+      "text": "The socketcan package shall enable CAN FD mode on the socket using the CAN_RAW_FD_FRAMES socket option. When sending a Frame with FD=true, the 72-byte canfd_frame kernel structure shall be used. The BRS (bit-rate switch) flag shall be encoded and decoded faithfully from the canfd_frame.flags field.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-001",
+      "title": "Message table construction from DBC BO_ declarations",
+      "text": "The DBC parser shall read every BO_ line and construct a Message entry with the message ID (decimal), name, DLC (data length code), and transmitter node. The resulting message table shall be indexed by message ID for O(1) lookup.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-002",
+      "title": "Signal definition parsing from DBC SG_ declarations",
+      "text": "The DBC parser shall read every SG_ line nested under a BO_ block and extract: signal name, start bit, bit length, byte order (little-endian Motorola or big-endian Intel), value type (signed/unsigned), scale factor, offset, minimum, maximum, unit, and receiving node list.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-003",
+      "title": "Signal decoding with bit extraction, scale, offset, and sign extension",
+      "text": "The Decode function shall extract the raw bit value from a CAN frame payload using the signal's start bit, length, and byte order. The physical value shall be computed as: physical = raw × scale + offset. Signed signals shall apply two's-complement sign extension. The function shall return an error if the payload is shorter than required by the signal definition.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-001",
+      "title": "ISO-TP connection configuration with TxID, RxID, and timeout",
+      "text": "The ISO-TP Config struct shall specify the transmit CAN arbitration ID (TxID), the receive CAN arbitration ID (RxID), and an optional RxTimeout. The defaults shall be: RxTimeout = 1 second. If TxID equals RxID, New shall return an error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-002",
+      "title": "ISO-TP connection setup with bus subscription and frame filtering",
+      "text": "The New function shall subscribe to the provided Bus and filter received frames to only those whose arbitration ID matches Config.RxID. The returned Conn shall be ready to send and receive ISO-TP messages immediately after creation.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-003",
+      "title": "ISO-TP single-frame and segmented multi-frame send",
+      "text": "The Send operation shall transmit a message using ISO-TP framing (ISO 15765-2): messages of 7 bytes or fewer shall be sent as a Single Frame (PCI byte 0x0N); longer messages shall be segmented using a First Frame followed by Consecutive Frames, pausing between each burst to observe the block size and separation time from the receiver's Flow Control frame.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-004",
+      "title": "ISO-TP multi-frame reassembly with flow control",
+      "text": "The Recv operation shall reassemble multi-frame ISO-TP messages: upon receiving a First Frame it shall send a Flow Control frame (block size 0, separation time 0), then collect Consecutive Frames in sequence-number order until the full payload is received. The Recv operation shall return an error if a Consecutive Frame sequence number is out of order or if the RxTimeout expires before reception is complete.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-001",
+      "title": "29-bit J1939 ID decoding to priority, PGN, and source address",
+      "text": "The DecodeID function shall decode a 29-bit J1939 CAN arbitration ID into its three fields: priority (bits 28–26, 3 bits), parameter group number PGN (bits 25–8, 18 bits), and source address (bits 7–0, 8 bits). The decoded values shall faithfully reflect the bit-field layout defined in SAE J1939-21.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-002",
+      "title": "29-bit J1939 ID encoding from priority, PGN, and source address",
+      "text": "The EncodeID function shall compose a 29-bit J1939 CAN arbitration ID from priority (3 bits), PGN (18 bits), and source address (8 bits) using the bit-field layout defined in SAE J1939-21. The encoded value shall round-trip faithfully through DecodeID.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-003",
+      "title": "J1939 Bus wrapper with PGN-filtered send and subscribe",
+      "text": "The J1939 Bus struct shall wrap a go-CAN Bus and provide Send(ctx, PGN, priority, src, data) and Subscribe(pgn) operations. Subscribe shall return a channel delivering only frames whose decoded PGN matches the requested value. Send shall encode the J1939 ID from the supplied fields before transmitting.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-001",
+      "title": "E2E protection configuration with DataID and SourceID",
+      "text": "The E2E Config struct shall carry a DataID (uint16) that is mixed into the CRC computation to bind the checksum to a specific message type, and a SourceID (uint8) that is recorded in the protection header to identify the sender. Both fields shall be mandatory.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-002",
+      "title": "Protector with monotonically-incrementing atomic sequence counter",
+      "text": "The Protector type shall maintain a sequence counter that increments atomically with each call to Protect. The counter shall wrap from 255 to 0. Concurrent calls to Protect from multiple goroutines shall each obtain a unique, monotonically increasing sequence number.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-003",
+      "title": "Protect operation: prepend 10-byte E2E header with CRC",
+      "text": "The Protect function shall prepend a 10-byte E2E Profile 11 header to the payload. The header shall contain: magic byte 0xE2, DataID (2 bytes, big-endian), SourceID (1 byte), sequence counter (1 byte), payload length (2 bytes, big-endian), and CRC-32 (4 bytes) computed over the DataID, sequence number, payload length, and payload bytes.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-004",
+      "title": "Receiver state machine for sequence gap detection",
+      "text": "The Receiver type shall maintain the last seen sequence number per SourceID. Upon successful Unwrap it shall update the stored sequence number and return the gap count (current minus previous minus 1). A gap greater than zero shall not be treated as an error but shall be reported to the caller for application-level handling.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-005",
+      "title": "Unwrap: CRC verification and header integrity check",
+      "text": "The Unwrap function shall verify the CRC-32 over the DataID, sequence number, length, and payload. If the CRC does not match, Unwrap shall return ErrCRCMismatch and discard the payload. If the header magic byte is not 0xE2 or the header is shorter than 10 bytes, Unwrap shall return ErrBadHeader.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SEOOC-001",
+      "title": "Safety Element Out Of Context transport-selection assumption",
+      "text": "go-CAN is developed as a Safety Element Out Of Context (SEOOC). The integrating system is responsible for selecting an appropriate transport (virtual bus for testing, SocketCAN for production) and for ensuring that the physical CAN interface meets the fault-containment and latency requirements of the target ASIL level. go-CAN does not enforce transport-level fault containment.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-001",
+      "title": "UDS client initialisation over an ISO-TP connection",
+      "text": "The NewClient function shall accept an *isotp.Conn and return a *Client ready to issue UDS requests. The Client shall not open, close, or configure the ISO-TP connection; connection lifecycle is the caller's responsibility.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-002",
+      "title": "UDS session control and ECU reset services",
+      "text": "The Client shall implement DiagnosticSessionControl (SID 0x10), ECUReset (SID 0x11), and TesterPresent (SID 0x3E). Each function shall send the request frame and verify the positive response SID (request SID + 0x40). Non-matching responses shall be returned as errors.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-003",
+      "title": "UDS data identifier read and write services",
+      "text": "The Client shall implement ReadDataByIdentifier (SID 0x22) and WriteDataByIdentifier (SID 0x2E). Both shall encode the 2-byte DID in big-endian order. ReadDataByIdentifier shall return the response payload after stripping the positive SID and echoed DID bytes.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-004",
+      "title": "UDS negative response and ResponsePending (NRC 0x78) handling",
+      "text": "The internal request function shall parse negative response frames (SID 0x7F). Responses with NRC 0x78 (responsePending) shall not terminate the request; the function shall continue receiving until a positive or terminal negative response is received. Other negative responses shall be returned as a *NegativeResponseError containing the RequestSID and NRC.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-OBD-001",
+      "title": "OBD-II client initialisation over an ISO-TP connection",
+      "text": "The OBD-II NewClient function shall accept an *isotp.Conn configured with the OBD-II functional address (default TxID 0x7DF, RxID 0x7E8) and return a *Client ready to issue OBD-II mode/PID requests. Connection lifecycle is the caller's responsibility.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-OBD-002",
+      "title": "OBD-II Mode 01 PID decoding for 15 standard PIDs",
+      "text": "The ReadPID function shall issue Mode 01 requests and decode responses for the following PIDs: 0x0C (engine RPM), 0x0D (vehicle speed), 0x05 (coolant temperature), 0x0F (intake air temperature), 0x04 (calculated engine load), 0x10 (MAF air flow rate), 0x11 (throttle position), 0x2F (fuel tank level), 0x5C (oil temperature), 0x42 (control module voltage), 0x1F (engine runtime), 0x06 (short-term fuel trim bank 1), 0x07 (long-term fuel trim bank 1), 0x0A (fuel pressure), 0x0B (intake manifold pressure). Physical unit conversions shall match ISO 15031-5 / SAE J1979.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-OBD-003",
+      "title": "OBD-II Mode 09 VIN retrieval",
+      "text": "The ReadVIN function shall issue a Mode 09 PID 0x02 request and decode the response payload as an ASCII VIN string (17 characters per ISO 3779). The function shall strip mode and PID echo bytes from the response before returning the VIN string.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    }
+  ]
+}
