@@ -16,6 +16,7 @@ import (
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
+//fusa:test REQ-OBD-001
 //fusa:test REQ-OBD-002
 //fusa:test REQ-OBD-003
 
