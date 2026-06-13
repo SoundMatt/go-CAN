@@ -16,6 +16,10 @@ import (
 //fusa:test REQ-DBC-001
 //fusa:test REQ-DBC-002
 //fusa:test REQ-DBC-003
+//fusa:test REQ-DBC-004
+//fusa:test REQ-DBC-005
+//fusa:test REQ-DBC-006
+//fusa:test REQ-DBC-007
 
 const sampleDBC = `
 VERSION ""

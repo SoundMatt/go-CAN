@@ -21,6 +21,10 @@
 //
 //fusa:req REQ-J1939-001
 //fusa:req REQ-J1939-002
+//fusa:req REQ-J1939-003
+//fusa:req REQ-J1939-004
+//fusa:req REQ-J1939-005
+//fusa:req REQ-J1939-006
 package j1939
 
 import (
@@ -61,6 +65,8 @@ func (p PGN) IsPeerToPeer() bool {
 // DecodeID extracts J1939 fields from a 29-bit CAN extended ID.
 //
 //fusa:req REQ-J1939-001
+//fusa:req REQ-J1939-002
+//fusa:req REQ-J1939-003
 func DecodeID(id uint32) (priority Priority, pgn PGN, src byte) {
 	priority = Priority((id >> 26) & 0x07)
 	src = byte(id & 0xFF)
@@ -79,7 +85,7 @@ func DecodeID(id uint32) (priority Priority, pgn PGN, src byte) {
 
 // EncodeID builds a 29-bit J1939 CAN extended ID.
 //
-//fusa:req REQ-J1939-002
+//fusa:req REQ-J1939-004
 func EncodeID(priority Priority, pgn PGN, src byte) uint32 {
 	pf := byte((pgn >> 8) & 0xFF)
 	ps := byte(pgn & 0xFF)
@@ -107,6 +113,8 @@ func NewBus(canBus can.Bus, srcAddr byte) *Bus {
 }
 
 // Send transmits a J1939 frame.
+//
+//fusa:req REQ-J1939-005
 func (b *Bus) Send(ctx context.Context, f Frame) error {
 	id := EncodeID(f.Priority, f.PGN, b.src)
 	if f.PGN.IsPeerToPeer() {
@@ -121,6 +129,8 @@ func (b *Bus) Send(ctx context.Context, f Frame) error {
 
 // Subscribe returns a channel delivering decoded J1939 frames that match
 // the given PGNs. With no PGNs, all J1939 frames are delivered.
+//
+//fusa:req REQ-J1939-006
 func (b *Bus) Subscribe(pgns ...PGN) (<-chan Frame, error) {
 	raw, err := b.can.Subscribe()
 	if err != nil {

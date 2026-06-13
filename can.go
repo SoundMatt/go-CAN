@@ -27,6 +27,8 @@ import "context"
 //fusa:req REQ-CAN-001
 //fusa:req REQ-CAN-002
 //fusa:req REQ-CAN-003
+//fusa:req REQ-CAN-004
+//fusa:req REQ-CAN-005
 
 // Frame is a CAN or CAN FD frame.
 //
@@ -81,7 +83,9 @@ func (fl Filter) Matches(f Frame) bool {
 //     virtual CAN interfaces (vcan0, can0, …).
 //   - (future) canfd.Bus — CAN FD with bit-rate switching.
 //
-//fusa:req REQ-CAN-004
+//fusa:req REQ-CAN-006
+//fusa:req REQ-CAN-007
+//fusa:req REQ-CAN-008
 type Bus interface {
 	// Send transmits a single CAN frame. It blocks until the frame is
 	// accepted by the transport or ctx is cancelled.
@@ -113,7 +117,12 @@ func MaxDataLen(fd bool) int {
 
 // ValidateFrame checks that f satisfies CAN protocol constraints.
 //
-//fusa:req REQ-CAN-005
+//fusa:req REQ-CAN-009
+//fusa:req REQ-CAN-010
+//fusa:req REQ-CAN-011
+//fusa:req REQ-CAN-012
+//fusa:req REQ-CAN-013
+//fusa:req REQ-CAN-014
 func ValidateFrame(f Frame) error {
 	if f.Ext && f.ID > 0x1FFFFFFF {
 		return &ErrInvalidFrame{Reason: "extended ID exceeds 29 bits"}

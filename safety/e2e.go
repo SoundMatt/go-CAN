@@ -30,6 +30,12 @@
 //fusa:req REQ-SAFETY-003
 //fusa:req REQ-SAFETY-004
 //fusa:req REQ-SAFETY-005
+//fusa:req REQ-SAFETY-006
+//fusa:req REQ-SAFETY-007
+//fusa:req REQ-SAFETY-008
+//fusa:req REQ-SAFETY-009
+//fusa:req REQ-SAFETY-010
+//fusa:req REQ-SAFETY-011
 //fusa:req REQ-SEOOC-001
 package safety
 
@@ -45,6 +51,7 @@ const headerSize = 10
 // Config configures end-to-end protection parameters.
 //
 //fusa:req REQ-SAFETY-001
+//fusa:req REQ-SAFETY-002
 type Config struct {
 	// DataID identifies the logical data element (0–65535).
 	DataID uint16
@@ -79,7 +86,8 @@ func (e *E2EError) Error() string {
 // Use Protect to wrap a payload, then send the result via any transport
 // (ISO-TP, CAN FD, J1939 TP, etc.).
 //
-//fusa:req REQ-SAFETY-002
+//fusa:req REQ-SAFETY-003
+//fusa:req REQ-SAFETY-004
 type Protector struct {
 	cfg Config
 	seq atomic.Uint32
@@ -87,14 +95,16 @@ type Protector struct {
 
 // NewProtector creates an E2E protector.
 //
-//fusa:req REQ-SAFETY-002
+//fusa:req REQ-SAFETY-003
+//fusa:req REQ-SAFETY-004
 func NewProtector(cfg Config) *Protector {
 	return &Protector{cfg: cfg}
 }
 
 // Protect prepends the E2E header and returns the protected payload.
 //
-//fusa:req REQ-SAFETY-003
+//fusa:req REQ-SAFETY-005
+//fusa:req REQ-SAFETY-006
 func (p *Protector) Protect(payload []byte) []byte {
 	seq := p.seq.Add(1) - 1
 	hdr := buildHeader(p.cfg.DataID, p.cfg.SourceID, seq, payload)
@@ -106,7 +116,7 @@ func (p *Protector) Protect(payload []byte) []byte {
 
 // Receiver validates E2E headers on received payloads.
 //
-//fusa:req REQ-SAFETY-004
+//fusa:req REQ-SAFETY-011
 type Receiver struct {
 	mu      sync.Mutex
 	cfg     Config
@@ -121,7 +131,11 @@ func NewReceiver(cfg Config) *Receiver {
 
 // Unwrap validates the E2E header in data and returns the original payload.
 //
-//fusa:req REQ-SAFETY-005
+//fusa:req REQ-SAFETY-007
+//fusa:req REQ-SAFETY-008
+//fusa:req REQ-SAFETY-009
+//fusa:req REQ-SAFETY-010
+//fusa:req REQ-SAFETY-011
 func (r *Receiver) Unwrap(data []byte) ([]byte, error) {
 	if len(data) < headerSize {
 		return nil, &E2EError{Kind: ErrHeaderTooShort, Message: fmt.Sprintf("need %d bytes, got %d", headerSize, len(data))}

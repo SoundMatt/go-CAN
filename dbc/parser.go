@@ -13,6 +13,10 @@
 //fusa:req REQ-DBC-001
 //fusa:req REQ-DBC-002
 //fusa:req REQ-DBC-003
+//fusa:req REQ-DBC-004
+//fusa:req REQ-DBC-005
+//fusa:req REQ-DBC-006
+//fusa:req REQ-DBC-007
 package dbc
 
 import (
@@ -61,13 +65,19 @@ type Message struct {
 // DB is a parsed DBC database.
 //
 //fusa:req REQ-DBC-001
+//fusa:req REQ-DBC-002
+//fusa:req REQ-DBC-003
+//fusa:req REQ-DBC-004
 type DB struct {
 	Messages map[uint32]*Message
 }
 
 // Parse reads a DBC file from r and returns the parsed database.
 //
+//fusa:req REQ-DBC-001
 //fusa:req REQ-DBC-002
+//fusa:req REQ-DBC-003
+//fusa:req REQ-DBC-004
 func Parse(r io.Reader) (*DB, error) {
 	db := &DB{Messages: make(map[uint32]*Message)}
 	scanner := bufio.NewScanner(r)
@@ -108,7 +118,9 @@ func Parse(r io.Reader) (*DB, error) {
 // Decode extracts all signal values from data for the given message ID.
 // Returns nil if the message ID is not in the database.
 //
-//fusa:req REQ-DBC-003
+//fusa:req REQ-DBC-005
+//fusa:req REQ-DBC-006
+//fusa:req REQ-DBC-007
 func (db *DB) Decode(id uint32, data []byte) map[string]float64 {
 	msg, ok := db.Messages[id]
 	if !ok {

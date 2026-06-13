@@ -13,6 +13,11 @@
 //fusa:req REQ-SCAN-001
 //fusa:req REQ-SCAN-002
 //fusa:req REQ-SCAN-003
+//fusa:req REQ-SCAN-004
+//fusa:req REQ-SCAN-005
+//fusa:req REQ-SCAN-006
+//fusa:req REQ-SCAN-007
+//fusa:req REQ-SCAN-008
 package socketcan
 
 import (
@@ -38,6 +43,7 @@ const (
 // Bus is a Linux SocketCAN bus implementation supporting classic CAN and CAN FD.
 //
 //fusa:req REQ-SCAN-001
+//fusa:req REQ-SCAN-006
 type Bus struct {
 	fd   int
 	mu   sync.RWMutex
@@ -56,6 +62,8 @@ type subscription struct {
 // frames to be transmitted without error.
 //
 //fusa:req REQ-SCAN-001
+//fusa:req REQ-SCAN-002
+//fusa:req REQ-SCAN-006
 func New(iface string) (*Bus, error) {
 	fd, err := unix.Socket(unix.AF_CAN, unix.SOCK_RAW, unix.CAN_RAW)
 	if err != nil {
@@ -87,7 +95,10 @@ func New(iface string) (*Bus, error) {
 
 // Send transmits a CAN or CAN FD frame.
 //
-//fusa:req REQ-SCAN-002
+//fusa:req REQ-SCAN-003
+//fusa:req REQ-SCAN-004
+//fusa:req REQ-SCAN-007
+//fusa:req REQ-SCAN-008
 func (b *Bus) Send(_ context.Context, f can.Frame) error {
 	if err := can.ValidateFrame(f); err != nil {
 		return err
@@ -102,7 +113,7 @@ func (b *Bus) Send(_ context.Context, f can.Frame) error {
 
 // Subscribe returns a channel that delivers frames matching any of the filters.
 //
-//fusa:req REQ-SCAN-003
+//fusa:req REQ-SCAN-005
 func (b *Bus) Subscribe(filters ...can.Filter) (<-chan can.Frame, error) {
 	b.mu.Lock()
 	defer b.mu.Unlock()

@@ -24,6 +24,12 @@
 //fusa:req REQ-UDS-001
 //fusa:req REQ-UDS-002
 //fusa:req REQ-UDS-003
+//fusa:req REQ-UDS-004
+//fusa:req REQ-UDS-005
+//fusa:req REQ-UDS-006
+//fusa:req REQ-UDS-007
+//fusa:req REQ-UDS-008
+//fusa:req REQ-UDS-009
 package uds
 
 import (
@@ -92,6 +98,14 @@ func (e *NegativeResponseError) Error() string {
 // Client is a UDS client that communicates over an ISO-TP connection.
 //
 //fusa:req REQ-UDS-001
+//fusa:req REQ-UDS-002
+//fusa:req REQ-UDS-003
+//fusa:req REQ-UDS-004
+//fusa:req REQ-UDS-005
+//fusa:req REQ-UDS-006
+//fusa:req REQ-UDS-007
+//fusa:req REQ-UDS-008
+//fusa:req REQ-UDS-009
 type Client struct {
 	conn *isotp.Conn
 }
@@ -99,6 +113,7 @@ type Client struct {
 // NewClient creates a UDS client.
 //
 //fusa:req REQ-UDS-001
+//fusa:req REQ-UDS-009
 func NewClient(conn *isotp.Conn) *Client {
 	return &Client{conn: conn}
 }
@@ -118,6 +133,8 @@ func (c *Client) DiagnosticSessionControl(ctx context.Context, session SessionTy
 }
 
 // ECUReset requests an ECU reset.
+//
+//fusa:req REQ-UDS-003
 func (c *Client) ECUReset(ctx context.Context, resetType ResetType) error {
 	resp, err := c.request(ctx, []byte{SIDECUReset, byte(resetType)})
 	if err != nil {
@@ -132,7 +149,8 @@ func (c *Client) ECUReset(ctx context.Context, resetType ResetType) error {
 // ReadDataByIdentifier reads one or more data identifiers from the ECU.
 // Returns the raw response data (excluding the positive response SID).
 //
-//fusa:req REQ-UDS-003
+//fusa:req REQ-UDS-005
+//fusa:req REQ-UDS-006
 func (c *Client) ReadDataByIdentifier(ctx context.Context, did uint16) ([]byte, error) {
 	req := []byte{
 		SIDReadDataByIdentifier,
@@ -154,6 +172,8 @@ func (c *Client) ReadDataByIdentifier(ctx context.Context, did uint16) ([]byte, 
 }
 
 // WriteDataByIdentifier writes data to a data identifier.
+//
+//fusa:req REQ-UDS-007
 func (c *Client) WriteDataByIdentifier(ctx context.Context, did uint16, data []byte) error {
 	req := make([]byte, 3+len(data))
 	req[0] = SIDWriteDataByIdentifier
@@ -172,6 +192,8 @@ func (c *Client) WriteDataByIdentifier(ctx context.Context, did uint16, data []b
 }
 
 // TesterPresent sends a keep-alive to prevent the ECU from timing out the session.
+//
+//fusa:req REQ-UDS-004
 func (c *Client) TesterPresent(ctx context.Context) error {
 	resp, err := c.request(ctx, []byte{SIDTesterPresent, 0x00})
 	if err != nil {
@@ -184,6 +206,9 @@ func (c *Client) TesterPresent(ctx context.Context) error {
 }
 
 // request sends a UDS request and returns the raw response payload.
+//
+//fusa:req REQ-UDS-008
+//fusa:req REQ-UDS-009
 func (c *Client) request(ctx context.Context, req []byte) ([]byte, error) {
 	if err := c.conn.Send(ctx, req); err != nil {
 		return nil, fmt.Errorf("uds: send: %w", err)

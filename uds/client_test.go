@@ -15,8 +15,13 @@ import (
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
+//fusa:test REQ-UDS-001
 //fusa:test REQ-UDS-002
-//fusa:test REQ-UDS-003
+//fusa:test REQ-UDS-004
+//fusa:test REQ-UDS-005
+//fusa:test REQ-UDS-006
+//fusa:test REQ-UDS-008
+//fusa:test REQ-UDS-009
 
 // echoServer runs a minimal UDS echo server on the virtual bus.
 // It reads requests from rxID and sends positive responses to txID.
