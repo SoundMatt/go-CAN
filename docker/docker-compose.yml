@@ -1,0 +1,20 @@
+# go-CAN quickstart — in-process CAN virtual bus demo.
+#
+# Runs a single container demonstrating the virtual bus with a sender
+# goroutine publishing synthetic engine-speed frames and a receiver
+# goroutine decoding them.
+#
+# Usage:
+#   docker compose -f docker/docker-compose.yml up --build
+#
+# The virtual bus is in-process; no network bridging is needed.
+
+services:
+  quickstart:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: quickstart
+    environment:
+      - CAN_INTERVAL_MS=500
+    restart: unless-stopped

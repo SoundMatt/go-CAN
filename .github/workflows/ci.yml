@@ -1,0 +1,139 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  # ── Cross-platform unit tests (virtual, dbc, isotp, j1939, safety) ─────────
+  test:
+    name: Test (${{ matrix.os }}, Go ${{ matrix.go }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        go: ["1.25", "1.26"]
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: go vet
+        run: go vet ./...
+
+      - name: go test (unit + race)
+        shell: bash
+        run: |
+          # Exclude socketcan on non-Linux (it uses Linux syscalls)
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            go test -race -count=1 -coverprofile=coverage.out ./...
+          else
+            go test -race -count=1 -coverprofile=coverage.out \
+              $(go list ./... | grep -v socketcan)
+          fi
+
+      - name: Upload coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.go == '1.25'
+        uses: actions/upload-artifact@v6
+        with:
+          name: coverage
+          path: coverage.out
+
+  # ── Benchmark smoke run ───────────────────────────────────────────────────
+  benchmark-smoke:
+    name: Benchmark smoke (ubuntu-latest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.25"
+
+      - name: go test -bench (smoke, 1 iteration)
+        run: >
+          go test
+          -bench=.
+          -benchtime=1x
+          -benchmem
+          -run=^$
+          ./virtual/...
+
+  # ── Short fuzz run ────────────────────────────────────────────────────────
+  fuzz-short:
+    name: Fuzz (short, ubuntu-latest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.25"
+
+      - name: Clear fuzz corpus cache
+        run: go clean -fuzzcache
+
+      - name: FuzzSend (virtual)
+        run: go test -fuzz=^FuzzSend$ -fuzztime=10s ./virtual/...
+
+      - name: FuzzParse (dbc)
+        run: go test -fuzz=^FuzzParse$ -fuzztime=10s ./dbc/...
+
+  # ── SocketCAN tests (Linux only, requires vcan) ───────────────────────────
+  # Uses vcan0 Linux virtual CAN interface. The test helpers skip gracefully
+  # if vcan0 is not available, so CI passes even without hardware.
+  test-socketcan:
+    name: Test (socketcan, ubuntu-latest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.25"
+
+      - name: Load vcan module
+        id: vcan
+        run: |
+          if sudo modprobe vcan 2>/dev/null && \
+             sudo ip link add dev vcan0 type vcan 2>/dev/null && \
+             sudo ip link set up vcan0; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::vcan0 not available — socketcan tests will skip"
+          fi
+
+      - name: go vet (socketcan)
+        run: go vet ./socketcan/...
+
+      - name: go test (socketcan, -race)
+        run: go test -race -count=1 -v ./socketcan/...
+
+  # ── go-FuSa safety checks ─────────────────────────────────────────────────
+  # Pinned to v0.30.0; exits 1 on any ERROR-level finding.
+  # To upgrade: install the new version locally, run 'gofusa check ./...',
+  # fix all findings, then bump the @version pin below.
+  gofusa:
+    name: go-FuSa safety check (v0.30.0)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.25"
+
+      - name: Install go-FuSa
+        run: go install github.com/SoundMatt/go-FuSa/cmd/gofusa@v0.30.0
+
+      - name: gofusa check
+        run: gofusa check ./...

@@ -1,0 +1,38 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test artifacts
+*.test
+*.out
+coverage.out
+coverage.html
+*.cov.out
+
+# go-FuSa artifacts (regenerated on release)
+fmea.csv
+fmea.json
+safety-case.json
+safety-case.md
+safety-case.mermaid
+sbom.json
+provenance.json
+artifact-manifest.json
+check-report.json
+qualify-report.json
+vuln.json
+
+# Build output
+/bin/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
