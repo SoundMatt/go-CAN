@@ -5,7 +5,8 @@
 
 // Package socketcan provides a CAN bus implementation using Linux SocketCAN.
 // It works with hardware CAN interfaces (can0, can1, …) and the Linux
-// virtual CAN driver (vcan0, …).
+// virtual CAN driver (vcan0, …). CAN FD frames are supported when the
+// underlying interface is FD-capable.
 //
 // Requires Linux kernel ≥ 3.6 with CONFIG_CAN_RAW=y or =m.
 //
@@ -30,17 +31,11 @@ const (
 	canRTRFlag = 0x40000000 // remote transmission request
 	canEFFMask = 0x1FFFFFFF // extended ID mask
 	canSFFMask = 0x000007FF // standard ID mask
+
+	classicFrameLen = 16 // sizeof(struct can_frame)
 )
 
-// canFrame is the kernel struct layout for a CAN frame (16 bytes).
-type canFrame struct {
-	ID  uint32
-	DLC uint8
-	_   [3]byte
-	// Data is 8 bytes; kernel pads to 16 total.
-}
-
-// Bus is a Linux SocketCAN bus implementation.
+// Bus is a Linux SocketCAN bus implementation supporting classic CAN and CAN FD.
 //
 //fusa:req REQ-SCAN-001
 type Bus struct {
@@ -57,12 +52,20 @@ type subscription struct {
 }
 
 // New opens a raw CAN socket on the named network interface (e.g. "can0", "vcan0").
+// CAN FD frames are enabled automatically; the interface must support FD for FD
+// frames to be transmitted without error.
 //
 //fusa:req REQ-SCAN-001
 func New(iface string) (*Bus, error) {
 	fd, err := unix.Socket(unix.AF_CAN, unix.SOCK_RAW, unix.CAN_RAW)
 	if err != nil {
 		return nil, fmt.Errorf("socketcan: socket: %w", err)
+	}
+
+	// Enable CAN FD frames (gracefully ignored on non-FD interfaces).
+	if fdErr := enableFD(fd); fdErr != nil {
+		// Non-fatal: classic-only interfaces don't support this option.
+		_ = fdErr
 	}
 
 	ifIdx, err := ifaceIndex(iface)
@@ -82,10 +85,10 @@ func New(iface string) (*Bus, error) {
 	return b, nil
 }
 
-// Send transmits a CAN frame. Blocks until the kernel accepts the frame.
+// Send transmits a CAN or CAN FD frame.
 //
 //fusa:req REQ-SCAN-002
-func (b *Bus) Send(ctx context.Context, f can.Frame) error {
+func (b *Bus) Send(_ context.Context, f can.Frame) error {
 	if err := can.ValidateFrame(f); err != nil {
 		return err
 	}
@@ -128,7 +131,7 @@ func (b *Bus) Close() error {
 }
 
 func (b *Bus) readLoop() {
-	buf := make([]byte, 16)
+	buf := make([]byte, canFDFrameLen)
 	for {
 		select {
 		case <-b.done:
@@ -136,8 +139,11 @@ func (b *Bus) readLoop() {
 		default:
 		}
 		n, err := unix.Read(b.fd, buf)
-		if err != nil || n < 8 {
+		if err != nil {
 			return
+		}
+		if n != classicFrameLen && n != canFDFrameLen {
+			continue
 		}
 		f := decodeFrame(buf[:n])
 		b.mu.RLock()
@@ -153,8 +159,8 @@ func (b *Bus) readLoop() {
 	}
 }
 
+// encodeFrame serialises a Frame into a kernel can_frame or canfd_frame byte slice.
 func encodeFrame(f can.Frame) []byte {
-	raw := make([]byte, 16)
 	id := f.ID
 	if f.Ext {
 		id |= canEFFFlag
@@ -162,12 +168,26 @@ func encodeFrame(f can.Frame) []byte {
 	if f.RTR {
 		id |= canRTRFlag
 	}
+
+	if f.FD {
+		raw := make([]byte, canFDFrameLen)
+		binary.NativeEndian.PutUint32(raw[0:4], id)
+		raw[4] = byte(len(f.Data))
+		if f.BRS {
+			raw[5] |= canFDBRSFlag
+		}
+		copy(raw[8:], f.Data)
+		return raw
+	}
+
+	raw := make([]byte, classicFrameLen)
 	binary.NativeEndian.PutUint32(raw[0:4], id)
 	raw[4] = byte(len(f.Data))
 	copy(raw[8:], f.Data)
 	return raw
 }
 
+// decodeFrame deserialises a kernel can_frame or canfd_frame byte slice.
 func decodeFrame(raw []byte) can.Frame {
 	id := binary.NativeEndian.Uint32(raw[0:4])
 	ext := id&canEFFFlag != 0
@@ -177,6 +197,26 @@ func decodeFrame(raw []byte) can.Frame {
 	} else {
 		id &= canSFFMask
 	}
+
+	if len(raw) == canFDFrameLen {
+		// CAN FD frame
+		dataLen := int(raw[4])
+		if dataLen > 64 {
+			dataLen = 64
+		}
+		flags := raw[5]
+		data := make([]byte, dataLen)
+		copy(data, raw[8:8+dataLen])
+		return can.Frame{
+			ID:  id,
+			Ext: ext,
+			FD:  true,
+			BRS: flags&canFDBRSFlag != 0,
+			Data: data,
+		}
+	}
+
+	// Classic CAN frame
 	dlc := int(raw[4])
 	if dlc > 8 {
 		dlc = 8
@@ -205,4 +245,3 @@ func matchesAny(filters []can.Filter, f can.Frame) bool {
 	}
 	return false
 }
-
