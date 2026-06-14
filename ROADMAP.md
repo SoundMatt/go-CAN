@@ -13,8 +13,9 @@ The project focuses on:
 - Standards compliance: ISO 15765-2 (ISO-TP), SAE J1939, DBC signal decoding
 - Testability by default via the in-process virtual bus
 
-go-CAN does not bridge to other protocols (DDS, MQTT, SOME/IP, etc.).
-Other projects adapt to go-CAN.
+Protocol bridges live under `bridge/` as optional sub-packages — import only
+what you need. Each bridge adapts `can.Bus` bidirectionally to a target
+protocol, with zero required dependencies in the core library.
 
 ---
 
@@ -26,6 +27,7 @@ Other projects adapt to go-CAN.
 4. Testability by default — virtual bus works everywhere
 5. Safety as a first-class concern
 6. Interface-first API — transports are always swappable
+7. Optional bridges — protocol adapters live under `bridge/` and carry their own dependencies; core remains zero-dependency
 
 ---
 
@@ -43,6 +45,11 @@ Other projects adapt to go-CAN.
 | v0.8.0 | go-FuSa v0.30.0 → latest; coverage 80% across all packages | planned |
 | v0.9.0 | Statistics and metrics — bus load, error frames, frame counters per ID | planned |
 | v1.0.0 | API stability, full SocketCAN feature set, documentation complete | planned |
+| v1.1.0 | **Bridge — MQTT** (`bridge/mqtt/`) — publish/subscribe CAN frames over MQTT topics | planned |
+| v1.2.0 | **Bridge — SOME/IP** (`bridge/someip/`) — translate CAN frames to/from SOME/IP service events | planned |
+| v1.3.0 | **Bridge — DDS** (`bridge/dds/`) — CAN frame distribution over DDS topics (works with go-DDS) | planned |
+| v1.4.0 | **Bridge — gRPC** (`bridge/grpc/`) — stream CAN frames over gRPC (bidirectional streaming RPC) | planned |
+| v1.5.0 | **Bridge — REST** (`bridge/rest/`) — HTTP/REST gateway: send frames via POST, subscribe via SSE | planned |
 
 ---
 
@@ -114,3 +121,46 @@ Other projects adapt to go-CAN.
 - Record frames to JSONL file (with timestamps)
 - Replay in real-time or at scaled rate
 - candump-compatible text format option
+
+---
+
+## Bridges
+
+Each bridge lives under `bridge/<protocol>/` and imports only its own protocol
+library — no bridge dependency bleeds into the core `can` package. All bridges
+implement the same bidirectional pattern:
+
+- **Subscribe** direction: `can.Bus.Subscribe` → protocol publish
+- **Publish** direction: protocol receive → `can.Bus.Send`
+
+### 14 — Bridge: MQTT (`bridge/mqtt/`)
+- Adapts any `can.Bus` to an MQTT broker
+- CAN frame → MQTT topic (configurable topic pattern, e.g. `can/{id}`)
+- MQTT message → CAN frame (with configurable QoS and retain)
+- Uses [paho.mqtt.golang](https://github.com/eclipse/paho.mqtt.golang) or Eclipse Paho v5
+- Bidirectional `Bridge` struct; `Run(ctx)` blocks until context cancelled
+
+### 15 — Bridge: SOME/IP (`bridge/someip/`)
+- Translates CAN frames to/from SOME/IP service events
+- Compatible with go-SOMEIP
+- Each CAN message ID maps to a SOME/IP service/instance/event
+- Configurable via a mapping table (JSON or Go struct)
+
+### 16 — Bridge: DDS (`bridge/dds/`)
+- Distributes CAN frames as DDS topic samples
+- Compatible with go-DDS
+- Each CAN frame → typed DDS sample; configurable topic name and QoS profile
+- Useful for automotive middleware stacks mixing CAN and DDS domains
+
+### 17 — Bridge: gRPC (`bridge/grpc/`)
+- Bidirectional streaming RPC: client streams frames to/from a CAN bus
+- Protobuf message mirrors `can.Frame` (ID, Ext, FD, BRS, Data)
+- Server-side: wraps any `can.Bus`; client-side: implements `can.Bus` interface
+- TLS and mutual-TLS support via standard gRPC dial options
+
+### 18 — Bridge: REST (`bridge/rest/`)
+- HTTP/REST gateway for environments where persistent connections are unavailable
+- `POST /frames` — send a CAN frame
+- `GET  /frames` — Server-Sent Events (SSE) stream of received frames
+- `GET  /frames/{id}` — last-known-value for a specific CAN ID
+- JSON encoding of `can.Frame`; configurable listen address and filters
