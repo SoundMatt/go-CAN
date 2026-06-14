@@ -66,6 +66,8 @@ Key requirement groups:
 | REQ-ISOTP-* | ISO-TP segmentation and reassembly |
 | REQ-J1939-* | J1939 ID encoding/decoding |
 | REQ-SAFETY-* | E2E protection header |
+| REQ-UDS-* | UDS ISO 14229 diagnostic services |
+| REQ-OBD-* | OBD-II ISO 15031 / SAE J1979 PIDs and VIN |
 | REQ-SEOOC-* | SEOOC integration assumptions |
 
 ---
