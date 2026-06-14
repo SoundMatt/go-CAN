@@ -17,6 +17,8 @@ import (
 //fusa:test REQ-VIRT-001
 //fusa:test REQ-VIRT-002
 //fusa:test REQ-VIRT-003
+//fusa:test REQ-VIRT-004
+//fusa:test REQ-VIRT-005
 
 func TestNew(t *testing.T) {
 	b, err := virtual.New()

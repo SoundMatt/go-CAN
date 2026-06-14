@@ -1,0 +1,596 @@
+{
+  "requirements": [
+    {
+      "id": "REQ-CAN-001",
+      "title": "Frame ID field for standard (11-bit) arbitration",
+      "text": "The Frame.ID field shall hold the CAN arbitration identifier. When Frame.Ext is false the ID is an 11-bit standard identifier in the range 0–0x7FF.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-002",
+      "title": "Frame ID field for extended (29-bit) arbitration",
+      "text": "When Frame.Ext is true the ID is a 29-bit extended identifier in the range 0–0x1FFFFFFF.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-003",
+      "title": "Frame FD flag enables CAN FD mode",
+      "text": "When Frame.FD is true the frame is a CAN FD frame and may carry a payload of 0–64 bytes.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-004",
+      "title": "Frame RTR flag indicates remote transmission request",
+      "text": "When Frame.RTR is true the frame is a Remote Transmission Request and carries no data payload; Frame.Data shall be nil or empty.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-005",
+      "title": "Frame BRS flag enables bit-rate switching (FD only)",
+      "text": "Frame.BRS enables the bit-rate switch in a CAN FD frame. BRS is meaningful only when Frame.FD is true; it is ignored otherwise.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-006",
+      "title": "Bus.Send transmits a single CAN frame",
+      "text": "Bus.Send(ctx, f) shall transmit frame f, blocking until the frame is accepted by the transport or ctx is cancelled. It shall return an error if f is invalid.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-007",
+      "title": "Bus.Subscribe returns an independent receive channel",
+      "text": "Bus.Subscribe(filters...) shall return a distinct receive-only channel that delivers frames matching any supplied filter. With no filters, all frames are delivered. Each Subscribe call returns a channel independent of all other subscriber channels.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-008",
+      "title": "Bus.Close releases resources and closes subscriber channels",
+      "text": "Bus.Close() shall release all transport resources and close every channel previously returned by Subscribe. Subsequent calls to Send or Subscribe shall return an error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-009",
+      "title": "ValidateFrame rejects standard ID greater than 0x7FF",
+      "text": "ValidateFrame shall return an error when Frame.Ext is false and Frame.ID exceeds 0x7FF.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-010",
+      "title": "ValidateFrame rejects extended ID greater than 0x1FFFFFFF",
+      "text": "ValidateFrame shall return an error when Frame.Ext is true and Frame.ID exceeds 0x1FFFFFFF.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-011",
+      "title": "ValidateFrame rejects classic CAN payload exceeding 8 bytes",
+      "text": "ValidateFrame shall return an error when Frame.FD is false and len(Frame.Data) exceeds 8.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-012",
+      "title": "ValidateFrame rejects CAN FD payload exceeding 64 bytes",
+      "text": "ValidateFrame shall return an error when Frame.FD is true and len(Frame.Data) exceeds 64.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-013",
+      "title": "ValidateFrame rejects RTR frame with non-empty data",
+      "text": "ValidateFrame shall return an error when Frame.RTR is true and len(Frame.Data) is greater than zero.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CAN-014",
+      "title": "ValidateFrame rejects BRS without FD",
+      "text": "ValidateFrame shall return an error when Frame.BRS is true and Frame.FD is false.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-VIRT-001",
+      "title": "Virtual bus broadcasts each frame to all active subscribers",
+      "text": "virtual.Bus.Send shall deliver the frame to every channel returned by active Subscribe calls whose filter matches, including any channel held by the sender.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-VIRT-002",
+      "title": "Virtual bus validates frame before broadcast",
+      "text": "virtual.Bus.Send shall call ValidateFrame before delivering the frame. If validation fails, Send shall return an error and no frame shall be delivered to any subscriber.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-VIRT-003",
+      "title": "Subscribe returns an independent channel, closed on Bus.Close",
+      "text": "Each call to virtual.Bus.Subscribe shall return an independent receive-only channel. When Close is called, all channels returned by Subscribe shall be closed.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-VIRT-004",
+      "title": "Subscribe channels deliver only frames matching supplied filters",
+      "text": "A channel returned by Subscribe with one or more filters shall receive only frames for which at least one filter matches ((frame.ID & filter.Mask) == (filter.ID & filter.Mask)). A channel subscribed with no filters shall receive all frames.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-VIRT-005",
+      "title": "Virtual bus drops frames on a full subscriber channel",
+      "text": "If a subscriber channel is full at the time of delivery, virtual.Bus.Send shall silently discard the frame for that subscriber without blocking or returning an error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-001",
+      "title": "New creates AF_CAN socket bound to the named interface",
+      "text": "socketcan.New shall create an AF_CAN SOCK_RAW CAN_RAW socket and bind it to the network interface identified by the iface argument.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-002",
+      "title": "New returns error if named interface does not exist",
+      "text": "socketcan.New shall return a non-nil error if the named CAN interface cannot be found via net.InterfaceByName.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-003",
+      "title": "Send serialises classic CAN frame to can_frame kernel struct",
+      "text": "socketcan.Bus.Send shall serialise a Frame with FD=false into the 16-byte Linux can_frame structure, encoding the ID (with EFF/RTR flags), DLC, and data bytes before writing to the socket.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-004",
+      "title": "Extended frame format flag encoded in can_id bit 31",
+      "text": "When Frame.Ext is true, the canEFFFlag (0x80000000) shall be set in the can_id field of the kernel struct. When decoding, can_id bit 31 shall set Frame.Ext and the ID shall be masked to 29 bits.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-005",
+      "title": "Receive loop decodes kernel frame and delivers to matching subscribers",
+      "text": "The socketcan read loop shall read frames from the socket, decode them to the can.Frame type, and deliver each frame to every active subscriber channel whose filter matches.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-006",
+      "title": "CAN_RAW_FD_FRAMES socket option enables CAN FD reception and transmission",
+      "text": "socketcan.New shall call setsockopt(CAN_RAW_FD_FRAMES, 1) on the socket to enable CAN FD frame support. Failure to set the option shall be treated as non-fatal for classic-only interfaces.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-007",
+      "title": "CAN FD frame serialised to 72-byte canfd_frame kernel struct",
+      "text": "When Frame.FD is true, socketcan.Bus.Send shall serialise the frame into the 72-byte Linux canfd_frame structure (4-byte can_id, 1-byte len, 1-byte flags, 2 reserved bytes, 64-byte data).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SCAN-008",
+      "title": "BRS flag encoded in canfd_frame.flags bit 0",
+      "text": "When Frame.BRS is true, canFDBRSFlag (0x01) shall be set in canfd_frame.flags byte during encoding. When decoding a canfd_frame, Frame.BRS shall be set if and only if canfd_frame.flags bit 0 is set.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-001",
+      "title": "Parse builds message table from BO_ declarations",
+      "text": "dbc.Parse shall construct a Messages map keyed by 32-bit message ID for every BO_ line, capturing the ID (decimal), name, DLC, and transmitter node.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-002",
+      "title": "Parse extracts signal name, start bit, and bit length from SG_ lines",
+      "text": "For each SG_ line nested under a BO_ block, Parse shall extract the signal name, start bit, and bit length from the <start>|<len>@<order><sign> field.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-003",
+      "title": "Parse extracts byte order from SG_ order character",
+      "text": "Parse shall set Signal.ByteOrder to LittleEndian when the SG_ order character is '1' (Intel) and to BigEndian when it is '0' (Motorola).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-004",
+      "title": "Parse extracts value type, scale, offset, range, and unit from SG_ lines",
+      "text": "Parse shall extract Signal.Signed ('+' = unsigned, '-' = signed), Factor, Offset, Min, Max from the (<factor>,<offset>) [<min>|<max>] fields, and Unit from the quoted string.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-005",
+      "title": "Decode extracts raw bit value using start bit, length, and byte order",
+      "text": "Signal.Decode shall extract the raw unsigned bit field from the payload byte slice using the signal's StartBit, Length, and ByteOrder. For LittleEndian signals, bit i maps to payload byte (StartBit+i)/8 at bit offset (StartBit+i)%8.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-006",
+      "title": "Decode computes physical value as raw × factor + offset",
+      "text": "After extracting the raw value, Signal.Decode shall compute the physical value as: physical = float64(raw) × Factor + Offset.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-DBC-007",
+      "title": "Decode applies two's-complement sign extension for signed signals",
+      "text": "When Signal.Signed is true, Decode shall apply two's-complement sign extension: if bit (Length-1) of raw is set, the signed integer value is raw minus (1 << Length).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-001",
+      "title": "Config.TxID specifies the CAN ID for all outgoing ISO-TP frames",
+      "text": "isotp.Config.TxID shall be used as the CAN arbitration ID for every Single Frame, First Frame, Consecutive Frame, and Flow Control frame transmitted by the Conn.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-002",
+      "title": "Config.RxID specifies the CAN ID filter for incoming ISO-TP frames",
+      "text": "isotp.Config.RxID shall be used as the exact-match filter (Mask=0x1FFFFFFF) when subscribing to the Bus. Only frames with ID equal to RxID shall be processed by the Conn.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-003",
+      "title": "Config.Timeout defaults to 250 ms when zero",
+      "text": "If Config.Timeout is zero, isotp.New shall apply a default receive/flow-control timeout of 250 milliseconds for all blocking operations.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-004",
+      "title": "New subscribes to the Bus filtering to Config.RxID",
+      "text": "isotp.New shall call Bus.Subscribe with a Filter{ID: cfg.RxID, Mask: 0x1FFFFFFF} to receive only frames destined for this connection.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-005",
+      "title": "Send transmits payloads of 7 bytes or fewer as a Single Frame",
+      "text": "When len(payload) is between 1 and 7 bytes inclusive, isotp.Conn.Send shall transmit a Single Frame: a CAN frame with first byte (typeSF | length) followed by the payload bytes.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-006",
+      "title": "Send segments payloads greater than 7 bytes into First and Consecutive Frames",
+      "text": "When len(payload) exceeds 7 bytes, isotp.Conn.Send shall transmit a First Frame (carrying the total length and first 6 payload bytes) followed by Consecutive Frames (each carrying up to 7 payload bytes with an incrementing 4-bit sequence number).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-007",
+      "title": "Sender waits for Flow Control frame before sending Consecutive Frames",
+      "text": "After transmitting the First Frame, Send shall block waiting for a Flow Control frame from the receiver before transmitting any Consecutive Frames. A timeout during this wait shall return an error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-008",
+      "title": "Sender observes block size and STmin from received Flow Control",
+      "text": "Send shall read FC[1] (block size) and FC[2] (STmin) from the Flow Control frame. When block size is non-zero, Send shall request a new Flow Control after every block-size Consecutive Frames. When STmin is non-zero, Send shall sleep for the specified separation time between frames.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-009",
+      "title": "Recv returns payload of a received Single Frame",
+      "text": "When the first frame received has PCI nibble 0x0 (Single Frame), isotp.Conn.Recv shall return the payload bytes (first byte & 0x0F gives length, payload follows).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-010",
+      "title": "Recv sends Flow Control after receiving First Frame",
+      "text": "When the first frame received has PCI nibble 0x1 (First Frame), isotp.Conn.Recv shall immediately send a Flow Control frame with status ContinueToSend (0x00), block size 0, and STmin 0.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-011",
+      "title": "Recv assembles Consecutive Frames in sequence-number order",
+      "text": "After the First Frame, Recv shall collect Consecutive Frames and append their payload bytes to the reassembly buffer until the total declared length is reached. Consecutive Frames shall be processed in the order they are received.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-012",
+      "title": "Recv returns error on out-of-order Consecutive Frame sequence number",
+      "text": "If a Consecutive Frame's 4-bit sequence number does not equal the expected value (previous SN + 1, mod 16), Recv shall return an error and discard the incomplete message.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-ISOTP-013",
+      "title": "Recv returns error when timeout expires before reassembly is complete",
+      "text": "If the timeout (Config.Timeout, default 250 ms) expires while waiting for the first frame or a Consecutive Frame, Recv shall return an error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-001",
+      "title": "DecodeID extracts 3-bit priority from bits 28..26",
+      "text": "j1939.DecodeID shall extract the Priority field from bits 28..26 (3 bits) of the 29-bit CAN extended ID: Priority = (id >> 26) & 0x07.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-002",
+      "title": "DecodeID extracts PGN from the 29-bit ID per J1939-21 PDU format",
+      "text": "j1939.DecodeID shall extract the Parameter Group Number from the 29-bit ID. When PDU Format (bits 23..16) is less than 240, the PGN excludes PS (bits 15..8); when PDU Format is 240 or greater, PS is part of the PGN.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-003",
+      "title": "DecodeID extracts 8-bit source address from bits 7..0",
+      "text": "j1939.DecodeID shall extract the source address from bits 7..0 of the 29-bit CAN extended ID: src = byte(id & 0xFF).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-004",
+      "title": "EncodeID composes 29-bit ID from priority, PGN, and source address",
+      "text": "j1939.EncodeID shall construct the 29-bit CAN extended ID by placing Priority in bits 28..26, DP in bit 24, PF in bits 23..16, PS (for broadcast PGNs) in bits 15..8, and src in bits 7..0.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-005",
+      "title": "Bus.Send encodes J1939 ID before frame transmission",
+      "text": "j1939.Bus.Send shall call EncodeID with the frame's Priority, PGN, and the bus's source address to compose the 29-bit CAN ID, then transmit a CAN Frame with Ext=true.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-006",
+      "title": "Bus.Subscribe delivers only frames whose decoded PGN matches the filter",
+      "text": "j1939.Bus.Subscribe shall decode the PGN from every received extended-format CAN frame and deliver only those frames for which the decoded PGN matches one of the requested PGNs. With no PGN filter, all J1939 frames are delivered.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-001",
+      "title": "Config.DataID is mixed into the CRC to bind the checksum to the message type",
+      "text": "safety.Config.DataID (uint16) shall be encoded in header bytes 0–1 (little-endian) and shall be included in the CRC-16 computation so that a receiver configured with a different DataID will detect a mismatch.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-002",
+      "title": "Config.SourceID is encoded in the protection header",
+      "text": "safety.Config.SourceID (uint16) shall be encoded in header bytes 2–3 (little-endian) of every protected message, identifying the sender.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-003",
+      "title": "Protector increments sequence counter atomically on each Protect call",
+      "text": "safety.Protector shall maintain an atomic uint32 sequence counter that is incremented by 1 on every call to Protect. The counter value used for a given call is the value before the increment (seq = counter.Add(1) - 1).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-004",
+      "title": "Concurrent Protect calls each obtain a unique sequence number",
+      "text": "When Protect is called concurrently from multiple goroutines, each call shall receive a distinct sequence counter value. No two concurrent calls shall produce frames with the same sequence number.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-005",
+      "title": "Protect prepends a 10-byte E2E header to the payload",
+      "text": "safety.Protector.Protect shall return a byte slice consisting of a 10-byte header followed by the original payload. The header layout is: DataID (2 bytes LE), SourceID (2 bytes LE), SequenceCounter (4 bytes LE), CRC-16 (2 bytes LE).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-006",
+      "title": "Protect CRC-16/CCITT-FALSE covers header bytes 0..7 and the payload",
+      "text": "The CRC-16/CCITT-FALSE (poly=0x1021, init=0xFFFF) shall be computed over header bytes 0..7 (with the CRC slot bytes 8..9 treated as zero) followed by all payload bytes. The CRC shall be stored in header bytes 8..9 (little-endian).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-007",
+      "title": "Unwrap returns ErrHeaderTooShort if data is shorter than 10 bytes",
+      "text": "safety.Receiver.Unwrap shall return a *E2EError with Kind=ErrHeaderTooShort if len(data) is less than 10.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-008",
+      "title": "Unwrap returns ErrCRCMismatch if CRC-16 verification fails",
+      "text": "Unwrap shall recompute the CRC-16 over the received header bytes 0..7 (with CRC slot zeroed) and the payload. If the recomputed CRC does not equal the received CRC (bytes 8..9), Unwrap shall return *E2EError{Kind: ErrCRCMismatch}.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-009",
+      "title": "Unwrap returns ErrSequenceGap if sequence counter is not lastSeq+1",
+      "text": "After the first successful Unwrap, Receiver shall track the last seen sequence counter. If a subsequent Unwrap receives a sequence counter that is not exactly lastSeq+1, Unwrap shall return *E2EError{Kind: ErrSequenceGap}.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-010",
+      "title": "Unwrap returns original payload on success",
+      "text": "When CRC verification passes and the sequence counter is valid, Unwrap shall return the original payload bytes (data[10:]) and a nil error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SAFETY-011",
+      "title": "First Unwrap call skips sequence gap check",
+      "text": "The first call to Receiver.Unwrap after construction shall not check the sequence counter against any previous value. The CRC check still applies.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SEOOC-001",
+      "title": "Integrating system is responsible for transport selection (SEOOC)",
+      "text": "go-CAN is developed as a Safety Element Out Of Context (SEOOC). The integrating system is responsible for selecting the appropriate transport (virtual.Bus for testing, socketcan.Bus for production) and for ensuring the physical CAN interface meets the fault-containment and latency requirements of the target ASIL level.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-001",
+      "title": "NewClient accepts *isotp.Conn and returns a ready-to-use UDS Client",
+      "text": "uds.NewClient shall accept a *isotp.Conn and return a *Client ready to issue UDS service requests. The Client shall not open, configure, or close the ISO-TP connection; connection lifecycle is the caller's responsibility.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-002",
+      "title": "DiagnosticSessionControl sends SID 0x10 and verifies positive response",
+      "text": "uds.Client.DiagnosticSessionControl shall transmit [0x10, sessionType] and verify that the response first byte equals 0x50 (SID + 0x40). A non-matching or missing response shall be returned as an error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-003",
+      "title": "ECUReset sends SID 0x11 and verifies positive response",
+      "text": "uds.Client.ECUReset shall transmit [0x11, resetType] and verify that the response first byte equals 0x51. A non-matching or missing response shall be returned as an error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-004",
+      "title": "TesterPresent sends SID 0x3E and verifies positive response",
+      "text": "uds.Client.TesterPresent shall transmit [0x3E, 0x00] and verify that the response first byte equals 0x7E. A non-matching or missing response shall be returned as an error.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-005",
+      "title": "ReadDataByIdentifier sends SID 0x22 with 2-byte DID in big-endian order",
+      "text": "uds.Client.ReadDataByIdentifier shall transmit [0x22, DID>>8, DID&0xFF] where DID is the 16-bit data identifier encoded in big-endian byte order.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-006",
+      "title": "ReadDataByIdentifier returns data payload after stripping SID and DID echo",
+      "text": "When the positive response (first byte 0x62) is received, ReadDataByIdentifier shall strip the positive SID byte and the 2 echoed DID bytes and return the remaining bytes as the data payload.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-007",
+      "title": "WriteDataByIdentifier sends SID 0x2E with 2-byte DID and data payload",
+      "text": "uds.Client.WriteDataByIdentifier shall transmit [0x2E, DID>>8, DID&0xFF] followed by the data bytes, and verify that the response first byte equals 0x6E.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-008",
+      "title": "request returns *NegativeResponseError for SID 0x7F negative responses",
+      "text": "The internal request function shall detect negative response frames (first byte 0x7F) and return a *NegativeResponseError containing the RequestSID (byte[1]) and NRC (byte[2]).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-UDS-009",
+      "title": "request continues receiving on NRC 0x78 (responsePending) without resending",
+      "text": "When a negative response with NRC 0x78 (responsePending) is received, the request function shall continue waiting for the next response without retransmitting the request frame.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    }
+  ]
+}

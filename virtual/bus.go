@@ -13,6 +13,8 @@
 //fusa:req REQ-VIRT-001
 //fusa:req REQ-VIRT-002
 //fusa:req REQ-VIRT-003
+//fusa:req REQ-VIRT-004
+//fusa:req REQ-VIRT-005
 package virtual
 
 import (
@@ -40,6 +42,7 @@ type subscription struct {
 // New creates an in-process virtual CAN bus.
 //
 //fusa:req REQ-VIRT-001
+//fusa:req REQ-VIRT-003
 func New() (*Bus, error) {
 	return &Bus{}, nil
 }
@@ -47,7 +50,9 @@ func New() (*Bus, error) {
 // Send broadcasts f to all matching subscribers.
 // It returns an error if f is invalid or the bus is closed.
 //
+//fusa:req REQ-VIRT-001
 //fusa:req REQ-VIRT-002
+//fusa:req REQ-VIRT-005
 func (b *Bus) Send(_ context.Context, f can.Frame) error {
 	if err := can.ValidateFrame(f); err != nil {
 		return err
@@ -73,6 +78,7 @@ func (b *Bus) Send(_ context.Context, f can.Frame) error {
 // supplied filters. With no filters, all frames are delivered.
 //
 //fusa:req REQ-VIRT-003
+//fusa:req REQ-VIRT-004
 func (b *Bus) Subscribe(filters ...can.Filter) (<-chan can.Frame, error) {
 	b.mu.Lock()
 	defer b.mu.Unlock()

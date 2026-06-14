@@ -12,9 +12,8 @@ coverage.out
 coverage.html
 *.cov.out
 
-# go-FuSa transient reports (not committed; safety artifacts are committed on release)
+# go-FuSa transient reports (regenerated on every run; committed on release via workflow)
 check-report.json
-qualify-report.json
 vuln.json
 
 # Build output

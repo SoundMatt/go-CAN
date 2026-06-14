@@ -11,7 +11,15 @@ import (
 	can "github.com/SoundMatt/go-CAN"
 )
 
-//fusa:test REQ-CAN-005
+//fusa:test REQ-CAN-003
+//fusa:test REQ-CAN-004
+//fusa:test REQ-CAN-007
+//fusa:test REQ-CAN-009
+//fusa:test REQ-CAN-010
+//fusa:test REQ-CAN-011
+//fusa:test REQ-CAN-012
+//fusa:test REQ-CAN-013
+//fusa:test REQ-CAN-014
 
 func TestValidateFrame(t *testing.T) {
 	tests := []struct {

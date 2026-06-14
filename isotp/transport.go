@@ -20,6 +20,15 @@
 //fusa:req REQ-ISOTP-002
 //fusa:req REQ-ISOTP-003
 //fusa:req REQ-ISOTP-004
+//fusa:req REQ-ISOTP-005
+//fusa:req REQ-ISOTP-006
+//fusa:req REQ-ISOTP-007
+//fusa:req REQ-ISOTP-008
+//fusa:req REQ-ISOTP-009
+//fusa:req REQ-ISOTP-010
+//fusa:req REQ-ISOTP-011
+//fusa:req REQ-ISOTP-012
+//fusa:req REQ-ISOTP-013
 package isotp
 
 import (
@@ -50,6 +59,8 @@ const (
 // Config holds ISO-TP addressing and timing parameters.
 //
 //fusa:req REQ-ISOTP-001
+//fusa:req REQ-ISOTP-002
+//fusa:req REQ-ISOTP-003
 type Config struct {
 	// TxID is the CAN arbitration ID used for outgoing frames.
 	TxID uint32
@@ -74,7 +85,7 @@ func (c *Config) timeout() time.Duration {
 
 // Conn is an ISO-TP connection over a CAN bus.
 //
-//fusa:req REQ-ISOTP-002
+//fusa:req REQ-ISOTP-004
 type Conn struct {
 	bus  can.Bus
 	cfg  Config
@@ -83,7 +94,10 @@ type Conn struct {
 
 // New creates a new ISO-TP connection over the given CAN bus.
 //
+//fusa:req REQ-ISOTP-001
 //fusa:req REQ-ISOTP-002
+//fusa:req REQ-ISOTP-003
+//fusa:req REQ-ISOTP-004
 func New(bus can.Bus, cfg Config) (*Conn, error) {
 	rxCh, err := bus.Subscribe(can.Filter{ID: cfg.RxID, Mask: 0x1FFFFFFF})
 	if err != nil {
@@ -94,7 +108,10 @@ func New(bus can.Bus, cfg Config) (*Conn, error) {
 
 // Send transmits payload using ISO-TP segmentation.
 //
-//fusa:req REQ-ISOTP-003
+//fusa:req REQ-ISOTP-005
+//fusa:req REQ-ISOTP-006
+//fusa:req REQ-ISOTP-007
+//fusa:req REQ-ISOTP-008
 func (c *Conn) Send(ctx context.Context, payload []byte) error {
 	if len(payload) == 0 {
 		return errors.New("isotp: empty payload")
@@ -179,7 +196,11 @@ func (c *Conn) sendMultiFrame(ctx context.Context, payload []byte) error {
 
 // Recv reassembles and returns the next ISO-TP message.
 //
-//fusa:req REQ-ISOTP-004
+//fusa:req REQ-ISOTP-009
+//fusa:req REQ-ISOTP-010
+//fusa:req REQ-ISOTP-011
+//fusa:req REQ-ISOTP-012
+//fusa:req REQ-ISOTP-013
 func (c *Conn) Recv(ctx context.Context) ([]byte, error) {
 	timeout := time.After(c.cfg.timeout())
 	var first can.Frame

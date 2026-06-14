@@ -16,6 +16,14 @@ import (
 
 //fusa:test REQ-ISOTP-003
 //fusa:test REQ-ISOTP-004
+//fusa:test REQ-ISOTP-005
+//fusa:test REQ-ISOTP-006
+//fusa:test REQ-ISOTP-007
+//fusa:test REQ-ISOTP-008
+//fusa:test REQ-ISOTP-009
+//fusa:test REQ-ISOTP-010
+//fusa:test REQ-ISOTP-011
+//fusa:test REQ-ISOTP-013
 
 func newPair(t *testing.T) (sender, receiver *isotp.Conn) {
 	t.Helper()
