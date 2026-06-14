@@ -4,16 +4,16 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-06-13T19:07:50.416922341Z",
+  "generatedAt": "2026-06-14T00:28:56.169453412Z",
   "format": "x-FuSa manifest v1",
   "artifacts": [
     {
       "path": "/home/runner/work/go-CAN/go-CAN/sbom.json",
-      "sha256": "3590a0c5101dafa524e40970520648de98d16a1a472c779097191a9a6d57b256"
+      "sha256": "e49c266486cdef53b47091e8be1eb04819fdfc322f35f032a99e1286dbee8d8a"
     },
     {
       "path": "/home/runner/work/go-CAN/go-CAN/provenance.json",
-      "sha256": "c6351084810d64d36a932bc57227380270740fc21b59488c52c54261e633c2e2"
+      "sha256": "ee68dfcb3fe18a984221a98a71ec4eb86e73f673212310622554a265cf3c55c0"
     }
   ]
 }

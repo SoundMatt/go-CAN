@@ -1,6 +1,6 @@
 {
   "format": "go-FuSa dFMEA v1",
-  "generated_at": "2026-06-13T19:07:50.296833064Z",
+  "generated_at": "2026-06-14T00:28:56.048840975Z",
   "module": "github.com/SoundMatt/go-CAN",
   "entries": [
     {
@@ -16,7 +16,9 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-DBC-003"
+        "REQ-DBC-005",
+        "REQ-DBC-006",
+        "REQ-DBC-007"
       ],
       "cyber_risks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
@@ -51,7 +53,10 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-DBC-002"
+        "REQ-DBC-001",
+        "REQ-DBC-002",
+        "REQ-DBC-003",
+        "REQ-DBC-004"
       ],
       "cyber_risks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
@@ -109,7 +114,12 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-CAN-005"
+        "REQ-CAN-009",
+        "REQ-CAN-010",
+        "REQ-CAN-011",
+        "REQ-CAN-012",
+        "REQ-CAN-013",
+        "REQ-CAN-014"
       ]
     },
     {
@@ -125,7 +135,10 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-ISOTP-002"
+        "REQ-ISOTP-001",
+        "REQ-ISOTP-002",
+        "REQ-ISOTP-003",
+        "REQ-ISOTP-004"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -147,7 +160,11 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-ISOTP-004"
+        "REQ-ISOTP-009",
+        "REQ-ISOTP-010",
+        "REQ-ISOTP-011",
+        "REQ-ISOTP-012",
+        "REQ-ISOTP-013"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -169,7 +186,10 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-ISOTP-003"
+        "REQ-ISOTP-005",
+        "REQ-ISOTP-006",
+        "REQ-ISOTP-007",
+        "REQ-ISOTP-008"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -191,7 +211,9 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-J1939-001"
+        "REQ-J1939-001",
+        "REQ-J1939-002",
+        "REQ-J1939-003"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -229,7 +251,7 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-J1939-002"
+        "REQ-J1939-004"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -334,8 +356,11 @@
       "effects": [
         "Silent failure propagated to caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-J1939-005"
+      ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -371,8 +396,11 @@
         "Silent failure propagated to caller",
         "Memory leak or deadlock"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-J1939-006"
+      ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -394,6 +422,131 @@
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "obdii",
+      "function": "NewClient",
+      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-OBD-001"
+      ],
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "obdii",
+      "function": "ReadPID",
+      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-OBD-002"
+      ],
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "obdii",
+      "function": "ReadVIN",
+      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-OBD-003"
+      ],
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "obdii",
+      "function": "SupportedPIDs",
+      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
@@ -426,7 +579,8 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-SAFETY-002"
+        "REQ-SAFETY-003",
+        "REQ-SAFETY-004"
       ],
       "cyber_risks": [
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -463,7 +617,8 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-SAFETY-003"
+        "REQ-SAFETY-005",
+        "REQ-SAFETY-006"
       ],
       "cyber_risks": [
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -483,7 +638,11 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-SAFETY-005"
+        "REQ-SAFETY-007",
+        "REQ-SAFETY-008",
+        "REQ-SAFETY-009",
+        "REQ-SAFETY-010",
+        "REQ-SAFETY-011"
       ],
       "cyber_risks": [
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -522,7 +681,9 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-SCAN-001"
+        "REQ-SCAN-001",
+        "REQ-SCAN-002",
+        "REQ-SCAN-006"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -542,7 +703,10 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-SCAN-002"
+        "REQ-SCAN-003",
+        "REQ-SCAN-004",
+        "REQ-SCAN-007",
+        "REQ-SCAN-008"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -562,7 +726,7 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-SCAN-003"
+        "REQ-SCAN-005"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -603,8 +767,11 @@
       "effects": [
         "Silent failure propagated to caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-UDS-003"
+      ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -648,7 +815,8 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-UDS-001"
+        "REQ-UDS-001",
+        "REQ-UDS-009"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -672,7 +840,8 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-UDS-003"
+        "REQ-UDS-005",
+        "REQ-UDS-006"
       ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -693,8 +862,11 @@
       "effects": [
         "Silent failure propagated to caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-UDS-004"
+      ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -716,8 +888,11 @@
         "Silent failure propagated to caller",
         "Incorrect system state"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-UDS-007"
+      ],
       "cyber_risks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -766,7 +941,8 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-VIRT-001"
+        "REQ-VIRT-001",
+        "REQ-VIRT-003"
       ]
     },
     {
@@ -782,7 +958,9 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-VIRT-002"
+        "REQ-VIRT-001",
+        "REQ-VIRT-002",
+        "REQ-VIRT-005"
       ]
     },
     {
@@ -798,7 +976,8 @@
       "severity": "high",
       "detection_control": "requirement testing + unit tests",
       "requirement_ids": [
-        "REQ-VIRT-003"
+        "REQ-VIRT-003",
+        "REQ-VIRT-004"
       ]
     }
   ]

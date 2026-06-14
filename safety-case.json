@@ -1,6 +1,6 @@
 {
   "format": "go-FuSa Safety Case v1",
-  "generatedAt": "2026-06-13T19:07:50.395285782Z",
+  "generatedAt": "2026-06-14T00:28:56.150089912Z",
   "module": "github.com/SoundMatt/go-CAN",
   "standard": "generic",
   "evidence": [
@@ -15,8 +15,8 @@
       "id": "trace",
       "description": "Requirements traceability matrix",
       "file": ".fusa-reqs.json",
-      "status": "absent",
-      "detail": "run 'gofusa trace' and add requirements to .fusa-reqs.json"
+      "status": "present",
+      "detail": "74 requirements"
     },
     {
       "id": "verify",
@@ -90,7 +90,6 @@
   ],
   "gaps": [
     "check",
-    "trace",
     "verify",
     "qualify"
   ]

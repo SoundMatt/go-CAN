@@ -4,12 +4,12 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-06-13T19:07:50.416709552Z",
+  "generatedAt": "2026-06-14T00:28:56.169278545Z",
   "format": "x-FuSa provenance v1",
   "module": "github.com/SoundMatt/go-CAN",
   "goVersion": "go1.25.11",
   "goos": "linux",
   "goarch": "amd64",
-  "vcsRevision": "0a982c39866c599b633f6fa1a64804f770bf3c19",
+  "vcsRevision": "23e24077aaeccfebefd4995af2d5b1a095f2bd55",
   "vcsModified": true
 }
