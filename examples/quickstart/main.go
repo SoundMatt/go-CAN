@@ -35,7 +35,7 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
-	ch, err := bus.Subscribe(can.Filter{ID: 0x100, Mask: 0x7FF})
+	ch, err := bus.Subscribe([]can.Filter{{ID: 0x100, Mask: 0x7FF}})
 	if err != nil {
 		log.Fatalf("Subscribe: %v", err)
 	}

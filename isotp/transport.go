@@ -99,7 +99,7 @@ type Conn struct {
 //fusa:req REQ-ISOTP-003
 //fusa:req REQ-ISOTP-004
 func New(bus can.Bus, cfg Config) (*Conn, error) {
-	rxCh, err := bus.Subscribe(can.Filter{ID: cfg.RxID, Mask: 0x1FFFFFFF})
+	rxCh, err := bus.Subscribe([]can.Filter{{ID: cfg.RxID, Mask: 0x1FFFFFFF}})
 	if err != nil {
 		return nil, fmt.Errorf("isotp: subscribe: %w", err)
 	}

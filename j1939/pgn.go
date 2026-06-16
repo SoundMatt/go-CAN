@@ -133,7 +133,7 @@ func (b *Bus) Send(ctx context.Context, f Frame) error {
 //
 //fusa:req REQ-J1939-006
 func (b *Bus) Subscribe(pgns ...PGN) (<-chan Frame, error) {
-	raw, err := b.can.Subscribe()
+	raw, err := b.can.Subscribe(nil)
 	if err != nil {
 		return nil, err
 	}

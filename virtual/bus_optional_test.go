@@ -53,7 +53,7 @@ func TestSendLoaned(t *testing.T) {
 	b, _ := virtual.New()
 	defer b.Close()
 
-	ch, err := b.Subscribe()
+	ch, err := b.Subscribe(nil)
 	if err != nil {
 		t.Fatalf("Subscribe: %v", err)
 	}
@@ -104,7 +104,7 @@ func TestMetrics(t *testing.T) {
 	b, _ := virtual.New()
 	defer b.Close()
 
-	ch, _ := b.Subscribe()
+	ch, _ := b.Subscribe(nil)
 
 	f := can.Frame{ID: 0x300, Data: []byte{0x01, 0x02, 0x03}}
 	if err := b.Send(context.Background(), f); err != nil {
@@ -138,7 +138,7 @@ func TestMetricsDropCount(t *testing.T) {
 	defer b.Close()
 
 	// Subscribe but never read — channel will fill and frames will be dropped.
-	ch, _ := b.Subscribe()
+	ch, _ := b.Subscribe(nil)
 	_ = ch
 
 	// Send enough frames to overflow the channel buffer (defaultChanSize = 64).
@@ -164,7 +164,7 @@ func TestMetricsDropCount(t *testing.T) {
 func TestCloseWithDrain(t *testing.T) {
 	b, _ := virtual.New()
 
-	ch, _ := b.Subscribe()
+	ch, _ := b.Subscribe(nil)
 
 	// Send a frame, then drain it in a goroutine slightly after.
 	f := can.Frame{ID: 0x500, Data: []byte{0x42}}
@@ -192,7 +192,7 @@ func TestCloseWithDrainContextCancel(t *testing.T) {
 	b, _ := virtual.New()
 
 	// Subscribe but never drain — CloseWithDrain should respect ctx cancellation.
-	ch, _ := b.Subscribe()
+	ch, _ := b.Subscribe(nil)
 	_ = ch // intentionally never read
 
 	// Send a frame so the channel is non-empty.

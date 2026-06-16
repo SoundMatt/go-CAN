@@ -129,7 +129,7 @@ func TestBAMPacketCountAndPadding(t *testing.T) {
 	defer b.Close()
 
 	// Subscribe at the raw CAN level to inspect TP frames directly.
-	rawCh, err := b.Subscribe()
+	rawCh, err := b.Subscribe(nil)
 	if err != nil {
 		t.Fatalf("Subscribe: %v", err)
 	}

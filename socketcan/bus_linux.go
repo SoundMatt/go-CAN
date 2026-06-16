@@ -28,6 +28,7 @@ import (
 	"sync"
 
 	can "github.com/SoundMatt/go-CAN"
+	relay "github.com/SoundMatt/RELAY"
 	"golang.org/x/sys/unix"
 )
 
@@ -114,12 +115,14 @@ func (b *Bus) Send(_ context.Context, f can.Frame) error {
 // Subscribe returns a channel that delivers frames matching any of the filters.
 //
 //fusa:req REQ-SCAN-005
-func (b *Bus) Subscribe(filters ...can.Filter) (<-chan can.Frame, error) {
+func (b *Bus) Subscribe(filters []can.Filter, opts ...relay.SubscriberOption) (<-chan can.Frame, error) {
+	cfg := relay.ApplySubscriberOpts(opts)
+	depth := cfg.ChanDepth(64)
 	b.mu.Lock()
 	defer b.mu.Unlock()
 	s := &subscription{
 		filters: filters,
-		ch:      make(chan can.Frame, 64),
+		ch:      make(chan can.Frame, depth),
 	}
 	b.subs = append(b.subs, s)
 	return s.ch, nil

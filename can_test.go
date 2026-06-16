@@ -31,6 +31,7 @@ func TestValidateFrame(t *testing.T) {
 		{name: "valid extended", frame: can.Frame{ID: 0x1FFFFFFF, Ext: true, Data: []byte{0xFF}}, wantErr: false},
 		{name: "valid CAN FD", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 64)}, wantErr: false},
 		{name: "valid RTR", frame: can.Frame{ID: 0x200, RTR: true}, wantErr: false},
+		{name: "RTR with FD", frame: can.Frame{ID: 0x200, RTR: true, FD: true}, wantErr: true},
 		{name: "standard ID too large", frame: can.Frame{ID: 0x800}, wantErr: true},
 		{name: "extended ID too large", frame: can.Frame{ID: 0x20000000, Ext: true}, wantErr: true},
 		{name: "RTR with data", frame: can.Frame{ID: 0x100, RTR: true, Data: []byte{1}}, wantErr: true},

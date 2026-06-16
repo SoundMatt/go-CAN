@@ -19,11 +19,13 @@ package virtual
 
 import (
 	"context"
+	"fmt"
 	"sync"
 	"sync/atomic"
 	"time"
 
 	can "github.com/SoundMatt/go-CAN"
+	relay "github.com/SoundMatt/RELAY"
 )
 
 const defaultChanSize = 64
@@ -54,8 +56,9 @@ type Bus struct {
 }
 
 type subscription struct {
-	filters []can.Filter
-	ch      chan can.Frame
+	filters      []can.Filter
+	ch           chan can.Frame
+	backPressure relay.BackPressurePolicy
 }
 
 // New creates an in-process virtual CAN bus.
@@ -91,13 +94,30 @@ func (b *Bus) Send(_ context.Context, f can.Frame) error {
 	b.bytesWritten.Add(uint64(len(f.Data)))
 	for _, s := range b.subs {
 		if matchesAny(s.filters, f) {
-			select {
-			case s.ch <- f:
+			switch s.backPressure {
+			case relay.DropNewest:
+				select {
+				case s.ch <- f:
+					b.deliverCount.Add(1)
+					b.bytesDelivered.Add(uint64(len(f.Data)))
+				default:
+					b.dropCount.Add(1)
+				}
+			case relay.DropOldest:
+				select {
+				case s.ch <- f:
+					b.deliverCount.Add(1)
+					b.bytesDelivered.Add(uint64(len(f.Data)))
+				default:
+					<-s.ch
+					s.ch <- f
+					b.deliverCount.Add(1)
+					b.bytesDelivered.Add(uint64(len(f.Data)))
+				}
+			case relay.Block:
+				s.ch <- f
 				b.deliverCount.Add(1)
 				b.bytesDelivered.Add(uint64(len(f.Data)))
-			default:
-				// drop on full channel — same semantics as real CAN hardware
-				b.dropCount.Add(1)
 			}
 		}
 	}
@@ -105,19 +125,22 @@ func (b *Bus) Send(_ context.Context, f can.Frame) error {
 }
 
 // Subscribe returns a channel that delivers frames matching any of the
-// supplied filters. With no filters, all frames are delivered.
+// supplied filters. With no filters (nil or empty), all frames are delivered.
 //
 //fusa:req REQ-VIRT-003
 //fusa:req REQ-VIRT-004
-func (b *Bus) Subscribe(filters ...can.Filter) (<-chan can.Frame, error) {
+func (b *Bus) Subscribe(filters []can.Filter, opts ...relay.SubscriberOption) (<-chan can.Frame, error) {
+	cfg := relay.ApplySubscriberOpts(opts)
+	depth := cfg.ChanDepth(defaultChanSize)
 	b.mu.Lock()
 	defer b.mu.Unlock()
 	if b.closed {
 		return nil, errClosed
 	}
 	s := &subscription{
-		filters: filters,
-		ch:      make(chan can.Frame, defaultChanSize),
+		filters:      filters,
+		ch:           make(chan can.Frame, depth),
+		backPressure: cfg.BackPressure,
 	}
 	b.subs = append(b.subs, s)
 	return s.ch, nil
@@ -224,8 +247,4 @@ func matchesAny(filters []can.Filter, f can.Frame) bool {
 	return false
 }
 
-var errClosed = &closedError{}
-
-type closedError struct{}
-
-func (*closedError) Error() string { return "can/virtual: bus is closed" }
+var errClosed = fmt.Errorf("can/virtual: bus is closed: %w", relay.ErrClosed)

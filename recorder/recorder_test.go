@@ -98,7 +98,7 @@ func TestReplay(t *testing.T) {
 		t.Fatalf("virtual.New: %v", err)
 	}
 
-	ch, err := bus.Subscribe()
+	ch, err := bus.Subscribe(nil)
 	if err != nil {
 		t.Fatalf("Subscribe: %v", err)
 	}
@@ -206,7 +206,7 @@ func TestReplayTiming(t *testing.T) {
 		t.Fatalf("virtual.New: %v", err)
 	}
 
-	ch, err := bus.Subscribe()
+	ch, err := bus.Subscribe(nil)
 	if err != nil {
 		t.Fatalf("Subscribe: %v", err)
 	}
