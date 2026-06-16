@@ -29,7 +29,6 @@ package j1939
 
 import (
 	"context"
-	"fmt"
 
 	can "github.com/SoundMatt/go-CAN"
 )
@@ -112,17 +111,19 @@ func NewBus(canBus can.Bus, srcAddr byte) *Bus {
 	return &Bus{can: canBus, src: srcAddr}
 }
 
-// Send transmits a J1939 frame.
+// Send transmits a J1939 frame. For payloads longer than 8 bytes, Send
+// automatically uses BAM Transport Protocol (SAE J1939-21) via SendTP.
+// Payloads of 9–1785 bytes are sent as BAM; larger payloads are rejected.
 //
 //fusa:req REQ-J1939-005
 func (b *Bus) Send(ctx context.Context, f Frame) error {
+	if len(f.Data) > 8 {
+		return b.SendTP(ctx, f, TPConfig{})
+	}
 	id := EncodeID(f.Priority, f.PGN, b.src)
 	if f.PGN.IsPeerToPeer() {
 		// embed destination in bits 15–8
 		id |= uint32(f.Dst) << 8
-	}
-	if len(f.Data) > 8 {
-		return fmt.Errorf("j1939: data too long (%d bytes, max 8 for single frame)", len(f.Data))
 	}
 	return b.can.Send(ctx, can.Frame{ID: id, Ext: true, Data: f.Data})
 }
