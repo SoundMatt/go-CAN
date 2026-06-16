@@ -51,6 +51,20 @@ type Signal struct {
 	Max       float64
 	Unit      string
 	Receivers []string
+	Values    map[int64]string // raw integer value → label (from VAL_ entries)
+}
+
+// PhysicalToLabel returns the value table label for a physical value,
+// or ("", false) if no label exists.
+//
+//fusa:req REQ-DBC-006
+func (s *Signal) PhysicalToLabel(physical float64) (string, bool) {
+	if s.Values == nil {
+		return "", false
+	}
+	raw := int64(math.Round((physical - s.Offset) / s.Factor))
+	label, ok := s.Values[raw]
+	return label, ok
 }
 
 // Message is a CAN message definition from a DBC file.
@@ -104,6 +118,12 @@ func Parse(r io.Reader) (*DB, error) {
 				return nil, err
 			}
 			curMsg.Signals[sig.Name] = sig
+
+		case strings.HasPrefix(line, "VAL_ "):
+			curMsg = nil
+			if err := parseVAL(db, line); err != nil {
+				return nil, err
+			}
 
 		case !strings.HasPrefix(line, "SG_ "):
 			curMsg = nil
@@ -306,4 +326,88 @@ func parseSignal(line string) (*Signal, error) {
 		Unit:      unit,
 		Receivers: receivers,
 	}, nil
+}
+
+// parseVAL parses a VAL_ line and populates the signal's Values map.
+// Format: VAL_ <msgID> <sigName> <value> "<label>" ... ;
+//
+//fusa:req REQ-DBC-006
+func parseVAL(db *DB, line string) error {
+	// Strip trailing semicolon and trim
+	line = strings.TrimSuffix(strings.TrimSpace(line), ";")
+	line = strings.TrimSpace(line)
+
+	// Tokenise: split on whitespace but keep quoted strings together.
+	tokens := tokeniseVAL(line)
+	// tokens[0] = "VAL_", tokens[1] = msgID, tokens[2] = sigName, tokens[3..] = value/label pairs
+	if len(tokens) < 3 {
+		return fmt.Errorf("dbc: malformed VAL_ line: %q", line)
+	}
+
+	msgID, err := strconv.ParseUint(tokens[1], 10, 32)
+	if err != nil {
+		return fmt.Errorf("dbc: VAL_ invalid message ID %q: %w", tokens[1], err)
+	}
+	msg, ok := db.Messages[uint32(msgID)]
+	if !ok {
+		// Unknown message – skip silently (non-fatal, common in partial DBCs).
+		return nil
+	}
+	sigName := tokens[2]
+	sig, ok := msg.Signals[sigName]
+	if !ok {
+		// Unknown signal – skip silently.
+		return nil
+	}
+
+	pairs := tokens[3:]
+	if sig.Values == nil {
+		sig.Values = make(map[int64]string)
+	}
+	for i := 0; i+1 < len(pairs); i += 2 {
+		raw, err := strconv.ParseInt(pairs[i], 10, 64)
+		if err != nil {
+			return fmt.Errorf("dbc: VAL_ invalid value %q: %w", pairs[i], err)
+		}
+		sig.Values[raw] = pairs[i+1]
+	}
+	return nil
+}
+
+// tokeniseVAL splits a VAL_ line into tokens, treating quoted strings as single tokens
+// (with the quotes stripped).
+func tokeniseVAL(line string) []string {
+	var tokens []string
+	i := 0
+	for i < len(line) {
+		// Skip whitespace
+		for i < len(line) && (line[i] == ' ' || line[i] == '\t') {
+			i++
+		}
+		if i >= len(line) {
+			break
+		}
+		if line[i] == '"' {
+			// Quoted token
+			i++ // skip opening quote
+			j := i
+			for j < len(line) && line[j] != '"' {
+				j++
+			}
+			tokens = append(tokens, line[i:j])
+			if j < len(line) {
+				j++ // skip closing quote
+			}
+			i = j
+		} else {
+			// Unquoted token
+			j := i
+			for j < len(line) && line[j] != ' ' && line[j] != '\t' {
+				j++
+			}
+			tokens = append(tokens, line[i:j])
+			i = j
+		}
+	}
+	return tokens
 }
