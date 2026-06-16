@@ -105,7 +105,7 @@ func cmdCapabilities() error {
 		"protocol_int":        1,
 		"version":             toolVersion,
 		"spec_version":        can.SpecVersion,
-		"commands":            []string{"version", "capabilities", "status", "send", "dump"},
+		"commands":            []string{"version", "capabilities", "status", "send", "dump", "record", "replay"},
 		"transports":          []string{"socketcan", "virtual"},
 		"features":            []string{"fd", "isotp", "j1939"},
 		"interfaces":          []string{"Bus"},
