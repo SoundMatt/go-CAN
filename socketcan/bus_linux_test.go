@@ -57,7 +57,7 @@ func TestSendReceive(t *testing.T) {
 	}
 	defer receiver.Close()
 
-	ch, err := receiver.Subscribe()
+	ch, err := receiver.Subscribe(nil)
 	if err != nil {
 		t.Fatalf("Subscribe: %v", err)
 	}
@@ -88,7 +88,7 @@ func TestSendReceiveExtended(t *testing.T) {
 	receiver, _ := socketcan.New("vcan0")
 	defer receiver.Close()
 
-	ch, _ := receiver.Subscribe()
+	ch, _ := receiver.Subscribe(nil)
 
 	f := can.Frame{ID: 0x1FFFFFFF, Ext: true, Data: []byte{0xDE, 0xAD}}
 	if err := sender.Send(context.Background(), f); err != nil {
@@ -121,7 +121,7 @@ func TestSendReceiveFD(t *testing.T) {
 	}
 	defer receiver.Close()
 
-	ch, _ := receiver.Subscribe()
+	ch, _ := receiver.Subscribe(nil)
 
 	payload := make([]byte, 48)
 	for i := range payload {

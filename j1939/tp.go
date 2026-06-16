@@ -139,7 +139,7 @@ func (b *Bus) SendTP(ctx context.Context, f Frame, cfg TPConfig) error {
 // underlying bus is closed.
 func (b *Bus) SubscribeTP(ctx context.Context, pgns ...PGN) (<-chan Frame, error) {
 	// Subscribe to all frames; we filter for TP PGNs in the goroutine.
-	raw, err := b.can.Subscribe()
+	raw, err := b.can.Subscribe(nil)
 	if err != nil {
 		return nil, fmt.Errorf("j1939/tp: subscribe: %w", err)
 	}

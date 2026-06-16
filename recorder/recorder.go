@@ -36,7 +36,7 @@ import (
 // iface is the interface name written to each line (e.g. "vcan0").
 // Blocks until ctx is cancelled or the bus subscription channel closes.
 func Record(ctx context.Context, bus can.Bus, w io.Writer, iface string) error {
-	ch, err := bus.Subscribe()
+	ch, err := bus.Subscribe(nil)
 	if err != nil {
 		return fmt.Errorf("recorder: subscribe: %w", err)
 	}

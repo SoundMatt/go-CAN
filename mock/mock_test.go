@@ -23,7 +23,7 @@ func TestMockImplementsBus(t *testing.T) {
 	// Verify mock.Bus satisfies can.Bus interface.
 	var _ can.Bus = b
 
-	ch, err := b.Subscribe()
+	ch, err := b.Subscribe(nil)
 	if err != nil {
 		t.Fatalf("Subscribe: %v", err)
 	}

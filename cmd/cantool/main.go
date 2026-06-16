@@ -3,22 +3,27 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// Command cantool is a CLI for interacting with CAN buses.
+// Command go-can is the go-CAN command-line tool (RELAY spec §13.2).
 //
 // Subcommands:
 //
-//	send   <iface> <id>[#<data>]              Send a CAN frame
-//	dump   <iface>                             Dump all received frames to stdout
-//	record <iface> [output-file]              Record frames to stdout or file (candump format)
-//	replay <iface> <log-file> [--speed N]     Replay a candump log file
+//	version      [--format text|json]          Print version information
+//	capabilities                               Print capability declaration (JSON)
+//	status       [--format text|json]          Print bus status
+//	send         <iface> <id>[#<data>]         Send a CAN frame
+//	dump         <iface>                        Dump all received frames to stdout
+//	record       <iface> [output-file]          Record frames in candump format
+//	replay       <iface> <log-file> [--speed N] Replay a candump log file
 package main
 
 import (
 	"context"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"os"
 	"os/signal"
+	"runtime"
 	"strconv"
 	"strings"
 	"syscall"
@@ -27,6 +32,8 @@ import (
 	"github.com/SoundMatt/go-CAN/recorder"
 	"github.com/SoundMatt/go-CAN/virtual"
 )
+
+const toolVersion = "0.4.0"
 
 func main() {
 	if len(os.Args) < 2 {
@@ -39,6 +46,12 @@ func main() {
 
 	var err error
 	switch os.Args[1] {
+	case "version":
+		err = cmdVersion(os.Args[2:])
+	case "capabilities":
+		err = cmdCapabilities()
+	case "status":
+		err = cmdStatus(os.Args[2:])
 	case "send":
 		err = cmdSend(ctx, os.Args[2:])
 	case "dump":
@@ -50,20 +63,84 @@ func main() {
 	case "help", "--help", "-h":
 		usage()
 	default:
-		fmt.Fprintf(os.Stderr, "cantool: unknown subcommand %q\n", os.Args[1])
+		fmt.Fprintf(os.Stderr, "go-can: unknown subcommand %q\n", os.Args[1])
 		usage()
 		os.Exit(1)
 	}
 
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "cantool:", err)
+		fmt.Fprintln(os.Stderr, "go-can:", err)
 		os.Exit(1)
 	}
 }
 
+func cmdVersion(args []string) error {
+	format := "text"
+	for i, a := range args {
+		if a == "--format" && i+1 < len(args) {
+			format = args[i+1]
+		}
+	}
+	if format == "json" {
+		v := map[string]interface{}{
+			"tool":         "go-can",
+			"protocol":     "CAN",
+			"protocol_int": 1,
+			"version":      toolVersion,
+			"spec_version": can.SpecVersion,
+			"language":     "go",
+			"runtime":      runtime.Version(),
+		}
+		return printJSON(v)
+	}
+	fmt.Printf("go-can %s (RELAY spec %s, %s)\n", toolVersion, can.SpecVersion, runtime.Version())
+	return nil
+}
+
+func cmdCapabilities() error {
+	cap := map[string]interface{}{
+		"kind":                "capabilities",
+		"tool":                "go-can",
+		"protocol":            "CAN",
+		"protocol_int":        1,
+		"version":             toolVersion,
+		"spec_version":        can.SpecVersion,
+		"commands":            []string{"version", "capabilities", "status", "send", "dump", "record", "replay"},
+		"transports":          []string{"socketcan", "virtual"},
+		"features":            []string{"fd", "isotp", "j1939"},
+		"interfaces":          []string{"Bus"},
+		"optional_interfaces": []string{},
+		"adapt":               true,
+	}
+	return printJSON(cap)
+}
+
+func cmdStatus(args []string) error {
+	format := "text"
+	for i, a := range args {
+		if a == "--format" && i+1 < len(args) {
+			format = args[i+1]
+		}
+	}
+	status := map[string]interface{}{
+		"protocol":  "CAN",
+		"tool":      "go-can",
+		"version":   toolVersion,
+		"healthy":   true,
+		"connected": false,
+		"endpoint":  "",
+		"details":   map[string]interface{}{},
+	}
+	if format == "json" {
+		return printJSON(status)
+	}
+	fmt.Printf("tool=%s version=%s protocol=CAN healthy=true connected=false\n", "go-can", toolVersion)
+	return nil
+}
+
 func cmdSend(ctx context.Context, args []string) error {
 	if len(args) < 2 {
-		return fmt.Errorf("usage: cantool send <iface> <hex-id>[#<hex-data>]")
+		return fmt.Errorf("usage: go-can send <iface> <hex-id>[#<hex-data>]")
 	}
 	iface := args[0]
 	frameStr := args[1]
@@ -98,7 +175,7 @@ func cmdSend(ctx context.Context, args []string) error {
 
 func cmdDump(ctx context.Context, args []string) error {
 	if len(args) < 1 {
-		return fmt.Errorf("usage: cantool dump <iface>")
+		return fmt.Errorf("usage: go-can dump <iface>")
 	}
 	iface := args[0]
 
@@ -108,7 +185,7 @@ func cmdDump(ctx context.Context, args []string) error {
 	}
 	defer bus.Close()
 
-	ch, err := bus.Subscribe()
+	ch, err := bus.Subscribe(nil)
 	if err != nil {
 		return err
 	}
@@ -214,14 +291,23 @@ func openBus(iface string) (can.Bus, error) {
 	return openPlatformBus(iface)
 }
 
+func printJSON(v interface{}) error {
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	return enc.Encode(v)
+}
+
 func usage() {
-	fmt.Fprintln(os.Stderr, `cantool — CAN bus command-line tool
+	fmt.Fprintln(os.Stderr, `go-can — CAN bus command-line tool (RELAY spec v`+can.SpecVersion+`)
 
 Usage:
-  cantool send   <iface> <id>[#<data>]              Send a CAN frame
-  cantool dump   <iface>                             Dump all received frames
-  cantool record <iface> [output-file]              Record frames in candump format (Ctrl+C to stop)
-  cantool replay <iface> <log-file> [--speed N]     Replay a candump log file (default speed: 1.0)
+  go-can version       [--format text|json]           Print version information
+  go-can capabilities                                 Print capability declaration
+  go-can status        [--format text|json]           Print bus status
+  go-can send          <iface> <id>[#<data>]          Send a CAN frame
+  go-can dump          <iface>                         Dump all received frames
+  go-can record        <iface> [output-file]           Record frames in candump format (Ctrl+C to stop)
+  go-can replay        <iface> <log-file> [--speed N]  Replay a candump log file (default speed: 1.0)
 
 iface: "virtual" for in-process test bus; "vcan0", "can0", etc. for SocketCAN (Linux only).`)
 }

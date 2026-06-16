@@ -32,7 +32,7 @@ func TestSendReceive(t *testing.T) {
 	b, _ := virtual.New()
 	defer b.Close()
 
-	ch, err := b.Subscribe()
+	ch, err := b.Subscribe(nil)
 	if err != nil {
 		t.Fatalf("Subscribe: %v", err)
 	}
@@ -56,7 +56,7 @@ func TestFilterAccepts(t *testing.T) {
 	b, _ := virtual.New()
 	defer b.Close()
 
-	ch, _ := b.Subscribe(can.Filter{ID: 0x200, Mask: 0x7FF})
+	ch, _ := b.Subscribe([]can.Filter{{ID: 0x200, Mask: 0x7FF}})
 
 	_ = b.Send(context.Background(), can.Frame{ID: 0x100, Data: []byte{1}})
 	_ = b.Send(context.Background(), can.Frame{ID: 0x200, Data: []byte{2}})
@@ -82,8 +82,8 @@ func TestMultipleSubscribers(t *testing.T) {
 	b, _ := virtual.New()
 	defer b.Close()
 
-	ch1, _ := b.Subscribe()
-	ch2, _ := b.Subscribe()
+	ch1, _ := b.Subscribe(nil)
+	ch2, _ := b.Subscribe(nil)
 
 	f := can.Frame{ID: 0x300, Data: []byte{0x42}}
 	_ = b.Send(context.Background(), f)
@@ -107,7 +107,7 @@ func TestClosedBus(t *testing.T) {
 	if err := b.Send(context.Background(), can.Frame{ID: 0x100}); err == nil {
 		t.Error("Send on closed bus should error")
 	}
-	if _, err := b.Subscribe(); err == nil {
+	if _, err := b.Subscribe(nil); err == nil {
 		t.Error("Subscribe on closed bus should error")
 	}
 }
@@ -138,7 +138,7 @@ func FuzzSend(f *testing.F) {
 		b, _ := virtual.New()
 		defer b.Close()
 
-		ch, _ := b.Subscribe()
+		ch, _ := b.Subscribe(nil)
 		fr := can.Frame{ID: id, Ext: ext, RTR: rtr}
 		if !rtr && len(data) <= 8 {
 			fr.Data = data
