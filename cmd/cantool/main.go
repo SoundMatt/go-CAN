@@ -7,9 +7,10 @@
 //
 // Subcommands:
 //
-//	send   <iface> <id> <hex-data>   Send a CAN frame
-//	dump   <iface>                   Dump all received frames to stdout
-//	decode <dbc-file> <iface>        Decode frames using a DBC file
+//	send   <iface> <id>[#<data>]              Send a CAN frame
+//	dump   <iface>                             Dump all received frames to stdout
+//	record <iface> [output-file]              Record frames to stdout or file (candump format)
+//	replay <iface> <log-file> [--speed N]     Replay a candump log file
 package main
 
 import (
@@ -23,6 +24,7 @@ import (
 	"syscall"
 
 	can "github.com/SoundMatt/go-CAN"
+	"github.com/SoundMatt/go-CAN/recorder"
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
@@ -41,6 +43,10 @@ func main() {
 		err = cmdSend(ctx, os.Args[2:])
 	case "dump":
 		err = cmdDump(ctx, os.Args[2:])
+	case "record":
+		err = cmdRecord(ctx, os.Args[2:])
+	case "replay":
+		err = cmdReplay(ctx, os.Args[2:])
 	case "help", "--help", "-h":
 		usage()
 	default:
@@ -121,6 +127,84 @@ func cmdDump(ctx context.Context, args []string) error {
 	}
 }
 
+// cmdRecord records all frames from iface to an output file (or stdout) in
+// candump format. Press Ctrl+C to stop.
+//
+//	cantool record <iface> [output-file]
+func cmdRecord(ctx context.Context, args []string) error {
+	if len(args) < 1 {
+		return fmt.Errorf("usage: cantool record <iface> [output-file]")
+	}
+	iface := args[0]
+
+	var out *os.File
+	if len(args) >= 2 {
+		var err error
+		out, err = os.Create(args[1])
+		if err != nil {
+			return fmt.Errorf("record: open output: %w", err)
+		}
+		defer out.Close()
+		fmt.Fprintf(os.Stderr, "recording %s → %s (Ctrl+C to stop)\n", iface, args[1])
+	} else {
+		out = os.Stdout
+		fmt.Fprintf(os.Stderr, "recording %s → stdout (Ctrl+C to stop)\n", iface)
+	}
+
+	bus, err := openBus(iface)
+	if err != nil {
+		return err
+	}
+	defer bus.Close()
+
+	if err := recorder.Record(ctx, bus, out, iface); err != nil && err != context.Canceled {
+		return fmt.Errorf("record: %w", err)
+	}
+	return nil
+}
+
+// cmdReplay replays a candump log file to iface, preserving frame timing.
+//
+//	cantool replay <iface> <log-file> [--speed N]
+func cmdReplay(ctx context.Context, args []string) error {
+	if len(args) < 2 {
+		return fmt.Errorf("usage: cantool replay <iface> <log-file> [--speed N]")
+	}
+	iface := args[0]
+	logFile := args[1]
+
+	speedFactor := 1.0
+	for i := 2; i < len(args)-1; i++ {
+		if args[i] == "--speed" {
+			v, err := strconv.ParseFloat(args[i+1], 64)
+			if err != nil {
+				return fmt.Errorf("replay: invalid speed %q: %w", args[i+1], err)
+			}
+			speedFactor = v
+		}
+	}
+
+	f, err := os.Open(logFile)
+	if err != nil {
+		return fmt.Errorf("replay: open log: %w", err)
+	}
+	defer f.Close()
+
+	bus, err := openBus(iface)
+	if err != nil {
+		return err
+	}
+	defer bus.Close()
+
+	fmt.Fprintf(os.Stderr, "replaying %s → %s at %.1f× speed (Ctrl+C to stop)\n",
+		logFile, iface, speedFactor)
+
+	if err := recorder.Replay(ctx, bus, f, speedFactor); err != nil && err != context.Canceled {
+		return fmt.Errorf("replay: %w", err)
+	}
+	return nil
+}
+
 // openBus returns a virtual bus when iface == "virtual", otherwise tries
 // to open a SocketCAN interface. On non-Linux systems virtual is always used.
 func openBus(iface string) (can.Bus, error) {
@@ -134,8 +218,10 @@ func usage() {
 	fmt.Fprintln(os.Stderr, `cantool — CAN bus command-line tool
 
 Usage:
-  cantool send  <iface> <id>[#<data>]   Send a CAN frame (e.g. cantool send vcan0 123#DEADBEEF)
-  cantool dump  <iface>                  Dump all received frames
+  cantool send   <iface> <id>[#<data>]              Send a CAN frame
+  cantool dump   <iface>                             Dump all received frames
+  cantool record <iface> [output-file]              Record frames in candump format (Ctrl+C to stop)
+  cantool replay <iface> <log-file> [--speed N]     Replay a candump log file (default speed: 1.0)
 
 iface: "virtual" for in-process test bus; "vcan0", "can0", etc. for SocketCAN (Linux only).`)
 }
