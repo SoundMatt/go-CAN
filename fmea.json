@@ -1,8 +1,25 @@
 {
   "format": "go-FuSa dFMEA v1",
-  "generated_at": "2026-06-14T00:28:56.048840975Z",
+  "generated_at": "2026-06-16T23:57:11.012080452Z",
   "module": "github.com/SoundMatt/go-CAN",
   "entries": [
+    {
+      "component": "dbc",
+      "function": "Decode",
+      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "low",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
     {
       "component": "dbc",
       "function": "Decode",
@@ -21,23 +38,25 @@
         "REQ-DBC-007"
       ],
       "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
       "component": "dbc",
-      "function": "Decode",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+      "function": "Encode",
+      "file": "/home/runner/work/go-CAN/go-CAN/dbc/encode.go",
       "failure_modes": [
-        "Incorrect output"
+        "Returns unexpected error"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "Silent failure propagated to caller"
       ],
-      "severity": "low",
-      "detection_control": "unit tests",
-      "cyber_risks": [
-        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-DBC-005",
+        "REQ-DBC-007"
       ]
     },
     {
@@ -59,6 +78,62 @@
         "REQ-DBC-004"
       ],
       "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "dbc",
+      "function": "PhysicalToLabel",
+      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-DBC-006"
+      ],
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "go-CAN (can)",
+      "function": "Adapt",
+      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-CAN-007"
+      ],
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "go-CAN (can)",
+      "function": "Close",
+      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests",
+      "cyber_risks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
@@ -74,6 +149,25 @@
       ],
       "severity": "low",
       "detection_control": "unit tests"
+    },
+    {
+      "component": "go-CAN (can)",
+      "function": "FromMessage",
+      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-CAN-007"
+      ],
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
     },
     {
       "component": "go-CAN (can)",
@@ -100,6 +194,101 @@
       ],
       "severity": "low",
       "detection_control": "unit tests"
+    },
+    {
+      "component": "go-CAN (can)",
+      "function": "NewLoanedFrame",
+      "file": "/home/runner/work/go-CAN/go-CAN/can_optional.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "low",
+      "detection_control": "unit tests"
+    },
+    {
+      "component": "go-CAN (can)",
+      "function": "Protocol",
+      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "low",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "go-CAN (can)",
+      "function": "Return",
+      "file": "/home/runner/work/go-CAN/go-CAN/can_optional.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "low",
+      "detection_control": "unit tests"
+    },
+    {
+      "component": "go-CAN (can)",
+      "function": "Send",
+      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "go-CAN (can)",
+      "function": "Subscribe",
+      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "failure_modes": [
+        "Returns unexpected error",
+        "Goroutine not terminated"
+      ],
+      "effects": [
+        "Silent failure propagated to caller",
+        "Memory leak or deadlock"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "go-CAN (can)",
+      "function": "ToMessage",
+      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "high",
+      "detection_control": "requirement testing + unit tests",
+      "requirement_ids": [
+        "REQ-CAN-007"
+      ],
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
     },
     {
       "component": "go-CAN (can)",
@@ -386,6 +575,31 @@
     },
     {
       "component": "j1939",
+      "function": "SendTP",
+      "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "j1939",
       "function": "Subscribe",
       "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
       "failure_modes": [
@@ -423,6 +637,46 @@
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
+    },
+    {
+      "component": "j1939",
+      "function": "SubscribeTP",
+      "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+      "failure_modes": [
+        "Returns unexpected error",
+        "Goroutine not terminated"
+      ],
+      "effects": [
+        "Silent failure propagated to caller",
+        "Memory leak or deadlock"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "mock",
+      "function": "New",
+      "file": "/home/runner/work/go-CAN/go-CAN/mock/mock.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests"
     },
     {
       "component": "obdii",
@@ -547,6 +801,74 @@
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "recorder",
+      "function": "FormatLine",
+      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "low",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "recorder",
+      "function": "ParseLine",
+      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "recorder",
+      "function": "Record",
+      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
+      ]
+    },
+    {
+      "component": "recorder",
+      "function": "Replay",
+      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests",
+      "cyber_risks": [
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+        "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
@@ -917,7 +1239,46 @@
     },
     {
       "component": "virtual",
-      "function": "Error",
+      "function": "CloseWithDrain",
+      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests"
+    },
+    {
+      "component": "virtual",
+      "function": "Health",
+      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "failure_modes": [
+        "Incorrect output"
+      ],
+      "effects": [
+        "Incorrect system behavior"
+      ],
+      "severity": "low",
+      "detection_control": "unit tests"
+    },
+    {
+      "component": "virtual",
+      "function": "Loan",
+      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests"
+    },
+    {
+      "component": "virtual",
+      "function": "Metrics",
       "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Incorrect output"
@@ -962,6 +1323,19 @@
         "REQ-VIRT-002",
         "REQ-VIRT-005"
       ]
+    },
+    {
+      "component": "virtual",
+      "function": "SendLoaned",
+      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "failure_modes": [
+        "Returns unexpected error"
+      ],
+      "effects": [
+        "Silent failure propagated to caller"
+      ],
+      "severity": "medium",
+      "detection_control": "unit tests"
     },
     {
       "component": "virtual",

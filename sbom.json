@@ -4,11 +4,16 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-06-14T00:28:56.164061711Z",
+  "generatedAt": "2026-06-16T23:57:11.119062998Z",
   "format": "x-FuSa SBOM v1",
   "module": "github.com/SoundMatt/go-CAN",
   "goVersion": "1.25.0",
   "components": [
+    {
+      "name": "github.com/SoundMatt/RELAY",
+      "version": "v0.1.0",
+      "hash": "sha256:8e9db8b5464e3d25518302272a712d980c5ad9241b37dce7282ca1330c165662"
+    },
     {
       "name": "golang.org/x/sys",
       "version": "v0.46.0",
