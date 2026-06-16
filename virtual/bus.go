@@ -20,18 +20,37 @@ package virtual
 import (
 	"context"
 	"sync"
+	"sync/atomic"
+	"time"
 
 	can "github.com/SoundMatt/go-CAN"
 )
 
 const defaultChanSize = 64
 
+// Compile-time assertions that *Bus satisfies all optional can interfaces.
+var (
+	_ can.LoaningBus      = (*Bus)(nil)
+	_ can.HealthProvider  = (*Bus)(nil)
+	_ can.MetricsProvider = (*Bus)(nil)
+	_ can.Drainer         = (*Bus)(nil)
+)
+
 // Bus is an in-process CAN bus. Multiple goroutines may call Send and
 // Subscribe concurrently. The zero value is not usable; call New.
 type Bus struct {
-	mu     sync.RWMutex
-	subs   []*subscription
+	mu   sync.RWMutex
+	subs []*subscription
+	pool sync.Pool
+
 	closed bool
+
+	writeCount     atomic.Uint64
+	deliverCount   atomic.Uint64
+	dropCount      atomic.Uint64
+	bytesWritten   atomic.Uint64
+	bytesDelivered atomic.Uint64
+	errorCount     atomic.Uint64
 }
 
 type subscription struct {
@@ -44,7 +63,11 @@ type subscription struct {
 //fusa:req REQ-VIRT-001
 //fusa:req REQ-VIRT-003
 func New() (*Bus, error) {
-	return &Bus{}, nil
+	b := &Bus{}
+	b.pool.New = func() any {
+		return new(can.LoanedFrame)
+	}
+	return b, nil
 }
 
 // Send broadcasts f to all matching subscribers.
@@ -55,19 +78,26 @@ func New() (*Bus, error) {
 //fusa:req REQ-VIRT-005
 func (b *Bus) Send(_ context.Context, f can.Frame) error {
 	if err := can.ValidateFrame(f); err != nil {
+		b.errorCount.Add(1)
 		return err
 	}
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if b.closed {
+		b.errorCount.Add(1)
 		return errClosed
 	}
+	b.writeCount.Add(1)
+	b.bytesWritten.Add(uint64(len(f.Data)))
 	for _, s := range b.subs {
 		if matchesAny(s.filters, f) {
 			select {
 			case s.ch <- f:
+				b.deliverCount.Add(1)
+				b.bytesDelivered.Add(uint64(len(f.Data)))
 			default:
 				// drop on full channel — same semantics as real CAN hardware
+				b.dropCount.Add(1)
 			}
 		}
 	}
@@ -106,6 +136,80 @@ func (b *Bus) Close() error {
 	}
 	b.subs = nil
 	return nil
+}
+
+// Loan returns a pre-allocated LoanedFrame from a pool.
+// The caller must call Return() on the frame when done.
+func (b *Bus) Loan() (*can.LoanedFrame, error) {
+	b.mu.RLock()
+	closed := b.closed
+	b.mu.RUnlock()
+	if closed {
+		return nil, errClosed
+	}
+	lf := b.pool.Get().(*can.LoanedFrame)
+	*lf = *can.NewLoanedFrame(can.Frame{}, func() {
+		b.pool.Put(lf)
+	})
+	return lf, nil
+}
+
+// SendLoaned transmits the loaned frame and calls Return() on it.
+func (b *Bus) SendLoaned(ctx context.Context, f *can.LoanedFrame) error {
+	err := b.Send(ctx, f.Frame)
+	f.Return()
+	return err
+}
+
+// Health returns the current operational health of the bus.
+func (b *Bus) Health() can.Health {
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	if b.closed {
+		return can.Health{Status: can.HealthDown, Details: "bus closed"}
+	}
+	return can.Health{Status: can.HealthOK}
+}
+
+// Metrics returns a snapshot of runtime counters.
+func (b *Bus) Metrics() can.Metrics {
+	return can.Metrics{
+		WriteCount:     b.writeCount.Load(),
+		DeliverCount:   b.deliverCount.Load(),
+		DropCount:      b.dropCount.Load(),
+		BytesWritten:   b.bytesWritten.Load(),
+		BytesDelivered: b.bytesDelivered.Load(),
+		ErrorCount:     b.errorCount.Load(),
+	}
+}
+
+// CloseWithDrain waits until all subscriber channels are empty or ctx is
+// cancelled, then calls Close.
+func (b *Bus) CloseWithDrain(ctx context.Context) error {
+	ticker := time.NewTicker(time.Millisecond)
+	defer ticker.Stop()
+	for {
+		select {
+		case <-ctx.Done():
+			return b.Close()
+		case <-ticker.C:
+			if b.allDrained() {
+				return b.Close()
+			}
+		}
+	}
+}
+
+// allDrained reports whether every subscriber channel is empty.
+func (b *Bus) allDrained() bool {
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	for _, s := range b.subs {
+		if len(s.ch) > 0 {
+			return false
+		}
+	}
+	return true
 }
 
 func matchesAny(filters []can.Filter, f can.Frame) bool {
