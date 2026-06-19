@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-06-19T16:35:46.655616172Z",
+  "generatedAt": "2026-06-19T17:51:00.404208677Z",
   "projectRoot": "go-CAN",
   "standard": "iec62443",
   "objectives": [

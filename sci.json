@@ -1,7 +1,7 @@
 {
   "project": "go-CAN",
   "version": "1",
-  "generated": "2026-06-19T17:44:11.392282Z",
+  "generated": "2026-06-19T17:50:54.105335987Z",
   "items": [
     {
       "name": "Software Development Plan",
@@ -53,7 +53,7 @@
       "name": "SBOM (SPDX 3.0.1)",
       "file": "sbom.json",
       "class": "Configuration Management",
-      "sha256": "45dd6b320bb4cb97383dae81f5bd22b2e12e1a3f4be09d17ff72f1b706970500",
+      "sha256": "49404c5d72e7537578b505aa8e09b89a8a90f6eafc3fbe412d82bedf088fd13b",
       "present": true,
       "note": "DO-178C §11.15, NTIA SBOM"
     },
@@ -61,7 +61,7 @@
       "name": "Build Provenance",
       "file": "provenance.json",
       "class": "Configuration Management",
-      "sha256": "da5dbf864bc728cbd739ef54f118bd72162c0abbba6fc7b6e0dfcc90e694f10b",
+      "sha256": "c4fcfbbad388c215782d9dcdbc6103e48a6030b9f4f6c53ead98adf1cd478a43",
       "present": true,
       "note": "SLSA L2"
     },
@@ -76,7 +76,7 @@
       "name": "Test Evidence Bundle",
       "file": ".fusa-evidence.json",
       "class": "Verification",
-      "sha256": "80ff2e0b8535a36ea73f7d376dab42877335962809c36d272175453437e94474",
+      "sha256": "781926f21e9d5c29cc736094a882680fa1b4afc9aacd4955c0f034c5bd51a867",
       "present": true,
       "note": "DO-178C §11.14"
     },
@@ -84,7 +84,7 @@
       "name": "Vulnerability Report",
       "file": "vuln.json",
       "class": "Verification",
-      "sha256": "42f3a3b9efb5857838d27272d361d0c53c9d962264be48006bfb333de9440ffd",
+      "sha256": "afd6cf46f3596fe9fe05d48694a2a757f24431ffa0e597e6f2caa81bf2f3abe1",
       "present": true,
       "note": "ISO 21434 / OSV"
     },
@@ -92,7 +92,7 @@
       "name": "FMEA Table",
       "file": "fmea.json",
       "class": "Verification",
-      "sha256": "9d0eb5ca0bbf6c3254568d5bf0c9506f8a31815b5557523fb3ac5dff80b4aef5",
+      "sha256": "6fb452a96f0c0ea54674f7ac725b878e53234706e67dd7637616f5b7e411fc82",
       "present": true,
       "note": "DO-178C §11.9 (safety analysis)"
     },
@@ -100,7 +100,7 @@
       "name": "TARA Report",
       "file": "tara.json",
       "class": "Verification",
-      "sha256": "561a8ac9d84ca6b4b37b3689b211b76fb6ac5885475bcede99126b981d0eb28f",
+      "sha256": "99df38f832425124adcd1841c001878149e44f1f31859e3e384f6ef871b2f5fc",
       "present": true,
       "note": "ISO 21434 §9"
     },
@@ -108,7 +108,7 @@
       "name": "TARA Markdown",
       "file": "tara.md",
       "class": "Verification",
-      "sha256": "c6365c602da774fe6ad776acd6fb25f39b528a49a8608f5ddcf145a539ae60fd",
+      "sha256": "f538b4457777db48e149a92bdf0d6a8dc32004c582edf60a1d85d17ec7d9951a",
       "present": true,
       "note": "ISO 21434 §9"
     },
@@ -116,7 +116,7 @@
       "name": "Boundary Diagram",
       "file": "boundary.mermaid",
       "class": "Verification",
-      "sha256": "f35f2ebe6d8fcfbacf902257a3e99baf9a31932e086d28e00173df01397efdec",
+      "sha256": "ff4d985f7799fe5f4ec0f553954a6e48e3bac77627aab4c1ecc87caa6574e462",
       "present": true,
       "note": "DO-178C §11.10 (architecture)"
     },
@@ -124,7 +124,7 @@
       "name": "Cyber Report",
       "file": "cyber-report.json",
       "class": "Verification",
-      "sha256": "8e10455e808ec92af0944e43d169463f9865a558ee5f7ffba59c29953b7dda96",
+      "sha256": "4a1e72ba85eb447b6f29dd6414c75ce1a89f50b251276dcb1557dec1d9762134",
       "present": true,
       "note": "ISO 21434 §11"
     },
@@ -132,15 +132,14 @@
       "name": "Tool Qualification Report",
       "file": "qualify-report.json",
       "class": "Quality Assurance",
-      "sha256": "9c53c1e3bafc551a3f774d3f7bc63087adb05d2703127e887e8f1409fb8df704",
-      "present": true,
+      "present": false,
       "note": "DO-178C §12 / DO-330"
     },
     {
       "name": "Safety Case",
       "file": "safety-case.json",
       "class": "Accomplishment Summary",
-      "sha256": "8b3890e9b388c92513b5051793c21f1d000ca77971d7ef083a3ebf79519e59d5",
+      "sha256": "9793cbd7fea8de817a5650265f0035f2fb5e0a6ced43a3305f7ac8aecbb1fd86",
       "present": true,
       "note": "DO-178C §11.20 (SAS input)"
     },
@@ -155,8 +154,7 @@
       "name": "Audit Pack",
       "file": "audit-pack.zip",
       "class": "Configuration Management",
-      "sha256": "f3906b6070b79ce0e37452439f53464655174f54a2d45370ebeeac7d59fd5e6b",
-      "present": true,
+      "present": false,
       "note": "go-FuSa audit bundle"
     },
     {

@@ -1,7 +1,7 @@
 # Threat Analysis and Risk Assessment (TARA)
 
 **Module:** github.com/SoundMatt/go-CAN  
-**Generated:** 2026-06-19T17:44:06Z  
+**Generated:** 2026-06-19T17:50:48Z  
 **Standard:** ISO 21434 Chapter 9  
 
 | ID | Asset | Threat | STRIDE | CWE | Vector | Likelihood | Impact | SL | Control | Residual Risk |

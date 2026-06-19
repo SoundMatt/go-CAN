@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-06-19T17:44:12.335537Z",
+  "generatedAt": "2026-06-19T17:51:00.398100839Z",
   "projectRoot": "go-CAN",
   "standard": "IEC 61508 SIL-2",
   "objectives": [
