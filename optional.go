@@ -16,12 +16,16 @@ type LoanedFrame struct {
 
 // NewLoanedFrame creates a LoanedFrame backed by the given release function.
 // This is intended for use by LoaningBus implementations.
+//
+//fusa:req REQ-LOAN-001
 func NewLoanedFrame(f Frame, release func()) *LoanedFrame {
 	return &LoanedFrame{Frame: f, release: release}
 }
 
 // Return releases the frame buffer back to the owning pool.
 // It is safe to call Return more than once.
+//
+//fusa:req REQ-LOAN-001
 func (f *LoanedFrame) Return() {
 	if f.release != nil {
 		f.release()

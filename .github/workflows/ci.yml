@@ -119,12 +119,13 @@ jobs:
       - name: go test (socketcan, -race)
         run: go test -race -count=1 -v ./socketcan/...
 
-  # ── go-FuSa safety checks ─────────────────────────────────────────────────
-  # Pinned to v0.30.0; exits 1 on any ERROR-level finding.
-  # To upgrade: install the new version locally, run 'gofusa check ./...',
-  # fix all findings, then bump the @version pin below.
+  # ── go-FuSa continuous-conformance lifecycle (RELAY spec §20.1.2) ──────────
+  # Pinned to v0.30.0. Runs the FULL lifecycle, not a subset: static check,
+  # 100% requirement traceability (traced AND tested + function-annotation
+  # density), cybersecurity analysis, dependency vulnerability scan, and the
+  # tool-qualification suite. Conformance must be continuously proven.
   gofusa:
-    name: go-FuSa safety check (v0.30.0)
+    name: go-FuSa lifecycle (§20, v0.30.0)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -135,55 +136,43 @@ jobs:
       - name: Install go-FuSa
         run: go install github.com/SoundMatt/go-FuSa/cmd/gofusa@v0.30.0
 
-      - name: gofusa check
+      - name: gofusa check (gate on ERROR)
         run: gofusa check ./...
 
-      - name: Verify required safety artifacts are present
+      - name: Verify required evidence artifacts are present (§20.4)
         run: |
           missing=0
           for f in \
             .fusa.json \
             .fusa-reqs.json \
             .fusa-iec62443.json \
+            .fusa-hara.json \
+            tara.json \
+            fmea.json \
+            sbom.json \
+            provenance.json \
             SAFETY_PLAN.md \
             SECURITY.md \
             INCIDENT-RESPONSE.md \
             THREAT_MODEL.md; do
             if [ ! -f "$f" ]; then
-              echo "::error::Required safety artifact missing: $f"
+              echo "::error::Required evidence artifact missing: $f"
               missing=$((missing + 1))
             fi
           done
           [ "$missing" -eq 0 ] || exit 1
 
-      - name: Verify traceability (all requirements traced AND tested)
-        run: |
-          gofusa trace --format json -output trace.json
-          python3 - << 'PYEOF'
-          import json, sys
-          # A missing or unreadable trace file is a hard failure: the gate must
-          # never pass silently just because the evidence could not be produced.
-          with open('trace.json') as fh:
-              d = json.load(fh)
-          cov = d.get('coverage', {})
-          total  = cov.get('totalRequirements', 0)
-          traced = cov.get('tracedRequirements', 0)
-          tested = cov.get('testedRequirements', 0)
-          if total == 0:
-              print("::error::No requirements found in trace report")
-              sys.exit(1)
-          failed = False
-          if traced < total:
-              print(f"::error::Untraced requirements: {total - traced} of {total}")
-              failed = True
-          if tested < total:
-              # ASIL-B requirements without verification evidence fail the build.
-              print(f"::error::Untested requirements: {total - tested} of {total}")
-              failed = True
-          if failed:
-              sys.exit(1)
-          print(f"Traceability OK: {total} requirements, all traced and tested")
-          PYEOF
+      - name: 100% requirement traceability (traced AND tested)
+        run: gofusa trace -req-coverage 100
+
+      - name: Cybersecurity analysis
+        run: gofusa cyber
+
+      - name: Dependency vulnerability scan (OSV / ISO 21434)
+        run: gofusa vuln
+
+      - name: Tool qualification suite
+        run: gofusa qualify
 
   # ── Dependency vulnerability scan ─────────────────────────────────────────
   # govulncheck fails the build on any vulnerability the code actually calls.
@@ -227,13 +216,16 @@ jobs:
           go-version: "1.25"
 
       - name: Install relay CLI
-        run: go install github.com/SoundMatt/RELAY/cmd/relay@v1.8.1
+        run: go install github.com/SoundMatt/RELAY/cmd/relay@v1.10.0
 
       - name: Build go-can CLI
         run: go build -o /tmp/go-can ./cmd/cantool
 
-      - name: relay conform --strict
+      - name: relay conform --strict (fail on FAIL or WARN)
         run: relay conform --strict /tmp/go-can
+
+      - name: relay interop (behavioural equivalence vs reference, §20.2)
+        run: relay interop --protocol CAN /tmp/go-can
 
       - name: relay compare (convert-driver self-check)
         run: relay compare /tmp/go-can /tmp/go-can

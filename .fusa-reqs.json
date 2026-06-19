@@ -687,6 +687,70 @@
       "standard": "iso26262",
       "level": "ASIL-B",
       "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-007",
+      "title": "SendTP transmits a multi-packet message via BAM",
+      "text": "j1939.Bus.SendTP shall send a payload larger than 8 bytes using the SAE J1939-21 Broadcast Announce Message (BAM) Transport Protocol: a TP.CM_BAM announce (PGN 0xEC00) followed by TP.DT data packets (PGN 0xEB00, 7 data bytes each), for total sizes up to 1785 bytes.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-J1939-008",
+      "title": "SubscribeTP reassembles BAM multi-packet messages",
+      "text": "j1939.Bus.SubscribeTP shall reassemble BAM Transport Protocol sessions for the requested PGNs and deliver the completed multi-packet payload as a single frame, replacing any stale session when a new BAM announce arrives.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-REC-001",
+      "title": "Record captures frames to candump format",
+      "text": "recorder.Record shall subscribe to a Bus and write every received frame to an io.Writer as a candump-format line, flushing on bus close or context cancellation.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-REC-002",
+      "title": "Replay re-sends candump frames preserving timing",
+      "text": "recorder.Replay shall read candump lines and re-send each frame to a Bus, preserving inter-frame timing relative to the first frame, scaled by the speed factor, and returning on EOF or context cancellation.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-REC-003",
+      "title": "ParseLine parses a candump line",
+      "text": "recorder.ParseLine shall parse a candump line into interface name, timestamp, and Frame, supporting standard (ID#DATA) and CAN FD (ID##FLAGSDATA) forms, and returning an error for malformed lines.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-REC-004",
+      "title": "FormatLine formats a frame as a candump line",
+      "text": "recorder.FormatLine shall format a Frame as a candump line, using the ID#HEXDATA form for classic CAN and the ID##FLAGSHEXDATA form for CAN FD.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-MOCK-001",
+      "title": "mock.New provides an in-process test bus",
+      "text": "mock.New shall return an in-process Bus (an alias over the virtual transport) so applications can be unit-tested without hardware.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-LOAN-001",
+      "title": "LoanedFrame supports pooled zero-copy frames",
+      "text": "can.NewLoanedFrame shall wrap a Frame with a release function, and LoanedFrame.Return shall release the buffer to the owning pool exactly once and be safe to call repeatedly (LoaningBus optional interface).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
     }
   ]
 }
