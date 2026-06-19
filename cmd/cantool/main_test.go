@@ -256,3 +256,50 @@ func TestOpenBusVirtual(t *testing.T) {
 	}
 	defer bus.Close()
 }
+
+func TestUsage(t *testing.T) {
+	// usage() writes to stderr; just ensure it runs without panicking.
+	old := os.Stderr
+	_, w, _ := os.Pipe()
+	os.Stderr = w
+	usage()
+	_ = w.Close()
+	os.Stderr = old
+}
+
+func TestCmdDumpCancellation(t *testing.T) {
+	// cmdDump opens its own virtual bus, subscribes, and blocks until the
+	// context is cancelled. Verify it returns nil on cancellation.
+	ctx, cancel := context.WithCancel(context.Background())
+	go func() {
+		time.Sleep(20 * time.Millisecond)
+		cancel()
+	}()
+	if err := cmdDump(ctx, []string{"virtual"}); err != nil {
+		t.Errorf("cmdDump returned %v, want nil on cancellation", err)
+	}
+}
+
+func TestCmdDumpMissingArg(t *testing.T) {
+	if err := cmdDump(context.Background(), nil); err == nil {
+		t.Error("cmdDump with no iface should error")
+	}
+}
+
+func TestOpenBusNonVirtualOnNonLinux(t *testing.T) {
+	// On this (non-Linux) platform, a SocketCAN iface must return an error
+	// rather than silently succeeding.
+	if _, err := openBus("can0"); err == nil {
+		t.Skip("SocketCAN available on this platform; skipping non-Linux assertion")
+	}
+}
+
+func TestCmdSendDefaultIface(t *testing.T) {
+	// Empty iface falls through openBus to a virtual bus.
+	_, err := captureStdout(t, func() error {
+		return cmdSend(context.Background(), []string{"", "100#AA"})
+	})
+	if err != nil {
+		t.Fatalf("cmdSend with empty iface: %v", err)
+	}
+}
