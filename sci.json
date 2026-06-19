@@ -1,7 +1,7 @@
 {
   "project": "go-CAN",
   "version": "1",
-  "generated": "2026-06-19T13:24:30.460383Z",
+  "generated": "2026-06-19T13:39:22.804491128Z",
   "items": [
     {
       "name": "Software Development Plan",
@@ -76,7 +76,7 @@
       "name": "Test Evidence Bundle",
       "file": ".fusa-evidence.json",
       "class": "Verification",
-      "sha256": "cfe7f72e8c24b3b3936582b756cd4f195b998e1d37fb9dae64825d5ad5d1f60b",
+      "sha256": "808c23c63d8d62576ca14784d77d8e98be9c1f86eb5bb6f1383f5d2d6fa74daa",
       "present": true,
       "note": "DO-178C §11.14"
     },
@@ -92,7 +92,7 @@
       "name": "FMEA Table",
       "file": "fmea.json",
       "class": "Verification",
-      "sha256": "47a9af5b66a5fcb4d98a040509de638695284010435239c8c13df11b459f7deb",
+      "sha256": "3223b8c5387c513fa538d683684c9ae9898342d09afc5fac877fbcba58b434f7",
       "present": true,
       "note": "DO-178C §11.9 (safety analysis)"
     },
@@ -114,7 +114,7 @@
       "name": "Boundary Diagram",
       "file": "boundary.mermaid",
       "class": "Verification",
-      "sha256": "368858f8651e56843067ae8b468fb9fa8cb7a3476dc0c19395d186a2bd6bfebf",
+      "sha256": "ccacb915a3746bb1ffd2c232b5c271a2778115f6d047ee7d9932d5d358c52159",
       "present": true,
       "note": "DO-178C §11.10 (architecture)"
     },
@@ -122,7 +122,7 @@
       "name": "Cyber Report",
       "file": "cyber-report.json",
       "class": "Verification",
-      "sha256": "8a23138c873b3ae914e38e8667e1ddd2a7830ce13d05a451540b6bee6503d4d6",
+      "sha256": "3b7ed11870ac29e19312166132f6fb4c060a8f899072df178e6a7b61b34881a8",
       "present": true,
       "note": "ISO 21434 §11"
     },
