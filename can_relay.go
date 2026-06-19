@@ -18,19 +18,44 @@ import (
 
 // ToMessage converts a CAN Frame to a relay.Message for cross-protocol routing.
 //
+// The four base flags (can.ext, can.fd, can.rtr, can.brs) are always present.
+// The CAN XL fields (can.esi, can.xl, can.sdt, can.vcid, can.af, can.sec) are
+// emitted only when set/non-zero, matching the RELAY §15.1 canonical mapping
+// and golden vectors. The conversion is lossless via FromMessage.
+//
 //fusa:req REQ-CAN-007
+//fusa:req REQ-CANXL-004
 func (f Frame) ToMessage() relay.Message {
+	meta := map[string]string{
+		"can.ext": strconv.FormatBool(f.Ext),
+		"can.fd":  strconv.FormatBool(f.FD),
+		"can.rtr": strconv.FormatBool(f.RTR),
+		"can.brs": strconv.FormatBool(f.BRS),
+	}
+	if f.ESI {
+		meta["can.esi"] = "true"
+	}
+	if f.XL {
+		meta["can.xl"] = "true"
+	}
+	if f.SDT != 0 {
+		meta["can.sdt"] = strconv.FormatUint(uint64(f.SDT), 10)
+	}
+	if f.VCID != 0 {
+		meta["can.vcid"] = strconv.FormatUint(uint64(f.VCID), 10)
+	}
+	if f.AF != 0 {
+		meta["can.af"] = strconv.FormatUint(uint64(f.AF), 10)
+	}
+	if f.SEC {
+		meta["can.sec"] = "true"
+	}
 	return relay.Message{
 		Protocol:  relay.CAN,
 		ID:        strconv.FormatUint(uint64(f.ID), 10),
 		Payload:   f.Data,
 		Timestamp: time.Now(),
-		Meta: map[string]string{
-			"can.ext": strconv.FormatBool(f.Ext),
-			"can.fd":  strconv.FormatBool(f.FD),
-			"can.rtr": strconv.FormatBool(f.RTR),
-			"can.brs": strconv.FormatBool(f.BRS),
-		},
+		Meta:      meta,
 	}
 }
 
@@ -55,6 +80,24 @@ func FromMessage(m relay.Message) (Frame, error) {
 	}
 	if m.Meta["can.brs"] == "true" {
 		f.BRS = true
+	}
+	if m.Meta["can.esi"] == "true" {
+		f.ESI = true
+	}
+	if m.Meta["can.xl"] == "true" {
+		f.XL = true
+	}
+	if m.Meta["can.sec"] == "true" {
+		f.SEC = true
+	}
+	if v, err := strconv.ParseUint(m.Meta["can.sdt"], 10, 8); err == nil {
+		f.SDT = uint8(v)
+	}
+	if v, err := strconv.ParseUint(m.Meta["can.vcid"], 10, 8); err == nil {
+		f.VCID = uint8(v)
+	}
+	if v, err := strconv.ParseUint(m.Meta["can.af"], 10, 32); err == nil {
+		f.AF = uint32(v)
 	}
 	return f, nil
 }

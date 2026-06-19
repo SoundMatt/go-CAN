@@ -647,6 +647,38 @@
       "standard": "iso26262",
       "level": "ASIL-B",
       "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CANXL-001",
+      "title": "CAN XL frame fields (ISO 11898-1:2024)",
+      "text": "Frame shall carry CAN XL fields XL, SDT, VCID, AF, SEC and ESI so that a CAN XL frame (RELAY spec v1.1 canonical can.Frame, §15.1) can be represented losslessly.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CANXL-002",
+      "title": "Format-aware maximum data length",
+      "text": "Frame.MaxDataLen shall return 2048 for CAN XL frames, 64 for CAN FD frames, and 8 for classic CAN frames.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CANXL-003",
+      "title": "CAN XL structural validation",
+      "text": "ValidateFrame shall enforce CAN XL rules: FD and XL are mutually exclusive; ESI requires FD or XL; an XL frame must not set Ext/RTR/BRS, must use an 11-bit Priority ID (≤0x7FF), and must carry 1..2048 data bytes. Violations return ErrInvalidFrame.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-CANXL-004",
+      "title": "Lossless CAN XL canonical mapping",
+      "text": "Frame.ToMessage/FromMessage shall round-trip CAN XL frames using the RELAY Meta keys can.esi, can.xl, can.sdt, can.vcid, can.af, can.sec, emitting the XL keys only when set/non-zero per the §15.1 golden vectors.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
     }
   ]
 }
