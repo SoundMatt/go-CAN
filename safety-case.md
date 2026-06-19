@@ -1,6 +1,6 @@
 # Safety Case: github.com/SoundMatt/go-CAN
 
-Generated: 2026-06-19T14:09:57Z  
+Generated: 2026-06-19T16:16:52Z  
 Standard: generic
 
 ## Top Claim
@@ -12,9 +12,9 @@ argued by demonstrating compliance with the safety development lifecycle.
 
 | ID | Description | Status | Detail |
 |---|---|---|---|
-| Sn1 | Coding standard and static analysis checks | ✅ present | 304 findings (0 errors, 176 warnings) |
-| Sn2 | Requirements traceability matrix | ✅ present | 85 requirements |
-| Sn3 | Test evidence bundle | ✅ present | 188/192 tests passed |
+| Sn1 | Coding standard and static analysis checks | ✅ present | 323 findings (0 errors, 195 warnings) |
+| Sn2 | Requirements traceability matrix | ✅ present | 86 requirements |
+| Sn3 | Test evidence bundle | ✅ present | 205/205 tests passed |
 | Sn4 | Tool qualification report | ⚠ absent | run 'gofusa qualify' to generate |
 | Sn5 | SBOM (SPDX 3.0.1) | ✅ present |  |
 | Sn6 | Build provenance | ✅ present |  |

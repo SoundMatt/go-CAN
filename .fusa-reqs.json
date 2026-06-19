@@ -679,6 +679,14 @@
       "standard": "iso26262",
       "level": "ASIL-B",
       "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SEC-006",
+      "title": "Cryptographic message authentication (HMAC-SHA256)",
+      "text": "The safety package shall provide a pluggable MessageAuthenticator with an HMAC-SHA256 implementation (FIPS 198-1 / RFC 2104): Sign returns a 32-byte tag and Verify performs a constant-time comparison. This gives authenticity and integrity above the data link (defending THREAT_MODEL T2 tampering and T5 spoofing) when the integrator supplies a shared key. Mirrors rust-CAN safety::hmac_auth for cross-language equivalence.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
     }
   ]
 }
