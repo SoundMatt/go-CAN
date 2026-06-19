@@ -12,9 +12,10 @@ coverage.out
 coverage.html
 *.cov.out
 
-# go-FuSa transient reports (regenerated on every run; committed on release via workflow)
-check-report.json
-vuln.json
+# go-FuSa derived bundle (regenerate on demand with 'gofusa audit-pack')
+audit-pack.zip
+# Graphviz side-output of 'gofusa boundary' (boundary.mermaid is the committed diagram)
+boundary.dot
 
 # Build output
 /bin/

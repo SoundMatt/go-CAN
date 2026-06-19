@@ -7,13 +7,17 @@ package isotp_test
 
 import (
 	"context"
+	"strings"
 	"testing"
 	"time"
 
+	can "github.com/SoundMatt/go-CAN"
 	"github.com/SoundMatt/go-CAN/isotp"
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
+//fusa:test REQ-ISOTP-001
+//fusa:test REQ-ISOTP-002
 //fusa:test REQ-ISOTP-003
 //fusa:test REQ-ISOTP-004
 //fusa:test REQ-ISOTP-005
@@ -23,7 +27,10 @@ import (
 //fusa:test REQ-ISOTP-009
 //fusa:test REQ-ISOTP-010
 //fusa:test REQ-ISOTP-011
+//fusa:test REQ-ISOTP-012
 //fusa:test REQ-ISOTP-013
+//fusa:test REQ-SEC-002
+//fusa:test REQ-SEC-003
 
 func newPair(t *testing.T) (sender, receiver *isotp.Conn) {
 	t.Helper()
@@ -130,5 +137,138 @@ func TestRecvTimeout(t *testing.T) {
 	_, err := conn.Recv(ctx)
 	if err == nil {
 		t.Error("Recv should error on timeout")
+	}
+}
+
+// TestRecvOutOfOrderCF verifies that Recv rejects a Consecutive Frame whose
+// sequence number does not match the expected value (REQ-ISOTP-012).
+func TestRecvOutOfOrderCF(t *testing.T) {
+	b, _ := virtual.New()
+	defer b.Close()
+
+	// Receiver expects frames on RxID 0x7E0 and sends FC on 0x7E8.
+	receiver, err := isotp.New(b, isotp.Config{TxID: 0x7E8, RxID: 0x7E0, Timeout: time.Second})
+	if err != nil {
+		t.Fatalf("New: %v", err)
+	}
+
+	done := make(chan error, 1)
+	go func() {
+		_, err := receiver.Recv(context.Background())
+		done <- err
+	}()
+
+	ctx := context.Background()
+	// First Frame: total length 20, carrying the first 6 payload bytes.
+	ff := can.Frame{ID: 0x7E0, Data: []byte{0x10, 20, 1, 2, 3, 4, 5, 6}}
+	if err := b.Send(ctx, ff); err != nil {
+		t.Fatalf("send FF: %v", err)
+	}
+	// Consecutive Frame with the WRONG sequence number (2 instead of 1).
+	badCF := can.Frame{ID: 0x7E0, Data: []byte{0x22, 7, 8, 9, 10, 11, 12, 13}}
+	if err := b.Send(ctx, badCF); err != nil {
+		t.Fatalf("send CF: %v", err)
+	}
+
+	select {
+	case err := <-done:
+		if err == nil {
+			t.Fatal("expected out-of-order sequence-number error")
+		}
+		if !strings.Contains(err.Error(), "unexpected SN") {
+			t.Errorf("error = %v, want 'unexpected SN'", err)
+		}
+	case <-time.After(2 * time.Second):
+		t.Fatal("Recv did not return")
+	}
+}
+
+// TestRecvInvalidSingleFrameLength verifies that an SF declaring a length
+// larger than the frame payload is rejected.
+func TestRecvInvalidSingleFrameLength(t *testing.T) {
+	b, _ := virtual.New()
+	defer b.Close()
+
+	receiver, _ := isotp.New(b, isotp.Config{TxID: 0x7E8, RxID: 0x7E0, Timeout: time.Second})
+
+	done := make(chan error, 1)
+	go func() {
+		_, err := receiver.Recv(context.Background())
+		done <- err
+	}()
+
+	// SF claims 7 bytes but only carries 2.
+	bad := can.Frame{ID: 0x7E0, Data: []byte{0x07, 0xAA, 0xBB}}
+	if err := b.Send(context.Background(), bad); err != nil {
+		t.Fatalf("send: %v", err)
+	}
+
+	select {
+	case err := <-done:
+		if err == nil {
+			t.Fatal("expected invalid SF length error")
+		}
+	case <-time.After(2 * time.Second):
+		t.Fatal("Recv did not return")
+	}
+}
+
+// TestRecvUnexpectedFrameType verifies that a Flow Control frame arriving
+// where a SF/FF is expected is rejected.
+func TestRecvUnexpectedFrameType(t *testing.T) {
+	b, _ := virtual.New()
+	defer b.Close()
+
+	receiver, _ := isotp.New(b, isotp.Config{TxID: 0x7E8, RxID: 0x7E0, Timeout: time.Second})
+
+	done := make(chan error, 1)
+	go func() {
+		_, err := receiver.Recv(context.Background())
+		done <- err
+	}()
+
+	// Flow Control (type 0x30) is not a valid message-initiating frame.
+	fc := can.Frame{ID: 0x7E0, Data: []byte{0x30, 0x00, 0x00}}
+	if err := b.Send(context.Background(), fc); err != nil {
+		t.Fatalf("send: %v", err)
+	}
+
+	select {
+	case err := <-done:
+		if err == nil {
+			t.Fatal("expected unexpected-frame-type error")
+		}
+		if !strings.Contains(err.Error(), "unexpected frame type") {
+			t.Errorf("error = %v, want 'unexpected frame type'", err)
+		}
+	case <-time.After(2 * time.Second):
+		t.Fatal("Recv did not return")
+	}
+}
+
+// TestRecvEmptyFrame verifies that a zero-length CAN payload is rejected.
+func TestRecvEmptyFrame(t *testing.T) {
+	b, _ := virtual.New()
+	defer b.Close()
+
+	receiver, _ := isotp.New(b, isotp.Config{TxID: 0x7E8, RxID: 0x7E0, Timeout: time.Second})
+
+	done := make(chan error, 1)
+	go func() {
+		_, err := receiver.Recv(context.Background())
+		done <- err
+	}()
+
+	if err := b.Send(context.Background(), can.Frame{ID: 0x7E0, Data: []byte{}}); err != nil {
+		t.Fatalf("send: %v", err)
+	}
+
+	select {
+	case err := <-done:
+		if err == nil {
+			t.Fatal("expected empty-frame error")
+		}
+	case <-time.After(2 * time.Second):
+		t.Fatal("Recv did not return")
 	}
 }

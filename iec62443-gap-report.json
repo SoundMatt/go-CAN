@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-06-16T23:57:11.137659279Z",
+  "generatedAt": "2026-06-19T13:24:45.33318Z",
   "projectRoot": "go-CAN",
   "standard": "iec62443",
   "objectives": [
@@ -12,19 +12,13 @@
       "id": "IEC62443-CR-1.1",
       "title": "Security Level declared (.fusa-iec62443.json with target_sl)",
       "clause": "CR 1.1",
-      "status": "gap",
-      "findings": [
-        ".fusa-iec62443.json not found — run 'gofusa init (create .fusa-iec62443.json with target_sl, component_type)'"
-      ]
+      "status": "satisfied"
     },
     {
       "id": "IEC62443-CR-2.1",
       "title": "Check report present (authorization enforcement evidence)",
       "clause": "CR 2.1",
-      "status": "gap",
-      "findings": [
-        "check-report.json not found — run 'gofusa check --output check-report.json'"
-      ]
+      "status": "satisfied"
     },
     {
       "id": "IEC62443-CR-3.4",
@@ -42,19 +36,13 @@
       "id": "IEC62443-CR-6.1",
       "title": "Audit log accessible (check-report.json present)",
       "clause": "CR 6.1",
-      "status": "gap",
-      "findings": [
-        "check-report.json not found — run 'gofusa check --output check-report.json'"
-      ]
+      "status": "satisfied"
     },
     {
       "id": "IEC62443-CR-6.2",
       "title": "Vulnerability management policy (SECURITY.md present)",
       "clause": "CR 6.2",
-      "status": "gap",
-      "findings": [
-        "SECURITY.md not found — run 'gofusa — create SECURITY.md documenting the vulnerability disclosure policy'"
-      ]
+      "status": "satisfied"
     },
     {
       "id": "IEC62443-CR-1.4",
@@ -69,19 +57,13 @@
       "id": "IEC62443-CR-3.1",
       "title": "Security hardening evidence (cyber-report.json present)",
       "clause": "CR 3.1",
-      "status": "gap",
-      "findings": [
-        "cyber-report.json not found — run 'gofusa cyber --output cyber-report.json'"
-      ]
+      "status": "satisfied"
     },
     {
       "id": "IEC62443-CR-6.2.1",
       "title": "Cyber incident response plan present",
       "clause": "CR 6.2.1",
-      "status": "gap",
-      "findings": [
-        "INCIDENT-RESPONSE.md not found — run 'gofusa — create INCIDENT-RESPONSE.md or set incident_resp_doc in .fusa-iec62443.json'"
-      ]
+      "status": "satisfied"
     },
     {
       "id": "IEC62443-CR-7.3",
@@ -104,8 +86,8 @@
   ],
   "summary": {
     "total": 12,
-    "satisfied": 3,
+    "satisfied": 9,
     "partial": 2,
-    "gaps": 7
+    "gaps": 1
   }
 }

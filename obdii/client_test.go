@@ -160,6 +160,126 @@ func TestNegativeResponse(t *testing.T) {
 	}
 }
 
+// TestDecodePIDs exercises every Mode 01 PID decoder branch (REQ-OBD-002).
+func TestDecodePIDs(t *testing.T) {
+	tests := []struct {
+		name string
+		pid  byte
+		raw  []byte
+		want float64
+		unit string
+	}{
+		{"intake air temp", obdii.PIDIntakeAirTemp, []byte{60}, 20, "°C"},
+		{"ambient air temp", obdii.PIDAmbientAirTemp, []byte{55}, 15, "°C"},
+		{"engine load", obdii.PIDEngineLoad, []byte{255}, 100, "%"},
+		{"throttle position", obdii.PIDThrottlePosition, []byte{128}, 128 * 100.0 / 255.0, "%"},
+		{"MAF", obdii.PIDMAF, []byte{0x10, 0x00}, 40.96, "g/s"},
+		{"intake manifold pressure", obdii.PIDIntakeManifoldPressure, []byte{101}, 101, "kPa"},
+		{"barometric pressure", obdii.PIDBarometricPressure, []byte{99}, 99, "kPa"},
+		{"fuel tank level", obdii.PIDFuelTankLevel, []byte{128}, 128 * 100.0 / 255.0, "%"},
+		{"short fuel trim", obdii.PIDBankFuelTrim1Short, []byte{128}, 0, "%"},
+		{"long fuel trim", obdii.PIDBankFuelTrim1Long, []byte{192}, 192*100.0/128.0 - 100.0, "%"},
+		{"timing advance", obdii.PIDTimingAdvance, []byte{128}, 0, "°"},
+		{"control module voltage", obdii.PIDControlModuleVoltage, []byte{0x2E, 0xE0}, 12.0, "V"},
+		{"runtime since start", obdii.PIDRuntimeSinceStart, []byte{0x01, 0x00}, 256, "s"},
+		{"absolute load", obdii.PIDAbsoluteLoad, []byte{0x00, 0xFF}, 100, "%"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			pid, raw := tt.pid, tt.raw
+			client := newClient(t, func(req []byte) []byte {
+				if req[0] == obdii.ModeCurrentData && req[1] == pid {
+					return append([]byte{obdii.ModeCurrentData + 0x40, pid}, raw...)
+				}
+				return []byte{0x7F, req[0], 0x31}
+			})
+
+			ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+			defer cancel()
+
+			v, err := client.ReadPID(ctx, pid)
+			if err != nil {
+				t.Fatalf("ReadPID(0x%02X): %v", pid, err)
+			}
+			if math.Abs(v.Float-tt.want) > 0.01 {
+				t.Errorf("PID 0x%02X value = %.4f, want %.4f", pid, v.Float, tt.want)
+			}
+			if v.Unit != tt.unit {
+				t.Errorf("PID 0x%02X unit = %q, want %q", pid, v.Unit, tt.unit)
+			}
+		})
+	}
+}
+
+// TestReadPIDShortResponse verifies a response too short for a valid PID echo
+// is rejected.
+func TestReadPIDShortResponse(t *testing.T) {
+	client := newClient(t, func(req []byte) []byte {
+		return []byte{obdii.ModeCurrentData + 0x40} // missing echoed PID + data
+	})
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	if _, err := client.ReadPID(ctx, obdii.PIDEngineRPM); err == nil {
+		t.Error("expected error for short response")
+	}
+}
+
+// TestReadVINShortResponse verifies a truncated VIN response is rejected.
+func TestReadVINShortResponse(t *testing.T) {
+	client := newClient(t, func(req []byte) []byte {
+		return []byte{obdii.ModeVehicleInfo + 0x40, obdii.PIDVIN} // no count/data
+	})
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	if _, err := client.ReadVIN(ctx); err == nil {
+		t.Error("expected error for short VIN response")
+	}
+}
+
+// TestReadVINNullPadding verifies null-padding is trimmed from the VIN.
+func TestReadVINNullPadding(t *testing.T) {
+	client := newClient(t, func(req []byte) []byte {
+		resp := []byte{obdii.ModeVehicleInfo + 0x40, obdii.PIDVIN, 0x01}
+		resp = append(resp, []byte("ABC123")...)
+		resp = append(resp, 0x00, 0x00) // trailing null padding
+		return resp
+	})
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	vin, err := client.ReadVIN(ctx)
+	if err != nil {
+		t.Fatalf("ReadVIN: %v", err)
+	}
+	if vin != "ABC123" {
+		t.Errorf("VIN = %q, want ABC123 (null padding trimmed)", vin)
+	}
+}
+
+// TestReadVINNegative verifies a negative response on a VIN request errors.
+func TestReadVINNegative(t *testing.T) {
+	client := newClient(t, func(req []byte) []byte {
+		return []byte{0x7F, req[0], 0x31}
+	})
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	if _, err := client.ReadVIN(ctx); err == nil {
+		t.Error("expected error for negative VIN response")
+	}
+}
+
+// TestSupportedPIDsNegative verifies SupportedPIDs surfaces a negative response.
+func TestSupportedPIDsNegative(t *testing.T) {
+	client := newClient(t, func(req []byte) []byte {
+		return []byte{0x7F, req[0], 0x31}
+	})
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	if _, err := client.SupportedPIDs(ctx, 0x00); err == nil {
+		t.Error("expected error for negative SupportedPIDs response")
+	}
+}
+
 func TestSupportedPIDs(t *testing.T) {
 	client := newClient(t, func(req []byte) []byte {
 		if req[0] == obdii.ModeCurrentData && req[1] == 0x00 {

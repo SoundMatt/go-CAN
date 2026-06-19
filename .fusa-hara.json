@@ -1,0 +1,99 @@
+{
+  "project": "go-CAN",
+  "standard": "ISO 26262",
+  "createdAt": "2026-06-19T00:00:00Z",
+  "note": "SEOOC HARA. go-CAN is a Safety Element Out Of Context; the operational situations and ASIL ratings are assumptions on the integrating item, to be confirmed by the integrator's system-level HARA. See SAFETY_PLAN.md §1 and SEOOC assumptions (REQ-SEOOC-*).",
+  "operationalSituations": [
+    {
+      "id": "OS-001",
+      "description": "Vehicle in motion; ECU exchanging periodic safety-relevant signals over CAN (e.g. powertrain/chassis state)."
+    },
+    {
+      "id": "OS-002",
+      "description": "Vehicle stationary in service mode; diagnostic tester performing UDS/OBD-II read/write or ECU reset."
+    },
+    {
+      "id": "OS-003",
+      "description": "Multi-frame diagnostic transfer in progress over ISO-TP (e.g. VIN read, calibration download)."
+    }
+  ],
+  "hazards": [
+    {
+      "id": "H-001",
+      "description": "Undetected corruption of a received frame payload is delivered to the application as valid data.",
+      "situations": ["OS-001"],
+      "risk": { "severity": "S2", "exposure": "E4", "controllability": "C2", "asil": "ASIL-B" },
+      "safetyGoals": ["SG-001"]
+    },
+    {
+      "id": "H-002",
+      "description": "A safety-relevant frame is silently dropped or lost, so the application acts on stale data without notification.",
+      "situations": ["OS-001"],
+      "risk": { "severity": "S2", "exposure": "E4", "controllability": "C2", "asil": "ASIL-B" },
+      "safetyGoals": ["SG-002"]
+    },
+    {
+      "id": "H-003",
+      "description": "A DBC signal is mis-decoded or mis-encoded (wrong scaling, byte order, or bit truncation), yielding an incorrect physical value.",
+      "situations": ["OS-001"],
+      "risk": { "severity": "S2", "exposure": "E3", "controllability": "C2", "asil": "ASIL-B" },
+      "safetyGoals": ["SG-003"]
+    },
+    {
+      "id": "H-004",
+      "description": "ISO-TP reassembly accepts out-of-order, overlapping, or oversized segments and produces an incorrect or incomplete diagnostic message.",
+      "situations": ["OS-003"],
+      "risk": { "severity": "S2", "exposure": "E2", "controllability": "C3", "asil": "ASIL-A" },
+      "safetyGoals": ["SG-004"]
+    },
+    {
+      "id": "H-005",
+      "description": "A frame is transmitted with an out-of-range or malformed arbitration ID / DLC, corrupting another node's reception or violating bus framing.",
+      "situations": ["OS-001", "OS-002"],
+      "risk": { "severity": "S1", "exposure": "E4", "controllability": "C2", "asil": "ASIL-B" },
+      "safetyGoals": ["SG-005"]
+    }
+  ],
+  "safetyGoals": [
+    {
+      "id": "SG-001",
+      "description": "The library shall not present corrupted frame data as valid; data integrity must be verifiable end-to-end (E2E protection header).",
+      "hazards": ["H-001"],
+      "asil": "ASIL-B",
+      "safeState": "Application is signalled (via E2E CRC/counter mismatch) and discards the frame.",
+      "requirements": ["REQ-SAFETY-001", "REQ-SEC-001"]
+    },
+    {
+      "id": "SG-002",
+      "description": "Frame loss caused by back-pressure shall be observable; drops shall be counted and the policy explicit, never silent under a Block contract.",
+      "hazards": ["H-002"],
+      "asil": "ASIL-B",
+      "safeState": "Drop counters increment and are exposed via MetricsProvider for the application to detect.",
+      "requirements": ["REQ-VIRT-004", "REQ-SEC-003"]
+    },
+    {
+      "id": "SG-003",
+      "description": "DBC encode/decode shall be the exact inverse over the signal's representable range, with no silent truncation or wrap.",
+      "hazards": ["H-003"],
+      "asil": "ASIL-B",
+      "safeState": "Out-of-range physical values are clamped deterministically; round-trip is verified.",
+      "requirements": ["REQ-DBC-005", "REQ-SEC-004"]
+    },
+    {
+      "id": "SG-004",
+      "description": "ISO-TP reassembly shall reject any frame that violates the segmentation protocol (sequence number, length, type).",
+      "hazards": ["H-004"],
+      "asil": "ASIL-A",
+      "safeState": "Reassembly aborts with an error; no partial message is delivered.",
+      "requirements": ["REQ-ISOTP-012", "REQ-SEC-002", "REQ-SEC-003"]
+    },
+    {
+      "id": "SG-005",
+      "description": "Every transmitted frame shall be validated against CAN/CAN-FD structural constraints before it reaches the bus.",
+      "hazards": ["H-005"],
+      "asil": "ASIL-B",
+      "safeState": "Invalid frames are rejected at Send with ErrInvalidFrame; nothing is transmitted.",
+      "requirements": ["REQ-CAN-009", "REQ-CAN-010", "REQ-SEC-001"]
+    }
+  ]
+}

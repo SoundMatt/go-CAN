@@ -43,6 +43,8 @@ func (db *DB) Encode(msgID uint32, signals map[string]float64) ([]byte, error) {
 
 // physicalToRaw converts a physical value to a raw unsigned bit pattern
 // (two's complement for signed signals), clamped to the signal's bit range.
+//
+//fusa:req REQ-SEC-004
 func physicalToRaw(physical float64, sig *Signal) uint64 {
 	rawF := math.Round((physical - sig.Offset) / sig.Factor)
 

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "1.0",
+  "standard": "iec62443-4-2",
+  "component": "go-CAN",
+  "component_type": "software-application",
+  "target_sl": "SL-2",
+  "security_context": "go-CAN is a CAN protocol library/SDK embedded by an integrator. The physical CAN bus is an untrusted shared medium with no native authentication; bus-level threats are delegated to the integrating system. See THREAT_MODEL.md.",
+  "vuln_disclosure_doc": "SECURITY.md",
+  "incident_resp_doc": "INCIDENT-RESPONSE.md",
+  "threat_model_doc": "THREAT_MODEL.md",
+  "vulnerability_scan": "vuln.json",
+  "sbom": "sbom.json",
+  "provenance": "provenance.json"
+}

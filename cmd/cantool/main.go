@@ -33,7 +33,7 @@ import (
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
-const toolVersion = "0.4.0"
+const toolVersion = "0.6.0"
 
 func main() {
 	if len(os.Args) < 2 {

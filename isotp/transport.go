@@ -112,6 +112,7 @@ func New(bus can.Bus, cfg Config) (*Conn, error) {
 //fusa:req REQ-ISOTP-006
 //fusa:req REQ-ISOTP-007
 //fusa:req REQ-ISOTP-008
+//fusa:req REQ-SEC-003
 func (c *Conn) Send(ctx context.Context, payload []byte) error {
 	if len(payload) == 0 {
 		return errors.New("isotp: empty payload")
@@ -201,6 +202,8 @@ func (c *Conn) sendMultiFrame(ctx context.Context, payload []byte) error {
 //fusa:req REQ-ISOTP-011
 //fusa:req REQ-ISOTP-012
 //fusa:req REQ-ISOTP-013
+//fusa:req REQ-SEC-002
+//fusa:req REQ-SEC-003
 func (c *Conn) Recv(ctx context.Context) ([]byte, error) {
 	timeout := time.After(c.cfg.timeout())
 	var first can.Frame

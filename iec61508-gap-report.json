@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-06-16T23:57:11.132959337Z",
+  "generatedAt": "2026-06-19T13:24:51.10573Z",
   "projectRoot": "go-CAN",
   "standard": "IEC 61508 SIL-2",
   "objectives": [
@@ -30,9 +30,9 @@
       "id": "1.3",
       "title": "Risk assessment and SIL determination documented (.fusa-hara.json)",
       "clause": "§7.4",
-      "status": "gap",
-      "findings": [
-        ".fusa-hara.json not found — run 'gofusa hara init'"
+      "status": "satisfied",
+      "evidence": [
+        ".fusa-hara.json present"
       ]
     },
     {
@@ -57,36 +57,36 @@
       "id": "2.3",
       "title": "Architecture description (boundary.mermaid)",
       "clause": "§7.4",
-      "status": "gap",
-      "findings": [
-        "boundary.mermaid not found — run 'gofusa boundary'"
+      "status": "satisfied",
+      "evidence": [
+        "boundary.mermaid present"
       ]
     },
     {
       "id": "3.1",
       "title": "Module testing evidence (.fusa-evidence.json)",
       "clause": "§7.3",
-      "status": "gap",
-      "findings": [
-        ".fusa-evidence.json not found — run 'gofusa verify'"
+      "status": "satisfied",
+      "evidence": [
+        ".fusa-evidence.json present"
       ]
     },
     {
       "id": "3.2",
       "title": "Integration testing evidence (.fusa-evidence.json)",
       "clause": "§7.4",
-      "status": "gap",
-      "findings": [
-        ".fusa-evidence.json not found — run 'gofusa verify'"
+      "status": "satisfied",
+      "evidence": [
+        ".fusa-evidence.json present"
       ]
     },
     {
       "id": "3.3",
       "title": "Statement coverage (coverage-report.json)",
       "clause": "§7.4.8",
-      "status": "gap",
-      "findings": [
-        "coverage-report.json not found — run 'gofusa coverage'"
+      "status": "satisfied",
+      "evidence": [
+        "coverage-report.json present"
       ]
     },
     {
@@ -111,9 +111,9 @@
       "id": "5.2",
       "title": "Problem reporting (.fusa-problems.json)",
       "clause": "§6.3",
-      "status": "gap",
-      "findings": [
-        ".fusa-problems.json not found — run 'gofusa pr init'"
+      "status": "satisfied",
+      "evidence": [
+        ".fusa-problems.json present"
       ]
     },
     {
@@ -129,61 +129,61 @@
       "id": "5.4",
       "title": "Software Configuration Index (sci.json)",
       "clause": "§7.7",
-      "status": "gap",
-      "findings": [
-        "sci.json not found — run 'gofusa sci'"
+      "status": "satisfied",
+      "evidence": [
+        "sci.json present"
       ]
     },
     {
       "id": "6.1",
       "title": "Software verification plan (SVP.md)",
       "clause": "§7.2",
-      "status": "gap",
-      "findings": [
-        "SVP.md not found — run 'gofusa template --type svp'"
+      "status": "satisfied",
+      "evidence": [
+        "SVP.md present"
       ]
     },
     {
       "id": "6.2",
       "title": "Verification of requirements (.fusa-evidence.json)",
       "clause": "§7.3",
-      "status": "gap",
-      "findings": [
-        ".fusa-evidence.json not found — run 'gofusa verify'"
+      "status": "satisfied",
+      "evidence": [
+        ".fusa-evidence.json present"
       ]
     },
     {
       "id": "6.3",
       "title": "Static analysis (check-report.json)",
       "clause": "§7.4",
-      "status": "gap",
-      "findings": [
-        "check-report.json not found — run 'gofusa check'"
+      "status": "satisfied",
+      "evidence": [
+        "check-report.json present"
       ]
     },
     {
       "id": "8.1",
       "title": "Cybersecurity considerations (cyber-report.json)",
       "clause": "§8.1",
-      "status": "gap",
-      "findings": [
-        "cyber-report.json not found — run 'gofusa cyber'"
+      "status": "satisfied",
+      "evidence": [
+        "cyber-report.json present"
       ]
     },
     {
       "id": "8.2",
       "title": "Vulnerability assessment (vuln.json)",
       "clause": "§8.2",
-      "status": "gap",
-      "findings": [
-        "vuln.json not found — run 'gofusa vuln'"
+      "status": "satisfied",
+      "evidence": [
+        "vuln.json present"
       ]
     }
   ],
   "summary": {
     "total": 19,
-    "satisfied": 7,
+    "satisfied": 19,
     "partial": 0,
-    "gaps": 12
+    "gaps": 0
   }
 }
