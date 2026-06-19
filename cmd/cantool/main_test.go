@@ -6,6 +6,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"io"
@@ -14,6 +15,10 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	relay "github.com/SoundMatt/RELAY"
+	can "github.com/SoundMatt/go-CAN"
+	"github.com/SoundMatt/go-CAN/virtual"
 )
 
 // captureStdout runs fn with os.Stdout redirected to a pipe and returns what
@@ -301,5 +306,134 @@ func TestCmdSendDefaultIface(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatalf("cmdSend with empty iface: %v", err)
+	}
+}
+
+// TestRunSendJSON verifies the streaming NDJSON sink publishes each message as
+// a CAN frame to the bus (RELAY §11.2 crossbar spoke).
+func TestRunSendJSON(t *testing.T) {
+	bus, _ := virtual.New()
+	defer bus.Close()
+	ch, _ := bus.Subscribe(nil)
+
+	m1, _ := json.Marshal(can.Frame{ID: 0x100, Data: []byte{0xAA}}.ToMessage())
+	m2, _ := json.Marshal(can.Frame{ID: 0x123, Data: []byte{0xDE, 0xAD}}.ToMessage())
+	nd := string(m1) + "\n" + string(m2) + "\n"
+
+	if err := runSendJSON(context.Background(), bus, strings.NewReader(nd)); err != nil {
+		t.Fatalf("runSendJSON: %v", err)
+	}
+
+	want := []uint32{0x100, 0x123}
+	for i, id := range want {
+		select {
+		case f := <-ch:
+			if f.ID != id {
+				t.Errorf("frame %d ID = %X, want %X", i, f.ID, id)
+			}
+		case <-time.After(time.Second):
+			t.Fatalf("frame %d not published", i)
+		}
+	}
+}
+
+// TestRunSendJSONInvalid verifies a message with an invalid ID surfaces an error.
+func TestRunSendJSONInvalid(t *testing.T) {
+	bus, _ := virtual.New()
+	defer bus.Close()
+	err := runSendJSON(context.Background(), bus, strings.NewReader(`{"protocol":1,"id":"not-a-number"}`+"\n"))
+	if err == nil {
+		t.Error("expected error for message with invalid ID")
+	}
+}
+
+// TestRunSubscribeJSON verifies the streaming source writes each received frame
+// as one relay.Message NDJSON line, and that --count bounds the stream.
+func TestRunSubscribeJSON(t *testing.T) {
+	bus, _ := virtual.New()
+	defer bus.Close()
+
+	var buf bytes.Buffer
+	done := make(chan error, 1)
+	go func() { done <- runSubscribeJSON(context.Background(), bus, &buf, 2) }()
+
+	time.Sleep(30 * time.Millisecond) // let the subscription register
+	bus.Send(context.Background(), can.Frame{ID: 0x100, Data: []byte{0xAA}})
+	bus.Send(context.Background(), can.Frame{ID: 0x123, Data: []byte{0xDE, 0xAD}})
+
+	if err := <-done; err != nil {
+		t.Fatalf("runSubscribeJSON: %v", err)
+	}
+
+	lines := strings.Split(strings.TrimSpace(buf.String()), "\n")
+	if len(lines) != 2 {
+		t.Fatalf("expected 2 NDJSON lines, got %d:\n%s", len(lines), buf.String())
+	}
+	var m relay.Message
+	if err := json.Unmarshal([]byte(lines[0]), &m); err != nil {
+		t.Fatalf("line 0 not valid JSON: %v", err)
+	}
+	if m.Protocol != relay.CAN || m.ID != "256" {
+		t.Errorf("first message = protocol %v id %q, want CAN/256", m.Protocol, m.ID)
+	}
+}
+
+// TestRunSubscribeJSONCancel verifies cancellation ends the stream cleanly.
+func TestRunSubscribeJSONCancel(t *testing.T) {
+	bus, _ := virtual.New()
+	defer bus.Close()
+	ctx, cancel := context.WithCancel(context.Background())
+	done := make(chan error, 1)
+	go func() { done <- runSubscribeJSON(ctx, bus, io.Discard, 0) }()
+	cancel()
+	select {
+	case err := <-done:
+		if err != nil {
+			t.Errorf("runSubscribeJSON returned %v, want nil on cancel", err)
+		}
+	case <-time.After(time.Second):
+		t.Fatal("runSubscribeJSON did not return on cancel")
+	}
+}
+
+// TestSendJSONSinkMode verifies cmdSend routes to the streaming sink when
+// --format json is present.
+func TestSendJSONSinkMode(t *testing.T) {
+	m, _ := json.Marshal(can.Frame{ID: 0x1, Data: []byte{0xFF}}.ToMessage())
+	old := os.Stdin
+	r, w, _ := os.Pipe()
+	os.Stdin = r
+	go func() { w.Write(append(m, '\n')); w.Close() }()
+	err := cmdSend(context.Background(), []string{"--format", "json"})
+	os.Stdin = old
+	if err != nil {
+		t.Fatalf("cmdSend streaming sink: %v", err)
+	}
+}
+
+func TestJSONSinkIfaceDetection(t *testing.T) {
+	if iface, ok := jsonSinkIface([]string{"--format", "json"}); !ok || iface != "virtual" {
+		t.Errorf("default: ok=%v iface=%q", ok, iface)
+	}
+	if iface, ok := jsonSinkIface([]string{"--iface", "vcan0", "--format", "json"}); !ok || iface != "vcan0" {
+		t.Errorf("with iface: ok=%v iface=%q", ok, iface)
+	}
+	if _, ok := jsonSinkIface([]string{"virtual", "100#AA"}); ok {
+		t.Error("positional form should not be detected as JSON sink")
+	}
+}
+
+func TestCmdSubscribeArgErrors(t *testing.T) {
+	ctx := context.Background()
+	cases := [][]string{
+		{"--iface"},            // missing value
+		{"--count", "notanum"}, // bad count
+		{"--format", "yaml"},   // unsupported format
+		{"--bogus"},            // unknown arg
+	}
+	for _, args := range cases {
+		if err := cmdSubscribe(ctx, args); err == nil {
+			t.Errorf("cmdSubscribe(%v) = nil, want error", args)
+		}
 	}
 }

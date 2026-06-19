@@ -1,12 +1,12 @@
 {
   "format": "go-FuSa dFMEA v1",
-  "generated_at": "2026-06-19T16:20:10.844314836Z",
+  "generated_at": "2026-06-19T16:31:32.722778Z",
   "module": "github.com/SoundMatt/go-CAN",
   "entries": [
     {
       "component": "dbc",
       "function": "Decode",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/dbc/parser.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -23,7 +23,7 @@
     {
       "component": "dbc",
       "function": "Decode",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/dbc/parser.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -45,7 +45,7 @@
     {
       "component": "dbc",
       "function": "Encode",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/encode.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/dbc/encode.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -62,7 +62,7 @@
     {
       "component": "dbc",
       "function": "Parse",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/dbc/parser.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -85,7 +85,7 @@
     {
       "component": "dbc",
       "function": "PhysicalToLabel",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/dbc/parser.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -105,7 +105,7 @@
     {
       "component": "go-CAN (can)",
       "function": "Adapt",
-      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can_relay.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -127,7 +127,7 @@
     {
       "component": "go-CAN (can)",
       "function": "Close",
-      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can_relay.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -146,7 +146,7 @@
     {
       "component": "go-CAN (can)",
       "function": "Error",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -159,7 +159,7 @@
     {
       "component": "go-CAN (can)",
       "function": "FromMessage",
-      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can_relay.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -181,7 +181,7 @@
     {
       "component": "go-CAN (can)",
       "function": "Matches",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -194,7 +194,7 @@
     {
       "component": "go-CAN (can)",
       "function": "MaxDataLen",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -210,7 +210,7 @@
     {
       "component": "go-CAN (can)",
       "function": "MaxDataLen",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -223,7 +223,7 @@
     {
       "component": "go-CAN (can)",
       "function": "NewLoanedFrame",
-      "file": "/home/runner/work/go-CAN/go-CAN/can_optional.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can_optional.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -236,7 +236,7 @@
     {
       "component": "go-CAN (can)",
       "function": "Protocol",
-      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can_relay.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -255,7 +255,7 @@
     {
       "component": "go-CAN (can)",
       "function": "Return",
-      "file": "/home/runner/work/go-CAN/go-CAN/can_optional.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can_optional.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -268,7 +268,7 @@
     {
       "component": "go-CAN (can)",
       "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can_relay.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -287,7 +287,7 @@
     {
       "component": "go-CAN (can)",
       "function": "Subscribe",
-      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can_relay.go",
       "failure_modes": [
         "Returns unexpected error",
         "Goroutine not terminated"
@@ -308,7 +308,7 @@
     {
       "component": "go-CAN (can)",
       "function": "ToMessage",
-      "file": "/home/runner/work/go-CAN/go-CAN/can_relay.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can_relay.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -331,7 +331,7 @@
     {
       "component": "go-CAN (can)",
       "function": "ValidateFrame",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/can.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -354,7 +354,7 @@
     {
       "component": "isotp",
       "function": "New",
-      "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/isotp/transport.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -379,7 +379,7 @@
     {
       "component": "isotp",
       "function": "Recv",
-      "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/isotp/transport.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -407,7 +407,7 @@
     {
       "component": "isotp",
       "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/isotp/transport.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -433,7 +433,7 @@
     {
       "component": "j1939",
       "function": "DecodeID",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/j1939/pgn.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -473,7 +473,7 @@
     {
       "component": "j1939",
       "function": "EncodeID",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/j1939/pgn.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -511,7 +511,7 @@
     {
       "component": "j1939",
       "function": "IsPeerToPeer",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/j1939/pgn.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -546,7 +546,7 @@
     {
       "component": "j1939",
       "function": "NewBus",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/j1939/pgn.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -581,7 +581,7 @@
     {
       "component": "j1939",
       "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/j1939/pgn.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -619,7 +619,7 @@
     {
       "component": "j1939",
       "function": "SendTP",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/j1939/tp.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -644,7 +644,7 @@
     {
       "component": "j1939",
       "function": "Subscribe",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/j1939/pgn.go",
       "failure_modes": [
         "Returns unexpected error",
         "Goroutine not terminated"
@@ -684,7 +684,7 @@
     {
       "component": "j1939",
       "function": "SubscribeTP",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/j1939/tp.go",
       "failure_modes": [
         "Returns unexpected error",
         "Goroutine not terminated"
@@ -711,7 +711,7 @@
     {
       "component": "mock",
       "function": "New",
-      "file": "/home/runner/work/go-CAN/go-CAN/mock/mock.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/mock/mock.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -724,7 +724,7 @@
     {
       "component": "obdii",
       "function": "NewClient",
-      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/obdii/client.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -756,7 +756,7 @@
     {
       "component": "obdii",
       "function": "ReadPID",
-      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/obdii/client.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -788,7 +788,7 @@
     {
       "component": "obdii",
       "function": "ReadVIN",
-      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/obdii/client.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -820,7 +820,7 @@
     {
       "component": "obdii",
       "function": "SupportedPIDs",
-      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/obdii/client.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -849,7 +849,7 @@
     {
       "component": "recorder",
       "function": "FormatLine",
-      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/recorder/recorder.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -866,7 +866,7 @@
     {
       "component": "recorder",
       "function": "ParseLine",
-      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/recorder/recorder.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -883,7 +883,7 @@
     {
       "component": "recorder",
       "function": "Record",
-      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/recorder/recorder.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -900,7 +900,7 @@
     {
       "component": "recorder",
       "function": "Replay",
-      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/recorder/recorder.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -917,7 +917,7 @@
     {
       "component": "safety",
       "function": "Error",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/safety/e2e.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -934,7 +934,7 @@
     {
       "component": "safety",
       "function": "NewProtector",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/safety/e2e.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -955,7 +955,7 @@
     {
       "component": "safety",
       "function": "NewReceiver",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/safety/e2e.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -972,7 +972,7 @@
     {
       "component": "safety",
       "function": "Protect",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/safety/e2e.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -993,7 +993,7 @@
     {
       "component": "safety",
       "function": "Sign",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/auth.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/safety/auth.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -1009,7 +1009,7 @@
     {
       "component": "safety",
       "function": "TagLen",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/auth.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/safety/auth.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -1025,7 +1025,7 @@
     {
       "component": "safety",
       "function": "Unwrap",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/safety/e2e.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1049,7 +1049,7 @@
     {
       "component": "safety",
       "function": "Verify",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/auth.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/safety/auth.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -1065,7 +1065,7 @@
     {
       "component": "socketcan",
       "function": "Close",
-      "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/socketcan/bus_linux.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1082,7 +1082,7 @@
     {
       "component": "socketcan",
       "function": "New",
-      "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/socketcan/bus_linux.go",
       "failure_modes": [
         "Returns unexpected error",
         "Goroutine not terminated"
@@ -1106,7 +1106,7 @@
     {
       "component": "socketcan",
       "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/socketcan/bus_linux.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1129,7 +1129,7 @@
     {
       "component": "socketcan",
       "function": "Subscribe",
-      "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/socketcan/bus_linux.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1149,7 +1149,7 @@
     {
       "component": "uds",
       "function": "DiagnosticSessionControl",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/uds/client.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1173,7 +1173,7 @@
     {
       "component": "uds",
       "function": "ECUReset",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/uds/client.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1197,7 +1197,7 @@
     {
       "component": "uds",
       "function": "Error",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/uds/client.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -1218,7 +1218,7 @@
     {
       "component": "uds",
       "function": "NewClient",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/uds/client.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -1243,7 +1243,7 @@
     {
       "component": "uds",
       "function": "ReadDataByIdentifier",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/uds/client.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1268,7 +1268,7 @@
     {
       "component": "uds",
       "function": "TesterPresent",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/uds/client.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1292,7 +1292,7 @@
     {
       "component": "uds",
       "function": "WriteDataByIdentifier",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/uds/client.go",
       "failure_modes": [
         "Returns unexpected error",
         "Partial write / data corruption"
@@ -1318,7 +1318,7 @@
     {
       "component": "virtual",
       "function": "Close",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1331,7 +1331,7 @@
     {
       "component": "virtual",
       "function": "CloseWithDrain",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1344,7 +1344,7 @@
     {
       "component": "virtual",
       "function": "Health",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -1357,7 +1357,7 @@
     {
       "component": "virtual",
       "function": "Loan",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1370,7 +1370,7 @@
     {
       "component": "virtual",
       "function": "Metrics",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Incorrect output"
       ],
@@ -1383,7 +1383,7 @@
     {
       "component": "virtual",
       "function": "New",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1400,7 +1400,7 @@
     {
       "component": "virtual",
       "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1418,7 +1418,7 @@
     {
       "component": "virtual",
       "function": "SendLoaned",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
@@ -1431,7 +1431,7 @@
     {
       "component": "virtual",
       "function": "Subscribe",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
+      "file": "/Users/matt/Documents/Coding/SoundMatt/go-CAN/virtual/bus.go",
       "failure_modes": [
         "Returns unexpected error"
       ],
