@@ -150,6 +150,7 @@ func MaxDataLen(fd bool) int {
 //fusa:req REQ-CAN-012
 //fusa:req REQ-CAN-013
 //fusa:req REQ-CAN-014
+//fusa:req REQ-SEC-001
 func ValidateFrame(f Frame) error {
 	if f.Ext && f.ID > CANMaxExtID {
 		return &ErrInvalidFrame{Reason: "extended ID exceeds 29 bits"}

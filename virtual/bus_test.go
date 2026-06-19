@@ -14,6 +14,8 @@ import (
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
+//fusa:test REQ-CAN-006
+//fusa:test REQ-CAN-008
 //fusa:test REQ-VIRT-001
 //fusa:test REQ-VIRT-002
 //fusa:test REQ-VIRT-003
@@ -117,6 +119,35 @@ func TestDoubleClose(t *testing.T) {
 	b.Close()
 	if err := b.Close(); err != nil {
 		t.Errorf("second Close should not error: %v", err)
+	}
+}
+
+// TestCloseClosesSubscriberChannels verifies that Close releases resources by
+// closing every subscriber channel, so ranging over a channel terminates
+// (REQ-CAN-008).
+func TestCloseClosesSubscriberChannels(t *testing.T) {
+	b, _ := virtual.New()
+
+	ch1, err := b.Subscribe(nil)
+	if err != nil {
+		t.Fatalf("Subscribe: %v", err)
+	}
+	ch2, err := b.Subscribe(nil)
+	if err != nil {
+		t.Fatalf("Subscribe: %v", err)
+	}
+
+	b.Close()
+
+	for i, ch := range []<-chan can.Frame{ch1, ch2} {
+		select {
+		case _, ok := <-ch:
+			if ok {
+				t.Errorf("subscriber %d channel should be closed after Close", i)
+			}
+		case <-time.After(time.Second):
+			t.Errorf("subscriber %d channel not closed after Close", i)
+		}
 	}
 }
 

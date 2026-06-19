@@ -129,6 +129,82 @@ func TestAdapt(t *testing.T) {
 	}
 }
 
+func TestAdaptSendInvalidMessage(t *testing.T) {
+	b, _ := virtual.New()
+	defer b.Close()
+	node := can.Adapt(b)
+
+	// A message whose ID is not a valid uint32 cannot become a Frame.
+	err := node.Send(context.Background(), relay.Message{Protocol: relay.CAN, ID: "not-a-number"})
+	if err == nil {
+		t.Error("expected error sending message with invalid ID")
+	}
+}
+
+func TestAdaptSubscribeBackPressure(t *testing.T) {
+	for _, policy := range []relay.BackPressurePolicy{relay.DropNewest, relay.DropOldest, relay.Block} {
+		b, _ := virtual.New()
+		node := can.Adapt(b)
+
+		ch, err := node.Subscribe(
+			relay.WithBackPressure(policy),
+			relay.WithChannelDepth(4),
+		)
+		if err != nil {
+			t.Fatalf("Subscribe(%v): %v", policy, err)
+		}
+
+		msg := can.Frame{ID: 0x100, Data: []byte{0x01}}.ToMessage()
+		if err := node.Send(context.Background(), msg); err != nil {
+			t.Fatalf("Send: %v", err)
+		}
+		select {
+		case got, ok := <-ch:
+			if !ok {
+				t.Fatalf("policy %v: channel closed unexpectedly", policy)
+			}
+			if got.ID != "256" {
+				t.Errorf("policy %v: ID = %q, want 256", policy, got.ID)
+			}
+		case <-time.After(time.Second):
+			t.Fatalf("policy %v: timeout", policy)
+		}
+		b.Close()
+	}
+}
+
+func TestAdaptSubscribeClosedBus(t *testing.T) {
+	b, _ := virtual.New()
+	b.Close()
+	node := can.Adapt(b)
+	if _, err := node.Subscribe(); err == nil {
+		t.Error("expected Subscribe error on closed bus")
+	}
+}
+
+func TestErrInvalidFrameError(t *testing.T) {
+	e := &can.ErrInvalidFrame{Reason: "bad thing"}
+	if got := e.Error(); got != "can: invalid frame: bad thing" {
+		t.Errorf("Error() = %q", got)
+	}
+}
+
+func TestLoanedFrameReturn(t *testing.T) {
+	released := 0
+	lf := can.NewLoanedFrame(can.Frame{ID: 0x123}, func() { released++ })
+	if lf.ID != 0x123 {
+		t.Errorf("embedded Frame ID = %X, want 123", lf.ID)
+	}
+	lf.Return()
+	lf.Return() // safe to call twice; release must run only once
+	if released != 1 {
+		t.Errorf("release called %d times, want exactly 1", released)
+	}
+
+	// A LoanedFrame with no release func must not panic on Return.
+	can.NewLoanedFrame(can.Frame{}, nil).Return()
+}
+
 func TestAdaptClose(t *testing.T) {
 	b, _ := virtual.New()
 	node := can.Adapt(b)

@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-06-16T23:57:11.135342643Z",
+  "generatedAt": "2026-06-19T13:24:45.312627Z",
   "projectRoot": "go-CAN",
   "standard": "ISO 26262 ASIL-B",
   "objectives": [
@@ -21,9 +21,9 @@
       "id": "6.2",
       "title": "Software architectural design documented (boundary.mermaid)",
       "clause": "§6.4.5",
-      "status": "gap",
-      "findings": [
-        "boundary.mermaid not found — run 'gofusa boundary'"
+      "status": "satisfied",
+      "evidence": [
+        "boundary.mermaid present"
       ]
     },
     {
@@ -39,9 +39,9 @@
       "id": "6.4",
       "title": "Software unit verification (test evidence + coverage) (.fusa-evidence.json)",
       "clause": "§6.4.9",
-      "status": "gap",
-      "findings": [
-        ".fusa-evidence.json not found — run 'gofusa verify'"
+      "status": "satisfied",
+      "evidence": [
+        ".fusa-evidence.json present"
       ]
     },
     {
@@ -57,9 +57,9 @@
       "id": "6.6",
       "title": "Verification of software safety requirements (.fusa-evidence.json + .fusa-reqs.json)",
       "clause": "§6.4.12",
-      "status": "gap",
-      "findings": [
-        ".fusa-evidence.json not found — run 'gofusa verify'"
+      "status": "satisfied",
+      "evidence": [
+        ".fusa-evidence.json present"
       ]
     },
     {
@@ -84,9 +84,9 @@
       "id": "7.3",
       "title": "Hazard and Risk Analysis (HARA) structured data (.fusa-hara.json)",
       "clause": "§7.4.2",
-      "status": "gap",
-      "findings": [
-        ".fusa-hara.json not found — run 'gofusa hara init'"
+      "status": "satisfied",
+      "evidence": [
+        ".fusa-hara.json present"
       ]
     },
     {
@@ -120,34 +120,34 @@
       "id": "10.2",
       "title": "Problem reports tracked (.fusa-problems.json)",
       "clause": "§10.4.3",
-      "status": "gap",
-      "findings": [
-        ".fusa-problems.json not found — run 'gofusa pr init'"
+      "status": "satisfied",
+      "evidence": [
+        ".fusa-problems.json present"
       ]
     },
     {
       "id": "10.4",
       "title": "Software Configuration Index (sci.json)",
       "clause": "§10.4.4",
-      "status": "gap",
-      "findings": [
-        "sci.json not found — run 'gofusa sci'"
+      "status": "satisfied",
+      "evidence": [
+        "sci.json present"
       ]
     },
     {
       "id": "11.2",
       "title": "Cybersecurity integration (cyber-report.json)",
       "clause": "§11.4",
-      "status": "gap",
-      "findings": [
-        "cyber-report.json not found — run 'gofusa cyber'"
+      "status": "satisfied",
+      "evidence": [
+        "cyber-report.json present"
       ]
     }
   ],
   "summary": {
     "total": 15,
-    "satisfied": 8,
+    "satisfied": 15,
     "partial": 0,
-    "gaps": 7
+    "gaps": 0
   }
 }

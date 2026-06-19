@@ -161,6 +161,124 @@ func TestEncodeUnknownSignalName(t *testing.T) {
 	}
 }
 
+// motorolaDBC defines big-endian (Motorola, @0) signals to exercise the
+// big-endian packing/unpacking path.
+const motorolaDBC = `
+VERSION ""
+BU_: ECU
+BO_ 100 MotorolaMsg: 8 ECU
+ SG_ BigA : 7|8@0+ (1,0) [0|255] "" ECU
+ SG_ BigB : 23|16@0- (1,0) [-32768|32767] "" ECU
+`
+
+// wideDBC defines a full 64-bit unsigned signal to exercise the Length==64
+// branch of physicalToRaw.
+const wideDBC = `
+VERSION ""
+BU_: ECU
+BO_ 200 WideMsg: 8 ECU
+ SG_ Counter : 0|64@1+ (1,0) [0|0] "" ECU
+`
+
+func TestEncodeDecodeRoundTripBigEndian(t *testing.T) {
+	//fusa:test REQ-DBC-005
+	db, err := dbc.Parse(strings.NewReader(motorolaDBC))
+	if err != nil {
+		t.Fatalf("Parse: %v", err)
+	}
+
+	want := map[string]float64{
+		"BigA": 200,
+		"BigB": -1000,
+	}
+	encoded, err := db.Encode(100, want)
+	if err != nil {
+		t.Fatalf("Encode: %v", err)
+	}
+	got := db.Decode(100, encoded)
+	for name, wantVal := range want {
+		if math.Abs(got[name]-wantVal) > 0.001 {
+			t.Errorf("big-endian round-trip %s: got %f, want %f", name, got[name], wantVal)
+		}
+	}
+}
+
+func TestEncodeClampsUnsigned(t *testing.T) {
+	//fusa:test REQ-DBC-005
+	//fusa:test REQ-SEC-004
+	db, err := dbc.Parse(strings.NewReader(sampleDBC))
+	if err != nil {
+		t.Fatalf("Parse: %v", err)
+	}
+
+	// EngineSpeed: 16-bit unsigned, factor 0.25 → physical max 16383.75.
+	// Over-range clamps to max; negative clamps to 0.
+	over := db.Decode(256, mustEncode(t, db, map[string]float64{"EngineSpeed": 1e9}))
+	if math.Abs(over["EngineSpeed"]-16383.75) > 0.001 {
+		t.Errorf("over-range clamp: got %f, want 16383.75", over["EngineSpeed"])
+	}
+	under := db.Decode(256, mustEncode(t, db, map[string]float64{"EngineSpeed": -500}))
+	if under["EngineSpeed"] != 0 {
+		t.Errorf("under-range clamp: got %f, want 0", under["EngineSpeed"])
+	}
+}
+
+func TestEncodeClampsSigned(t *testing.T) {
+	//fusa:test REQ-DBC-005
+	//fusa:test REQ-SEC-004
+	db, err := dbc.Parse(strings.NewReader(sampleDBC))
+	if err != nil {
+		t.Fatalf("Parse: %v", err)
+	}
+
+	// EngineTemp: signed 8-bit, factor 1, offset -40 → physical range -168..87.
+	over := db.Decode(256, mustEncode(t, db, map[string]float64{"EngineTemp": 1000}))
+	if math.Abs(over["EngineTemp"]-87) > 0.001 {
+		t.Errorf("signed over-range clamp: got %f, want 87", over["EngineTemp"])
+	}
+	under := db.Decode(256, mustEncode(t, db, map[string]float64{"EngineTemp": -1000}))
+	if math.Abs(under["EngineTemp"]-(-168)) > 0.001 {
+		t.Errorf("signed under-range clamp: got %f, want -168", under["EngineTemp"])
+	}
+}
+
+func TestEncode64BitSignal(t *testing.T) {
+	//fusa:test REQ-DBC-005
+	db, err := dbc.Parse(strings.NewReader(wideDBC))
+	if err != nil {
+		t.Fatalf("Parse: %v", err)
+	}
+	const v = 1 << 40
+	got := db.Decode(200, mustEncode(t, db, map[string]float64{"Counter": v}))
+	if math.Abs(got["Counter"]-v) > 1 {
+		t.Errorf("64-bit round-trip: got %f, want %d", got["Counter"], v)
+	}
+}
+
+func mustEncode(t *testing.T, db *dbc.DB, signals map[string]float64) []byte {
+	t.Helper()
+	b, err := db.Encode(forMsgID(signals), signals)
+	if err != nil {
+		t.Fatalf("Encode: %v", err)
+	}
+	return b
+}
+
+// forMsgID resolves the message ID a signal set belongs to for the test DBCs.
+func forMsgID(signals map[string]float64) uint32 {
+	for name := range signals {
+		switch name {
+		case "Counter":
+			return 200
+		case "BigA", "BigB":
+			return 100
+		default:
+			return 256
+		}
+	}
+	return 256
+}
+
 // ---- VAL_ parsing tests -----------------------------------------------------
 
 func TestParseVAL(t *testing.T) {

@@ -31,11 +31,29 @@ jobs:
       - name: Regenerate dFMEA table
         run: gofusa fmea -cyber
 
+      - name: Regenerate static analysis and cyber reports
+        run: |
+          gofusa check ./... -output check-report.json || true
+          gofusa cyber --output cyber-report.json || true
+
+      - name: Regenerate test evidence, coverage, boundary, and SCI
+        run: |
+          gofusa verify || true
+          go test -coverprofile=coverage.out $(go list ./... | grep -v socketcan) || true
+          gofusa coverage -format json -output coverage-report.json coverage.out || true
+          gofusa boundary || true
+          gofusa sci -output sci.json || true
+
       - name: Regenerate safety case
         run: gofusa safety-case
 
       - name: Regenerate SBOM, provenance, and artifact manifest
         run: gofusa release
+
+      - name: Regenerate dependency vulnerability report
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          govulncheck -format json ./... > vuln.json || true
 
       - name: Regenerate compliance gap reports
         run: |
@@ -53,7 +71,9 @@ jobs:
           TAG="${{ github.ref_name }}"
           git add fmea.csv fmea.json \
                   safety-case.json safety-case.md safety-case.mermaid \
-                  sbom.json provenance.json artifact-manifest.json \
+                  sbom.json provenance.json artifact-manifest.json vuln.json \
+                  check-report.json cyber-report.json coverage-report.json \
+                  sci.json boundary.mermaid .fusa-evidence.json \
                   iec61508-gap-report.json iso26262-gap-report.json iec62443-gap-report.json
           if git diff --cached --quiet; then
             echo "No artifact changes for $TAG — nothing to commit."

@@ -195,6 +195,123 @@ func TestParseLineRoundtrip(t *testing.T) {
 	}
 }
 
+// TestParseLineErrors verifies malformed candump lines are rejected.
+func TestParseLineErrors(t *testing.T) {
+	bad := []string{
+		"not enough fields",
+		"1609459200.0 vcan0 123#AA",            // timestamp missing parens
+		"(notanumber) vcan0 123#AA",            // non-numeric seconds
+		"(1609459200.xxx) vcan0 123#AA",        // non-numeric micros
+		"(1609459200.000000) vcan0 123",        // missing '#'
+		"(1609459200.000000) vcan0 ZZZ#AA",     // invalid CAN ID
+		"(1609459200.000000) vcan0 123#XYZ",    // invalid data hex
+		"(1609459200.000000) vcan0 123##",      // FD frame missing flags byte
+		"(1609459200.000000) vcan0 123##ZZ01",  // FD invalid flags hex
+		"(1609459200.000000) vcan0 ZZ##01AA",   // FD invalid CAN ID
+		"(1609459200.000000) vcan0 123##01XYZ", // FD invalid data hex
+	}
+	for _, line := range bad {
+		if _, _, _, err := recorder.ParseLine(line); err == nil {
+			t.Errorf("ParseLine(%q) = nil error, want error", line)
+		}
+	}
+}
+
+// TestParseLineNoFraction verifies a timestamp without a fractional part parses.
+func TestParseLineNoFraction(t *testing.T) {
+	iface, ts, f, err := recorder.ParseLine("(1609459200) vcan0 123#AABB")
+	if err != nil {
+		t.Fatalf("ParseLine: %v", err)
+	}
+	if iface != "vcan0" {
+		t.Errorf("iface = %q, want vcan0", iface)
+	}
+	if ts.Unix() != 1609459200 || ts.Nanosecond() != 0 {
+		t.Errorf("ts = %v, want exact seconds", ts)
+	}
+	if f.ID != 0x123 || !bytes.Equal(f.Data, []byte{0xAA, 0xBB}) {
+		t.Errorf("frame = %+v, want ID 0x123 data AABB", f)
+	}
+}
+
+// TestParseLineFDData verifies a CAN FD line with flags+data decodes correctly.
+func TestParseLineFDData(t *testing.T) {
+	_, _, f, err := recorder.ParseLine("(1000000000.000000) vcan0 100##0111223344")
+	if err != nil {
+		t.Fatalf("ParseLine: %v", err)
+	}
+	if !f.FD {
+		t.Error("expected FD frame")
+	}
+	if !f.BRS {
+		t.Error("expected BRS set from flags 0x01")
+	}
+	if !bytes.Equal(f.Data, []byte{0x11, 0x22, 0x33, 0x44}) {
+		t.Errorf("data = %X, want 11223344", f.Data)
+	}
+}
+
+// TestReplaySkipsMalformedAndComments verifies blank, comment, and malformed
+// lines are skipped without aborting replay.
+func TestReplaySkipsMalformedAndComments(t *testing.T) {
+	log := "# a comment\n" +
+		"\n" +
+		"garbage line that cannot parse\n" +
+		"(1609459200.000000) vcan0 123#AA\n"
+
+	bus, _ := virtual.New()
+	ch, _ := bus.Subscribe(nil)
+
+	if err := recorder.Replay(context.Background(), bus, strings.NewReader(log), 100.0); err != nil {
+		t.Fatalf("Replay: %v", err)
+	}
+
+	select {
+	case got := <-ch:
+		if got.ID != 0x123 {
+			t.Errorf("ID = %X, want 123", got.ID)
+		}
+	case <-time.After(time.Second):
+		t.Fatal("expected the one valid frame")
+	}
+}
+
+// TestReplayCancelled verifies Replay returns ctx.Err() when cancelled during
+// an inter-frame sleep.
+func TestReplayCancelled(t *testing.T) {
+	log := "(1609459200.000000) vcan0 123#AA\n" +
+		"(1609459260.000000) vcan0 456#BB\n" // 60s gap → guarantees a sleep
+
+	bus, _ := virtual.New()
+	_, _ = bus.Subscribe(nil)
+
+	ctx, cancel := context.WithCancel(context.Background())
+	go func() {
+		time.Sleep(20 * time.Millisecond)
+		cancel()
+	}()
+
+	err := recorder.Replay(ctx, bus, strings.NewReader(log), 1.0)
+	if err == nil {
+		t.Fatal("expected cancellation error")
+	}
+}
+
+// TestReplayDefaultSpeedFactor verifies a non-positive speedFactor is coerced
+// to real-time (1.0) without error for an instantaneous single frame.
+func TestReplayDefaultSpeedFactor(t *testing.T) {
+	bus, _ := virtual.New()
+	ch, _ := bus.Subscribe(nil)
+	if err := recorder.Replay(context.Background(), bus, strings.NewReader("(1.000000) vcan0 1#FF\n"), 0); err != nil {
+		t.Fatalf("Replay: %v", err)
+	}
+	select {
+	case <-ch:
+	case <-time.After(time.Second):
+		t.Fatal("expected frame")
+	}
+}
+
 // TestReplayTiming verifies that speedFactor=10 makes a 50ms gap play back
 // in well under 100ms.
 func TestReplayTiming(t *testing.T) {

@@ -144,7 +144,11 @@ jobs:
           for f in \
             .fusa.json \
             .fusa-reqs.json \
-            SAFETY_PLAN.md; do
+            .fusa-iec62443.json \
+            SAFETY_PLAN.md \
+            SECURITY.md \
+            INCIDENT-RESPONSE.md \
+            THREAT_MODEL.md; do
             if [ ! -f "$f" ]; then
               echo "::error::Required safety artifact missing: $f"
               missing=$((missing + 1))
@@ -152,22 +156,59 @@ jobs:
           done
           [ "$missing" -eq 0 ] || exit 1
 
-      - name: Verify traceability (all requirements traced and tested)
+      - name: Verify traceability (all requirements traced AND tested)
         run: |
-          gofusa trace --format json -output /tmp/trace.json 2>/dev/null || true
+          gofusa trace --format json -output trace.json
           python3 - << 'PYEOF'
           import json, sys
-          try:
-              d = json.load(open('/tmp/trace.json'))
-              cov = d.get('coverage', {})
-              total  = cov.get('totalRequirements', 0)
-              traced = cov.get('tracedRequirements', 0)
-              tested = cov.get('testedRequirements', 0)
-              if total > 0 and tested < total:
-                  print(f"::warning::Untested requirements: {total - tested}")
-              if total > 0 and traced < total:
-                  print(f"::error::Untraced requirements: {total - traced}")
-                  sys.exit(1)
-          except Exception:
-              pass  # gofusa trace JSON may not be available; gofusa check covers this
+          # A missing or unreadable trace file is a hard failure: the gate must
+          # never pass silently just because the evidence could not be produced.
+          with open('trace.json') as fh:
+              d = json.load(fh)
+          cov = d.get('coverage', {})
+          total  = cov.get('totalRequirements', 0)
+          traced = cov.get('tracedRequirements', 0)
+          tested = cov.get('testedRequirements', 0)
+          if total == 0:
+              print("::error::No requirements found in trace report")
+              sys.exit(1)
+          failed = False
+          if traced < total:
+              print(f"::error::Untraced requirements: {total - traced} of {total}")
+              failed = True
+          if tested < total:
+              # ASIL-B requirements without verification evidence fail the build.
+              print(f"::error::Untested requirements: {total - tested} of {total}")
+              failed = True
+          if failed:
+              sys.exit(1)
+          print(f"Traceability OK: {total} requirements, all traced and tested")
           PYEOF
+
+  # ── Dependency vulnerability scan ─────────────────────────────────────────
+  # govulncheck fails the build on any vulnerability the code actually calls.
+  govulncheck:
+    name: govulncheck (dependency CVE scan)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.25"
+
+      - name: Install govulncheck
+        run: go install golang.org/x/vuln/cmd/govulncheck@latest
+
+      - name: Run govulncheck
+        run: govulncheck ./...
+
+      - name: Publish machine-readable result
+        if: always()
+        run: govulncheck -format json ./... > vuln.json || true
+
+      - name: Upload vuln report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vuln-report
+          path: vuln.json

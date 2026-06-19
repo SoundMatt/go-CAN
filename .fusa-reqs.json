@@ -591,6 +591,62 @@
       "standard": "iso26262",
       "level": "ASIL-B",
       "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-OBD-001",
+      "title": "OBD-II client over ISO-TP with standard diagnostic CAN IDs",
+      "text": "obdii.NewClient shall wrap an isotp.Conn and provide an OBD-II (ISO 15031 / SAE J1979) client. The caller configures the ISO-TP transport with the standard OBD-II identifiers (0x7DF functional request, 0x7E8 ECU #1 response).",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-OBD-002",
+      "title": "ReadPID requests a Mode 01 current-data PID and decodes it",
+      "text": "obdii.Client.ReadPID shall transmit [0x01, pid] and verify the response first byte equals 0x41 and the echoed PID matches the request. On a non-matching or short response it shall return an error; otherwise it decodes the payload into a Value with physical value and unit.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-OBD-003",
+      "title": "ReadVIN requests the Vehicle Identification Number (Mode 09 PID 0x02)",
+      "text": "obdii.Client.ReadVIN shall transmit [0x09, 0x02] and verify the response first byte equals 0x49 and the echoed PID equals 0x02. It shall return the decoded 17-character VIN string, or an error on a non-matching or short response.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SEC-001",
+      "title": "Frame input validation on transmit",
+      "text": "Every frame submitted to Bus.Send shall be validated (ValidateFrame) against CAN/CAN-FD structural constraints — ID width, DLC bounds, RTR/FD/BRS consistency — and rejected before transmission. This bounds the attack surface from malformed or crafted frames injected via the public API.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SEC-002",
+      "title": "ISO-TP reassembly rejects out-of-order segments",
+      "text": "The ISO-TP receiver shall verify the sequence number of each Consecutive Frame and abort reassembly with an error on any mismatch, preventing injection or reordering of segments into a reassembled diagnostic message.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SEC-003",
+      "title": "Bounded message buffers prevent resource exhaustion",
+      "text": "ISO-TP transfers shall enforce the 4095-byte protocol maximum on both send and receive paths, and subscriber channels shall use bounded buffers with an explicit back-pressure policy, so that a hostile or malfunctioning peer cannot exhaust memory.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
+    },
+    {
+      "id": "REQ-SEC-004",
+      "title": "No silent numeric truncation in DBC signal packing",
+      "text": "DBC signal encoding shall clamp physical values to the signal's representable raw range (signed and unsigned) rather than silently wrapping or truncating, preventing crafted values from aliasing onto unintended bit patterns.",
+      "standard": "iso26262",
+      "level": "ASIL-B",
+      "asil": "ASIL-B"
     }
   ]
 }
