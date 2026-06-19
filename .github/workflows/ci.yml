@@ -227,7 +227,7 @@ jobs:
           go-version: "1.25"
 
       - name: Install relay CLI
-        run: go install github.com/SoundMatt/RELAY/cmd/relay@v1.6.3
+        run: go install github.com/SoundMatt/RELAY/cmd/relay@v1.8.1
 
       - name: Build go-can CLI
         run: go build -o /tmp/go-can ./cmd/cantool
@@ -237,3 +237,16 @@ jobs:
 
       - name: relay compare (convert-driver self-check)
         run: relay compare /tmp/go-can /tmp/go-can
+
+      - name: relay crossbar spoke smoke test
+        run: |
+          cat > /tmp/crossbar.json <<'JSON'
+          {
+            "spokes": [
+              {"name":"a","binary":"/tmp/go-can","protocol":"CAN","subscribe_args":["--iface","virtual"],"send_args":["--iface","virtual"]},
+              {"name":"b","binary":"/tmp/go-can","protocol":"CAN","subscribe_args":["--iface","virtual"],"send_args":["--iface","virtual"]}
+            ],
+            "routes": [{"from":"a","to":["b"]}]
+          }
+          JSON
+          relay crossbar --config /tmp/crossbar.json --duration 2s

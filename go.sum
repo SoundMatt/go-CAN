@@ -2,5 +2,7 @@ github.com/SoundMatt/RELAY v0.1.0 h1:jp24tUZOPSVRgwInKnEtmAxa2SQbN9znKCyhMwwWVmI
 github.com/SoundMatt/RELAY v0.1.0/go.mod h1:8HXkxErdk4pHaM1de9eopm2S8o1aE7tKYkCBBsHxxcg=
 github.com/SoundMatt/RELAY v1.6.3 h1:hCPeN5/pTnKmHEpzzMWzN0+cTsQAJaCYMwBdHRxqDYw=
 github.com/SoundMatt/RELAY v1.6.3/go.mod h1:8HXkxErdk4pHaM1de9eopm2S8o1aE7tKYkCBBsHxxcg=
+github.com/SoundMatt/RELAY v1.8.1 h1:4T0Geo4Q4yyGfkP9KkdHt6H7AY7UQKNyaGIlc9ClhY0=
+github.com/SoundMatt/RELAY v1.8.1/go.mod h1:8HXkxErdk4pHaM1de9eopm2S8o1aE7tKYkCBBsHxxcg=
 golang.org/x/sys v0.46.0 h1:noSf2Fq6F8DBgS+LysIkx7rIExoNHJsxOAtPp4rthXw=
 golang.org/x/sys v0.46.0/go.mod h1:4GL1E5IUh+htKOUEOaiffhrAeqysfVGipDYzABqnCmw=

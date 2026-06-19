@@ -11,6 +11,8 @@
 //	capabilities                               Print capability declaration (JSON)
 //	status       [--format text|json]          Print bus status
 //	send         <iface> <id>[#<data>]         Send a CAN frame
+//	send         [--iface X] --format json     Streaming sink: publish relay.Message NDJSON from stdin
+//	subscribe    [--iface X] [--count N]        Streaming source: print relay.Message NDJSON to stdout
 //	dump         <iface>                        Dump all received frames to stdout
 //	record       <iface> [output-file]          Record frames in candump format
 //	replay       <iface> <log-file> [--speed N] Replay a candump log file
@@ -31,12 +33,13 @@ import (
 	"syscall"
 	"time"
 
+	relay "github.com/SoundMatt/RELAY"
 	can "github.com/SoundMatt/go-CAN"
 	"github.com/SoundMatt/go-CAN/recorder"
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
-const toolVersion = "0.7.0"
+const toolVersion = "0.9.0"
 
 func main() {
 	if len(os.Args) < 2 {
@@ -59,6 +62,8 @@ func main() {
 		err = cmdSend(ctx, os.Args[2:])
 	case "dump":
 		err = cmdDump(ctx, os.Args[2:])
+	case "subscribe":
+		err = cmdSubscribe(ctx, os.Args[2:])
 	case "record":
 		err = cmdRecord(ctx, os.Args[2:])
 	case "replay":
@@ -112,7 +117,7 @@ func cmdCapabilities() error {
 		"protocol_int":        1,
 		"version":             toolVersion,
 		"spec_version":        can.SpecVersion,
-		"commands":            []string{"version", "capabilities", "status", "send", "dump", "record", "replay", "convert"},
+		"commands":            []string{"version", "capabilities", "status", "send", "subscribe", "dump", "record", "replay", "convert"},
 		"transports":          []string{"socketcan", "virtual"},
 		"features":            []string{"fd", "xl", "isotp", "j1939"},
 		"interfaces":          []string{"Bus"},
@@ -146,8 +151,20 @@ func cmdStatus(args []string) error {
 }
 
 func cmdSend(ctx context.Context, args []string) error {
+	// Streaming JSON sink (RELAY spec §11.2 crossbar spoke): `send --format json`
+	// with no positional frame reads relay.Message NDJSON from stdin and
+	// publishes each until EOF. This is the egress dual of `subscribe`.
+	if iface, ok := jsonSinkIface(args); ok {
+		bus, err := openBus(iface)
+		if err != nil {
+			return err
+		}
+		defer bus.Close()
+		return runSendJSON(ctx, bus, os.Stdin)
+	}
+
 	if len(args) < 2 {
-		return fmt.Errorf("usage: go-can send <iface> <hex-id>[#<hex-data>]")
+		return fmt.Errorf("usage: go-can send <iface> <hex-id>[#<hex-data>]  |  go-can send [--iface X] --format json")
 	}
 	iface := args[0]
 	frameStr := args[1]
@@ -289,6 +306,127 @@ func cmdReplay(ctx context.Context, args []string) error {
 	return nil
 }
 
+// jsonSinkIface reports whether args select the streaming JSON sink mode
+// (`--format json` with no positional frame) and returns the chosen iface
+// (default "virtual"). It accepts an optional `--iface <name>` flag.
+func jsonSinkIface(args []string) (string, bool) {
+	iface := "virtual"
+	jsonMode := false
+	for i := 0; i < len(args); i++ {
+		switch args[i] {
+		case "--format":
+			if i+1 < len(args) && args[i+1] == "json" {
+				jsonMode = true
+				i++
+			}
+		case "--iface":
+			if i+1 < len(args) {
+				iface = args[i+1]
+				i++
+			}
+		}
+	}
+	return iface, jsonMode
+}
+
+// runSendJSON reads relay.Message values as NDJSON from r and publishes each as
+// a CAN frame to bus until EOF (RELAY spec §11.2 streaming JSON sink).
+func runSendJSON(ctx context.Context, bus can.Bus, r io.Reader) error {
+	dec := json.NewDecoder(r)
+	for {
+		var msg relay.Message
+		if err := dec.Decode(&msg); err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("send: decode message: %w", err)
+		}
+		f, err := can.FromMessage(msg)
+		if err != nil {
+			return fmt.Errorf("send: %w", err)
+		}
+		if err := bus.Send(ctx, f); err != nil {
+			return fmt.Errorf("send: %w", err)
+		}
+	}
+}
+
+// cmdSubscribe implements `subscribe [--iface X] [--format json] [--count N]`
+// (RELAY spec §11.2): it prints every received frame as a relay.Message NDJSON
+// line on stdout — the crossbar source dual of the streaming `send` sink.
+func cmdSubscribe(ctx context.Context, args []string) error {
+	iface := "virtual"
+	format := "json"
+	count := 0
+	for i := 0; i < len(args); i++ {
+		switch args[i] {
+		case "--iface":
+			if i+1 >= len(args) {
+				return fmt.Errorf("subscribe: --iface requires a value")
+			}
+			iface = args[i+1]
+			i++
+		case "--format":
+			if i+1 >= len(args) {
+				return fmt.Errorf("subscribe: --format requires a value")
+			}
+			format = args[i+1]
+			i++
+		case "--count":
+			if i+1 >= len(args) {
+				return fmt.Errorf("subscribe: --count requires a value")
+			}
+			n, err := strconv.Atoi(args[i+1])
+			if err != nil {
+				return fmt.Errorf("subscribe: invalid --count %q: %w", args[i+1], err)
+			}
+			count = n
+			i++
+		default:
+			return fmt.Errorf("subscribe: unknown argument %q", args[i])
+		}
+	}
+	if format != "json" {
+		return fmt.Errorf("subscribe: only --format json is supported (got %q)", format)
+	}
+
+	bus, err := openBus(iface)
+	if err != nil {
+		return err
+	}
+	defer bus.Close()
+	return runSubscribeJSON(ctx, bus, os.Stdout, count)
+}
+
+// runSubscribeJSON writes each frame received from bus as a relay.Message
+// NDJSON line to w. It stops when ctx is done, the bus closes, or count
+// messages have been written (count <= 0 means run until cancelled).
+func runSubscribeJSON(ctx context.Context, bus can.Bus, w io.Writer, count int) error {
+	ch, err := bus.Subscribe(nil)
+	if err != nil {
+		return err
+	}
+	enc := json.NewEncoder(w) // Encode writes one JSON value + "\n" → NDJSON
+	n := 0
+	for {
+		select {
+		case f, ok := <-ch:
+			if !ok {
+				return nil
+			}
+			if err := enc.Encode(f.ToMessage()); err != nil {
+				return fmt.Errorf("subscribe: encode message: %w", err)
+			}
+			n++
+			if count > 0 && n >= count {
+				return nil
+			}
+		case <-ctx.Done():
+			return nil
+		}
+	}
+}
+
 // runConvert implements the RELAY interop driver command (spec §11.2):
 //
 //	convert --protocol CAN [--format json]
@@ -386,6 +524,8 @@ Usage:
   go-can capabilities                                 Print capability declaration
   go-can status        [--format text|json]           Print bus status
   go-can send          <iface> <id>[#<data>]          Send a CAN frame
+  go-can send          [--iface X] --format json       Streaming sink: publish relay.Message NDJSON read from stdin
+  go-can subscribe     [--iface X] [--count N]          Streaming source: print received frames as relay.Message NDJSON
   go-can dump          <iface>                         Dump all received frames
   go-can record        <iface> [output-file]           Record frames in candump format (Ctrl+C to stop)
   go-can replay        <iface> <log-file> [--speed N]  Replay a candump log file (default speed: 1.0)
