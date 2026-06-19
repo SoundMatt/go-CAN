@@ -1,6 +1,6 @@
 {
   "format": "go-FuSa Safety Case v1",
-  "generatedAt": "2026-06-19T14:04:38.466207Z",
+  "generatedAt": "2026-06-19T14:09:57.007805336Z",
   "module": "github.com/SoundMatt/go-CAN",
   "standard": "generic",
   "evidence": [
@@ -9,7 +9,7 @@
       "description": "Coding standard and static analysis checks",
       "file": "check-report.json",
       "status": "present",
-      "detail": "303 findings (0 errors, 176 warnings)"
+      "detail": "304 findings (0 errors, 176 warnings)"
     },
     {
       "id": "trace",
@@ -23,7 +23,7 @@
       "description": "Test evidence bundle",
       "file": ".fusa-evidence.json",
       "status": "present",
-      "detail": "187/187 tests passed"
+      "detail": "188/192 tests passed"
     },
     {
       "id": "qualify",
