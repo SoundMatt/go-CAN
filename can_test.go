@@ -81,3 +81,50 @@ func TestMaxDataLen(t *testing.T) {
 		t.Error("CAN FD max data len should be 64")
 	}
 }
+
+//fusa:test REQ-CANXL-002
+func TestFrameMaxDataLen(t *testing.T) {
+	tests := []struct {
+		name  string
+		frame can.Frame
+		want  int
+	}{
+		{"classic", can.Frame{ID: 0x100}, 8},
+		{"fd", can.Frame{ID: 0x100, FD: true}, 64},
+		{"xl", can.Frame{ID: 0x100, XL: true}, 2048},
+	}
+	for _, tt := range tests {
+		if got := tt.frame.MaxDataLen(); got != tt.want {
+			t.Errorf("%s: MaxDataLen() = %d, want %d", tt.name, got, tt.want)
+		}
+	}
+}
+
+//fusa:test REQ-CANXL-001
+//fusa:test REQ-CANXL-003
+func TestValidateFrameXL(t *testing.T) {
+	tests := []struct {
+		name    string
+		frame   can.Frame
+		wantErr bool
+	}{
+		{"valid XL", can.Frame{ID: 0x123, XL: true, SDT: 5, VCID: 2, AF: 0xCAFE, SEC: true, ESI: true, Data: []byte{1, 2, 3}}, false},
+		{"valid XL max data", can.Frame{ID: 0x7FF, XL: true, Data: make([]byte, 2048)}, false},
+		{"FD and XL", can.Frame{ID: 0x100, FD: true, XL: true, Data: []byte{1}}, true},
+		{"ESI without FD/XL", can.Frame{ID: 0x100, ESI: true, Data: []byte{1}}, true},
+		{"XL with Ext", can.Frame{ID: 0x100, XL: true, Ext: true, Data: []byte{1}}, true},
+		{"XL with RTR", can.Frame{ID: 0x100, XL: true, RTR: true, Data: []byte{1}}, true},
+		{"XL with BRS", can.Frame{ID: 0x100, XL: true, BRS: true, Data: []byte{1}}, true},
+		{"XL priority ID overflow", can.Frame{ID: 0x800, XL: true, Data: []byte{1}}, true},
+		{"XL empty data", can.Frame{ID: 0x100, XL: true, Data: nil}, true},
+		{"XL data too long", can.Frame{ID: 0x100, XL: true, Data: make([]byte, 2049)}, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			err := can.ValidateFrame(tt.frame)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("ValidateFrame() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}

@@ -212,3 +212,28 @@ jobs:
         with:
           name: vuln-report
           path: vuln.json
+
+  # ── RELAY conformance gate ────────────────────────────────────────────────
+  # Validates the go-can CLI version/capabilities/status output against the
+  # authoritative RELAY §12 JSON Schemas. Pinned to the spec version go-CAN
+  # targets (v1.6.x) so a spec bump is an explicit upgrade, not a surprise.
+  relay-conform:
+    name: RELAY conform
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.25"
+
+      - name: Install relay CLI
+        run: go install github.com/SoundMatt/RELAY/cmd/relay@v1.6.3
+
+      - name: Build go-can CLI
+        run: go build -o /tmp/go-can ./cmd/cantool
+
+      - name: relay conform --strict
+        run: relay conform --strict /tmp/go-can
+
+      - name: relay compare (convert-driver self-check)
+        run: relay compare /tmp/go-can /tmp/go-can

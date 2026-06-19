@@ -1,7 +1,7 @@
 {
   "project": "go-CAN",
   "version": "1",
-  "generated": "2026-06-19T13:39:22.804491128Z",
+  "generated": "2026-06-19T14:04:38.456041Z",
   "items": [
     {
       "name": "Software Development Plan",
@@ -37,7 +37,7 @@
       "name": "Requirements Manifest",
       "file": ".fusa-reqs.json",
       "class": "Development",
-      "sha256": "43fff74a8b23d0db0bfd5e94e737216d786a759e6165e674660ea25a76872c4f",
+      "sha256": "2fe118951a91246ce97cb69b665c67e41cbdf50af3e611a9836f1a39687497b0",
       "present": true,
       "note": "DO-178C §11.9"
     },
@@ -53,7 +53,7 @@
       "name": "SBOM (SPDX 3.0.1)",
       "file": "sbom.json",
       "class": "Configuration Management",
-      "sha256": "7f0462a738fddb4256a33b3e67761067d60c519360698f331bade401965415ce",
+      "sha256": "34e18059ab20ef55e2da5685fc4d48219a3f5dc6fb9a619000e5cd85c013cd07",
       "present": true,
       "note": "DO-178C §11.15, NTIA SBOM"
     },
@@ -61,7 +61,7 @@
       "name": "Build Provenance",
       "file": "provenance.json",
       "class": "Configuration Management",
-      "sha256": "bfcb7818d51767ff06b04d9a07966b798fd437b034997aaf6e1b72fef9f619bc",
+      "sha256": "9c460bf33afa7d359a9356b71fedb4bf0c09c450bf4a3a217826dd1bcc160d33",
       "present": true,
       "note": "SLSA L2"
     },
@@ -76,7 +76,7 @@
       "name": "Test Evidence Bundle",
       "file": ".fusa-evidence.json",
       "class": "Verification",
-      "sha256": "808c23c63d8d62576ca14784d77d8e98be9c1f86eb5bb6f1383f5d2d6fa74daa",
+      "sha256": "6986fcca9d8014b331be51ecb5c9389fc7663f0df0fc01d968082cf4def4ff1c",
       "present": true,
       "note": "DO-178C §11.14"
     },
@@ -84,7 +84,7 @@
       "name": "Vulnerability Report",
       "file": "vuln.json",
       "class": "Verification",
-      "sha256": "93a15b926532914b490663fbe8abaff4a5ee2b887f04446c189285d90e022a68",
+      "sha256": "f2e14f98df3ac8fac6e5bf90727158a2aba4dff8e0f130c6c8a58d34d9f485db",
       "present": true,
       "note": "ISO 21434 / OSV"
     },
@@ -92,7 +92,7 @@
       "name": "FMEA Table",
       "file": "fmea.json",
       "class": "Verification",
-      "sha256": "3223b8c5387c513fa538d683684c9ae9898342d09afc5fac877fbcba58b434f7",
+      "sha256": "d28f09e17e62b3b23e9656910c2a9bbf456bb3b850e669b9d1767320b24b1366",
       "present": true,
       "note": "DO-178C §11.9 (safety analysis)"
     },
@@ -114,7 +114,7 @@
       "name": "Boundary Diagram",
       "file": "boundary.mermaid",
       "class": "Verification",
-      "sha256": "ccacb915a3746bb1ffd2c232b5c271a2778115f6d047ee7d9932d5d358c52159",
+      "sha256": "77d4264beff5dd9b981660301acf85305032c735c61fe8a0792faa93ae6d40c8",
       "present": true,
       "note": "DO-178C §11.10 (architecture)"
     },
@@ -122,7 +122,7 @@
       "name": "Cyber Report",
       "file": "cyber-report.json",
       "class": "Verification",
-      "sha256": "3b7ed11870ac29e19312166132f6fb4c060a8f899072df178e6a7b61b34881a8",
+      "sha256": "a00d9ab24d12e0ed0ebd6e2fbb3e5ed7f4416fea151e0c1962476b891821d3fb",
       "present": true,
       "note": "ISO 21434 §11"
     },
@@ -137,7 +137,7 @@
       "name": "Safety Case",
       "file": "safety-case.json",
       "class": "Accomplishment Summary",
-      "sha256": "f573879f99528c3a8fbb1104a96b044b4e463e15b8669aeae026d8b4ab11f45b",
+      "sha256": "814fbbfbfb374b4387ff117adc8de2351c6324453065bf533be76f809c0f947c",
       "present": true,
       "note": "DO-178C §11.20 (SAS input)"
     },
@@ -152,7 +152,8 @@
       "name": "Audit Pack",
       "file": "audit-pack.zip",
       "class": "Configuration Management",
-      "present": false,
+      "sha256": "f3906b6070b79ce0e37452439f53464655174f54a2d45370ebeeac7d59fd5e6b",
+      "present": true,
       "note": "go-FuSa audit bundle"
     },
     {
@@ -182,7 +183,7 @@
       "name": "CI Workflow",
       "file": ".github/workflows/ci.yml",
       "class": "Configuration Management",
-      "sha256": "03ba610f81809d40ce4c94503bbc38327a4a8981b9df8bedb182693a933854cf",
+      "sha256": "978e1ef84a97877fcf9f9b501beeebcaf58c6ffb2e8d7239f6f541df1038a340",
       "present": true,
       "note": "DO-178C §12.2 (tool env)"
     },

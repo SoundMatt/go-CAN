@@ -14,6 +14,7 @@
 //	dump         <iface>                        Dump all received frames to stdout
 //	record       <iface> [output-file]          Record frames in candump format
 //	replay       <iface> <log-file> [--speed N] Replay a candump log file
+//	convert      --protocol CAN [--format json] RELAY interop driver (stdin->stdout)
 package main
 
 import (
@@ -21,19 +22,21 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"os/signal"
 	"runtime"
 	"strconv"
 	"strings"
 	"syscall"
+	"time"
 
 	can "github.com/SoundMatt/go-CAN"
 	"github.com/SoundMatt/go-CAN/recorder"
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
-const toolVersion = "0.6.0"
+const toolVersion = "0.7.0"
 
 func main() {
 	if len(os.Args) < 2 {
@@ -60,6 +63,10 @@ func main() {
 		err = cmdRecord(ctx, os.Args[2:])
 	case "replay":
 		err = cmdReplay(ctx, os.Args[2:])
+	case "convert":
+		// convert has its own exit-code contract (RELAY spec §11.2):
+		// 0 = converted, 1 = invalid input, 2 = invalid args.
+		os.Exit(runConvert(os.Args[2:], os.Stdin, os.Stdout, os.Stderr))
 	case "help", "--help", "-h":
 		usage()
 	default:
@@ -105,9 +112,9 @@ func cmdCapabilities() error {
 		"protocol_int":        1,
 		"version":             toolVersion,
 		"spec_version":        can.SpecVersion,
-		"commands":            []string{"version", "capabilities", "status", "send", "dump", "record", "replay"},
+		"commands":            []string{"version", "capabilities", "status", "send", "dump", "record", "replay", "convert"},
 		"transports":          []string{"socketcan", "virtual"},
-		"features":            []string{"fd", "isotp", "j1939"},
+		"features":            []string{"fd", "xl", "isotp", "j1939"},
 		"interfaces":          []string{"Bus"},
 		"optional_interfaces": []string{},
 		"adapt":               true,
@@ -282,6 +289,80 @@ func cmdReplay(ctx context.Context, args []string) error {
 	return nil
 }
 
+// runConvert implements the RELAY interop driver command (spec §11.2):
+//
+//	convert --protocol CAN [--format json]
+//
+// It reads one canonical can.Frame as JSON on stdin, runs it through this
+// implementation's own ToMessage() conversion, and writes the resulting
+// relay.Message as JSON on stdout (timestamp zeroed for comparability). The
+// output is a faithful witness of runtime behaviour, so `relay interop` can
+// diff it against other CAN implementations for byte-identical equality.
+//
+// Exit codes: 0 converted, 1 invalid input (sentinel name on stderr),
+// 2 invalid arguments.
+func runConvert(args []string, stdin io.Reader, stdout, stderr io.Writer) int {
+	protocol := ""
+	format := "json"
+	for i := 0; i < len(args); i++ {
+		switch args[i] {
+		case "--protocol":
+			if i+1 >= len(args) {
+				fmt.Fprintln(stderr, "convert: --protocol requires a value")
+				return 2
+			}
+			protocol = args[i+1]
+			i++
+		case "--format":
+			if i+1 >= len(args) {
+				fmt.Fprintln(stderr, "convert: --format requires a value")
+				return 2
+			}
+			format = args[i+1]
+			i++
+		default:
+			fmt.Fprintf(stderr, "convert: unknown argument %q\n", args[i])
+			return 2
+		}
+	}
+	if protocol != "CAN" {
+		fmt.Fprintf(stderr, "convert: --protocol must be CAN (got %q)\n", protocol)
+		return 2
+	}
+	if format != "json" {
+		fmt.Fprintf(stderr, "convert: unsupported --format %q (only json)\n", format)
+		return 2
+	}
+
+	data, err := io.ReadAll(stdin)
+	if err != nil {
+		fmt.Fprintf(stderr, "convert: read stdin: %v\n", err)
+		return 2
+	}
+
+	var f can.Frame
+	if err := json.Unmarshal(data, &f); err != nil {
+		// Unparseable canonical input is treated as invalid input.
+		fmt.Fprintln(stderr, "ErrInvalidFrame")
+		return 1
+	}
+	if err := can.ValidateFrame(f); err != nil {
+		// RELAY §5 sentinel name for a structurally invalid CAN frame.
+		fmt.Fprintln(stderr, "ErrInvalidFrame")
+		return 1
+	}
+
+	msg := f.ToMessage()
+	msg.Timestamp = time.Time{} // zeroed to keep interop comparisons stable
+	out, err := json.Marshal(msg)
+	if err != nil {
+		fmt.Fprintf(stderr, "convert: marshal: %v\n", err)
+		return 2
+	}
+	fmt.Fprintln(stdout, string(out))
+	return 0
+}
+
 // openBus returns a virtual bus when iface == "virtual", otherwise tries
 // to open a SocketCAN interface. On non-Linux systems virtual is always used.
 func openBus(iface string) (can.Bus, error) {
@@ -308,6 +389,7 @@ Usage:
   go-can dump          <iface>                         Dump all received frames
   go-can record        <iface> [output-file]           Record frames in candump format (Ctrl+C to stop)
   go-can replay        <iface> <log-file> [--speed N]  Replay a candump log file (default speed: 1.0)
+  go-can convert       --protocol CAN [--format json]  RELAY interop driver: can.Frame JSON (stdin) -> relay.Message JSON (stdout)
 
 iface: "virtual" for in-process test bus; "vcan0", "can0", etc. for SocketCAN (Linux only).`)
 }

@@ -181,6 +181,74 @@ func TestCmdRecordError(t *testing.T) {
 	}
 }
 
+func TestRunConvertStandardFrame(t *testing.T) {
+	var out, errb strings.Builder
+	in := strings.NewReader(`{"id":291,"data":"3q2+7w=="}`)
+	code := runConvert([]string{"--protocol", "CAN"}, in, &out, &errb)
+	if code != 0 {
+		t.Fatalf("exit code = %d, want 0 (stderr: %s)", code, errb.String())
+	}
+	want := `{"protocol":1,"version":{"major":0,"minor":0,"patch":0},"id":"291","payload":"3q2+7w==","timestamp":"0001-01-01T00:00:00Z","meta":{"can.brs":"false","can.ext":"false","can.fd":"false","can.rtr":"false"}}`
+	if strings.TrimSpace(out.String()) != want {
+		t.Errorf("convert output mismatch:\n got  %s\n want %s", strings.TrimSpace(out.String()), want)
+	}
+}
+
+func TestRunConvertXLFrame(t *testing.T) {
+	var out, errb strings.Builder
+	in := strings.NewReader(`{"id":291,"esi":true,"xl":true,"sdt":5,"vcid":2,"af":51966,"sec":true,"data":"3q2+7w=="}`)
+	code := runConvert([]string{"--protocol", "CAN", "--format", "json"}, in, &out, &errb)
+	if code != 0 {
+		t.Fatalf("exit code = %d, want 0 (stderr: %s)", code, errb.String())
+	}
+	for _, key := range []string{`"can.xl":"true"`, `"can.sdt":"5"`, `"can.vcid":"2"`, `"can.af":"51966"`, `"can.sec":"true"`, `"can.esi":"true"`} {
+		if !strings.Contains(out.String(), key) {
+			t.Errorf("XL convert output missing %s:\n%s", key, out.String())
+		}
+	}
+}
+
+func TestRunConvertInvalidInput(t *testing.T) {
+	var out, errb strings.Builder
+	// Standard ID overflow → ValidateFrame fails.
+	in := strings.NewReader(`{"id":2048,"data":"AA=="}`)
+	code := runConvert([]string{"--protocol", "CAN"}, in, &out, &errb)
+	if code != 1 {
+		t.Fatalf("exit code = %d, want 1", code)
+	}
+	if strings.TrimSpace(errb.String()) != "ErrInvalidFrame" {
+		t.Errorf("stderr = %q, want ErrInvalidFrame", strings.TrimSpace(errb.String()))
+	}
+	if out.String() != "" {
+		t.Errorf("stdout should be empty on invalid input, got %q", out.String())
+	}
+}
+
+func TestRunConvertMalformedJSON(t *testing.T) {
+	var out, errb strings.Builder
+	code := runConvert([]string{"--protocol", "CAN"}, strings.NewReader("not json"), &out, &errb)
+	if code != 1 {
+		t.Errorf("exit code = %d, want 1 for malformed input", code)
+	}
+}
+
+func TestRunConvertArgErrors(t *testing.T) {
+	cases := [][]string{
+		{"--protocol", "DDS"},   // wrong protocol
+		{"--protocol"},          // missing value
+		{"--format", "yaml", "--protocol", "CAN"}, // unsupported format
+		{"--bogus"},             // unknown arg
+		{},                      // missing protocol
+	}
+	for _, args := range cases {
+		var out, errb strings.Builder
+		code := runConvert(args, strings.NewReader("{}"), &out, &errb)
+		if code != 2 {
+			t.Errorf("runConvert(%v) exit = %d, want 2", args, code)
+		}
+	}
+}
+
 func TestOpenBusVirtual(t *testing.T) {
 	bus, err := openBus("virtual")
 	if err != nil {
