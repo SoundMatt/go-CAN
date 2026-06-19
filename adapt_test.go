@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
+	relay "github.com/SoundMatt/RELAY"
 	can "github.com/SoundMatt/go-CAN"
 	"github.com/SoundMatt/go-CAN/virtual"
-	relay "github.com/SoundMatt/RELAY"
 )
 
 func TestToMessage(t *testing.T) {
@@ -189,6 +189,7 @@ func TestErrInvalidFrameError(t *testing.T) {
 	}
 }
 
+//fusa:test REQ-LOAN-001
 func TestLoanedFrameReturn(t *testing.T) {
 	released := 0
 	lf := can.NewLoanedFrame(can.Frame{ID: 0x123}, func() { released++ })

@@ -35,6 +35,8 @@ import (
 // Record records all frames from bus to w in candump format.
 // iface is the interface name written to each line (e.g. "vcan0").
 // Blocks until ctx is cancelled or the bus subscription channel closes.
+//
+//fusa:req REQ-REC-001
 func Record(ctx context.Context, bus can.Bus, w io.Writer, iface string) error {
 	ch, err := bus.Subscribe(nil)
 	if err != nil {
@@ -64,6 +66,8 @@ func Record(ctx context.Context, bus can.Bus, w io.Writer, iface string) error {
 // after frame 1 in the log, Replay sleeps 50 ms between sends.
 // speedFactor scales inter-frame delays: 1.0 = real-time, 2.0 = 2× speed.
 // Returns nil on EOF or a non-nil error on context cancellation or send failure.
+//
+//fusa:req REQ-REC-002
 func Replay(ctx context.Context, bus can.Bus, r io.Reader, speedFactor float64) error {
 	if speedFactor <= 0 {
 		speedFactor = 1.0
@@ -129,6 +133,8 @@ func Replay(ctx context.Context, bus can.Bus, r io.Reader, speedFactor float64) 
 //
 //	(1609459200.000000) vcan0 123#DEADBEEF
 //	(1609459200.000000) vcan0 123##0DEADBEEF   (CAN FD, flags byte after ##)
+//
+//fusa:req REQ-REC-003
 func ParseLine(line string) (iface string, ts time.Time, f can.Frame, err error) {
 	// Expected: (TIMESTAMP) IFACE ID#DATA  or  (TIMESTAMP) IFACE ID##FLAGSDATA
 	parts := strings.Fields(line)
@@ -254,6 +260,8 @@ func parseInt64(s string) (int64, error) {
 //
 // Standard CAN:  (TIMESTAMP) iface ID#HEXDATA
 // CAN FD:        (TIMESTAMP) iface ID##FLAGSHEXDATA
+//
+//fusa:req REQ-REC-004
 func FormatLine(iface string, ts time.Time, f can.Frame) string {
 	tsStr := fmt.Sprintf("(%d.%06d)",
 		ts.Unix(),

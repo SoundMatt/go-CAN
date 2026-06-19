@@ -5,11 +5,8 @@
 
 package j1939_test
 
-//fusa:test REQ-J1939-TP-001
-//fusa:test REQ-J1939-TP-002
-//fusa:test REQ-J1939-TP-003
-//fusa:test REQ-J1939-TP-004
-//fusa:test REQ-J1939-TP-005
+//fusa:test REQ-J1939-007
+//fusa:test REQ-J1939-008
 
 import (
 	"bytes"
@@ -44,21 +41,21 @@ func makePayload(n int) []byte {
 
 // TestBAMRoundTrip_50bytes verifies a 50-byte payload round-trips correctly.
 //
-//fusa:test REQ-J1939-TP-001
+//fusa:test REQ-J1939-007
 func TestBAMRoundTrip_50bytes(t *testing.T) {
 	testBAMRoundTrip(t, 50)
 }
 
 // TestBAMRoundTrip_100bytes verifies a 100-byte payload round-trips correctly.
 //
-//fusa:test REQ-J1939-TP-001
+//fusa:test REQ-J1939-007
 func TestBAMRoundTrip_100bytes(t *testing.T) {
 	testBAMRoundTrip(t, 100)
 }
 
 // TestBAMRoundTrip_1785bytes verifies the maximum J1939-21 payload (1785 bytes).
 //
-//fusa:test REQ-J1939-TP-001
+//fusa:test REQ-J1939-007
 func TestBAMRoundTrip_1785bytes(t *testing.T) {
 	testBAMRoundTrip(t, 1785)
 }
@@ -115,7 +112,7 @@ func testBAMRoundTrip(t *testing.T, payloadSize int) {
 // TestBAMPacketCountAndPadding verifies that the correct number of TP.DT
 // packets are sent and that the last packet is padded with 0xFF.
 //
-//fusa:test REQ-J1939-TP-002
+//fusa:test REQ-J1939-007
 func TestBAMPacketCountAndPadding(t *testing.T) {
 	// 9 bytes = ceil(9/7) = 2 packets
 	// packet 1: bytes 0-6 (7 bytes), packet 2: bytes 7-8 + 0xFF*5 padding
@@ -187,7 +184,7 @@ func TestBAMPacketCountAndPadding(t *testing.T) {
 // TestBAMSendViaTransparentSend verifies that Bus.Send automatically
 // uses BAM for payloads > 8 bytes.
 //
-//fusa:test REQ-J1939-TP-001
+//fusa:test REQ-J1939-007
 func TestBAMSendViaTransparentSend(t *testing.T) {
 	sender, receiver, closeAll := newTestBus(t)
 	defer closeAll()
@@ -228,7 +225,7 @@ func TestBAMSendViaTransparentSend(t *testing.T) {
 // for the same source PGN before the previous one completes, the stale
 // session is dropped and only the new session's data is delivered.
 //
-//fusa:test REQ-J1939-TP-003
+//fusa:test REQ-J1939-007
 func TestBAMStaleSessionReplacedOnNewBAM(t *testing.T) {
 	b, err := virtual.New()
 	if err != nil {
@@ -303,7 +300,7 @@ done:
 // TestSubscribeTPContextCancellation verifies that the SubscribeTP goroutine
 // exits cleanly when its context is cancelled.
 //
-//fusa:test REQ-J1939-TP-004
+//fusa:test REQ-J1939-008
 func TestSubscribeTPContextCancellation(t *testing.T) {
 	b, err := virtual.New()
 	if err != nil {
@@ -346,7 +343,7 @@ func TestSubscribeTPContextCancellation(t *testing.T) {
 // TestSubscribeTPAllPGNs verifies that SubscribeTP with no PGN filter
 // delivers frames for any assembled PGN.
 //
-//fusa:test REQ-J1939-TP-005
+//fusa:test REQ-J1939-008
 func TestSubscribeTPAllPGNs(t *testing.T) {
 	sender, receiver, closeAll := newTestBus(t)
 	defer closeAll()

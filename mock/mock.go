@@ -15,4 +15,6 @@ import "github.com/SoundMatt/go-CAN/virtual"
 type Bus = virtual.Bus
 
 // New creates an in-process mock CAN bus.
+//
+//fusa:req REQ-MOCK-001
 func New() (*Bus, error) { return virtual.New() }

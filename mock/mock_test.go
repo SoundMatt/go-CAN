@@ -5,6 +5,8 @@
 
 package mock_test
 
+//fusa:test REQ-MOCK-001
+
 import (
 	"context"
 	"testing"

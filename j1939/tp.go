@@ -60,6 +60,8 @@ func (c TPConfig) packetDelay() time.Duration {
 //
 // f.Data must be between 9 and 1785 bytes inclusive. For single frames
 // (≤8 bytes) use Bus.Send instead.
+//
+//fusa:req REQ-J1939-007
 func (b *Bus) SendTP(ctx context.Context, f Frame, cfg TPConfig) error {
 	n := len(f.Data)
 	if n < 9 {
@@ -137,6 +139,8 @@ func (b *Bus) SendTP(ctx context.Context, f Frame, cfg TPConfig) error {
 // A background goroutine listens for TP.CM_BAM (0xEC00) and TP.DT (0xEB00)
 // frames and reassembles them. The goroutine exits when ctx is done or the
 // underlying bus is closed.
+//
+//fusa:req REQ-J1939-008
 func (b *Bus) SubscribeTP(ctx context.Context, pgns ...PGN) (<-chan Frame, error) {
 	// Subscribe to all frames; we filter for TP PGNs in the goroutine.
 	raw, err := b.can.Subscribe(nil)
