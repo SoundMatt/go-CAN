@@ -57,32 +57,32 @@ const (
 type SessionType byte
 
 const (
-	SessionDefault    SessionType = 0x01
+	SessionDefault     SessionType = 0x01
 	SessionProgramming SessionType = 0x02
-	SessionExtended   SessionType = 0x03
+	SessionExtended    SessionType = 0x03
 )
 
 // ResetType specifies the ECU reset mode.
 type ResetType byte
 
 const (
-	ResetHard    ResetType = 0x01
-	ResetKeyOff  ResetType = 0x02
-	ResetSoft    ResetType = 0x03
+	ResetHard   ResetType = 0x01
+	ResetKeyOff ResetType = 0x02
+	ResetSoft   ResetType = 0x03
 )
 
 // NRC (Negative Response Code) values from ISO 14229-1 Table A-1.
 const (
-	NRCGeneralReject                    byte = 0x10
-	NRCServiceNotSupported              byte = 0x11
-	NRCSubFunctionNotSupported          byte = 0x12
-	NRCIncorrectMessageLengthOrFormat   byte = 0x13
-	NRCConditionsNotCorrect             byte = 0x22
-	NRCRequestSequenceError             byte = 0x24
-	NRCRequestOutOfRange                byte = 0x31
-	NRCSecurityAccessDenied             byte = 0x33
-	NRCUploadDownloadNotAccepted        byte = 0x70
-	NRCResponsePending                  byte = 0x78
+	NRCGeneralReject                  byte = 0x10
+	NRCServiceNotSupported            byte = 0x11
+	NRCSubFunctionNotSupported        byte = 0x12
+	NRCIncorrectMessageLengthOrFormat byte = 0x13
+	NRCConditionsNotCorrect           byte = 0x22
+	NRCRequestSequenceError           byte = 0x24
+	NRCRequestOutOfRange              byte = 0x31
+	NRCSecurityAccessDenied           byte = 0x33
+	NRCUploadDownloadNotAccepted      byte = 0x70
+	NRCResponsePending                byte = 0x78
 )
 
 // NegativeResponseError is returned when the ECU sends a negative response.

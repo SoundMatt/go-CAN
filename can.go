@@ -46,9 +46,9 @@ const (
 	CANMaxExtID     = 0x1FFFFFFF
 
 	// CAN XL (ISO 11898-1:2024) limits.
-	CANXLMinDataLen = 1      // XL frames carry at least 1 data byte
-	CANXLMaxDataLen = 2048   // XL frames carry up to 2048 data bytes
-	CANXLMaxPrioID  = 0x7FF  // XL uses an 11-bit Priority ID
+	CANXLMinDataLen = 1     // XL frames carry at least 1 data byte
+	CANXLMaxDataLen = 2048  // XL frames carry up to 2048 data bytes
+	CANXLMaxPrioID  = 0x7FF // XL uses an 11-bit Priority ID
 )
 
 // Error sentinels — aliases for relay errors so errors.Is(err, can.ErrClosed) works.

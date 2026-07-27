@@ -10,7 +10,6 @@ package can
 import (
 	"context"
 	"strconv"
-	"sync/atomic"
 	"time"
 
 	relay "github.com/SoundMatt/RELAY"
@@ -111,7 +110,6 @@ func Adapt(bus Bus) relay.Node {
 
 type canAdapter struct {
 	bus Bus
-	seq uint64
 }
 
 func (a *canAdapter) Protocol() relay.Protocol { return relay.CAN }
@@ -133,9 +131,11 @@ func (a *canAdapter) Subscribe(opts ...relay.SubscriberOption) (<-chan relay.Mes
 	}
 	go func() {
 		defer close(out)
+		var seq uint64 // local to this call; each Subscribe() owns its own counter (RELAY spec §10.5 rule 7)
 		for f := range frames {
 			msg := f.ToMessage()
-			msg.Seq = atomic.AddUint64(&a.seq, 1)
+			seq++
+			msg.Seq = seq
 			switch cfg.BackPressure {
 			case relay.DropNewest:
 				select {

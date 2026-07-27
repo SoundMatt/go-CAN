@@ -27,8 +27,8 @@ import (
 	"net"
 	"sync"
 
-	can "github.com/SoundMatt/go-CAN"
 	relay "github.com/SoundMatt/RELAY"
+	can "github.com/SoundMatt/go-CAN"
 	"golang.org/x/sys/unix"
 )
 
@@ -222,10 +222,10 @@ func decodeFrame(raw []byte) can.Frame {
 		data := make([]byte, dataLen)
 		copy(data, raw[8:8+dataLen])
 		return can.Frame{
-			ID:  id,
-			Ext: ext,
-			FD:  true,
-			BRS: flags&canFDBRSFlag != 0,
+			ID:   id,
+			Ext:  ext,
+			FD:   true,
+			BRS:  flags&canFDBRSFlag != 0,
 			Data: data,
 		}
 	}

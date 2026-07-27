@@ -24,8 +24,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	can "github.com/SoundMatt/go-CAN"
 	relay "github.com/SoundMatt/RELAY"
+	can "github.com/SoundMatt/go-CAN"
 )
 
 const defaultChanSize = 64

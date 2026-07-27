@@ -129,6 +129,75 @@ func TestAdapt(t *testing.T) {
 	}
 }
 
+// TestAdaptSubscribeIndependentSeq guards against a shared Seq counter across
+// Subscribe() calls (RELAY spec §10.5 rule 7): each subscription must start
+// its own counter at 0, so the first message on any Subscribe() channel has
+// Seq == 1 regardless of how many other subscriptions are already running.
+func TestAdaptSubscribeIndependentSeq(t *testing.T) {
+	b, _ := virtual.New()
+	defer b.Close()
+
+	node := can.Adapt(b)
+
+	ch1, err := node.Subscribe()
+	if err != nil {
+		t.Fatalf("Subscribe (1st): %v", err)
+	}
+
+	// Send a few frames so the first subscription's counter advances
+	// before the second subscription is created.
+	for i := 0; i < 3; i++ {
+		msg := can.Frame{ID: 0x100, Data: []byte{byte(i)}}.ToMessage()
+		if err := node.Send(context.Background(), msg); err != nil {
+			t.Fatalf("Send: %v", err)
+		}
+		select {
+		case <-ch1:
+		case <-time.After(time.Second):
+			t.Fatal("timeout draining ch1")
+		}
+	}
+
+	ch2, err := node.Subscribe()
+	if err != nil {
+		t.Fatalf("Subscribe (2nd): %v", err)
+	}
+
+	msg := can.Frame{ID: 0x200, Data: []byte{0xFF}}.ToMessage()
+	if err := node.Send(context.Background(), msg); err != nil {
+		t.Fatalf("Send: %v", err)
+	}
+
+	select {
+	case got, ok := <-ch2:
+		if !ok {
+			t.Fatal("ch2 closed unexpectedly")
+		}
+		if got.Seq != 1 {
+			t.Errorf("2nd Subscribe() first message Seq = %d, want 1 (counters must not be shared across Subscribe() calls)", got.Seq)
+		}
+	case <-time.After(time.Second):
+		t.Fatal("timeout waiting for relay.Message on ch2")
+	}
+
+	// ch1's counter should have kept advancing independently and now be at 4.
+	msg2 := can.Frame{ID: 0x100, Data: []byte{0x99}}.ToMessage()
+	if err := node.Send(context.Background(), msg2); err != nil {
+		t.Fatalf("Send: %v", err)
+	}
+	select {
+	case got, ok := <-ch1:
+		if !ok {
+			t.Fatal("ch1 closed unexpectedly")
+		}
+		if got.Seq != 4 {
+			t.Errorf("1st Subscribe() 4th message Seq = %d, want 4", got.Seq)
+		}
+	case <-time.After(time.Second):
+		t.Fatal("timeout waiting for relay.Message on ch1")
+	}
+}
+
 func TestAdaptSendInvalidMessage(t *testing.T) {
 	b, _ := virtual.New()
 	defer b.Close()
