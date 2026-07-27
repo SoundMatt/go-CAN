@@ -8,7 +8,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-        "line": 71,
+        "line": 70,
         "column": 17
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -19,7 +19,7 @@
       "message": "uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-        "line": 94,
+        "line": 93,
         "column": 11
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -30,7 +30,7 @@
       "message": "uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-        "line": 97,
+        "line": 96,
         "column": 12
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -41,8 +41,19 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-        "line": 100,
+        "line": 99,
         "column": 10
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/adapt_test.go",
+        "line": 150,
+        "column": 44
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
     },
@@ -52,7 +63,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
-        "line": 192,
+        "line": 196,
         "column": 21
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"

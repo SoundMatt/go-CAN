@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-06-19T17:50:48.611263415Z",
+  "generatedAt": "2026-07-27T16:15:46.171262999Z",
   "projectRoot": "/home/runner/work/go-CAN/go-CAN",
   "standard": "iso26262",
   "asil": "ASIL-B",
@@ -240,9 +240,9 @@
       "message": "fmt.Errorf format string \"usage: go-can send \u003ciface\u003e \u003chex-id\u003e[#\u003chex-data\u003e]  |  go-can send [--iface X] --format json\" does not wrap error with %w",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 167,
+        "line": 171,
         "column": 10,
-        "endLine": 167,
+        "endLine": 171,
         "endColumn": 114
       },
       "category": "safety",
@@ -255,9 +255,9 @@
       "message": "fmt.Errorf format string \"usage: go-can dump \u003ciface\u003e\" does not wrap error with %w",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 202,
+        "line": 206,
         "column": 10,
-        "endLine": 202,
+        "endLine": 206,
         "endColumn": 50
       },
       "category": "safety",
@@ -270,9 +270,9 @@
       "message": "fmt.Errorf format string \"usage: cantool record \u003ciface\u003e [output-file]\" does not wrap error with %w",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 237,
+        "line": 241,
         "column": 10,
-        "endLine": 237,
+        "endLine": 241,
         "endColumn": 67
       },
       "category": "safety",
@@ -285,9 +285,9 @@
       "message": "fmt.Errorf format string \"usage: cantool replay \u003ciface\u003e \u003clog-file\u003e [--speed N]\" does not wrap error with %w",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 272,
+        "line": 276,
         "column": 10,
-        "endLine": 272,
+        "endLine": 276,
         "endColumn": 76
       },
       "category": "safety",
@@ -300,9 +300,9 @@
       "message": "fmt.Errorf format string \"subscribe: --iface requires a value\" does not wrap error with %w",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 365,
+        "line": 369,
         "column": 12,
-        "endLine": 365,
+        "endLine": 369,
         "endColumn": 61
       },
       "category": "safety",
@@ -315,9 +315,9 @@
       "message": "fmt.Errorf format string \"subscribe: --format requires a value\" does not wrap error with %w",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 371,
+        "line": 375,
         "column": 12,
-        "endLine": 371,
+        "endLine": 375,
         "endColumn": 62
       },
       "category": "safety",
@@ -330,9 +330,9 @@
       "message": "fmt.Errorf format string \"subscribe: --count requires a value\" does not wrap error with %w",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 377,
+        "line": 381,
         "column": 12,
-        "endLine": 377,
+        "endLine": 381,
         "endColumn": 61
       },
       "category": "safety",
@@ -345,9 +345,9 @@
       "message": "fmt.Errorf format string \"subscribe: unknown argument %q\" does not wrap error with %w",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 386,
+        "line": 390,
         "column": 11,
-        "endLine": 386,
+        "endLine": 390,
         "endColumn": 64
       },
       "category": "safety",
@@ -360,9 +360,9 @@
       "message": "fmt.Errorf format string \"subscribe: only --format json is supported (got %q)\" does not wrap error with %w",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 390,
+        "line": 394,
         "column": 10,
-        "endLine": 390,
+        "endLine": 394,
         "endColumn": 83
       },
       "category": "safety",
@@ -840,9 +840,9 @@
       "message": "value \"b\" from function call used before checking err — potential nil dereference",
       "location": {
         "file": "adapt_test.go",
-        "line": 133,
+        "line": 137,
         "column": 2,
-        "endLine": 133,
+        "endLine": 137,
         "endColumn": 23
       },
       "category": "safety",
@@ -855,9 +855,9 @@
       "message": "value \"b\" from function call used before checking err — potential nil dereference",
       "location": {
         "file": "adapt_test.go",
-        "line": 177,
+        "line": 202,
         "column": 2,
-        "endLine": 177,
+        "endLine": 202,
         "endColumn": 23
       },
       "category": "safety",
@@ -870,9 +870,9 @@
       "message": "value \"b\" from function call used before checking err — potential nil dereference",
       "location": {
         "file": "adapt_test.go",
-        "line": 210,
+        "line": 246,
         "column": 2,
-        "endLine": 210,
+        "endLine": 246,
         "endColumn": 23
       },
       "category": "safety",
@@ -885,9 +885,24 @@
       "message": "value \"b\" from function call used before checking err — potential nil dereference",
       "location": {
         "file": "adapt_test.go",
-        "line": 219,
+        "line": 279,
         "column": 2,
-        "endLine": 219,
+        "endLine": 279,
+        "endColumn": 23
+      },
+      "category": "safety",
+      "remediation": "check err != nil before using the returned value",
+      "fingerprint": "sha256:fdc9a67d5a26751cdebe52852c91ca412ad287e2037c75f15eb8f02758ffe4ff"
+    },
+    {
+      "ruleId": "ANA007",
+      "severity": "WARNING",
+      "message": "value \"b\" from function call used before checking err — potential nil dereference",
+      "location": {
+        "file": "adapt_test.go",
+        "line": 288,
+        "column": 2,
+        "endLine": 288,
         "endColumn": 23
       },
       "category": "safety",
@@ -1691,7 +1706,7 @@
       "message": "function FromMessage has cyclomatic complexity 12 (threshold 10) — DO-178C §6.3.4",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-        "line": 66
+        "line": 65
       },
       "category": "other",
       "remediation": "refactor FromMessage to reduce branching; consider extracting helper functions",
@@ -1727,7 +1742,7 @@
       "message": "function cmdSubscribe has cyclomatic complexity 11 (threshold 10) — DO-178C §6.3.4",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
-        "line": 357
+        "line": 361
       },
       "category": "other",
       "remediation": "refactor cmdSubscribe to reduce branching; consider extracting helper functions",
@@ -1739,7 +1754,7 @@
       "message": "function runConvert has cyclomatic complexity 12 (threshold 10) — DO-178C §6.3.4",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
-        "line": 442
+        "line": 446
       },
       "category": "other",
       "remediation": "refactor runConvert to reduce branching; consider extracting helper functions",
@@ -1955,7 +1970,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-        "line": 71,
+        "line": 70,
         "column": 17
       },
       "category": "security",
@@ -1968,7 +1983,7 @@
       "message": "uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-        "line": 94,
+        "line": 93,
         "column": 11
       },
       "category": "security",
@@ -1981,7 +1996,7 @@
       "message": "uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-        "line": 97,
+        "line": 96,
         "column": 12
       },
       "category": "security",
@@ -1994,7 +2009,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-        "line": 100,
+        "line": 99,
         "column": 10
       },
       "category": "security",
@@ -2004,10 +2019,23 @@
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/adapt_test.go",
+        "line": 150,
+        "column": 44
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:566b07d3565582ceabb000e0032b6073062f24eb31fad06323fed5d2b0bd7b74"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
-        "line": 192,
+        "line": 196,
         "column": 21
       },
       "category": "security",
@@ -3051,9 +3079,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "adapt_test.go",
-        "line": 133,
+        "line": 137,
         "column": 2,
-        "endLine": 133,
+        "endLine": 137,
         "endColumn": 23
       },
       "category": "lint",
@@ -3066,9 +3094,24 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "adapt_test.go",
-        "line": 146,
+        "line": 202,
+        "column": 2,
+        "endLine": 202,
+        "endColumn": 23
+      },
+      "category": "lint",
+      "remediation": "assign all return values to named variables and handle each explicitly",
+      "fingerprint": "sha256:482e28dc9a66598e39fbb7d30ce675397107ade150d887014470c656a42dc4a7"
+    },
+    {
+      "ruleId": "LINT001",
+      "severity": "WARNING",
+      "message": "return value discarded with blank identifier in multi-value call",
+      "location": {
+        "file": "adapt_test.go",
+        "line": 215,
         "column": 3,
-        "endLine": 146,
+        "endLine": 215,
         "endColumn": 24
       },
       "category": "lint",
@@ -3081,9 +3124,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "adapt_test.go",
-        "line": 177,
+        "line": 246,
         "column": 2,
-        "endLine": 177,
+        "endLine": 246,
         "endColumn": 23
       },
       "category": "lint",
@@ -3096,9 +3139,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "adapt_test.go",
-        "line": 180,
+        "line": 249,
         "column": 5,
-        "endLine": 180,
+        "endLine": 249,
         "endColumn": 31
       },
       "category": "lint",
@@ -3111,9 +3154,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "adapt_test.go",
-        "line": 210,
+        "line": 279,
         "column": 2,
-        "endLine": 210,
+        "endLine": 279,
         "endColumn": 23
       },
       "category": "lint",
@@ -3126,9 +3169,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "adapt_test.go",
-        "line": 219,
+        "line": 288,
         "column": 2,
-        "endLine": 219,
+        "endLine": 288,
         "endColumn": 23
       },
       "category": "lint",
@@ -3141,9 +3184,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "adapt_test.go",
-        "line": 227,
+        "line": 296,
         "column": 2,
-        "endLine": 227,
+        "endLine": 296,
         "endColumn": 27
       },
       "category": "lint",
@@ -3216,9 +3259,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "cmd/cantool/main.go",
-        "line": 172,
+        "line": 176,
         "column": 2,
-        "endLine": 172,
+        "endLine": 176,
         "endColumn": 49
       },
       "category": "lint",
@@ -4940,19 +4983,19 @@
     }
   ],
   "summary": {
-    "total": 345,
+    "total": 348,
     "errors": 0,
-    "warnings": 212,
-    "infos": 133
+    "warnings": 214,
+    "infos": 134
   },
   "summaryTable": {
     "by_category": [
       {
         "category": "ANA",
         "errors": 0,
-        "warnings": 72,
+        "warnings": 73,
         "infos": 39,
-        "total": 111
+        "total": 112
       },
       {
         "category": "AUDITPACK",
@@ -4979,15 +5022,15 @@
         "category": "CYBER",
         "errors": 0,
         "warnings": 2,
-        "infos": 80,
-        "total": 82
+        "infos": 81,
+        "total": 83
       },
       {
         "category": "LINT",
         "errors": 0,
-        "warnings": 121,
+        "warnings": 122,
         "infos": 5,
-        "total": 126
+        "total": 127
       },
       {
         "category": "QUALIFY",
@@ -5008,17 +5051,17 @@
       {
         "ruleId": "LINT001",
         "severity": "WARNING",
-        "count": 121
+        "count": 122
       },
       {
         "ruleId": "CYBER009",
         "severity": "INFO",
-        "count": 80
+        "count": 81
       },
       {
         "ruleId": "ANA007",
         "severity": "WARNING",
-        "count": 57
+        "count": 58
       },
       {
         "ruleId": "ANA006",
@@ -5086,6 +5129,6 @@
         "count": 1
       }
     ],
-    "file_count": 54
+    "file_count": 55
   }
 }
