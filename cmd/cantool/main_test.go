@@ -239,11 +239,11 @@ func TestRunConvertMalformedJSON(t *testing.T) {
 
 func TestRunConvertArgErrors(t *testing.T) {
 	cases := [][]string{
-		{"--protocol", "DDS"},   // wrong protocol
-		{"--protocol"},          // missing value
+		{"--protocol", "DDS"},                     // wrong protocol
+		{"--protocol"},                            // missing value
 		{"--format", "yaml", "--protocol", "CAN"}, // unsupported format
-		{"--bogus"},             // unknown arg
-		{},                      // missing protocol
+		{"--bogus"},                               // unknown arg
+		{},                                        // missing protocol
 	}
 	for _, args := range cases {
 		var out, errb strings.Builder

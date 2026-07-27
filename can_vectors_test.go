@@ -11,8 +11,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	can "github.com/SoundMatt/go-CAN"
 	relay "github.com/SoundMatt/RELAY"
+	can "github.com/SoundMatt/go-CAN"
 )
 
 // These tests verify go-CAN against the RELAY canonical golden reference

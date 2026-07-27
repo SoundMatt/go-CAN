@@ -19,7 +19,7 @@ The `can.Bus` interface is stable. Implementations are swappable without changin
 | `isotp` | ISO 15765-2 (ISO-TP) multi-frame transport. | Nothing |
 | `j1939` | SAE J1939 — 29-bit extended ID, PGN addressing, J1939 Bus. | Nothing |
 | `safety` | E2E protection header — DataID, SourceID, SequenceCounter, CRC-16. | Nothing |
-| `cmd/cantool` | CLI tool: `send`, `dump` subcommands. | Nothing |
+| `cmd/cantool` | CLI tool: `version`, `capabilities`, `status`, `send`, `subscribe`, `dump`, `record`, `replay`, `convert` subcommands. | Nothing |
 
 ## Install
 
@@ -38,7 +38,7 @@ import (
 bus, _ := virtual.New()
 defer bus.Close()
 
-ch, _ := bus.Subscribe(can.Filter{ID: 0x100, Mask: 0x7FF})
+ch, _ := bus.Subscribe([]can.Filter{{ID: 0x100, Mask: 0x7FF}})
 bus.Send(context.Background(), can.Frame{ID: 0x100, Data: []byte{0xDE, 0xAD, 0xBE, 0xEF}})
 
 frame := <-ch

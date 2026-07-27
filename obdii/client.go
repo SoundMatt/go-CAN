@@ -29,45 +29,45 @@ import (
 
 // Service identifiers (OBD-II modes).
 const (
-	ModeCurrentData       = 0x01 // show current data
-	ModeFreezeDTC         = 0x02 // show freeze frame data
-	ModeStoredDTC         = 0x03 // show stored diagnostic trouble codes
-	ModeClearDTC          = 0x04 // clear DTCs and stored values
-	ModeTestResults       = 0x05 // oxygen sensor monitor test results
-	ModeOnboardMonitor    = 0x06 // on-board monitoring test results
-	ModePendingDTC        = 0x07 // show pending diagnostic trouble codes
-	ModeControlOperation  = 0x08 // control operation of on-board system
-	ModeVehicleInfo       = 0x09 // request vehicle information
-	ModePermDTC           = 0x0A // permanent / confirmed DTCs
+	ModeCurrentData      = 0x01 // show current data
+	ModeFreezeDTC        = 0x02 // show freeze frame data
+	ModeStoredDTC        = 0x03 // show stored diagnostic trouble codes
+	ModeClearDTC         = 0x04 // clear DTCs and stored values
+	ModeTestResults      = 0x05 // oxygen sensor monitor test results
+	ModeOnboardMonitor   = 0x06 // on-board monitoring test results
+	ModePendingDTC       = 0x07 // show pending diagnostic trouble codes
+	ModeControlOperation = 0x08 // control operation of on-board system
+	ModeVehicleInfo      = 0x09 // request vehicle information
+	ModePermDTC          = 0x0A // permanent / confirmed DTCs
 )
 
 // Standard Mode 01 PIDs (partial list).
 const (
-	PIDMonitorStatus         = 0x01 // monitor status since DTCs cleared
-	PIDFuelSystemStatus      = 0x03 // fuel system status
-	PIDEngineLoad            = 0x04 // calculated engine load (%)
-	PIDCoolantTemp           = 0x05 // engine coolant temperature (°C)
-	PIDBankFuelTrim1Short    = 0x06 // short-term fuel trim bank 1 (%)
-	PIDBankFuelTrim1Long     = 0x07 // long-term fuel trim bank 1 (%)
+	PIDMonitorStatus          = 0x01 // monitor status since DTCs cleared
+	PIDFuelSystemStatus       = 0x03 // fuel system status
+	PIDEngineLoad             = 0x04 // calculated engine load (%)
+	PIDCoolantTemp            = 0x05 // engine coolant temperature (°C)
+	PIDBankFuelTrim1Short     = 0x06 // short-term fuel trim bank 1 (%)
+	PIDBankFuelTrim1Long      = 0x07 // long-term fuel trim bank 1 (%)
 	PIDIntakeManifoldPressure = 0x0B // intake manifold absolute pressure (kPa)
-	PIDEngineRPM             = 0x0C // engine speed (rpm)
-	PIDVehicleSpeed          = 0x0D // vehicle speed (km/h)
-	PIDTimingAdvance         = 0x0E // timing advance (°)
-	PIDIntakeAirTemp         = 0x0F // intake air temperature (°C)
-	PIDMAF                   = 0x10 // MAF air flow rate (g/s)
-	PIDThrottlePosition      = 0x11 // throttle position (%)
-	PIDOBDStandards          = 0x1C // OBD standards this vehicle conforms to
-	PIDRuntimeSinceStart     = 0x1F // run time since engine start (s)
-	PIDFuelTankLevel         = 0x2F // fuel tank input level (%)
-	PIDBarometricPressure    = 0x33 // barometric pressure (kPa)
-	PIDControlModuleVoltage  = 0x42 // control module voltage (V)
-	PIDAbsoluteLoad          = 0x43 // absolute load value (%)
-	PIDOBDFuelType           = 0x51 // fuel type
-	PIDAmbientAirTemp        = 0x46 // ambient air temperature (°C)
+	PIDEngineRPM              = 0x0C // engine speed (rpm)
+	PIDVehicleSpeed           = 0x0D // vehicle speed (km/h)
+	PIDTimingAdvance          = 0x0E // timing advance (°)
+	PIDIntakeAirTemp          = 0x0F // intake air temperature (°C)
+	PIDMAF                    = 0x10 // MAF air flow rate (g/s)
+	PIDThrottlePosition       = 0x11 // throttle position (%)
+	PIDOBDStandards           = 0x1C // OBD standards this vehicle conforms to
+	PIDRuntimeSinceStart      = 0x1F // run time since engine start (s)
+	PIDFuelTankLevel          = 0x2F // fuel tank input level (%)
+	PIDBarometricPressure     = 0x33 // barometric pressure (kPa)
+	PIDControlModuleVoltage   = 0x42 // control module voltage (V)
+	PIDAbsoluteLoad           = 0x43 // absolute load value (%)
+	PIDOBDFuelType            = 0x51 // fuel type
+	PIDAmbientAirTemp         = 0x46 // ambient air temperature (°C)
 
 	// Mode 09 PIDs
-	PIDVIN                   = 0x02 // vehicle identification number (17 chars)
-	PIDECUName               = 0x0A // ECU name (20 bytes)
+	PIDVIN     = 0x02 // vehicle identification number (17 chars)
+	PIDECUName = 0x0A // ECU name (20 bytes)
 )
 
 // Value holds a decoded OBD-II signal with its physical value and unit.

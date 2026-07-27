@@ -111,17 +111,21 @@ func cmdVersion(args []string) error {
 
 func cmdCapabilities() error {
 	cap := map[string]interface{}{
-		"kind":                "capabilities",
-		"tool":                "go-can",
-		"protocol":            "CAN",
-		"protocol_int":        1,
-		"version":             toolVersion,
-		"spec_version":        can.SpecVersion,
-		"commands":            []string{"version", "capabilities", "status", "send", "subscribe", "dump", "record", "replay", "convert"},
-		"transports":          []string{"socketcan", "virtual"},
-		"features":            []string{"fd", "xl", "isotp", "j1939"},
-		"interfaces":          []string{"Bus"},
-		"optional_interfaces": []string{},
+		"kind":         "capabilities",
+		"tool":         "go-can",
+		"protocol":     "CAN",
+		"protocol_int": 1,
+		"version":      toolVersion,
+		"spec_version": can.SpecVersion,
+		"commands":     []string{"version", "capabilities", "status", "send", "subscribe", "dump", "record", "replay", "convert"},
+		"transports":   []string{"socketcan", "virtual"},
+		"features":     []string{"fd", "xl"},
+		"interfaces":   []string{"Bus"},
+		// optional_interfaces reflects what the shipped virtual.Bus (the
+		// default transport, see openBus) implements — see
+		// virtual/bus.go's compile-time assertions. socketcan.Bus does not
+		// yet implement these optional interfaces.
+		"optional_interfaces": []string{"LoaningBus", "HealthProvider", "MetricsProvider", "Drainer"},
 		"adapt":               true,
 	}
 	return printJSON(cap)
