@@ -1,9 +1,10 @@
 %{init: {"theme": "default"}}%
 flowchart LR
     % Module: github.com/SoundMatt/go-CAN
-    % Generated: 2026-07-27T16:15:50Z
+    % Generated: 2026-07-28T01:28:58Z
 
     github_com_SoundMatt_go_CAN["can"]
+    github_com_SoundMatt_go_CAN_cmd_can_interop_peer["github.com/SoundMatt/go-CAN/cmd/can-interop-peer"]
     github_com_SoundMatt_go_CAN_cmd_cantool["github.com/SoundMatt/go-CAN/cmd/cantool"]
     github_com_SoundMatt_go_CAN_dbc["dbc"]
     github_com_SoundMatt_go_CAN_examples_quickstart["github.com/SoundMatt/go-CAN/examples/quickstart"]
@@ -19,6 +20,8 @@ flowchart LR
     github_com_SoundMatt_go_CAN_uds["uds"]
     github_com_SoundMatt_go_CAN_virtual["virtual"]
 
+    github_com_SoundMatt_go_CAN_cmd_can_interop_peer --> github_com_SoundMatt_go_CAN
+    github_com_SoundMatt_go_CAN_cmd_can_interop_peer --> github_com_SoundMatt_go_CAN_socketcan
     github_com_SoundMatt_go_CAN_cmd_cantool --> github_com_SoundMatt_go_CAN
     github_com_SoundMatt_go_CAN_cmd_cantool --> github_com_SoundMatt_go_CAN_recorder
     github_com_SoundMatt_go_CAN_cmd_cantool --> github_com_SoundMatt_go_CAN_socketcan

@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.30.0",
   "language": "go",
-  "generatedAt": "2026-07-27T16:15:46.171262999Z",
+  "generatedAt": "2026-07-28T01:28:51.620816993Z",
   "projectRoot": "/home/runner/work/go-CAN/go-CAN",
   "standard": "iso26262",
   "asil": "ASIL-B",
@@ -143,6 +143,51 @@
       "category": "safety",
       "remediation": "pass a context.Context or done \u003c-chan struct{} parameter to allow cancellation",
       "fingerprint": "sha256:26b3e2604d2c7ef3770da7a0ea9c2a678715b3b17c9e380add8f606258d6268c"
+    },
+    {
+      "ruleId": "ANA001",
+      "severity": "WARNING",
+      "message": "goroutine launched without visible termination signal",
+      "location": {
+        "file": "socketcan/interop_helpers_linux_test.go",
+        "line": 156,
+        "column": 2,
+        "endLine": 160,
+        "endColumn": 5
+      },
+      "category": "safety",
+      "remediation": "pass a context.Context or done \u003c-chan struct{} parameter to allow cancellation",
+      "fingerprint": "sha256:09ea2b300dd32c5dc72ac517b8a7eca67f0e40731aec0da2aed33ce4067179a6"
+    },
+    {
+      "ruleId": "ANA001",
+      "severity": "WARNING",
+      "message": "goroutine launched without visible termination signal",
+      "location": {
+        "file": "socketcan/interop_helpers_linux_test.go",
+        "line": 161,
+        "column": 2,
+        "endLine": 171,
+        "endColumn": 5
+      },
+      "category": "safety",
+      "remediation": "pass a context.Context or done \u003c-chan struct{} parameter to allow cancellation",
+      "fingerprint": "sha256:09ea2b300dd32c5dc72ac517b8a7eca67f0e40731aec0da2aed33ce4067179a6"
+    },
+    {
+      "ruleId": "ANA001",
+      "severity": "WARNING",
+      "message": "goroutine launched without visible termination signal",
+      "location": {
+        "file": "socketcan/interop_helpers_linux_test.go",
+        "line": 173,
+        "column": 2,
+        "endLine": 183,
+        "endColumn": 5
+      },
+      "category": "safety",
+      "remediation": "pass a context.Context or done \u003c-chan struct{} parameter to allow cancellation",
+      "fingerprint": "sha256:09ea2b300dd32c5dc72ac517b8a7eca67f0e40731aec0da2aed33ce4067179a6"
     },
     {
       "ruleId": "ANA001",
@@ -743,6 +788,81 @@
       "category": "safety",
       "remediation": "add %w to the format string to preserve the error chain for errors.Is/As",
       "fingerprint": "sha256:59682ddb6d3560ee829334bedbf4fe2eded518bfaa75086552de7e2a33a8a948"
+    },
+    {
+      "ruleId": "ANA006",
+      "severity": "INFO",
+      "message": "fmt.Errorf format string \"unexpected candump line (want '(ts) iface frame'): %q\" does not wrap error with %w",
+      "location": {
+        "file": "socketcan/interop_canutils_linux_test.go",
+        "line": 238,
+        "column": 16,
+        "endLine": 238,
+        "endColumn": 89
+      },
+      "category": "safety",
+      "remediation": "add %w to the format string to preserve the error chain for errors.Is/As",
+      "fingerprint": "sha256:6aff691eb5cb0f1195f1176ddf2081733d7a09f6c32cc5d0bc75bcc21a1cabb8"
+    },
+    {
+      "ruleId": "ANA006",
+      "severity": "INFO",
+      "message": "fmt.Errorf format string \"no '#' in candump frame field: %q (line: %q)\" does not wrap error with %w",
+      "location": {
+        "file": "socketcan/interop_canutils_linux_test.go",
+        "line": 244,
+        "column": 16,
+        "endLine": 244,
+        "endColumn": 92
+      },
+      "category": "safety",
+      "remediation": "add %w to the format string to preserve the error chain for errors.Is/As",
+      "fingerprint": "sha256:37dda454d1ddb06e1bbe8651fa3c1f8bb4812cb65c617e3eddd02722e5e05a5b"
+    },
+    {
+      "ruleId": "ANA006",
+      "severity": "INFO",
+      "message": "fmt.Errorf format string \"unexpected CAN ID field width %d in %q (line: %q)\" does not wrap error with %w",
+      "location": {
+        "file": "socketcan/interop_canutils_linux_test.go",
+        "line": 256,
+        "column": 16,
+        "endLine": 256,
+        "endColumn": 109
+      },
+      "category": "safety",
+      "remediation": "add %w to the format string to preserve the error chain for errors.Is/As",
+      "fingerprint": "sha256:90d116392c77d52ca8842f48675b7b95b3c4a1803d82d69c9ffb545e88b093e4"
+    },
+    {
+      "ruleId": "ANA006",
+      "severity": "INFO",
+      "message": "fmt.Errorf format string \"CAN FD frame missing flags digit: %q (line: %q)\" does not wrap error with %w",
+      "location": {
+        "file": "socketcan/interop_canutils_linux_test.go",
+        "line": 270,
+        "column": 17,
+        "endLine": 270,
+        "endColumn": 96
+      },
+      "category": "safety",
+      "remediation": "add %w to the format string to preserve the error chain for errors.Is/As",
+      "fingerprint": "sha256:e6fd367e5c4631247594f97e4d85570a8637789e8a8a5cd9c2ea3cff7b5427a0"
+    },
+    {
+      "ruleId": "ANA006",
+      "severity": "INFO",
+      "message": "fmt.Errorf format string \"peer produced no stdout\" does not wrap error with %w",
+      "location": {
+        "file": "socketcan/interop_helpers_linux_test.go",
+        "line": 110,
+        "column": 15,
+        "endLine": 110,
+        "endColumn": 52
+      },
+      "category": "safety",
+      "remediation": "add %w to the format string to preserve the error chain for errors.Is/As",
+      "fingerprint": "sha256:bdede1a5d445e2aafd83f4efe5f25fbda2bc2876d64ca9a67eabf6f20f254864"
     },
     {
       "ruleId": "ANA006",
@@ -1407,6 +1527,21 @@
     {
       "ruleId": "ANA007",
       "severity": "WARNING",
+      "message": "value \"data\" from function call used before checking err — potential nil dereference",
+      "location": {
+        "file": "socketcan/interop_helpers_linux_test.go",
+        "line": 158,
+        "column": 3,
+        "endLine": 158,
+        "endColumn": 36
+      },
+      "category": "safety",
+      "remediation": "check err != nil before using the returned value",
+      "fingerprint": "sha256:a2c7f0a0aae5260ea3e82a89e3d3a0750954b366bdf0947c007941bbf164c584"
+    },
+    {
+      "ruleId": "ANA007",
+      "severity": "WARNING",
       "message": "value \"b\" from function call used before checking err — potential nil dereference",
       "location": {
         "file": "uds/client_test.go",
@@ -1965,6 +2100,32 @@
       "fingerprint": "sha256:0d36f99d29673aa93f96eb78c25d81a65e70c34cde8db8c1622130a9092750da"
     },
     {
+      "ruleId": "CYBER005",
+      "severity": "WARNING",
+      "message": "exec.Command called with a non-literal command name — verify the value cannot be influenced by untrusted input",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_canutils_linux_test.go",
+        "line": 207,
+        "column": 14
+      },
+      "category": "security",
+      "remediation": "use a fixed command name string literal; pass variable data only as arguments, never as the command name",
+      "fingerprint": "sha256:826fb4d834af8d198f9a563aca16460b3c45b82fc98c18905e62412596c85089"
+    },
+    {
+      "ruleId": "CYBER005",
+      "severity": "WARNING",
+      "message": "exec.Command called with a non-literal command name — verify the value cannot be influenced by untrusted input",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_helpers_linux_test.go",
+        "line": 138,
+        "column": 9
+      },
+      "category": "security",
+      "remediation": "use a fixed command name string literal; pass variable data only as arguments, never as the command name",
+      "fingerprint": "sha256:9ba90d9e6073996679da4d1c7a808b7ce048cf4ef0d56d409cea8b1347bd8947"
+    },
+    {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -2028,6 +2189,19 @@
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
       "fingerprint": "sha256:566b07d3565582ceabb000e0032b6073062f24eb31fad06323fed5d2b0bd7b74"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/cmd/can-interop-peer/main.go",
+        "line": 155,
+        "column": 10
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:3c45eeb39fcaeed7ffeb22f145a6fa4ff9eed50bacdf0bc0cefdfe159daf3233"
     },
     {
       "ruleId": "CYBER009",
@@ -2886,6 +3060,19 @@
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
       "fingerprint": "sha256:4d23cafd260f930632761a4542c9f59b656f663f3aeabb1eb492487a2a4e77c5"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_canutils_linux_test.go",
+        "line": 262,
+        "column": 10
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:f00268514b3672a3477de15e39dae9cf0eb5f2b69a2c3450734756669184a4f9"
     },
     {
       "ruleId": "CYBER009",
@@ -4458,6 +4645,36 @@
       "severity": "WARNING",
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
+        "file": "socketcan/interop_helpers_linux_test.go",
+        "line": 80,
+        "column": 6,
+        "endLine": 80,
+        "endColumn": 34
+      },
+      "category": "lint",
+      "remediation": "assign all return values to named variables and handle each explicitly",
+      "fingerprint": "sha256:175a483795b22b6e099d47e8e75311db38831094547fc0f8ecd72b34231c6995"
+    },
+    {
+      "ruleId": "LINT001",
+      "severity": "WARNING",
+      "message": "return value discarded with blank identifier in multi-value call",
+      "location": {
+        "file": "socketcan/interop_helpers_linux_test.go",
+        "line": 158,
+        "column": 3,
+        "endLine": 158,
+        "endColumn": 36
+      },
+      "category": "lint",
+      "remediation": "assign all return values to named variables and handle each explicitly",
+      "fingerprint": "sha256:175a483795b22b6e099d47e8e75311db38831094547fc0f8ecd72b34231c6995"
+    },
+    {
+      "ruleId": "LINT001",
+      "severity": "WARNING",
+      "message": "return value discarded with blank identifier in multi-value call",
+      "location": {
         "file": "uds/client_test.go",
         "line": 52,
         "column": 2,
@@ -4936,6 +5153,21 @@
     {
       "ruleId": "LINT006",
       "severity": "INFO",
+      "message": "package-level var peerBinPath introduces global mutable state",
+      "location": {
+        "file": "socketcan/interop_helpers_linux_test.go",
+        "line": 27,
+        "column": 5,
+        "endLine": 27,
+        "endColumn": 23
+      },
+      "category": "lint",
+      "remediation": "prefer passing state explicitly; document justification for any global variable (registries, once-initialised singletons are acceptable)",
+      "fingerprint": "sha256:9737667a90a8312fe635fca691920e127a2bb685ba507d1d86a1d14d530ca0f0"
+    },
+    {
+      "ruleId": "LINT006",
+      "severity": "INFO",
       "message": "package-level var errClosed introduces global mutable state",
       "location": {
         "file": "virtual/bus.go",
@@ -4983,19 +5215,19 @@
     }
   ],
   "summary": {
-    "total": 348,
+    "total": 364,
     "errors": 0,
-    "warnings": 214,
-    "infos": 134
+    "warnings": 222,
+    "infos": 142
   },
   "summaryTable": {
     "by_category": [
       {
         "category": "ANA",
         "errors": 0,
-        "warnings": 73,
-        "infos": 39,
-        "total": 112
+        "warnings": 77,
+        "infos": 44,
+        "total": 121
       },
       {
         "category": "AUDITPACK",
@@ -5021,16 +5253,16 @@
       {
         "category": "CYBER",
         "errors": 0,
-        "warnings": 2,
-        "infos": 81,
-        "total": 83
+        "warnings": 4,
+        "infos": 83,
+        "total": 87
       },
       {
         "category": "LINT",
         "errors": 0,
-        "warnings": 122,
-        "infos": 5,
-        "total": 127
+        "warnings": 124,
+        "infos": 6,
+        "total": 130
       },
       {
         "category": "QUALIFY",
@@ -5051,22 +5283,22 @@
       {
         "ruleId": "LINT001",
         "severity": "WARNING",
-        "count": 122
+        "count": 124
       },
       {
         "ruleId": "CYBER009",
         "severity": "INFO",
-        "count": 81
+        "count": 83
       },
       {
         "ruleId": "ANA007",
         "severity": "WARNING",
-        "count": 58
+        "count": 59
       },
       {
         "ruleId": "ANA006",
         "severity": "INFO",
-        "count": 39
+        "count": 44
       },
       {
         "ruleId": "COMP001",
@@ -5076,12 +5308,12 @@
       {
         "ruleId": "ANA001",
         "severity": "WARNING",
-        "count": 10
+        "count": 13
       },
       {
         "ruleId": "LINT006",
         "severity": "INFO",
-        "count": 5
+        "count": 6
       },
       {
         "ruleId": "COUP001",
@@ -5095,6 +5327,11 @@
       },
       {
         "ruleId": "ANA002",
+        "severity": "WARNING",
+        "count": 2
+      },
+      {
+        "ruleId": "CYBER005",
         "severity": "WARNING",
         "count": 2
       },
@@ -5129,6 +5366,6 @@
         "count": 1
       }
     ],
-    "file_count": 55
+    "file_count": 60
   }
 }

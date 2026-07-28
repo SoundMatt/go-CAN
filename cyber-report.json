@@ -3,6 +3,28 @@
   "module": "github.com/SoundMatt/go-CAN",
   "findings": [
     {
+      "ruleId": "CYBER005",
+      "severity": "WARNING",
+      "message": "exec.Command called with a non-literal command name — verify the value cannot be influenced by untrusted input",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_canutils_linux_test.go",
+        "line": 207,
+        "column": 14
+      },
+      "remediation": "use a fixed command name string literal; pass variable data only as arguments, never as the command name"
+    },
+    {
+      "ruleId": "CYBER005",
+      "severity": "WARNING",
+      "message": "exec.Command called with a non-literal command name — verify the value cannot be influenced by untrusted input",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_helpers_linux_test.go",
+        "line": 138,
+        "column": 9
+      },
+      "remediation": "use a fixed command name string literal; pass variable data only as arguments, never as the command name"
+    },
+    {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -54,6 +76,17 @@
         "file": "/home/runner/work/go-CAN/go-CAN/adapt_test.go",
         "line": 150,
         "column": 44
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/cmd/can-interop-peer/main.go",
+        "line": 155,
+        "column": 10
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
     },
@@ -780,6 +813,17 @@
         "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux_test.go",
         "line": 128,
         "column": 16
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_canutils_linux_test.go",
+        "line": 262,
+        "column": 10
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
     },
