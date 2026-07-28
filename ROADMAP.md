@@ -122,6 +122,45 @@ protocol, with zero required dependencies in the core library.
 - Replay in real-time or at scaled rate
 - candump-compatible text format option
 
+### 19 — Interop Testing Infrastructure
+Real wire-level interop testing beyond in-process unit tests and RELAY's
+`relay conform`/`relay interop` (which only check the CLI's JSON output
+shape and RELAY-adapter equivalence — neither puts a frame on a real bus).
+CAN has no equivalent of a second independent network stack the way DDS has
+CycloneDDS to test against; the Linux kernel's own SocketCAN subsystem plus
+`can-utils` (`cangen`/`candump`) *is* the real wire and a genuinely
+independent (of go-CAN) validator, so that's the third-party oracle here.
+
+- **Two-process self-interop** — `cmd/can-interop-peer`, a standalone
+  SocketCAN participant process (not part of the public API or the
+  RELAY-conformant `cmd/cantool` CLI) driven entirely by the real,
+  production `socketcan.Bus`. `socketcan/interop_two_process_linux_test.go`
+  spawns two of these as genuinely separate OS processes bound to the same
+  real `vcan0` interface — one sending via `Bus.Send`, the other receiving
+  via `Bus.Subscribe` — and asserts field-exact correctness (ID, Ext, RTR,
+  FD, BRS, data) frame-for-frame. This is real kernel CAN traffic between
+  two processes, not two `Bus` values sharing memory in one process's test
+  binary (which `socketcan/bus_linux_test.go`'s existing
+  `TestSendReceive`/etc. already cover and cannot, by construction, prove
+  process-to-process interop).
+- **Third-party-peer interop (can-utils)** —
+  `socketcan/interop_canutils_linux_test.go` covers both directions:
+  `cangen` (deterministic fixed-value flags, never `-I r`/`-D r` random
+  modes, so each invocation's ground truth is exactly what this test told
+  it to generate) injects real frames onto `vcan0` that go-CAN's
+  `socketcan.Bus` receives and decodes; and go-CAN's own `Bus.Send` output
+  is captured independently by `candump -L` (log-file format on stdout,
+  the kernel-facing reference decoder) and checked byte-for-byte against
+  `candump.c`'s documented log-line format.
+- Both suites are gated behind `CAN_INTEROP_TESTS=1` (absent from the fast
+  default `go test ./...` sweep and from the existing `test-socketcan` CI
+  job) and run in a new `can-interop` CI job
+  (`.github/workflows/ci.yml`), ubuntu-only, which loads `vcan`, brings up
+  `vcan0`, and installs `can-utils` — probing all three first and skipping
+  the job cleanly (`::notice::`, exit 0) rather than hard-failing if any
+  of that setup does not succeed, the same posture the existing
+  `test-socketcan` job already uses for `vcan0` alone.
+
 ---
 
 ## Bridges
