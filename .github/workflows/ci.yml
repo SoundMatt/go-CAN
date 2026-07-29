@@ -104,6 +104,11 @@ jobs:
       - name: Load vcan module
         id: vcan
         run: |
+          uname -a
+          lsmod | grep -i vcan || echo "vcan not currently loaded"
+          find /lib/modules/$(uname -r) -iname 'vcan*' || echo "no vcan.ko found under /lib/modules"
+          sudo modprobe -v vcan
+          echo "modprobe exit=$?"
           if sudo modprobe vcan 2>/dev/null && \
              sudo ip link add dev vcan0 type vcan 2>/dev/null && \
              sudo ip link set up vcan0; then
