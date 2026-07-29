@@ -246,6 +246,53 @@ func TestRecvUnexpectedFrameType(t *testing.T) {
 	}
 }
 
+// TestRecvFirstFrameTruncatesToDeclaredLength verifies that Recv respects
+// the First Frame's declared FF_DL length even when the physical CAN frame
+// carries more bytes than that (e.g. padding). Extra bytes beyond FF_DL
+// must never be mistaken for payload.
+func TestRecvFirstFrameTruncatesToDeclaredLength(t *testing.T) {
+	b, _ := virtual.New()
+	defer b.Close()
+
+	receiver, err := isotp.New(b, isotp.Config{TxID: 0x7E8, RxID: 0x7E0, Timeout: time.Second})
+	if err != nil {
+		t.Fatalf("New: %v", err)
+	}
+
+	done := make(chan struct {
+		data []byte
+		err  error
+	}, 1)
+	go func() {
+		got, err := receiver.Recv(context.Background())
+		done <- struct {
+			data []byte
+			err  error
+		}{got, err}
+	}()
+
+	// FF declares FF_DL=3 but the physical frame carries 6 payload bytes
+	// (0xAA..0xFF) after the 2-byte FF header — as if the sender padded
+	// the CAN frame to 8 bytes.
+	ff := can.Frame{ID: 0x7E0, Data: []byte{0x10, 0x03, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF}}
+	if err := b.Send(context.Background(), ff); err != nil {
+		t.Fatalf("send FF: %v", err)
+	}
+
+	select {
+	case r := <-done:
+		if r.err != nil {
+			t.Fatalf("Recv: %v", r.err)
+		}
+		want := []byte{0xAA, 0xBB, 0xCC}
+		if string(r.data) != string(want) {
+			t.Errorf("Recv() = % X, want % X (FF_DL=3 must truncate padding, not return it)", r.data, want)
+		}
+	case <-time.After(2 * time.Second):
+		t.Fatal("Recv did not return")
+	}
+}
+
 // TestRecvEmptyFrame verifies that a zero-length CAN payload is rejected.
 func TestRecvEmptyFrame(t *testing.T) {
 	b, _ := virtual.New()
