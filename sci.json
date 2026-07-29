@@ -1,7 +1,13 @@
 {
+  "schemaVersion": "1.15.2",
+  "kind": "sci",
+  "tool": "go-FuSa",
+  "toolVersion": "0.47.0",
+  "language": "go",
+  "generatedAt": "2026-07-29T15:02:41.353448Z",
   "project": "go-CAN",
   "version": "1",
-  "generated": "2026-07-28T01:28:58.021101808Z",
+  "generated": "2026-07-29T15:02:41.353448Z",
   "items": [
     {
       "name": "Software Development Plan",
@@ -53,7 +59,7 @@
       "name": "SBOM (SPDX 3.0.1)",
       "file": "sbom.json",
       "class": "Configuration Management",
-      "sha256": "16ad2447241ce57868b000002ec7d77a3e216f23553929e25edb66a813f473fd",
+      "sha256": "42b12de69c2e069d5c83461387ea493164b393d35b2505423de529a669c6a2db",
       "present": true,
       "note": "DO-178C §11.15, NTIA SBOM"
     },
@@ -61,7 +67,7 @@
       "name": "Build Provenance",
       "file": "provenance.json",
       "class": "Configuration Management",
-      "sha256": "bc85742ed252a469431f74c7c018881c05f9e4f52435d6e2fa84e3807054bbd1",
+      "sha256": "bbc3f186d331bd335cf35ae5f4688a38c53ed9eda3d83dcd55f4d2a914be3d26",
       "present": true,
       "note": "SLSA L2"
     },
@@ -76,7 +82,7 @@
       "name": "Test Evidence Bundle",
       "file": ".fusa-evidence.json",
       "class": "Verification",
-      "sha256": "e50d1a7174601b8379676e19d2559a82f41615c8385b637d4308a05dd085b910",
+      "sha256": "2d621154214a3ac835fbf997a13f51642eaf59457db3d8c6f824918f67ff87ea",
       "present": true,
       "note": "DO-178C §11.14"
     },
@@ -84,7 +90,7 @@
       "name": "Vulnerability Report",
       "file": "vuln.json",
       "class": "Verification",
-      "sha256": "94405d8f68bfc56f79d0f8209990ceeee3565e5f3c0d6f93efe20585f5f56d73",
+      "sha256": "68d4849be5bef5cd5d8e76612c0bf43bec989f933146cf4c03ecef2e382cbda2",
       "present": true,
       "note": "ISO 21434 / OSV"
     },
@@ -92,7 +98,7 @@
       "name": "FMEA Table",
       "file": "fmea.json",
       "class": "Verification",
-      "sha256": "7d6a6a14a99036c82a928caf03b572100d125049d2972f862901dc73bfa067c8",
+      "sha256": "8494350b436a54b462c56c18d3b22d83272e2113b5c3683a4e8024f00c45fddd",
       "present": true,
       "note": "DO-178C §11.9 (safety analysis)"
     },
@@ -100,7 +106,7 @@
       "name": "TARA Report",
       "file": "tara.json",
       "class": "Verification",
-      "sha256": "4c8a86afd8a7c867994fea652ef903fcb331ab09e62b525680b6cfabdf348523",
+      "sha256": "c6322335313bcf1e0a475bf88076263416ca968aa62654e001f0e17c5526bb35",
       "present": true,
       "note": "ISO 21434 §9"
     },
@@ -108,7 +114,7 @@
       "name": "TARA Markdown",
       "file": "tara.md",
       "class": "Verification",
-      "sha256": "286b5591d6e8cc77748cc9bc23b30612d99afe43c1e6fa3f33f653feafed59e8",
+      "sha256": "9c8d0c42914f0975f14eb53340cab7b5498c84c50a70ee9e6e11c70efa4a5993",
       "present": true,
       "note": "ISO 21434 §9"
     },
@@ -116,7 +122,7 @@
       "name": "Boundary Diagram",
       "file": "boundary.mermaid",
       "class": "Verification",
-      "sha256": "52ae5e8beece17affa1f1f39d0ed10b0eee7509eb1b9d95c5bcc8620b84380cc",
+      "sha256": "283053ccde968aa8c405c84f249e384d66c02f5d64c88683487bd678ae07a8ef",
       "present": true,
       "note": "DO-178C §11.10 (architecture)"
     },
@@ -124,7 +130,7 @@
       "name": "Cyber Report",
       "file": "cyber-report.json",
       "class": "Verification",
-      "sha256": "f102ea8e499148f9268f71902ec5e64c30c8b5d201b450eaca82da30fddaa40f",
+      "sha256": "25d2494fb4ab05b2199ea17d1d9ae7363b95f7be95bbc721b578332e5dde6aa4",
       "present": true,
       "note": "ISO 21434 §11"
     },
@@ -132,14 +138,15 @@
       "name": "Tool Qualification Report",
       "file": "qualify-report.json",
       "class": "Quality Assurance",
-      "present": false,
+      "sha256": "15d07c0c2e55781924ebc0b0ecbfec0df9fe4b5f1bf6a183dd05b02a682a25f8",
+      "present": true,
       "note": "DO-178C §12 / DO-330"
     },
     {
       "name": "Safety Case",
       "file": "safety-case.json",
       "class": "Accomplishment Summary",
-      "sha256": "3071c344a22249c309fedd4c4bb35dcd0d69477e767b4df6779ec2e3545ede6d",
+      "sha256": "458e266fb0998d2859f636e013636b05821aea128a67fcbc28efd5364d3d8ac2",
       "present": true,
       "note": "DO-178C §11.20 (SAS input)"
     },
@@ -184,7 +191,7 @@
       "name": "CI Workflow",
       "file": ".github/workflows/ci.yml",
       "class": "Configuration Management",
-      "sha256": "6270dec6c6f7dfc2023cb818ac681e2e6afb541569d351417e5add0eb6d0cbe7",
+      "sha256": "091991877905bdfe7f0f1acf472301ff453570f7601f309607e792bdb1880a36",
       "present": true,
       "note": "DO-178C §12.2 (tool env)"
     },
@@ -203,6 +210,108 @@
       "sha256": "e58788e939f5f9ef6d81479c97baafcdc933ae210098b05ae77859d695112610",
       "present": true,
       "note": "IEC 62443-4-2 CR 6.2"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "SAFETY_PLAN.md",
+      "hash": "sha256:e165c68e2a034e1f72cc7d2c2f3b43880aa718e9d3902fe8e36670dfedef2d1b",
+      "version": "1"
+    },
+    {
+      "file": "SVP.md",
+      "hash": "sha256:0e57facb1a9ef1312c04cb162d764450694feb4e7c0e7d8d2dc2060f675df8ba",
+      "version": "1"
+    },
+    {
+      "file": ".fusa-reqs.json",
+      "hash": "sha256:1ba42c46de5daeda92ba6fd08b347728db1c0e15c000a9e60a5803e26601e585",
+      "version": "1"
+    },
+    {
+      "file": ".fusa.json",
+      "hash": "sha256:4518c2dc83d0a2e1d040cfcb6e5fd371b8239d4c0c72693eeb10405edc5e6a51",
+      "version": "1"
+    },
+    {
+      "file": "sbom.json",
+      "hash": "sha256:42b12de69c2e069d5c83461387ea493164b393d35b2505423de529a669c6a2db",
+      "version": "1"
+    },
+    {
+      "file": "provenance.json",
+      "hash": "sha256:bbc3f186d331bd335cf35ae5f4688a38c53ed9eda3d83dcd55f4d2a914be3d26",
+      "version": "1"
+    },
+    {
+      "file": ".fusa-evidence.json",
+      "hash": "sha256:2d621154214a3ac835fbf997a13f51642eaf59457db3d8c6f824918f67ff87ea",
+      "version": "1"
+    },
+    {
+      "file": "vuln.json",
+      "hash": "sha256:68d4849be5bef5cd5d8e76612c0bf43bec989f933146cf4c03ecef2e382cbda2",
+      "version": "1"
+    },
+    {
+      "file": "fmea.json",
+      "hash": "sha256:8494350b436a54b462c56c18d3b22d83272e2113b5c3683a4e8024f00c45fddd",
+      "version": "1"
+    },
+    {
+      "file": "tara.json",
+      "hash": "sha256:c6322335313bcf1e0a475bf88076263416ca968aa62654e001f0e17c5526bb35",
+      "version": "1"
+    },
+    {
+      "file": "tara.md",
+      "hash": "sha256:9c8d0c42914f0975f14eb53340cab7b5498c84c50a70ee9e6e11c70efa4a5993",
+      "version": "1"
+    },
+    {
+      "file": "boundary.mermaid",
+      "hash": "sha256:283053ccde968aa8c405c84f249e384d66c02f5d64c88683487bd678ae07a8ef",
+      "version": "1"
+    },
+    {
+      "file": "cyber-report.json",
+      "hash": "sha256:25d2494fb4ab05b2199ea17d1d9ae7363b95f7be95bbc721b578332e5dde6aa4",
+      "version": "1"
+    },
+    {
+      "file": "qualify-report.json",
+      "hash": "sha256:15d07c0c2e55781924ebc0b0ecbfec0df9fe4b5f1bf6a183dd05b02a682a25f8",
+      "version": "1"
+    },
+    {
+      "file": "safety-case.json",
+      "hash": "sha256:458e266fb0998d2859f636e013636b05821aea128a67fcbc28efd5364d3d8ac2",
+      "version": "1"
+    },
+    {
+      "file": ".fusa-problems.json",
+      "hash": "sha256:267dfc7a4c79b33f35966499872c1ff418b2e0100c4cf22fafdcc98b3e888704",
+      "version": "1"
+    },
+    {
+      "file": ".fusa-iec62443.json",
+      "hash": "sha256:ce07c048659b458c4d80c1ba7e258e954d22cee9c4ccce6a965277fd1f279609",
+      "version": "1"
+    },
+    {
+      "file": ".github/workflows/ci.yml",
+      "hash": "sha256:091991877905bdfe7f0f1acf472301ff453570f7601f309607e792bdb1880a36",
+      "version": "1"
+    },
+    {
+      "file": "INCIDENT-RESPONSE.md",
+      "hash": "sha256:26a016a0937d74f3bb24ecb068734a04373795301836f4051fa714da3daae5ed",
+      "version": "1"
+    },
+    {
+      "file": "SECURITY.md",
+      "hash": "sha256:e58788e939f5f9ef6d81479c97baafcdc933ae210098b05ae77859d695112610",
+      "version": "1"
     }
   ]
 }

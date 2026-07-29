@@ -1,6 +1,11 @@
 {
+  "schemaVersion": "1.15.2",
+  "kind": "safety-case",
+  "tool": "go-FuSa",
+  "toolVersion": "0.47.0",
+  "language": "go",
   "format": "go-FuSa Safety Case v1",
-  "generatedAt": "2026-07-28T01:28:58.041207731Z",
+  "generatedAt": "2026-07-29T15:02:41.360711Z",
   "module": "github.com/SoundMatt/go-CAN",
   "standard": "generic",
   "evidence": [
@@ -9,7 +14,7 @@
       "description": "Coding standard and static analysis checks",
       "file": "check-report.json",
       "status": "present",
-      "detail": "364 findings (0 errors, 222 warnings)"
+      "detail": "367 findings (0 errors, 226 warnings)"
     },
     {
       "id": "trace",
@@ -23,14 +28,14 @@
       "description": "Test evidence bundle",
       "file": ".fusa-evidence.json",
       "status": "present",
-      "detail": "214/222 tests passed"
+      "detail": "213/213 tests passed"
     },
     {
       "id": "qualify",
       "description": "Tool qualification report",
       "file": "qualify-report.json",
-      "status": "absent",
-      "detail": "run 'gofusa qualify' to generate"
+      "status": "present",
+      "detail": "46/46 cases passed"
     },
     {
       "id": "sbom",
@@ -88,7 +93,175 @@
       ]
     }
   ],
-  "gaps": [
-    "qualify"
-  ]
+  "gaps": null,
+  "nodes": [
+    {
+      "id": "G1",
+      "type": "goal",
+      "text": "github.com/SoundMatt/go-CAN is acceptably safe for use in a generic context, argued by demonstrating compliance with the go-FuSa safety development lifecycle."
+    },
+    {
+      "id": "St1",
+      "type": "strategy",
+      "text": "Argue over the 6 lifecycle evidence artifacts go-FuSa collects for github.com/SoundMatt/go-CAN (static checks, requirement traceability, test evidence, tool qualification, and supply-chain provenance)."
+    },
+    {
+      "id": "C1",
+      "type": "context",
+      "text": "Standard: generic. Language: go. Evidence collected for module \"github.com/SoundMatt/go-CAN\"."
+    },
+    {
+      "id": "A1",
+      "type": "assumption",
+      "text": "Each referenced evidence file reflects the repository's current state — a stale artifact (§1.6 freshness) would invalidate the argument even though the file is present."
+    },
+    {
+      "id": "G2",
+      "type": "goal",
+      "text": "Coding standard and static analysis checks is present and satisfactory for github.com/SoundMatt/go-CAN."
+    },
+    {
+      "id": "Sn1",
+      "type": "solution",
+      "text": "367 findings (0 errors, 226 warnings)",
+      "evidence": "check-report.json"
+    },
+    {
+      "id": "G3",
+      "type": "goal",
+      "text": "Requirements traceability matrix is present and satisfactory for github.com/SoundMatt/go-CAN."
+    },
+    {
+      "id": "Sn2",
+      "type": "solution",
+      "text": "94 requirements",
+      "evidence": ".fusa-reqs.json"
+    },
+    {
+      "id": "G4",
+      "type": "goal",
+      "text": "Test evidence bundle is present and satisfactory for github.com/SoundMatt/go-CAN."
+    },
+    {
+      "id": "Sn3",
+      "type": "solution",
+      "text": "213/213 tests passed",
+      "evidence": ".fusa-evidence.json"
+    },
+    {
+      "id": "G5",
+      "type": "goal",
+      "text": "Tool qualification report is present and satisfactory for github.com/SoundMatt/go-CAN."
+    },
+    {
+      "id": "Sn4",
+      "type": "solution",
+      "text": "46/46 cases passed",
+      "evidence": "qualify-report.json"
+    },
+    {
+      "id": "G6",
+      "type": "goal",
+      "text": "SBOM (SPDX 3.0.1) is present and satisfactory for github.com/SoundMatt/go-CAN."
+    },
+    {
+      "id": "Sn5",
+      "type": "solution",
+      "text": "sbom.json",
+      "evidence": "sbom.json"
+    },
+    {
+      "id": "G7",
+      "type": "goal",
+      "text": "Build provenance is present and satisfactory for github.com/SoundMatt/go-CAN."
+    },
+    {
+      "id": "Sn6",
+      "type": "solution",
+      "text": "provenance.json",
+      "evidence": "provenance.json"
+    }
+  ],
+  "edges": [
+    {
+      "from": "G1",
+      "to": "St1",
+      "type": "supportedBy"
+    },
+    {
+      "from": "G1",
+      "to": "C1",
+      "type": "inContextOf"
+    },
+    {
+      "from": "St1",
+      "to": "A1",
+      "type": "inContextOf"
+    },
+    {
+      "from": "St1",
+      "to": "G2",
+      "type": "supportedBy"
+    },
+    {
+      "from": "G2",
+      "to": "Sn1",
+      "type": "supportedBy"
+    },
+    {
+      "from": "St1",
+      "to": "G3",
+      "type": "supportedBy"
+    },
+    {
+      "from": "G3",
+      "to": "Sn2",
+      "type": "supportedBy"
+    },
+    {
+      "from": "St1",
+      "to": "G4",
+      "type": "supportedBy"
+    },
+    {
+      "from": "G4",
+      "to": "Sn3",
+      "type": "supportedBy"
+    },
+    {
+      "from": "St1",
+      "to": "G5",
+      "type": "supportedBy"
+    },
+    {
+      "from": "G5",
+      "to": "Sn4",
+      "type": "supportedBy"
+    },
+    {
+      "from": "St1",
+      "to": "G6",
+      "type": "supportedBy"
+    },
+    {
+      "from": "G6",
+      "to": "Sn5",
+      "type": "supportedBy"
+    },
+    {
+      "from": "St1",
+      "to": "G7",
+      "type": "supportedBy"
+    },
+    {
+      "from": "G7",
+      "to": "Sn6",
+      "type": "supportedBy"
+    }
+  ],
+  "completeness": {
+    "totalGoals": 7,
+    "goalsWithEvidence": 6,
+    "undeveloped": 0
+  }
 }

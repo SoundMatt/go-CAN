@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T01:28:55.462960266Z",
-  "projectRoot": "/home/runner/work/go-CAN/go-CAN",
-  "goVersion": "go1.25.12",
+  "generatedAt": "2026-07-29T15:02:40.979827Z",
+  "projectRoot": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN",
+  "goVersion": "go1.26.3",
   "results": [
     {
       "name": "TestToMessage",
@@ -340,6 +340,126 @@
       "elapsedSeconds": 0
     },
     {
+      "name": "TestCmdRecordToFile",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0.03
+    },
+    {
+      "name": "TestCmdRecordError",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestRunConvertStandardFrame",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestRunConvertXLFrame",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestRunConvertInvalidInput",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestRunConvertMalformedJSON",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestRunConvertArgErrors",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestOpenBusVirtual",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestUsage",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestCmdDumpCancellation",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0.02
+    },
+    {
+      "name": "TestCmdDumpMissingArg",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestOpenBusNonVirtualOnNonLinux",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestCmdSendDefaultIface",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestRunSendJSON",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestRunSendJSONInvalid",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestRunSubscribeJSON",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0.03
+    },
+    {
+      "name": "TestRunSubscribeJSONCancel",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestSendJSONSinkMode",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestJSONSinkIfaceDetection",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestCmdSubscribeArgErrors",
+      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
       "name": "TestEncodeDecodeRoundTripUnsigned",
       "package": "github.com/SoundMatt/go-CAN/dbc",
       "status": "pass",
@@ -458,138 +578,6 @@
       "package": "github.com/SoundMatt/go-CAN/dbc",
       "status": "pass",
       "elapsedSeconds": 0
-    },
-    {
-      "name": "TestSingleFrame",
-      "package": "github.com/SoundMatt/go-CAN/isotp",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestMultiFrame",
-      "package": "github.com/SoundMatt/go-CAN/isotp",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestSendEmptyError",
-      "package": "github.com/SoundMatt/go-CAN/isotp",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestSendTooLarge",
-      "package": "github.com/SoundMatt/go-CAN/isotp",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestDecodeEncodeRoundTrip/broadcast_PGN_0xFECA_(CCVS)",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestDecodeEncodeRoundTrip/peer-to-peer_PF=0xE8",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestDecodeEncodeRoundTrip/high_priority",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestDecodeEncodeRoundTrip",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestIsPeerToPeer",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestBusSendReceive",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestMockImplementsBus",
-      "package": "github.com/SoundMatt/go-CAN/mock",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestBAMRoundTrip_50bytes",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
-      "status": "pass",
-      "elapsedSeconds": 0.01
-    },
-    {
-      "name": "TestCmdRecordToFile",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0.03
-    },
-    {
-      "name": "TestCmdRecordError",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestRunConvertStandardFrame",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestRunConvertXLFrame",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestRunConvertInvalidInput",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestRunConvertMalformedJSON",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestRunConvertArgErrors",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestOpenBusVirtual",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestUsage",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestBAMRoundTrip_100bytes",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
-      "status": "pass",
-      "elapsedSeconds": 0.02
     },
     {
       "name": "TestReadEngineRPM",
@@ -748,14 +736,26 @@
       "elapsedSeconds": 0
     },
     {
-      "name": "TestCmdDumpCancellation",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "name": "TestSingleFrame",
+      "package": "github.com/SoundMatt/go-CAN/isotp",
       "status": "pass",
-      "elapsedSeconds": 0.02
+      "elapsedSeconds": 0
     },
     {
-      "name": "TestCmdDumpMissingArg",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "name": "TestMultiFrame",
+      "package": "github.com/SoundMatt/go-CAN/isotp",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestSendEmptyError",
+      "package": "github.com/SoundMatt/go-CAN/isotp",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestSendTooLarge",
+      "package": "github.com/SoundMatt/go-CAN/isotp",
       "status": "pass",
       "elapsedSeconds": 0
     },
@@ -816,6 +816,72 @@
     {
       "name": "TestSendMultiFrameFlowControlWait",
       "package": "github.com/SoundMatt/go-CAN/isotp",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestSendFlowControlTimeout",
+      "package": "github.com/SoundMatt/go-CAN/isotp",
+      "status": "pass",
+      "elapsedSeconds": 0.05
+    },
+    {
+      "name": "TestNewSubscribeError",
+      "package": "github.com/SoundMatt/go-CAN/isotp",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestDecodeEncodeRoundTrip/broadcast_PGN_0xFECA_(CCVS)",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestDecodeEncodeRoundTrip/peer-to-peer_PF=0xE8",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestDecodeEncodeRoundTrip/high_priority",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestDecodeEncodeRoundTrip",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestIsPeerToPeer",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestBusSendReceive",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
+      "status": "pass",
+      "elapsedSeconds": 0
+    },
+    {
+      "name": "TestBAMRoundTrip_50bytes",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
+      "status": "pass",
+      "elapsedSeconds": 0.01
+    },
+    {
+      "name": "TestBAMRoundTrip_100bytes",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
+      "status": "pass",
+      "elapsedSeconds": 0.02
+    },
+    {
+      "name": "TestMockImplementsBus",
+      "package": "github.com/SoundMatt/go-CAN/mock",
       "status": "pass",
       "elapsedSeconds": 0
     },
@@ -904,68 +970,14 @@
       "elapsedSeconds": 0.01
     },
     {
-      "name": "TestOpenBusNonVirtualOnNonLinux",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "name": "TestBAMRoundTrip_1785bytes",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
       "status": "pass",
-      "elapsedSeconds": 0.07
+      "elapsedSeconds": 0.29
     },
     {
-      "name": "TestCmdSendDefaultIface",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestRunSendJSON",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestRunSendJSONInvalid",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestSendFlowControlTimeout",
-      "package": "github.com/SoundMatt/go-CAN/isotp",
-      "status": "pass",
-      "elapsedSeconds": 0.05
-    },
-    {
-      "name": "TestNewSubscribeError",
-      "package": "github.com/SoundMatt/go-CAN/isotp",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestRunSubscribeJSON",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0.03
-    },
-    {
-      "name": "TestRunSubscribeJSONCancel",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestSendJSONSinkMode",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestJSONSinkIfaceDetection",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestCmdSubscribeArgErrors",
-      "package": "github.com/SoundMatt/go-CAN/cmd/cantool",
+      "name": "TestBAMPacketCountAndPadding",
+      "package": "github.com/SoundMatt/go-CAN/j1939",
       "status": "pass",
       "elapsedSeconds": 0
     },
@@ -1038,18 +1050,6 @@
     {
       "name": "TestConcurrentProtect",
       "package": "github.com/SoundMatt/go-CAN/safety",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestBAMRoundTrip_1785bytes",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
-      "status": "pass",
-      "elapsedSeconds": 0.3
-    },
-    {
-      "name": "TestBAMPacketCountAndPadding",
-      "package": "github.com/SoundMatt/go-CAN/j1939",
       "status": "pass",
       "elapsedSeconds": 0
     },
@@ -1159,60 +1159,6 @@
       "name": "TestTesterPresent",
       "package": "github.com/SoundMatt/go-CAN/uds",
       "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestNew",
-      "package": "github.com/SoundMatt/go-CAN/socketcan",
-      "status": "skip",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestSendReceive",
-      "package": "github.com/SoundMatt/go-CAN/socketcan",
-      "status": "skip",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestSendReceiveExtended",
-      "package": "github.com/SoundMatt/go-CAN/socketcan",
-      "status": "skip",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestSendReceiveFD",
-      "package": "github.com/SoundMatt/go-CAN/socketcan",
-      "status": "skip",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestBadInterface",
-      "package": "github.com/SoundMatt/go-CAN/socketcan",
-      "status": "pass",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestCanUtilsCangenIntoGoCAN",
-      "package": "github.com/SoundMatt/go-CAN/socketcan",
-      "status": "skip",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestGoCANIntoCanUtilsCandump",
-      "package": "github.com/SoundMatt/go-CAN/socketcan",
-      "status": "skip",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestTwoProcessSelfInterop",
-      "package": "github.com/SoundMatt/go-CAN/socketcan",
-      "status": "skip",
-      "elapsedSeconds": 0
-    },
-    {
-      "name": "TestReaderReportsTimeoutWhenNothingArrives",
-      "package": "github.com/SoundMatt/go-CAN/socketcan",
-      "status": "skip",
       "elapsedSeconds": 0
     },
     {
@@ -1337,9 +1283,9 @@
     }
   ],
   "summary": {
-    "total": 222,
-    "passed": 214,
+    "total": 213,
+    "passed": 213,
     "failed": 0,
-    "skipped": 8
+    "skipped": 0
   }
 }

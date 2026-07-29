@@ -1,19 +1,19 @@
 {
-  "schemaVersion": "1.9",
+  "schemaVersion": "1.15.2",
   "kind": "artifact-manifest",
   "tool": "go-FuSa",
-  "toolVersion": "0.30.0",
+  "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-28T01:28:58.063914346Z",
+  "generatedAt": "2026-07-29T15:02:41.382928Z",
   "format": "x-FuSa manifest v1",
   "artifacts": [
     {
-      "path": "/home/runner/work/go-CAN/go-CAN/sbom.json",
-      "sha256": "42b12de69c2e069d5c83461387ea493164b393d35b2505423de529a669c6a2db"
+      "path": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/sbom.json",
+      "sha256": "5a21db5b4dbfcda0e17624880655ed5e356f01872a0a7551d42d8c491915d8af"
     },
     {
-      "path": "/home/runner/work/go-CAN/go-CAN/provenance.json",
-      "sha256": "bbc3f186d331bd335cf35ae5f4688a38c53ed9eda3d83dcd55f4d2a914be3d26"
+      "path": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/provenance.json",
+      "sha256": "0402a7074b2664155086c93440346a0c22a1fc37f9ae38e5581ae49fc9417de7"
     }
   ]
 }

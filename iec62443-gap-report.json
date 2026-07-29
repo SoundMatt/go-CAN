@@ -1,12 +1,12 @@
 {
-  "schemaVersion": "1.9",
+  "schemaVersion": "1.15.2",
   "kind": "gap-report",
   "tool": "go-FuSa",
-  "toolVersion": "0.30.0",
+  "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-28T01:29:04.908176926Z",
+  "generatedAt": "2026-07-29T15:02:43.749631Z",
   "projectRoot": "go-CAN",
-  "standard": "iec62443",
+  "standard": "iec62443-4-2",
   "objectives": [
     {
       "id": "IEC62443-CR-1.1",
@@ -50,7 +50,7 @@
       "clause": "CR 1.4",
       "status": "gap",
       "findings": [
-        "provenance.json missing builder field — run 'gofusa release' from CI"
+        "provenance.json missing builder field — run 'gofusa release' from CI (auto-detected via GITHUB_ACTIONS/GITHUB_WORKFLOW_REF or FUSA_BUILDER), or pass --builder explicitly"
       ]
     },
     {
