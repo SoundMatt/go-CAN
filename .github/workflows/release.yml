@@ -33,17 +33,17 @@ jobs:
 
       - name: Regenerate static analysis, cyber, and TARA reports
         run: |
-          gofusa check ./... -output check-report.json || true
-          gofusa cyber --output cyber-report.json || true
-          gofusa tara || true
+          gofusa check ./... -output check-report.json
+          gofusa cyber --output cyber-report.json
+          gofusa tara
 
       - name: Regenerate test evidence, coverage, boundary, and SCI
         run: |
-          gofusa verify || true
-          go test -coverprofile=coverage.out $(go list ./... | grep -v socketcan) || true
-          gofusa coverage -format json -output coverage-report.json coverage.out || true
-          gofusa boundary || true
-          gofusa sci -output sci.json || true
+          gofusa verify
+          go test -coverprofile=coverage.out $(go list ./... | grep -v socketcan)
+          gofusa coverage -format json -output coverage-report.json coverage.out
+          gofusa boundary
+          gofusa sci -output sci.json
 
       - name: Regenerate safety case
         run: gofusa safety-case
@@ -54,8 +54,14 @@ jobs:
       - name: Regenerate dependency vulnerability report
         run: |
           go install golang.org/x/vuln/cmd/govulncheck@latest
-          govulncheck -format json ./... > vuln.json || true
+          govulncheck -format json ./... > vuln.json
 
+      # gofusa iec61508/iso26262/iec62443 exit 1 when compliance gaps are
+      # found — expected for a SEOOC (Safety Element Out Of Context) that
+      # doesn't claim full standalone conformance (commit 23e2407). The
+      # report files are still written on a gap-exit; these are the only
+      # three commands in this workflow allowed to fail without failing
+      # the job — every other step here must fail loudly.
       - name: Regenerate compliance gap reports
         run: |
           gofusa iec61508 -output iec61508-gap-report.json -format json || true
