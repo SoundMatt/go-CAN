@@ -161,7 +161,8 @@ func (b *Bus) SubscribeTP(ctx context.Context, pgns ...PGN) (<-chan Frame, error
 			priority   Priority
 			src        byte
 			buf        []byte
-			received   int // packets received so far
+			received   int    // count of distinct sequence numbers applied so far
+			seen       []bool // seen[seq-1] == true once TP.DT seq has been applied
 		}
 
 		sessions := make(map[byte]*bamSession)
@@ -199,6 +200,7 @@ func (b *Bus) SubscribeTP(ctx context.Context, pgns ...PGN) (<-chan Frame, error
 						src:        src,
 						buf:        make([]byte, totalSize),
 						received:   0,
+						seen:       make([]bool, numPackets),
 					}
 
 				case pgnTPDT:
@@ -211,6 +213,15 @@ func (b *Bus) SubscribeTP(ctx context.Context, pgns ...PGN) (<-chan Frame, error
 					if seq < 1 || seq > sess.numPackets {
 						continue
 					}
+					if sess.seen[seq-1] {
+						// Duplicate (or retransmitted) segment — already
+						// applied. Ignore rather than counting it again,
+						// which would let reassembly report "complete"
+						// while a different, never-seen sequence number's
+						// bytes are still zero-filled.
+						continue
+					}
+					sess.seen[seq-1] = true
 					offset := (seq - 1) * tpBytesPerPacket
 					for i := 1; i <= tpBytesPerPacket; i++ {
 						dst := offset + i - 1
