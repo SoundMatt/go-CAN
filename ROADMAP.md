@@ -35,21 +35,27 @@ protocol, with zero required dependencies in the core library.
 
 | Version | Theme | Status |
 |---|---|---|
-| v0.1.0 | Core `can.Bus` interface, virtual bus, DBC parser, ISO-TP, J1939, safety E2E, SocketCAN, Docker quickstart | **next** |
-| v0.2.0 | CAN FD support (FD frames, BRS flag, 64-byte payloads via socketcan) | planned |
-| v0.3.0 | UDS (ISO 14229) — request/response over ISO-TP; common service IDs | planned |
-| v0.4.0 | OBD-II (ISO 15031) — Mode 01/02/03/09 PID decoding | planned |
-| v0.5.0 | J1939 transport layer — Transport Protocol (TP) for multi-packet PGNs (>8 bytes) | planned |
-| v0.6.0 | DBC signal encoding (write direction) and value table support | planned |
-| v0.7.0 | Logging / trace — candump-compatible frame recording and replay | planned |
-| v0.8.0 | go-FuSa v0.30.0 → latest; coverage 80% across all packages | planned |
-| v0.9.0 | Statistics and metrics — bus load, error frames, frame counters per ID | planned |
+| v0.1.0 | Core `can.Bus` interface, virtual bus, DBC parser, ISO-TP, J1939, safety E2E, SocketCAN, Docker quickstart (Milestones 1–9) | shipped |
+| v0.1.1 | Patch: `.fusa.json` project config + `.gitignore` fix for safety-artifact release | shipped |
+| v0.2.0 | CAN FD support (FD frames, BRS flag, 64-byte payloads via socketcan) (Milestone 10) | shipped |
+| v0.3.0 | UDS (ISO 14229) — request/response over ISO-TP; common service IDs (Milestone 11) | shipped |
+| v0.4.0 | OBD-II (ISO 15031 / SAE J1979) — Mode 01/02/03/09 PID decoding; formal go-FuSa requirements registry (74 atomic requirements, full traceability) | shipped |
+| v0.5.0 | DBC signal encoding (write direction) + value tables (Milestone 6); J1939 Transport Protocol / BAM (Milestone 12); frame recorder and replay (Milestone 13); `mock` package; optional interfaces (`LoaningBus`, `HealthProvider`, `MetricsProvider`, `Drainer`); RELAY spec v0.2 conformance | shipped |
+| v0.6.0 | Close FuSa & cybersecurity gaps — 100% requirement traceability, security baseline | shipped |
+| v0.7.0 | RELAY spec v1.6 adoption + CAN XL canonical frame support | shipped |
+| v0.8.0 | HMAC-SHA256 message authenticator (REQ-SEC-006) + coverage | shipped |
+| v0.9.0 | RELAY spec v1.8 — crossbar spoke (streaming NDJSON send/subscribe) | shipped |
+| v0.10.0 | RELAY spec v1.10 — §13.7 cross-language library architecture + §20 continuous conformance | shipped |
+| v0.10.1 | Patch: per-subscription Seq counters, capabilities accuracy, RELAY spec v1.11, README fix | shipped |
+| v0.11.0 | Interop testing infrastructure — two-process self-interop + can-utils third-party interop over real `vcan0` (Milestone 19) | shipped |
 | v1.0.0 | API stability, full SocketCAN feature set, documentation complete | planned |
 | v1.1.0 | **Bridge — MQTT** (`bridge/mqtt/`) — publish/subscribe CAN frames over MQTT topics | planned |
 | v1.2.0 | **Bridge — SOME/IP** (`bridge/someip/`) — translate CAN frames to/from SOME/IP service events | planned |
 | v1.3.0 | **Bridge — DDS** (`bridge/dds/`) — CAN frame distribution over DDS topics (works with go-DDS) | planned |
 | v1.4.0 | **Bridge — gRPC** (`bridge/grpc/`) — stream CAN frames over gRPC (bidirectional streaming RPC) | planned |
 | v1.5.0 | **Bridge — REST** (`bridge/rest/`) — HTTP/REST gateway: send frames via POST, subscribe via SSE | planned |
+
+See the [Milestones](#milestones) section below for what each shipped release actually contains; version numbers above are informational (not derived from git tags automatically), so keep this table in sync by hand whenever a release ships.
 
 ---
 
