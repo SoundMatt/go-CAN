@@ -265,6 +265,9 @@ func parseSignal(line string) (*Signal, error) {
 	if err != nil {
 		return nil, fmt.Errorf("dbc: invalid length: %w", err)
 	}
+	if length < 1 || length > 64 {
+		return nil, fmt.Errorf("dbc: signal %q has invalid length %d (must be 1-64): %q", name, length, bitDef)
+	}
 	orderSign := bitDef[atIdx+1:]
 	if len(orderSign) < 2 {
 		return nil, fmt.Errorf("dbc: malformed order+sign: %q", orderSign)
