@@ -82,3 +82,37 @@ jobs:
             git commit -m "$(printf 'chore: regenerate safety artifacts for %s [skip ci]\n\nSigned-off-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>' "$TAG")"
             git push origin HEAD:refs/heads/main
           fi
+
+      # Attach the full safety-evidence bundle to the GitHub Release itself
+      # (not just committed to main) so downstream consumers and supply-
+      # chain scanners can fetch a verifiable, tamper-evident evidence
+      # bundle directly from the release artifact. Creates the release if
+      # it doesn't already exist for this tag; otherwise uploads to it.
+      # No `|| true` here: a failure to publish the evidence bundle must
+      # block the release, not silently regress supply-chain posture.
+      - name: Attach safety evidence to the GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            fmea.csv
+            fmea.json
+            tara.json
+            tara.md
+            safety-case.json
+            safety-case.md
+            safety-case.mermaid
+            sbom.json
+            provenance.json
+            artifact-manifest.json
+            vuln.json
+            check-report.json
+            cyber-report.json
+            coverage-report.json
+            sci.json
+            boundary.mermaid
+            .fusa-evidence.json
+            iec61508-gap-report.json
+            iso26262-gap-report.json
+            iec62443-gap-report.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
