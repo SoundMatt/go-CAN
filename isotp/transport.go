@@ -238,7 +238,14 @@ func (c *Conn) Recv(ctx context.Context) ([]byte, error) {
 		}
 		length := int(binary.BigEndian.Uint16(first.Data[0:2]) & 0x0FFF)
 		buf := make([]byte, 0, length)
-		buf = append(buf, first.Data[2:]...)
+		ffPayload := first.Data[2:]
+		if len(ffPayload) > length {
+			// The physical frame carries more bytes than FF_DL declares
+			// (e.g. CAN padding). Truncate to the declared length so
+			// padding is never mistaken for payload.
+			ffPayload = ffPayload[:length]
+		}
+		buf = append(buf, ffPayload...)
 
 		// Send Flow Control
 		fc := c.frame([]byte{typeFC | fcContinueToSend, c.cfg.BlockSize, c.cfg.STmin})
