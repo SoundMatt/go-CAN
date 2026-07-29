@@ -14,6 +14,7 @@ import (
 	"testing"
 	"time"
 
+	can "github.com/SoundMatt/go-CAN"
 	"github.com/SoundMatt/go-CAN/j1939"
 	"github.com/SoundMatt/go-CAN/virtual"
 )
@@ -294,6 +295,74 @@ done:
 		if !bytes.Equal(f.Data, payload1) && !bytes.Equal(f.Data, payload2) {
 			t.Errorf("frame %d: data is neither payload1 nor payload2 — got corrupt reassembly", i)
 		}
+	}
+}
+
+// TestBAMDuplicateSequenceNotCountedAsComplete verifies that a duplicated
+// TP.DT sequence number does not let the reassembler reach numPackets while
+// a different, real sequence number was never delivered. Without per-
+// sequence dedup, `received` is a raw packet counter: seq=1, seq=1 (dup),
+// seq=2 would make received==3==numPackets even though seq=3 was never
+// sent, and the reassembler would emit the message as "complete" with the
+// seq=3 byte range still zero-filled.
+//
+//fusa:test REQ-J1939-008
+func TestBAMDuplicateSequenceNotCountedAsComplete(t *testing.T) {
+	b, err := virtual.New()
+	if err != nil {
+		t.Fatalf("virtual.New: %v", err)
+	}
+	defer b.Close()
+
+	receiver := j1939.NewBus(b, 0x02)
+	testPGN := j1939.PGN(0x0FEF4)
+	const src = byte(0x01)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	ch, err := receiver.SubscribeTP(ctx, testPGN)
+	if err != nil {
+		t.Fatalf("SubscribeTP: %v", err)
+	}
+
+	// numPackets=3 (totalSize=21, 3*7 bytes/packet). We only ever deliver
+	// distinct seq=1 and seq=2; seq=3 is never sent — instead seq=1 is
+	// retransmitted as a duplicate.
+	const numPackets = 3
+	const totalSize = numPackets * 7
+
+	bamID := j1939.EncodeID(6, j1939.PGN(0xEC00), src)
+	bamData := []byte{
+		0x20,
+		byte(totalSize & 0xFF), byte((totalSize >> 8) & 0xFF),
+		numPackets,
+		0xFF, // reserved
+		byte(testPGN), byte(testPGN >> 8), byte(testPGN >> 16),
+	}
+	if err := b.Send(ctx, can.Frame{ID: bamID, Ext: true, Data: bamData}); err != nil {
+		t.Fatalf("send BAM: %v", err)
+	}
+
+	dtID := j1939.EncodeID(6, j1939.PGN(0xEB00), src)
+	sendDT := func(seq byte, fill byte) {
+		t.Helper()
+		data := []byte{seq, fill, fill, fill, fill, fill, fill, fill}
+		if err := b.Send(ctx, can.Frame{ID: dtID, Ext: true, Data: data}); err != nil {
+			t.Fatalf("send TP.DT seq=%d: %v", seq, err)
+		}
+	}
+
+	sendDT(1, 0xAA) // real seq 1
+	sendDT(1, 0xAA) // duplicate of seq 1 — must not advance completion
+	sendDT(2, 0xBB) // real seq 2 — seq 3 is never sent
+
+	select {
+	case got := <-ch:
+		t.Fatalf("reassembler delivered a message with a missing sequence: %v (want no delivery — seq=3 was never sent)", got)
+	case <-time.After(500 * time.Millisecond):
+		// Expected: nothing delivered, since only 2 of 3 distinct
+		// sequences were ever applied.
 	}
 }
 
