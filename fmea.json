@@ -1,123 +1,182 @@
 {
+  "schemaVersion": "1.15.2",
+  "kind": "fmea-report",
+  "tool": "go-FuSa",
+  "toolVersion": "0.47.0",
+  "language": "go",
+  "generatedAt": "2026-07-29T15:02:38.660367Z",
   "format": "go-FuSa dFMEA v1",
-  "generated_at": "2026-07-28T01:28:50.804115791Z",
   "module": "github.com/SoundMatt/go-CAN",
   "entries": [
     {
+      "id": "FMEA-001",
+      "item": "dbc.Decode",
       "component": "dbc",
       "function": "Decode",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "dbc/parser.go",
+      "failureMode": "dbc derives incorrect output from receiver and argument state",
+      "effect": "incorrect system behavior from dbc",
+      "cause": "a logic error in dbc combining receiver state with its arguments, not surfaced as an error return or panic",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add requirement-traced unit tests covering this method's documented behaviour"
+      ],
+      "failureModes": [
+        "dbc derives incorrect output from receiver and argument state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "incorrect system behavior from dbc"
       ],
-      "severity": "low",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-002",
+      "item": "dbc.Decode",
       "component": "dbc",
       "function": "Decode",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "dbc/parser.go",
+      "failureMode": "dbc derives incorrect output from receiver and argument state",
+      "effect": "incorrect system behavior from dbc",
+      "cause": "a logic error in dbc combining receiver state with its arguments, not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this method's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-DBC-005",
         "REQ-DBC-006",
         "REQ-DBC-007"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "dbc derives incorrect output from receiver and argument state"
+      ],
+      "effects": [
+        "incorrect system behavior from dbc"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-003",
+      "item": "dbc.Encode",
       "component": "dbc",
       "function": "Encode",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/encode.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "dbc/encode.go",
+      "failureMode": "dbc returns an unexpected error",
+      "effect": "silent failure propagated to dbc's caller",
+      "cause": "an unhandled error path in dbc's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-DBC-005",
         "REQ-DBC-007"
-      ]
-    },
-    {
-      "component": "dbc",
-      "function": "Parse",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      ],
+      "failureModes": [
+        "dbc returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to dbc's caller"
       ],
+      "detectionControl": "requirement testing + unit tests"
+    },
+    {
+      "id": "FMEA-004",
+      "item": "dbc.Parse",
+      "component": "dbc",
+      "function": "Parse",
+      "file": "dbc/parser.go",
+      "failureMode": "dbc returns an unexpected error",
+      "effect": "silent failure propagated to dbc's caller",
+      "cause": "an unhandled error path in dbc's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-DBC-001",
         "REQ-DBC-002",
         "REQ-DBC-003",
         "REQ-DBC-004"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "dbc returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to dbc's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-005",
+      "item": "dbc.PhysicalToLabel",
       "component": "dbc",
       "function": "PhysicalToLabel",
-      "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "dbc/parser.go",
+      "failureMode": "dbc derives incorrect output from receiver and argument state",
+      "effect": "incorrect system behavior from dbc",
+      "cause": "a logic error in dbc combining receiver state with its arguments, not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this method's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-DBC-006"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "dbc derives incorrect output from receiver and argument state"
+      ],
+      "effects": [
+        "incorrect system behavior from dbc"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-006",
+      "item": "go-CAN (can).Adapt",
       "component": "go-CAN (can)",
       "function": "Adapt",
-      "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "adapt.go",
+      "failureMode": "go-CAN (can) produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from go-CAN (can)",
+      "cause": "a logic error in go-CAN (can) not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-CAN-007"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "go-CAN (can) produces incorrect output for a given input combination"
+      ],
+      "effects": [
+        "incorrect system behavior from go-CAN (can)"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -125,18 +184,27 @@
       ]
     },
     {
+      "id": "FMEA-007",
+      "item": "go-CAN (can).Close",
       "component": "go-CAN (can)",
       "function": "Close",
-      "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      "file": "adapt.go",
+      "failureMode": "go-CAN (can) returns an unexpected error",
+      "effect": "silent failure propagated to go-CAN (can)'s caller",
+      "cause": "an unhandled error path in go-CAN (can)'s function body or a callee",
+      "severity": "medium",
+      "actionPriority": "medium",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "failureModes": [
+        "go-CAN (can) returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to go-CAN (can)'s caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -144,34 +212,52 @@
       ]
     },
     {
+      "id": "FMEA-008",
+      "item": "go-CAN (can).Error",
       "component": "go-CAN (can)",
       "function": "Error",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "can.go",
+      "failureMode": "go-CAN (can) returns stale or inconsistent receiver state",
+      "effect": "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation",
+      "cause": "go-CAN (can) reads receiver fields with no synchronisation against concurrent mutation",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "failureModes": [
+        "go-CAN (can) returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "low",
-      "detection_control": "unit tests"
+      "detectionControl": "unit tests"
     },
     {
+      "id": "FMEA-009",
+      "item": "go-CAN (can).FromMessage",
       "component": "go-CAN (can)",
       "function": "FromMessage",
-      "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "adapt.go",
+      "failureMode": "go-CAN (can) returns an unexpected error",
+      "effect": "silent failure propagated to go-CAN (can)'s caller",
+      "cause": "an unhandled error path in go-CAN (can)'s function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-CAN-007"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "go-CAN (can) returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to go-CAN (can)'s caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -179,76 +265,121 @@
       ]
     },
     {
+      "id": "FMEA-010",
+      "item": "go-CAN (can).Matches",
       "component": "go-CAN (can)",
       "function": "Matches",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "can.go",
+      "failureMode": "go-CAN (can) derives incorrect output from receiver and argument state",
+      "effect": "incorrect system behavior from go-CAN (can)",
+      "cause": "a logic error in go-CAN (can) combining receiver state with its arguments, not surfaced as an error return or panic",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add requirement-traced unit tests covering this method's documented behaviour"
+      ],
+      "failureModes": [
+        "go-CAN (can) derives incorrect output from receiver and argument state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "incorrect system behavior from go-CAN (can)"
       ],
-      "severity": "low",
-      "detection_control": "unit tests"
+      "detectionControl": "unit tests"
     },
     {
+      "id": "FMEA-011",
+      "item": "go-CAN (can).MaxDataLen",
       "component": "go-CAN (can)",
       "function": "MaxDataLen",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "can.go",
+      "failureMode": "go-CAN (can) returns stale or inconsistent receiver state",
+      "effect": "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation",
+      "cause": "go-CAN (can) reads receiver fields with no synchronisation against concurrent mutation",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "requirementIds": [
         "REQ-CANXL-002"
-      ]
-    },
-    {
-      "component": "go-CAN (can)",
-      "function": "MaxDataLen",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
-      "failure_modes": [
-        "Incorrect output"
+      ],
+      "failureModes": [
+        "go-CAN (can) returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "low",
-      "detection_control": "unit tests"
+      "detectionControl": "requirement testing + unit tests"
     },
     {
+      "id": "FMEA-012",
+      "item": "go-CAN (can).MaxDataLen",
+      "component": "go-CAN (can)",
+      "function": "MaxDataLen",
+      "file": "can.go",
+      "failureMode": "go-CAN (can) produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from go-CAN (can)",
+      "cause": "a logic error in go-CAN (can) not surfaced as an error return or panic",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "failureModes": [
+        "go-CAN (can) produces incorrect output for a given input combination"
+      ],
+      "effects": [
+        "incorrect system behavior from go-CAN (can)"
+      ],
+      "detectionControl": "unit tests"
+    },
+    {
+      "id": "FMEA-013",
+      "item": "go-CAN (can).NewLoanedFrame",
       "component": "go-CAN (can)",
       "function": "NewLoanedFrame",
-      "file": "/home/runner/work/go-CAN/go-CAN/optional.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "optional.go",
+      "failureMode": "go-CAN (can) produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from go-CAN (can)",
+      "cause": "a logic error in go-CAN (can) not surfaced as an error return or panic",
+      "severity": "high",
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "requirementIds": [
+        "REQ-LOAN-001"
+      ],
+      "failureModes": [
+        "go-CAN (can) produces incorrect output for a given input combination"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "incorrect system behavior from go-CAN (can)"
       ],
-      "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
-        "REQ-LOAN-001"
-      ]
+      "detectionControl": "requirement testing + unit tests"
     },
     {
+      "id": "FMEA-014",
+      "item": "go-CAN (can).Protocol",
       "component": "go-CAN (can)",
       "function": "Protocol",
-      "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "adapt.go",
+      "failureMode": "go-CAN (can) returns stale or inconsistent receiver state",
+      "effect": "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation",
+      "cause": "go-CAN (can) reads receiver fields with no synchronisation against concurrent mutation",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "failureModes": [
+        "go-CAN (can) returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "low",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -256,34 +387,52 @@
       ]
     },
     {
+      "id": "FMEA-015",
+      "item": "go-CAN (can).Return",
       "component": "go-CAN (can)",
       "function": "Return",
-      "file": "/home/runner/work/go-CAN/go-CAN/optional.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "optional.go",
+      "failureMode": "go-CAN (can) returns stale or inconsistent receiver state",
+      "effect": "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation",
+      "cause": "go-CAN (can) reads receiver fields with no synchronisation against concurrent mutation",
+      "severity": "high",
+      "actionPriority": "high",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "requirementIds": [
+        "REQ-LOAN-001"
+      ],
+      "failureModes": [
+        "go-CAN (can) returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
-        "REQ-LOAN-001"
-      ]
+      "detectionControl": "requirement testing + unit tests"
     },
     {
+      "id": "FMEA-016",
+      "item": "go-CAN (can).Send",
       "component": "go-CAN (can)",
       "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      "file": "adapt.go",
+      "failureMode": "go-CAN (can) returns an unexpected error",
+      "effect": "silent failure propagated to go-CAN (can)'s caller",
+      "cause": "an unhandled error path in go-CAN (can)'s function body or a callee",
+      "severity": "medium",
+      "actionPriority": "medium",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "failureModes": [
+        "go-CAN (can) returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to go-CAN (can)'s caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -291,20 +440,30 @@
       ]
     },
     {
+      "id": "FMEA-017",
+      "item": "go-CAN (can).Subscribe",
       "component": "go-CAN (can)",
       "function": "Subscribe",
-      "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-      "failure_modes": [
-        "Returns unexpected error",
-        "Goroutine not terminated"
+      "file": "adapt.go",
+      "failureMode": "go-CAN (can) returns an unexpected error; goroutine spawned in go-CAN (can) not terminated",
+      "effect": "silent failure propagated to go-CAN (can)'s caller; memory leak or deadlock in go-CAN (can)",
+      "cause": "an unhandled error path in go-CAN (can)'s function body or a callee; a spawned goroutine in go-CAN (can) with no cancellation, timeout, or WaitGroup join",
+      "severity": "medium",
+      "actionPriority": "medium",
+      "mitigations": [
+        "add unit test coverage for every returned error path",
+        "join or cancel the goroutine before the function returns"
+      ],
+      "failureModes": [
+        "go-CAN (can) returns an unexpected error",
+        "goroutine spawned in go-CAN (can) not terminated"
       ],
       "effects": [
-        "Silent failure propagated to caller",
-        "Memory leak or deadlock"
+        "silent failure propagated to go-CAN (can)'s caller",
+        "memory leak or deadlock in go-CAN (can)"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -312,22 +471,31 @@
       ]
     },
     {
+      "id": "FMEA-018",
+      "item": "go-CAN (can).ToMessage",
       "component": "go-CAN (can)",
       "function": "ToMessage",
-      "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "adapt.go",
+      "failureMode": "go-CAN (can) returns stale or inconsistent receiver state",
+      "effect": "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation",
+      "cause": "go-CAN (can) reads receiver fields with no synchronisation against concurrent mutation",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "requirementIds": [
         "REQ-CAN-007",
         "REQ-CANXL-004"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "go-CAN (can) returns stale or inconsistent receiver state"
+      ],
+      "effects": [
+        "caller of go-CAN (can) observes state that no longer reflects a concurrent mutation"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -335,18 +503,20 @@
       ]
     },
     {
+      "id": "FMEA-019",
+      "item": "go-CAN (can).ValidateFrame",
       "component": "go-CAN (can)",
       "function": "ValidateFrame",
-      "file": "/home/runner/work/go-CAN/go-CAN/can.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "can.go",
+      "failureMode": "go-CAN (can) returns an unexpected error",
+      "effect": "silent failure propagated to go-CAN (can)'s caller",
+      "cause": "an unhandled error path in go-CAN (can)'s function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-CAN-009",
         "REQ-CAN-010",
         "REQ-CAN-011",
@@ -355,27 +525,43 @@
         "REQ-CAN-014",
         "REQ-CANXL-003",
         "REQ-SEC-001"
-      ]
-    },
-    {
-      "component": "isotp",
-      "function": "New",
-      "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      ],
+      "failureModes": [
+        "go-CAN (can) returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to go-CAN (can)'s caller"
       ],
+      "detectionControl": "requirement testing + unit tests"
+    },
+    {
+      "id": "FMEA-020",
+      "item": "isotp.New",
+      "component": "isotp",
+      "function": "New",
+      "file": "isotp/transport.go",
+      "failureMode": "isotp returns an unexpected error",
+      "effect": "silent failure propagated to isotp's caller",
+      "cause": "an unhandled error path in isotp's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-ISOTP-001",
         "REQ-ISOTP-002",
         "REQ-ISOTP-003",
         "REQ-ISOTP-004"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "isotp returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to isotp's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -383,18 +569,20 @@
       ]
     },
     {
+      "id": "FMEA-021",
+      "item": "isotp.Recv",
       "component": "isotp",
       "function": "Recv",
-      "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "isotp/transport.go",
+      "failureMode": "isotp returns an unexpected error",
+      "effect": "silent failure propagated to isotp's caller",
+      "cause": "an unhandled error path in isotp's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-ISOTP-009",
         "REQ-ISOTP-010",
         "REQ-ISOTP-011",
@@ -403,7 +591,14 @@
         "REQ-SEC-002",
         "REQ-SEC-003"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "isotp returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to isotp's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -411,25 +606,34 @@
       ]
     },
     {
+      "id": "FMEA-022",
+      "item": "isotp.Send",
       "component": "isotp",
       "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "isotp/transport.go",
+      "failureMode": "isotp returns an unexpected error",
+      "effect": "silent failure propagated to isotp's caller",
+      "cause": "an unhandled error path in isotp's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-ISOTP-005",
         "REQ-ISOTP-006",
         "REQ-ISOTP-007",
         "REQ-ISOTP-008",
         "REQ-SEC-003"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "isotp returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to isotp's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -437,23 +641,32 @@
       ]
     },
     {
+      "id": "FMEA-023",
+      "item": "j1939.DecodeID",
       "component": "j1939",
       "function": "DecodeID",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "j1939/pgn.go",
+      "failureMode": "j1939 produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from j1939",
+      "cause": "a logic error in j1939 not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-J1939-001",
         "REQ-J1939-002",
         "REQ-J1939-003"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "j1939 produces incorrect output for a given input combination"
+      ],
+      "effects": [
+        "incorrect system behavior from j1939"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -477,21 +690,30 @@
       ]
     },
     {
+      "id": "FMEA-024",
+      "item": "j1939.EncodeID",
       "component": "j1939",
       "function": "EncodeID",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "j1939/pgn.go",
+      "failureMode": "j1939 produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from j1939",
+      "cause": "a logic error in j1939 not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-J1939-004"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "j1939 produces incorrect output for a given input combination"
+      ],
+      "effects": [
+        "incorrect system behavior from j1939"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -515,18 +737,27 @@
       ]
     },
     {
+      "id": "FMEA-025",
+      "item": "j1939.IsPeerToPeer",
       "component": "j1939",
       "function": "IsPeerToPeer",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "j1939/pgn.go",
+      "failureMode": "j1939 returns stale or inconsistent receiver state",
+      "effect": "caller of j1939 observes state that no longer reflects a concurrent mutation",
+      "cause": "j1939 reads receiver fields with no synchronisation against concurrent mutation",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "failureModes": [
+        "j1939 returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of j1939 observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "low",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -550,18 +781,27 @@
       ]
     },
     {
+      "id": "FMEA-026",
+      "item": "j1939.NewBus",
       "component": "j1939",
       "function": "NewBus",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "j1939/pgn.go",
+      "failureMode": "j1939 produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from j1939",
+      "cause": "a logic error in j1939 not surfaced as an error return or panic",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "failureModes": [
+        "j1939 produces incorrect output for a given input combination"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "incorrect system behavior from j1939"
       ],
-      "severity": "low",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -585,21 +825,30 @@
       ]
     },
     {
+      "id": "FMEA-027",
+      "item": "j1939.Send",
       "component": "j1939",
       "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "j1939/pgn.go",
+      "failureMode": "j1939 returns an unexpected error",
+      "effect": "silent failure propagated to j1939's caller",
+      "cause": "an unhandled error path in j1939's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-J1939-005"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "j1939 returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to j1939's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -623,21 +872,30 @@
       ]
     },
     {
+      "id": "FMEA-028",
+      "item": "j1939.SendTP",
       "component": "j1939",
       "function": "SendTP",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "j1939/tp.go",
+      "failureMode": "j1939 returns an unexpected error",
+      "effect": "silent failure propagated to j1939's caller",
+      "cause": "an unhandled error path in j1939's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-J1939-007"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "j1939 returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to j1939's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -651,23 +909,33 @@
       ]
     },
     {
+      "id": "FMEA-029",
+      "item": "j1939.Subscribe",
       "component": "j1939",
       "function": "Subscribe",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
-      "failure_modes": [
-        "Returns unexpected error",
-        "Goroutine not terminated"
-      ],
-      "effects": [
-        "Silent failure propagated to caller",
-        "Memory leak or deadlock"
-      ],
+      "file": "j1939/pgn.go",
+      "failureMode": "j1939 returns an unexpected error; goroutine spawned in j1939 not terminated",
+      "effect": "silent failure propagated to j1939's caller; memory leak or deadlock in j1939",
+      "cause": "an unhandled error path in j1939's function body or a callee; a spawned goroutine in j1939 with no cancellation, timeout, or WaitGroup join",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path",
+        "join or cancel the goroutine before the function returns"
+      ],
+      "requirementIds": [
         "REQ-J1939-006"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "j1939 returns an unexpected error",
+        "goroutine spawned in j1939 not terminated"
+      ],
+      "effects": [
+        "silent failure propagated to j1939's caller",
+        "memory leak or deadlock in j1939"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -691,23 +959,33 @@
       ]
     },
     {
+      "id": "FMEA-030",
+      "item": "j1939.SubscribeTP",
       "component": "j1939",
       "function": "SubscribeTP",
-      "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
-      "failure_modes": [
-        "Returns unexpected error",
-        "Goroutine not terminated"
-      ],
-      "effects": [
-        "Silent failure propagated to caller",
-        "Memory leak or deadlock"
-      ],
+      "file": "j1939/tp.go",
+      "failureMode": "j1939 returns an unexpected error; goroutine spawned in j1939 not terminated",
+      "effect": "silent failure propagated to j1939's caller; memory leak or deadlock in j1939",
+      "cause": "an unhandled error path in j1939's function body or a callee; a spawned goroutine in j1939 with no cancellation, timeout, or WaitGroup join",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path",
+        "join or cancel the goroutine before the function returns"
+      ],
+      "requirementIds": [
         "REQ-J1939-008"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "j1939 returns an unexpected error",
+        "goroutine spawned in j1939 not terminated"
+      ],
+      "effects": [
+        "silent failure propagated to j1939's caller",
+        "memory leak or deadlock in j1939"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -721,37 +999,55 @@
       ]
     },
     {
+      "id": "FMEA-031",
+      "item": "mock.New",
       "component": "mock",
       "function": "New",
-      "file": "/home/runner/work/go-CAN/go-CAN/mock/mock.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      "file": "mock/mock.go",
+      "failureMode": "mock returns an unexpected error",
+      "effect": "silent failure propagated to mock's caller",
+      "cause": "an unhandled error path in mock's function body or a callee",
+      "severity": "high",
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
+        "REQ-MOCK-001"
+      ],
+      "failureModes": [
+        "mock returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to mock's caller"
       ],
-      "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
-        "REQ-MOCK-001"
-      ]
+      "detectionControl": "requirement testing + unit tests"
     },
     {
+      "id": "FMEA-032",
+      "item": "obdii.NewClient",
       "component": "obdii",
       "function": "NewClient",
-      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "obdii/client.go",
+      "failureMode": "obdii produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from obdii",
+      "cause": "a logic error in obdii not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-OBD-001"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "obdii produces incorrect output for a given input combination"
+      ],
+      "effects": [
+        "incorrect system behavior from obdii"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -769,21 +1065,30 @@
       ]
     },
     {
+      "id": "FMEA-033",
+      "item": "obdii.ReadPID",
       "component": "obdii",
       "function": "ReadPID",
-      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "obdii/client.go",
+      "failureMode": "obdii returns an unexpected error",
+      "effect": "silent failure propagated to obdii's caller",
+      "cause": "an unhandled error path in obdii's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-OBD-002"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "obdii returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to obdii's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -801,21 +1106,30 @@
       ]
     },
     {
+      "id": "FMEA-034",
+      "item": "obdii.ReadVIN",
       "component": "obdii",
       "function": "ReadVIN",
-      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "obdii/client.go",
+      "failureMode": "obdii returns an unexpected error",
+      "effect": "silent failure propagated to obdii's caller",
+      "cause": "an unhandled error path in obdii's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-OBD-003"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "obdii returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to obdii's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -833,18 +1147,27 @@
       ]
     },
     {
+      "id": "FMEA-035",
+      "item": "obdii.SupportedPIDs",
       "component": "obdii",
       "function": "SupportedPIDs",
-      "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      "file": "obdii/client.go",
+      "failureMode": "obdii returns an unexpected error",
+      "effect": "silent failure propagated to obdii's caller",
+      "cause": "an unhandled error path in obdii's function body or a callee",
+      "severity": "medium",
+      "actionPriority": "medium",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "failureModes": [
+        "obdii returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to obdii's caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -862,333 +1185,487 @@
       ]
     },
     {
+      "id": "FMEA-036",
+      "item": "recorder.FormatLine",
       "component": "recorder",
       "function": "FormatLine",
-      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "recorder/recorder.go",
+      "failureMode": "recorder produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from recorder",
+      "cause": "a logic error in recorder not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-REC-004"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "recorder produces incorrect output for a given input combination"
+      ],
+      "effects": [
+        "incorrect system behavior from recorder"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-037",
+      "item": "recorder.ParseLine",
       "component": "recorder",
       "function": "ParseLine",
-      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "recorder/recorder.go",
+      "failureMode": "recorder returns an unexpected error",
+      "effect": "silent failure propagated to recorder's caller",
+      "cause": "an unhandled error path in recorder's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-REC-003"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "recorder returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to recorder's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-038",
+      "item": "recorder.Record",
       "component": "recorder",
       "function": "Record",
-      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "recorder/recorder.go",
+      "failureMode": "recorder returns an unexpected error",
+      "effect": "silent failure propagated to recorder's caller",
+      "cause": "an unhandled error path in recorder's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-REC-001"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "recorder returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to recorder's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-039",
+      "item": "recorder.Replay",
       "component": "recorder",
       "function": "Replay",
-      "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "recorder/recorder.go",
+      "failureMode": "recorder returns an unexpected error",
+      "effect": "silent failure propagated to recorder's caller",
+      "cause": "an unhandled error path in recorder's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-REC-002"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "recorder returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to recorder's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-040",
+      "item": "safety.Error",
       "component": "safety",
       "function": "Error",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "safety/e2e.go",
+      "failureMode": "safety returns stale or inconsistent receiver state",
+      "effect": "caller of safety observes state that no longer reflects a concurrent mutation",
+      "cause": "safety reads receiver fields with no synchronisation against concurrent mutation",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "failureModes": [
+        "safety returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of safety observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "low",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-041",
+      "item": "safety.NewProtector",
       "component": "safety",
       "function": "NewProtector",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "safety/e2e.go",
+      "failureMode": "safety produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from safety",
+      "cause": "a logic error in safety not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-SAFETY-003",
         "REQ-SAFETY-004"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "safety produces incorrect output for a given input combination"
+      ],
+      "effects": [
+        "incorrect system behavior from safety"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-042",
+      "item": "safety.NewReceiver",
       "component": "safety",
       "function": "NewReceiver",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "safety/e2e.go",
+      "failureMode": "safety produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from safety",
+      "cause": "a logic error in safety not surfaced as an error return or panic",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "failureModes": [
+        "safety produces incorrect output for a given input combination"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "incorrect system behavior from safety"
       ],
-      "severity": "low",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-043",
+      "item": "safety.Protect",
       "component": "safety",
       "function": "Protect",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "safety/e2e.go",
+      "failureMode": "safety derives incorrect output from receiver and argument state",
+      "effect": "incorrect system behavior from safety",
+      "cause": "a logic error in safety combining receiver state with its arguments, not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this method's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-SAFETY-005",
         "REQ-SAFETY-006"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "safety derives incorrect output from receiver and argument state"
+      ],
+      "effects": [
+        "incorrect system behavior from safety"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-044",
+      "item": "safety.Sign",
       "component": "safety",
       "function": "Sign",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/auth.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "safety/auth.go",
+      "failureMode": "safety derives incorrect output from receiver and argument state",
+      "effect": "incorrect system behavior from safety",
+      "cause": "a logic error in safety combining receiver state with its arguments, not surfaced as an error return or panic",
+      "severity": "high",
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this method's documented behaviour"
+      ],
+      "requirementIds": [
+        "REQ-SEC-006"
+      ],
+      "failureModes": [
+        "safety derives incorrect output from receiver and argument state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "incorrect system behavior from safety"
       ],
-      "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
-        "REQ-SEC-006"
-      ]
+      "detectionControl": "requirement testing + unit tests"
     },
     {
+      "id": "FMEA-045",
+      "item": "safety.TagLen",
       "component": "safety",
       "function": "TagLen",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/auth.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "safety/auth.go",
+      "failureMode": "safety returns stale or inconsistent receiver state",
+      "effect": "caller of safety observes state that no longer reflects a concurrent mutation",
+      "cause": "safety reads receiver fields with no synchronisation against concurrent mutation",
+      "severity": "high",
+      "actionPriority": "high",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "requirementIds": [
+        "REQ-SEC-006"
+      ],
+      "failureModes": [
+        "safety returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of safety observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
-        "REQ-SEC-006"
-      ]
+      "detectionControl": "requirement testing + unit tests"
     },
     {
+      "id": "FMEA-046",
+      "item": "safety.Unwrap",
       "component": "safety",
       "function": "Unwrap",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "safety/e2e.go",
+      "failureMode": "safety returns an unexpected error",
+      "effect": "silent failure propagated to safety's caller",
+      "cause": "an unhandled error path in safety's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-SAFETY-007",
         "REQ-SAFETY-008",
         "REQ-SAFETY-009",
         "REQ-SAFETY-010",
         "REQ-SAFETY-011"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "safety returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to safety's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-047",
+      "item": "safety.Verify",
       "component": "safety",
       "function": "Verify",
-      "file": "/home/runner/work/go-CAN/go-CAN/safety/auth.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "safety/auth.go",
+      "failureMode": "safety derives incorrect output from receiver and argument state",
+      "effect": "incorrect system behavior from safety",
+      "cause": "a logic error in safety combining receiver state with its arguments, not surfaced as an error return or panic",
+      "severity": "high",
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this method's documented behaviour"
+      ],
+      "requirementIds": [
+        "REQ-SEC-006"
+      ],
+      "failureModes": [
+        "safety derives incorrect output from receiver and argument state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "incorrect system behavior from safety"
       ],
-      "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
-        "REQ-SEC-006"
-      ]
+      "detectionControl": "requirement testing + unit tests"
     },
     {
+      "id": "FMEA-048",
+      "item": "socketcan.Close",
       "component": "socketcan",
       "function": "Close",
-      "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      "file": "socketcan/bus_linux.go",
+      "failureMode": "socketcan returns an unexpected error",
+      "effect": "silent failure propagated to socketcan's caller",
+      "cause": "an unhandled error path in socketcan's function body or a callee",
+      "severity": "medium",
+      "actionPriority": "medium",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "failureModes": [
+        "socketcan returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to socketcan's caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-049",
+      "item": "socketcan.New",
       "component": "socketcan",
       "function": "New",
-      "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
-      "failure_modes": [
-        "Returns unexpected error",
-        "Goroutine not terminated"
-      ],
-      "effects": [
-        "Silent failure propagated to caller",
-        "Memory leak or deadlock"
-      ],
+      "file": "socketcan/bus_linux.go",
+      "failureMode": "socketcan returns an unexpected error; goroutine spawned in socketcan not terminated",
+      "effect": "silent failure propagated to socketcan's caller; memory leak or deadlock in socketcan",
+      "cause": "an unhandled error path in socketcan's function body or a callee; a spawned goroutine in socketcan with no cancellation, timeout, or WaitGroup join",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path",
+        "join or cancel the goroutine before the function returns"
+      ],
+      "requirementIds": [
         "REQ-SCAN-001",
         "REQ-SCAN-002",
         "REQ-SCAN-006"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "socketcan returns an unexpected error",
+        "goroutine spawned in socketcan not terminated"
+      ],
+      "effects": [
+        "silent failure propagated to socketcan's caller",
+        "memory leak or deadlock in socketcan"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-050",
+      "item": "socketcan.Send",
       "component": "socketcan",
       "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "socketcan/bus_linux.go",
+      "failureMode": "socketcan returns an unexpected error",
+      "effect": "silent failure propagated to socketcan's caller",
+      "cause": "an unhandled error path in socketcan's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-SCAN-003",
         "REQ-SCAN-004",
         "REQ-SCAN-007",
         "REQ-SCAN-008"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "socketcan returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to socketcan's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-051",
+      "item": "socketcan.Subscribe",
       "component": "socketcan",
       "function": "Subscribe",
-      "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "socketcan/bus_linux.go",
+      "failureMode": "socketcan returns an unexpected error",
+      "effect": "silent failure propagated to socketcan's caller",
+      "cause": "an unhandled error path in socketcan's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-SCAN-005"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "socketcan returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to socketcan's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range"
       ]
     },
     {
+      "id": "FMEA-052",
+      "item": "uds.DiagnosticSessionControl",
       "component": "uds",
       "function": "DiagnosticSessionControl",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "uds/client.go",
+      "failureMode": "uds returns an unexpected error",
+      "effect": "silent failure propagated to uds's caller",
+      "cause": "an unhandled error path in uds's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-UDS-002"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "uds returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to uds's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -1198,21 +1675,30 @@
       ]
     },
     {
+      "id": "FMEA-053",
+      "item": "uds.ECUReset",
       "component": "uds",
       "function": "ECUReset",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "uds/client.go",
+      "failureMode": "uds returns an unexpected error",
+      "effect": "silent failure propagated to uds's caller",
+      "cause": "an unhandled error path in uds's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-UDS-003"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "uds returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to uds's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -1222,18 +1708,27 @@
       ]
     },
     {
+      "id": "FMEA-054",
+      "item": "uds.Error",
       "component": "uds",
       "function": "Error",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "uds/client.go",
+      "failureMode": "uds returns stale or inconsistent receiver state",
+      "effect": "caller of uds observes state that no longer reflects a concurrent mutation",
+      "cause": "uds reads receiver fields with no synchronisation against concurrent mutation",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "failureModes": [
+        "uds returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of uds observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "low",
-      "detection_control": "unit tests",
-      "cyber_risks": [
+      "detectionControl": "unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -1243,22 +1738,31 @@
       ]
     },
     {
+      "id": "FMEA-055",
+      "item": "uds.NewClient",
       "component": "uds",
       "function": "NewClient",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
-      "failure_modes": [
-        "Incorrect output"
-      ],
-      "effects": [
-        "Incorrect system behavior"
-      ],
+      "file": "uds/client.go",
+      "failureMode": "uds produces incorrect output for a given input combination",
+      "effect": "incorrect system behavior from uds",
+      "cause": "a logic error in uds not surfaced as an error return or panic",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add requirement-traced unit tests covering this function's documented behaviour"
+      ],
+      "requirementIds": [
         "REQ-UDS-001",
         "REQ-UDS-009"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "uds produces incorrect output for a given input combination"
+      ],
+      "effects": [
+        "incorrect system behavior from uds"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -1268,22 +1772,31 @@
       ]
     },
     {
+      "id": "FMEA-056",
+      "item": "uds.ReadDataByIdentifier",
       "component": "uds",
       "function": "ReadDataByIdentifier",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "uds/client.go",
+      "failureMode": "uds returns an unexpected error",
+      "effect": "silent failure propagated to uds's caller",
+      "cause": "an unhandled error path in uds's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-UDS-005",
         "REQ-UDS-006"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "uds returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to uds's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -1293,21 +1806,30 @@
       ]
     },
     {
+      "id": "FMEA-057",
+      "item": "uds.TesterPresent",
       "component": "uds",
       "function": "TesterPresent",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "uds/client.go",
+      "failureMode": "uds returns an unexpected error",
+      "effect": "silent failure propagated to uds's caller",
+      "cause": "an unhandled error path in uds's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-UDS-004"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "uds returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to uds's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -1317,23 +1839,33 @@
       ]
     },
     {
+      "id": "FMEA-058",
+      "item": "uds.WriteDataByIdentifier",
       "component": "uds",
       "function": "WriteDataByIdentifier",
-      "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
-      "failure_modes": [
-        "Returns unexpected error",
-        "Partial write / data corruption"
-      ],
-      "effects": [
-        "Silent failure propagated to caller",
-        "Incorrect system state"
-      ],
+      "file": "uds/client.go",
+      "failureMode": "uds returns an unexpected error; partial write / data corruption in uds",
+      "effect": "silent failure propagated to uds's caller; incorrect persisted state for uds",
+      "cause": "an unhandled error path in uds's function body or a callee; an interrupted write in uds (crash, disk full, concurrent access) leaving a partial artifact",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path",
+        "write via a temp file and atomic rename, or validate the write's result"
+      ],
+      "requirementIds": [
         "REQ-UDS-007"
       ],
-      "cyber_risks": [
+      "failureModes": [
+        "uds returns an unexpected error",
+        "partial write / data corruption in uds"
+      ],
+      "effects": [
+        "silent failure propagated to uds's caller",
+        "incorrect persisted state for uds"
+      ],
+      "detectionControl": "requirement testing + unit tests",
+      "cyberRisks": [
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
         "CYBER009: byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
@@ -1343,134 +1875,223 @@
       ]
     },
     {
+      "id": "FMEA-059",
+      "item": "virtual.Close",
       "component": "virtual",
       "function": "Close",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      "file": "virtual/bus.go",
+      "failureMode": "virtual returns an unexpected error",
+      "effect": "silent failure propagated to virtual's caller",
+      "cause": "an unhandled error path in virtual's function body or a callee",
+      "severity": "medium",
+      "actionPriority": "medium",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "failureModes": [
+        "virtual returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to virtual's caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests"
+      "detectionControl": "unit tests"
     },
     {
+      "id": "FMEA-060",
+      "item": "virtual.CloseWithDrain",
       "component": "virtual",
       "function": "CloseWithDrain",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      "file": "virtual/bus.go",
+      "failureMode": "virtual returns an unexpected error",
+      "effect": "silent failure propagated to virtual's caller",
+      "cause": "an unhandled error path in virtual's function body or a callee",
+      "severity": "medium",
+      "actionPriority": "medium",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "failureModes": [
+        "virtual returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to virtual's caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests"
+      "detectionControl": "unit tests"
     },
     {
+      "id": "FMEA-061",
+      "item": "virtual.Health",
       "component": "virtual",
       "function": "Health",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "virtual/bus.go",
+      "failureMode": "virtual returns stale or inconsistent receiver state",
+      "effect": "caller of virtual observes state that no longer reflects a concurrent mutation",
+      "cause": "virtual reads receiver fields with no synchronisation against concurrent mutation",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "failureModes": [
+        "virtual returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of virtual observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "low",
-      "detection_control": "unit tests"
+      "detectionControl": "unit tests"
     },
     {
+      "id": "FMEA-062",
+      "item": "virtual.Loan",
       "component": "virtual",
       "function": "Loan",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      "file": "virtual/bus.go",
+      "failureMode": "virtual returns an unexpected error",
+      "effect": "silent failure propagated to virtual's caller",
+      "cause": "an unhandled error path in virtual's function body or a callee",
+      "severity": "medium",
+      "actionPriority": "medium",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "failureModes": [
+        "virtual returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to virtual's caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests"
+      "detectionControl": "unit tests"
     },
     {
+      "id": "FMEA-063",
+      "item": "virtual.Metrics",
       "component": "virtual",
       "function": "Metrics",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
-      "failure_modes": [
-        "Incorrect output"
+      "file": "virtual/bus.go",
+      "failureMode": "virtual returns stale or inconsistent receiver state",
+      "effect": "caller of virtual observes state that no longer reflects a concurrent mutation",
+      "cause": "virtual reads receiver fields with no synchronisation against concurrent mutation",
+      "severity": "low",
+      "actionPriority": "low",
+      "mitigations": [
+        "add a mutex, or otherwise make the receiver's field access goroutine-safe"
+      ],
+      "failureModes": [
+        "virtual returns stale or inconsistent receiver state"
       ],
       "effects": [
-        "Incorrect system behavior"
+        "caller of virtual observes state that no longer reflects a concurrent mutation"
       ],
-      "severity": "low",
-      "detection_control": "unit tests"
+      "detectionControl": "unit tests"
     },
     {
+      "id": "FMEA-064",
+      "item": "virtual.New",
       "component": "virtual",
       "function": "New",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "virtual/bus.go",
+      "failureMode": "virtual returns an unexpected error",
+      "effect": "silent failure propagated to virtual's caller",
+      "cause": "an unhandled error path in virtual's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-VIRT-001",
         "REQ-VIRT-003"
-      ]
-    },
-    {
-      "component": "virtual",
-      "function": "Send",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      ],
+      "failureModes": [
+        "virtual returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to virtual's caller"
       ],
+      "detectionControl": "requirement testing + unit tests"
+    },
+    {
+      "id": "FMEA-065",
+      "item": "virtual.Send",
+      "component": "virtual",
+      "function": "Send",
+      "file": "virtual/bus.go",
+      "failureMode": "virtual returns an unexpected error",
+      "effect": "silent failure propagated to virtual's caller",
+      "cause": "an unhandled error path in virtual's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-VIRT-001",
         "REQ-VIRT-002",
         "REQ-VIRT-005"
-      ]
+      ],
+      "failureModes": [
+        "virtual returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to virtual's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests"
     },
     {
+      "id": "FMEA-066",
+      "item": "virtual.SendLoaned",
       "component": "virtual",
       "function": "SendLoaned",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
-      "failure_modes": [
-        "Returns unexpected error"
+      "file": "virtual/bus.go",
+      "failureMode": "virtual returns an unexpected error",
+      "effect": "silent failure propagated to virtual's caller",
+      "cause": "an unhandled error path in virtual's function body or a callee",
+      "severity": "medium",
+      "actionPriority": "medium",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "failureModes": [
+        "virtual returns an unexpected error"
       ],
       "effects": [
-        "Silent failure propagated to caller"
+        "silent failure propagated to virtual's caller"
       ],
-      "severity": "medium",
-      "detection_control": "unit tests"
+      "detectionControl": "unit tests"
     },
     {
+      "id": "FMEA-067",
+      "item": "virtual.Subscribe",
       "component": "virtual",
       "function": "Subscribe",
-      "file": "/home/runner/work/go-CAN/go-CAN/virtual/bus.go",
-      "failure_modes": [
-        "Returns unexpected error"
-      ],
-      "effects": [
-        "Silent failure propagated to caller"
-      ],
+      "file": "virtual/bus.go",
+      "failureMode": "virtual returns an unexpected error",
+      "effect": "silent failure propagated to virtual's caller",
+      "cause": "an unhandled error path in virtual's function body or a callee",
       "severity": "high",
-      "detection_control": "requirement testing + unit tests",
-      "requirement_ids": [
+      "actionPriority": "high",
+      "mitigations": [
+        "add unit test coverage for every returned error path"
+      ],
+      "requirementIds": [
         "REQ-VIRT-003",
         "REQ-VIRT-004"
-      ]
+      ],
+      "failureModes": [
+        "virtual returns an unexpected error"
+      ],
+      "effects": [
+        "silent failure propagated to virtual's caller"
+      ],
+      "detectionControl": "requirement testing + unit tests"
     }
-  ]
+  ],
+  "summary": {
+    "total": 67,
+    "highPriority": 46,
+    "componentsAnalyzed": 67,
+    "componentsInProject": 67,
+    "coveragePct": 100,
+    "componentsInProjectMethod": "raw regex scan for top-level exported func declarations in non-test .go files under non-vendor/testdata/dot-directories (CountProjectFunctions) — independent of Scan's own go/ast parse, so a file Scan's parser rejects still counts toward the denominator; componentsAnalyzed counts entries Scan actually emitted (every exported function in every file it could parse — Scan does not curate a subset)"
+  }
 }

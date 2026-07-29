@@ -170,12 +170,12 @@ jobs:
           ./socketcan/...
 
   # ── go-FuSa continuous-conformance lifecycle (RELAY spec §20.1.2) ──────────
-  # Pinned to v0.36.0. Runs the FULL lifecycle, not a subset: static check,
+  # Pinned to v0.47.0. Runs the FULL lifecycle, not a subset: static check,
   # 100% requirement traceability (traced AND tested + function-annotation
   # density), cybersecurity analysis, dependency vulnerability scan, and the
   # tool-qualification suite. Conformance must be continuously proven.
   gofusa:
-    name: go-FuSa lifecycle (§20, v0.36.0)
+    name: go-FuSa lifecycle (§20, v0.47.0)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -184,7 +184,7 @@ jobs:
           go-version: "1.25"
 
       - name: Install go-FuSa
-        run: go install github.com/SoundMatt/go-FuSa/cmd/gofusa@v0.36.0
+        run: go install github.com/SoundMatt/go-FuSa/cmd/gofusa@v0.47.0
 
       - name: gofusa check (gate on ERROR)
         run: gofusa check ./...

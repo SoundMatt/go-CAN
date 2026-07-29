@@ -7,7 +7,7 @@
       "severity": "WARNING",
       "message": "exec.Command called with a non-literal command name — verify the value cannot be influenced by untrusted input",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_canutils_linux_test.go",
+        "file": "socketcan/interop_canutils_linux_test.go",
         "line": 207,
         "column": 14
       },
@@ -18,7 +18,7 @@
       "severity": "WARNING",
       "message": "exec.Command called with a non-literal command name — verify the value cannot be influenced by untrusted input",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_helpers_linux_test.go",
+        "file": "socketcan/interop_helpers_linux_test.go",
         "line": 138,
         "column": 9
       },
@@ -29,7 +29,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
+        "file": "adapt.go",
         "line": 70,
         "column": 17
       },
@@ -40,7 +40,7 @@
       "severity": "INFO",
       "message": "uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
+        "file": "adapt.go",
         "line": 93,
         "column": 11
       },
@@ -51,7 +51,7 @@
       "severity": "INFO",
       "message": "uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
+        "file": "adapt.go",
         "line": 96,
         "column": 12
       },
@@ -62,7 +62,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
+        "file": "adapt.go",
         "line": 99,
         "column": 10
       },
@@ -73,7 +73,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt_test.go",
+        "file": "adapt_test.go",
         "line": 150,
         "column": 44
       },
@@ -84,7 +84,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/can-interop-peer/main.go",
+        "file": "cmd/can-interop-peer/main.go",
         "line": 155,
         "column": 10
       },
@@ -95,7 +95,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
+        "file": "cmd/cantool/main.go",
         "line": 196,
         "column": 21
       },
@@ -106,7 +106,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+        "file": "dbc/parser.go",
         "line": 225,
         "column": 12
       },
@@ -117,7 +117,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+        "file": "dbc/parser.go",
         "line": 351,
         "column": 25
       },
@@ -128,7 +128,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/examples/quickstart/main.go",
+        "file": "examples/quickstart/main.go",
         "line": 59,
         "column": 11
       },
@@ -139,7 +139,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/examples/quickstart/sender/main.go",
+        "file": "examples/quickstart/sender/main.go",
         "line": 59,
         "column": 11
       },
@@ -150,7 +150,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "isotp/transport.go",
         "line": 132,
         "column": 21
       },
@@ -161,7 +161,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "isotp/transport.go",
         "line": 140,
         "column": 38
       },
@@ -172,7 +172,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "isotp/transport.go",
         "line": 140,
         "column": 56
       },
@@ -183,7 +183,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "isotp/transport.go",
         "line": 183,
         "column": 19
       },
@@ -194,7 +194,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport_test.go",
+        "file": "isotp/transport_test.go",
         "line": 84,
         "column": 16
       },
@@ -205,7 +205,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport_test.go",
+        "file": "isotp/transport_test.go",
         "line": 316,
         "column": 16
       },
@@ -216,7 +216,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 60,
         "column": 8
       },
@@ -227,7 +227,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 71,
         "column": 8
       },
@@ -238,7 +238,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 72,
         "column": 8
       },
@@ -249,7 +249,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 73,
         "column": 8
       },
@@ -260,7 +260,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 74,
         "column": 8
       },
@@ -271,7 +271,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 77,
         "column": 13
       },
@@ -282,7 +282,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 77,
         "column": 30
       },
@@ -293,7 +293,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 80,
         "column": 13
       },
@@ -304,7 +304,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 80,
         "column": 30
       },
@@ -315,7 +315,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 80,
         "column": 46
       },
@@ -326,7 +326,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 89,
         "column": 8
       },
@@ -337,7 +337,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 90,
         "column": 8
       },
@@ -348,7 +348,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 91,
         "column": 8
       },
@@ -359,7 +359,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 93,
         "column": 8
       },
@@ -370,7 +370,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 94,
         "column": 8
       },
@@ -381,7 +381,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 95,
         "column": 8
       },
@@ -392,7 +392,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 97,
         "column": 9
       },
@@ -403,7 +403,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 99,
         "column": 8
       },
@@ -414,7 +414,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 126,
         "column": 9
       },
@@ -425,7 +425,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 153,
         "column": 11
       },
@@ -436,7 +436,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 81,
         "column": 3
       },
@@ -447,7 +447,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 82,
         "column": 3
       },
@@ -458,7 +458,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 83,
         "column": 3
       },
@@ -469,7 +469,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 111,
         "column": 12
       },
@@ -480,7 +480,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 252,
         "column": 17
       },
@@ -491,7 +491,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 252,
         "column": 26
       },
@@ -502,7 +502,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 252,
         "column": 40
       },
@@ -513,7 +513,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 257,
         "column": 13
       },
@@ -524,7 +524,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 257,
         "column": 26
       },
@@ -535,7 +535,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 257,
         "column": 42
       },
@@ -546,7 +546,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp_test.go",
+        "file": "j1939/tp_test.go",
         "line": 37,
         "column": 10
       },
@@ -557,7 +557,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 146,
         "column": 10
       },
@@ -568,7 +568,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 146,
         "column": 32
       },
@@ -579,7 +579,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 146,
         "column": 54
       },
@@ -590,7 +590,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 146,
         "column": 75
       },
@@ -601,7 +601,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 177,
         "column": 22
       },
@@ -612,7 +612,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 177,
         "column": 41
       },
@@ -623,7 +623,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 212,
         "column": 22
       },
@@ -634,7 +634,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 212,
         "column": 41
       },
@@ -645,7 +645,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 237,
         "column": 22
       },
@@ -656,7 +656,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 237,
         "column": 41
       },
@@ -667,7 +667,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 242,
         "column": 22
       },
@@ -678,7 +678,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 242,
         "column": 43
       },
@@ -689,7 +689,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 247,
         "column": 22
       },
@@ -700,7 +700,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 247,
         "column": 41
       },
@@ -711,7 +711,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+        "file": "recorder/recorder.go",
         "line": 199,
         "column": 10
       },
@@ -722,7 +722,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+        "file": "recorder/recorder.go",
         "line": 232,
         "column": 10
       },
@@ -733,7 +733,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
+        "file": "safety/e2e.go",
         "line": 188,
         "column": 10
       },
@@ -744,7 +744,7 @@
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
+        "file": "safety/e2e.go",
         "line": 203,
         "column": 10
       },
@@ -755,7 +755,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e_test.go",
+        "file": "safety/e2e_test.go",
         "line": 50,
         "column": 21
       },
@@ -766,7 +766,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e_test.go",
+        "file": "safety/e2e_test.go",
         "line": 50,
         "column": 30
       },
@@ -777,7 +777,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e_test.go",
+        "file": "safety/e2e_test.go",
         "line": 123,
         "column": 21
       },
@@ -788,7 +788,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
+        "file": "socketcan/bus_linux.go",
         "line": 189,
         "column": 12
       },
@@ -799,7 +799,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
+        "file": "socketcan/bus_linux.go",
         "line": 199,
         "column": 11
       },
@@ -810,7 +810,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux_test.go",
+        "file": "socketcan/bus_linux_test.go",
         "line": 128,
         "column": 16
       },
@@ -821,7 +821,7 @@
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_canutils_linux_test.go",
+        "file": "socketcan/interop_canutils_linux_test.go",
         "line": 262,
         "column": 10
       },
@@ -832,7 +832,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 125,
         "column": 66
       },
@@ -843,7 +843,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 139,
         "column": 50
       },
@@ -854,7 +854,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 157,
         "column": 3
       },
@@ -865,7 +865,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 158,
         "column": 3
       },
@@ -876,7 +876,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 180,
         "column": 11
       },
@@ -887,7 +887,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 181,
         "column": 11
       },
@@ -898,7 +898,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client_test.go",
+        "file": "uds/client_test.go",
         "line": 120,
         "column": 18
       },
@@ -909,7 +909,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client_test.go",
+        "file": "uds/client_test.go",
         "line": 121,
         "column": 59
       },
@@ -920,7 +920,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client_test.go",
+        "file": "uds/client_test.go",
         "line": 162,
         "column": 54
       },
@@ -931,7 +931,7 @@
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client_test.go",
+        "file": "uds/client_test.go",
         "line": 162,
         "column": 70
       },
@@ -942,7 +942,7 @@
       "severity": "WARNING",
       "message": "os.WriteFile called with mode more permissive than 0640",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main_test.go",
+        "file": "cmd/cantool/main_test.go",
         "line": 137,
         "column": 12
       },
@@ -953,7 +953,7 @@
       "severity": "WARNING",
       "message": "os.WriteFile called with mode more permissive than 0640",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main_test.go",
+        "file": "cmd/cantool/main_test.go",
         "line": 157,
         "column": 6
       },

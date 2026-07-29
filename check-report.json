@@ -1,11 +1,11 @@
 {
-  "schemaVersion": "1.9",
+  "schemaVersion": "1.15.2",
   "kind": "check-report",
   "tool": "go-FuSa",
-  "toolVersion": "0.30.0",
+  "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-28T01:28:51.620816993Z",
-  "projectRoot": "/home/runner/work/go-CAN/go-CAN",
+  "generatedAt": "2026-07-29T15:02:38.998154Z",
+  "projectRoot": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN",
   "standard": "iso26262",
   "asil": "ASIL-B",
   "findings": [
@@ -1840,1395 +1840,1439 @@
       "severity": "WARNING",
       "message": "function FromMessage has cyclomatic complexity 12 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/adapt.go",
         "line": 65
       },
       "category": "other",
       "remediation": "refactor FromMessage to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:14263a031d56730ee0cc7149211386525f34deea3b17e19b6ecb06d2f8eabda3"
+      "fingerprint": "sha256:c65a1c6b217ed130dcd5d538fabb67dc74e0a6a40aca9c8b0599742b7dd74236"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function ValidateFrame has cyclomatic complexity 37 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
         "line": 201
       },
       "category": "other",
       "remediation": "refactor ValidateFrame to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:a87449ba15a44293b971c676711d37d3a74a43a5b1cf62fd6b453a19fea6516d"
+      "fingerprint": "sha256:8e17028dae1813d40117ec15c3072f13f48c08da64f3b00c0c372f1298a55997"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function main has cyclomatic complexity 13 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/cmd/cantool/main.go",
         "line": 44
       },
       "category": "other",
       "remediation": "refactor main to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:7879192cd01d40f413fccb1c8fc658d3c496184949acd37a4cf6cb9eee06b209"
+      "fingerprint": "sha256:ee908d43dc22721f487dcfa0a45dea136662af841286117474bfeeaa65e7cf0a"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function cmdSubscribe has cyclomatic complexity 11 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/cmd/cantool/main.go",
         "line": 361
       },
       "category": "other",
       "remediation": "refactor cmdSubscribe to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:1f7606ca58fd664509a80c09556aaeb1a8991d68b93d19344a209fec3fc5e383"
+      "fingerprint": "sha256:a6b4620d682a4cca9bea6dd8116b5f22444bada741440360a050b4bfb2eace9a"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function runConvert has cyclomatic complexity 12 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/cmd/cantool/main.go",
         "line": 446
       },
       "category": "other",
       "remediation": "refactor runConvert to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:053c256e3cfc7173b56d4944db9ac694062ba906a5d0041da0986b937a5184dc"
+      "fingerprint": "sha256:34e1921c4f152abbfed105ec48e7a41b65bbcd30b3788c330358911823489644"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Parse has cyclomatic complexity 14 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/dbc/parser.go",
         "line": 95
       },
       "category": "other",
       "remediation": "refactor Parse to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:b0c9da9a8868e905ffbdcbd6437d84db2c21cf40af5d20f529214786dd7c5e44"
+      "fingerprint": "sha256:b1e4aebb59c70ea9dc985a18b2aa25e6f053382790fa2421104100397fb237a2"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function parseSignal has cyclomatic complexity 15 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/dbc/parser.go",
         "line": 235
       },
       "category": "other",
       "remediation": "refactor parseSignal to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:74c18bf13541b81baf42da6c2faa98cbb7c5501672964eff7fa7a54152d0c657"
+      "fingerprint": "sha256:40efc70a95d5a5e6403b34ae36149a584200feb384e583a00e57c76db9e2a239"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function tokeniseVAL has cyclomatic complexity 13 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/dbc/parser.go",
         "line": 379
       },
       "category": "other",
       "remediation": "refactor tokeniseVAL to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:7a7631b17eca179a811471a54e6f8a249d2cb613672240f10d0d06ee7d095f75"
+      "fingerprint": "sha256:3ffc561627283ef8b0b66e9a0cd6043b9ae4c3d955d3a9970e67317caeaf4196"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Conn.sendMultiFrame has cyclomatic complexity 14 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/isotp/transport.go",
         "line": 137
       },
       "category": "other",
       "remediation": "refactor Conn.sendMultiFrame to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:4bfe0e1fb9b8a8dec3eef6a7a8d8e8b8c15b9004574bea8501fcda706d2ca2e7"
+      "fingerprint": "sha256:d60dc375858f8dac3f10e423c25739666d540bb9609d653460dc4ce8eac811fe"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Conn.Recv has cyclomatic complexity 17 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/isotp/transport.go",
         "line": 207
       },
       "category": "other",
       "remediation": "refactor Conn.Recv to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:6c9d217c4bcceff7c9bc3c3d52d8ff7c6ef5490954ef81e4b8496110597fa3c0"
+      "fingerprint": "sha256:26ff005dac48a7cb16c6b88d2655e454c1aaa74ae24abae5c62c30956fb6b21b"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Bus.SendTP has cyclomatic complexity 11 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/j1939/tp.go",
         "line": 65
       },
       "category": "other",
       "remediation": "refactor Bus.SendTP to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:2d7a4db6b3fde10ecd9ef0e63f59f955c9d6db76675cc02fbb2aa9f50de80c87"
+      "fingerprint": "sha256:7e525e0cc283628853cb621d18899f3375a815feedbf55322b01df2335c91f96"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Bus.SubscribeTP has cyclomatic complexity 24 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/j1939/tp.go",
         "line": 144
       },
       "category": "other",
       "remediation": "refactor Bus.SubscribeTP to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:bc34350bfb461c82fb4f1701df3bb960d6a0f6f8f15bf7849c1fb471702db13c"
+      "fingerprint": "sha256:1ae0822ccfc82a4f8a93674f787def663a4d6cf4f52757d85b1c7af5e8745232"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function decode01 has cyclomatic complexity 31 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/obdii/client.go",
         "line": 172
       },
       "category": "other",
       "remediation": "refactor decode01 to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:8bb72ef7091c48dbf74a7ec4a2a05a1c0892dca39aaf5ebda880c681eddfed35"
+      "fingerprint": "sha256:38858ef12a4070e0e5a0334460ec2927cb8ceb5703aa0ff4b79e4c74a654ff72"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Replay has cyclomatic complexity 14 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/recorder/recorder.go",
         "line": 71
       },
       "category": "other",
       "remediation": "refactor Replay to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:eb0682a615587e55fda393879abb20a75ffee937711f9360a01c8ef220c05066"
+      "fingerprint": "sha256:a5569eebfb9a9f5a6348d70a615c9db55b0a0236bde875559a3478fc6ed1dfbc"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function ParseLine has cyclomatic complexity 21 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/recorder/recorder.go",
         "line": 138
       },
       "category": "other",
       "remediation": "refactor ParseLine to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:87e9b41fd9dc76de8517ff1558bc0232a3f6695c7a5e0b640888159c5b84f0ba"
+      "fingerprint": "sha256:0c830410a205866ff4b4625eceddaf8833e6ff8a126cb4991b071b67331585bb"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Client.request has cyclomatic complexity 12 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/uds/client.go",
         "line": 212
       },
       "category": "other",
       "remediation": "refactor Client.request to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:234bf49d94d51757e5d754c9f2e3cc440c771560a7958298d50b5663689dc7d8"
+      "fingerprint": "sha256:50996e6e61300cc1de997fd043f3f653eb7032a1bad7d68655fd14b12df9d333"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function nrcString has cyclomatic complexity 11 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/uds/client.go",
         "line": 239
       },
       "category": "other",
       "remediation": "refactor nrcString to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:00ff9cbce75c5ccb1057a17022f65275271e506b029e689ae51f9b7b1a894e4f"
+      "fingerprint": "sha256:8e30d3099bf85a7dc8fc44c8cd9dc677e4d66e0862b96bb4bbf5d87de9d5624e"
     },
     {
       "ruleId": "COUP001",
       "severity": "INFO",
       "message": "exported var \"ErrClosed\" creates data coupling — callers can read/write shared state directly",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
         "line": 58
       },
       "category": "other",
       "remediation": "replace exported vars with accessor functions or encapsulate in a struct to control coupling",
-      "fingerprint": "sha256:39c74a8bac12cf4b5743b705c1333f3bf80cb852e98111335fe25e08e7f1b1e5"
+      "fingerprint": "sha256:0507104dcb56461ec87336e2bc5b9e5d0e865afa7b2e30fabbdd70c4fbe43721"
     },
     {
       "ruleId": "COUP001",
       "severity": "INFO",
       "message": "exported var \"ErrNotConnected\" creates data coupling — callers can read/write shared state directly",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
         "line": 59
       },
       "category": "other",
       "remediation": "replace exported vars with accessor functions or encapsulate in a struct to control coupling",
-      "fingerprint": "sha256:7c6ebf5b3ffd9bb1e44e3fc9cabba08304ff0f6904b025e258e48a17d0639f64"
+      "fingerprint": "sha256:729c49c8dc04036e2147fd02a5cdd29a7996f5105da5f4ae0f85299fc7222337"
     },
     {
       "ruleId": "COUP001",
       "severity": "INFO",
       "message": "exported var \"ErrTimeout\" creates data coupling — callers can read/write shared state directly",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
         "line": 60
       },
       "category": "other",
       "remediation": "replace exported vars with accessor functions or encapsulate in a struct to control coupling",
-      "fingerprint": "sha256:7120ed56827b41eb04e0b24a2e06ef5113fa5fd6c29af276060dde9defc77ea6"
+      "fingerprint": "sha256:9e6369a8f827eee7ac30fb013286d7fbc89e74c3fc323fcdae8e2fa88523fddc"
     },
     {
       "ruleId": "COUP001",
       "severity": "INFO",
       "message": "exported var \"ErrPayloadTooLarge\" creates data coupling — callers can read/write shared state directly",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
         "line": 61
       },
       "category": "other",
       "remediation": "replace exported vars with accessor functions or encapsulate in a struct to control coupling",
-      "fingerprint": "sha256:e8734e7181c1dabbcc8eefe15151648d41d9379f724966f0a253b00cc001cf95"
+      "fingerprint": "sha256:1952413bbf5ae26bb4bdc563419bd5a1e9c10eb26160a020b9cbd01b9a9cf699"
     },
     {
       "ruleId": "COUP002",
       "severity": "INFO",
       "message": "exported function \"NewLoanedFrame\" accepts func/interface parameter — documents control coupling",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/optional.go",
+        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/optional.go",
         "line": 21
       },
       "category": "other",
       "remediation": "document coupling in requirements traceability and verify all injected implementations",
-      "fingerprint": "sha256:0d36f99d29673aa93f96eb78c25d81a65e70c34cde8db8c1622130a9092750da"
+      "fingerprint": "sha256:dcac82da15951dce35aa71a4b967135ab65722c90f3492fc61dafc2f1f7047e3"
     },
     {
       "ruleId": "CYBER005",
       "severity": "WARNING",
       "message": "exec.Command called with a non-literal command name — verify the value cannot be influenced by untrusted input",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_canutils_linux_test.go",
+        "file": "socketcan/interop_canutils_linux_test.go",
         "line": 207,
         "column": 14
       },
       "category": "security",
       "remediation": "use a fixed command name string literal; pass variable data only as arguments, never as the command name",
-      "fingerprint": "sha256:826fb4d834af8d198f9a563aca16460b3c45b82fc98c18905e62412596c85089"
+      "fingerprint": "sha256:9734dc30f340c39c3c24fae8514d78ba3e016c6665b65588b63a8b6a06d92519"
     },
     {
       "ruleId": "CYBER005",
       "severity": "WARNING",
       "message": "exec.Command called with a non-literal command name — verify the value cannot be influenced by untrusted input",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_helpers_linux_test.go",
+        "file": "socketcan/interop_helpers_linux_test.go",
         "line": 138,
         "column": 9
       },
       "category": "security",
       "remediation": "use a fixed command name string literal; pass variable data only as arguments, never as the command name",
-      "fingerprint": "sha256:9ba90d9e6073996679da4d1c7a808b7ce048cf4ef0d56d409cea8b1347bd8947"
+      "fingerprint": "sha256:3ec63bcd5c93a7b0e41c7f3d41c1415124b49b56e14d72d6b663e816a8f8ecee"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
+        "file": "adapt.go",
         "line": 70,
         "column": 17
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:5fc2704a6b1380e0adbcefc38ed6961938770a405375e4ab4a5110aa03056ba4"
+      "fingerprint": "sha256:0f9063fab622b492d293258b8f2030375a15f6cc3617815d2e14d0c9023d6688"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
+        "file": "adapt.go",
         "line": 93,
         "column": 11
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:5fc2704a6b1380e0adbcefc38ed6961938770a405375e4ab4a5110aa03056ba4"
+      "fingerprint": "sha256:0f9063fab622b492d293258b8f2030375a15f6cc3617815d2e14d0c9023d6688"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint8(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
+        "file": "adapt.go",
         "line": 96,
         "column": 12
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:5fc2704a6b1380e0adbcefc38ed6961938770a405375e4ab4a5110aa03056ba4"
+      "fingerprint": "sha256:0f9063fab622b492d293258b8f2030375a15f6cc3617815d2e14d0c9023d6688"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
+        "file": "adapt.go",
         "line": 99,
         "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:5fc2704a6b1380e0adbcefc38ed6961938770a405375e4ab4a5110aa03056ba4"
+      "fingerprint": "sha256:0f9063fab622b492d293258b8f2030375a15f6cc3617815d2e14d0c9023d6688"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/adapt_test.go",
+        "file": "adapt_test.go",
         "line": 150,
         "column": 44
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:566b07d3565582ceabb000e0032b6073062f24eb31fad06323fed5d2b0bd7b74"
+      "fingerprint": "sha256:28ef4ecb7bf5f4ab3c9157b744b2b1be4fe707083e3a0e80baaf6b38a05f1a5a"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/can-interop-peer/main.go",
+        "file": "cmd/can-interop-peer/main.go",
         "line": 155,
         "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:3c45eeb39fcaeed7ffeb22f145a6fa4ff9eed50bacdf0bc0cefdfe159daf3233"
+      "fingerprint": "sha256:e60e8887e34d0bdc725154b1f9240d8aeeb369e6fea92d90fda007532b610a12"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
+        "file": "cmd/cantool/main.go",
         "line": 196,
         "column": 21
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:68efba7c93ee60ad3e573fa588bbf2964d6b7290495c1c5e9004d807213777c5"
+      "fingerprint": "sha256:695c15e1568142edfe21466e5cc407ee1889c898b5efe779d99d4b1b5ef818dd"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+        "file": "dbc/parser.go",
         "line": 225,
         "column": 12
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:511cc142ef5727f58ecd9e7d26fc701ad7d83fc02b1c3838f2c2f554736bee7c"
+      "fingerprint": "sha256:f6954acc1be4647fc6b0f327f8088710e46f18a9de9f2c3114c682765998bebf"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+        "file": "dbc/parser.go",
         "line": 351,
         "column": 25
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:511cc142ef5727f58ecd9e7d26fc701ad7d83fc02b1c3838f2c2f554736bee7c"
+      "fingerprint": "sha256:f6954acc1be4647fc6b0f327f8088710e46f18a9de9f2c3114c682765998bebf"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/examples/quickstart/main.go",
+        "file": "examples/quickstart/main.go",
         "line": 59,
         "column": 11
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:b76b87a4ad110ea67895327036f4f33de1af58f12f085910f9aa04acc501a569"
+      "fingerprint": "sha256:064d55b899a69b6b2b3a6a1dcfca5b7c1d5ebb303d2526b56d299a67d14216f5"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/examples/quickstart/sender/main.go",
+        "file": "examples/quickstart/sender/main.go",
         "line": 59,
         "column": 11
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:fbc313474db8847e412d58de09def790ff2e214ec896673fd17a0753f0073657"
+      "fingerprint": "sha256:1086e3c860c3d1e65309392f58166d82456b737707e2f66943b032e90445eda3"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "isotp/transport.go",
         "line": 132,
         "column": 21
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:baeecc080aeb2ff2f97b70b811c3c78193e2afa2e86491e7d2fa8795b29ed13e"
+      "fingerprint": "sha256:a261e742ed8246900f2e716fc6aed59efc070570b820c7546c95593b241c5ffe"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "isotp/transport.go",
         "line": 140,
         "column": 38
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:83a479a944fc7c44c13a9daa9fb8e2873c23eda7ba5bc5037215d3a66887091b"
+      "fingerprint": "sha256:458fcb0d2d03b0fb0b098f394c2fb1cc21e5bd11d1157a897a2060f5cccb6bd5"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "isotp/transport.go",
         "line": 140,
         "column": 56
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:83a479a944fc7c44c13a9daa9fb8e2873c23eda7ba5bc5037215d3a66887091b"
+      "fingerprint": "sha256:458fcb0d2d03b0fb0b098f394c2fb1cc21e5bd11d1157a897a2060f5cccb6bd5"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "file": "isotp/transport.go",
         "line": 183,
         "column": 19
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:baeecc080aeb2ff2f97b70b811c3c78193e2afa2e86491e7d2fa8795b29ed13e"
+      "fingerprint": "sha256:a261e742ed8246900f2e716fc6aed59efc070570b820c7546c95593b241c5ffe"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport_test.go",
+        "file": "isotp/transport_test.go",
         "line": 84,
         "column": 16
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c37c30164a6e73647a0e6e2e6e612b6fdd24c71470d22be721189d2f413bacca"
+      "fingerprint": "sha256:c9ee679a222117dde867c42395a90906b2886d8467acfacec1f44b69819993cc"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport_test.go",
+        "file": "isotp/transport_test.go",
         "line": 316,
         "column": 16
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c37c30164a6e73647a0e6e2e6e612b6fdd24c71470d22be721189d2f413bacca"
+      "fingerprint": "sha256:c9ee679a222117dde867c42395a90906b2886d8467acfacec1f44b69819993cc"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 60,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:1ad7c07069a1c2b77beed1905708383feddbce2d1294e02946e3f0a6167cbb8e"
+      "fingerprint": "sha256:6893b857a57d03874844f1d176fa6c85d4e3c8e32973f19605f7710a4cb9801e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 71,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:1ad7c07069a1c2b77beed1905708383feddbce2d1294e02946e3f0a6167cbb8e"
+      "fingerprint": "sha256:6893b857a57d03874844f1d176fa6c85d4e3c8e32973f19605f7710a4cb9801e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 72,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:1ad7c07069a1c2b77beed1905708383feddbce2d1294e02946e3f0a6167cbb8e"
+      "fingerprint": "sha256:6893b857a57d03874844f1d176fa6c85d4e3c8e32973f19605f7710a4cb9801e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 73,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:1ad7c07069a1c2b77beed1905708383feddbce2d1294e02946e3f0a6167cbb8e"
+      "fingerprint": "sha256:6893b857a57d03874844f1d176fa6c85d4e3c8e32973f19605f7710a4cb9801e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 74,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:1ad7c07069a1c2b77beed1905708383feddbce2d1294e02946e3f0a6167cbb8e"
+      "fingerprint": "sha256:6893b857a57d03874844f1d176fa6c85d4e3c8e32973f19605f7710a4cb9801e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 77,
         "column": 13
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 77,
         "column": 30
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 80,
         "column": 13
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 80,
         "column": 30
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 80,
         "column": 46
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 89,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:1ad7c07069a1c2b77beed1905708383feddbce2d1294e02946e3f0a6167cbb8e"
+      "fingerprint": "sha256:6893b857a57d03874844f1d176fa6c85d4e3c8e32973f19605f7710a4cb9801e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 90,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:1ad7c07069a1c2b77beed1905708383feddbce2d1294e02946e3f0a6167cbb8e"
+      "fingerprint": "sha256:6893b857a57d03874844f1d176fa6c85d4e3c8e32973f19605f7710a4cb9801e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 91,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:1ad7c07069a1c2b77beed1905708383feddbce2d1294e02946e3f0a6167cbb8e"
+      "fingerprint": "sha256:6893b857a57d03874844f1d176fa6c85d4e3c8e32973f19605f7710a4cb9801e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 93,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 94,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 95,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 97,
         "column": 9
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 99,
         "column": 8
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 126,
         "column": 9
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:e9d7f6f76dc35d698c06f4a03e2aa40232fb0fffd7ec088818af6326be3da72e"
+      "fingerprint": "sha256:9eabe624af325a5712abfe27f5e842d050ab9b4f71dbf9199e348153edfb8e22"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/pgn.go",
+        "file": "j1939/pgn.go",
         "line": 153,
         "column": 11
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:1ad7c07069a1c2b77beed1905708383feddbce2d1294e02946e3f0a6167cbb8e"
+      "fingerprint": "sha256:6893b857a57d03874844f1d176fa6c85d4e3c8e32973f19605f7710a4cb9801e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 81,
         "column": 3
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:adf80a816af4a13a6ee15327fe09247729769b5228114d3e19e839f0dd7a4b68"
+      "fingerprint": "sha256:e7d88f932d60a3b5d67a59412f11ae769444be8578abdc8f572089c08a809000"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 82,
         "column": 3
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:adf80a816af4a13a6ee15327fe09247729769b5228114d3e19e839f0dd7a4b68"
+      "fingerprint": "sha256:e7d88f932d60a3b5d67a59412f11ae769444be8578abdc8f572089c08a809000"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 83,
         "column": 3
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:adf80a816af4a13a6ee15327fe09247729769b5228114d3e19e839f0dd7a4b68"
+      "fingerprint": "sha256:e7d88f932d60a3b5d67a59412f11ae769444be8578abdc8f572089c08a809000"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 111,
         "column": 12
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:adf80a816af4a13a6ee15327fe09247729769b5228114d3e19e839f0dd7a4b68"
+      "fingerprint": "sha256:e7d88f932d60a3b5d67a59412f11ae769444be8578abdc8f572089c08a809000"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 252,
         "column": 17
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:adf80a816af4a13a6ee15327fe09247729769b5228114d3e19e839f0dd7a4b68"
+      "fingerprint": "sha256:e7d88f932d60a3b5d67a59412f11ae769444be8578abdc8f572089c08a809000"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 252,
         "column": 26
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:adf80a816af4a13a6ee15327fe09247729769b5228114d3e19e839f0dd7a4b68"
+      "fingerprint": "sha256:e7d88f932d60a3b5d67a59412f11ae769444be8578abdc8f572089c08a809000"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 252,
         "column": 40
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:adf80a816af4a13a6ee15327fe09247729769b5228114d3e19e839f0dd7a4b68"
+      "fingerprint": "sha256:e7d88f932d60a3b5d67a59412f11ae769444be8578abdc8f572089c08a809000"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 257,
         "column": 13
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:5c618e63fa0930f8f995412fdd4d50b27914579fad54f06b1250c894878b0307"
+      "fingerprint": "sha256:4dbc61b925070e25ab8b942d7febe8e324bbeeeae7d16effbab42b661c2cbc0b"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 257,
         "column": 26
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:5c618e63fa0930f8f995412fdd4d50b27914579fad54f06b1250c894878b0307"
+      "fingerprint": "sha256:4dbc61b925070e25ab8b942d7febe8e324bbeeeae7d16effbab42b661c2cbc0b"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "file": "j1939/tp.go",
         "line": 257,
         "column": 42
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:5c618e63fa0930f8f995412fdd4d50b27914579fad54f06b1250c894878b0307"
+      "fingerprint": "sha256:4dbc61b925070e25ab8b942d7febe8e324bbeeeae7d16effbab42b661c2cbc0b"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp_test.go",
+        "file": "j1939/tp_test.go",
         "line": 37,
         "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:896924238978539d3699e8afb5c1a200e98b04004d9a4186f505249aef51ecb0"
+      "fingerprint": "sha256:d0345fe9068ae160df03e1f64eecf5b044f8d902d2d2415c59bd14827fdc7e88"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 146,
         "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 146,
         "column": 32
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 146,
         "column": 54
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 146,
         "column": 75
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 177,
         "column": 22
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 177,
         "column": 41
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 212,
         "column": 22
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 212,
         "column": 41
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 237,
         "column": 22
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 237,
         "column": 41
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 242,
         "column": 22
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 242,
         "column": 43
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 247,
         "column": 22
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
+        "file": "obdii/client.go",
         "line": 247,
         "column": 41
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:c9a1fb9634f7c3fa536cf285cf90fc2b3a6081f4983c28efcdb886d42015690e"
+      "fingerprint": "sha256:e5adff34c689421c1a4973d692f00bd41664fc9bb1f18d5d880c4dd6b34e768e"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+        "file": "recorder/recorder.go",
         "line": 199,
         "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:a3a18209464827f854b9d48404d6e53bb28a629f909bbe4edbc1aac40383501e"
+      "fingerprint": "sha256:5fb6dba2a18470ea46c89aab05934e8c88b755d9b59bbedf15b4e4dc1f8ff0c0"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
+        "file": "recorder/recorder.go",
         "line": 232,
         "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:a3a18209464827f854b9d48404d6e53bb28a629f909bbe4edbc1aac40383501e"
+      "fingerprint": "sha256:5fb6dba2a18470ea46c89aab05934e8c88b755d9b59bbedf15b4e4dc1f8ff0c0"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
+        "file": "safety/e2e.go",
         "line": 188,
         "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:02f893c65e23982a22e7fb638604ba43eeb818787cfd91d9a1d8127a67d76400"
+      "fingerprint": "sha256:920846fbdee48423d069f4f8a0529afe7a6823ca196e6d66edc781c240afb462"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e.go",
+        "file": "safety/e2e.go",
         "line": 203,
         "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:02f893c65e23982a22e7fb638604ba43eeb818787cfd91d9a1d8127a67d76400"
+      "fingerprint": "sha256:920846fbdee48423d069f4f8a0529afe7a6823ca196e6d66edc781c240afb462"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e_test.go",
+        "file": "safety/e2e_test.go",
         "line": 50,
         "column": 21
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:b021ae8584d9d2fd91a3c9255a75a904c0b288802561e6286ed7bca5b1957c09"
+      "fingerprint": "sha256:0b947669c08bf6052a233fca587278301d18367fce84953fbf76f2fc92543cae"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e_test.go",
+        "file": "safety/e2e_test.go",
         "line": 50,
         "column": 30
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:b021ae8584d9d2fd91a3c9255a75a904c0b288802561e6286ed7bca5b1957c09"
+      "fingerprint": "sha256:0b947669c08bf6052a233fca587278301d18367fce84953fbf76f2fc92543cae"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/safety/e2e_test.go",
+        "file": "safety/e2e_test.go",
         "line": 123,
         "column": 21
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:b021ae8584d9d2fd91a3c9255a75a904c0b288802561e6286ed7bca5b1957c09"
+      "fingerprint": "sha256:0b947669c08bf6052a233fca587278301d18367fce84953fbf76f2fc92543cae"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
+        "file": "socketcan/bus_linux.go",
         "line": 189,
         "column": 12
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:a722c70a9d38b005873576bcc287aa0ee8c0be94c41b785c61e87b3c0f62003b"
+      "fingerprint": "sha256:f57f75602d4287744370bdff9baed384725a1ae5532e53cc5c4d7360bf8f3631"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux.go",
+        "file": "socketcan/bus_linux.go",
         "line": 199,
         "column": 11
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:a722c70a9d38b005873576bcc287aa0ee8c0be94c41b785c61e87b3c0f62003b"
+      "fingerprint": "sha256:f57f75602d4287744370bdff9baed384725a1ae5532e53cc5c4d7360bf8f3631"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/bus_linux_test.go",
+        "file": "socketcan/bus_linux_test.go",
         "line": 128,
         "column": 16
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:4d23cafd260f930632761a4542c9f59b656f663f3aeabb1eb492487a2a4e77c5"
+      "fingerprint": "sha256:bc9b120d59497e5e8aa7f3297c7f9f76436f59aa417ab4a0e0f6fe3e67977277"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/socketcan/interop_canutils_linux_test.go",
+        "file": "socketcan/interop_canutils_linux_test.go",
         "line": 262,
         "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:f00268514b3672a3477de15e39dae9cf0eb5f2b69a2c3450734756669184a4f9"
+      "fingerprint": "sha256:5f340f708cd1936e583dff7d4b6b3cde9443488ac73759862f1f15defe00bf3a"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 125,
         "column": 66
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:3fe3890b887c9f5a3e56a5cb886ace0b72e56d5b1601b87ee9a2ec9990dd1733"
+      "fingerprint": "sha256:b35deb98aaa0b98736673967be3b28005c798b3fbeaf3669c6d16652c6b8e2aa"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 139,
         "column": 50
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:3fe3890b887c9f5a3e56a5cb886ace0b72e56d5b1601b87ee9a2ec9990dd1733"
+      "fingerprint": "sha256:b35deb98aaa0b98736673967be3b28005c798b3fbeaf3669c6d16652c6b8e2aa"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 157,
         "column": 3
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:3fe3890b887c9f5a3e56a5cb886ace0b72e56d5b1601b87ee9a2ec9990dd1733"
+      "fingerprint": "sha256:b35deb98aaa0b98736673967be3b28005c798b3fbeaf3669c6d16652c6b8e2aa"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 158,
         "column": 3
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:3fe3890b887c9f5a3e56a5cb886ace0b72e56d5b1601b87ee9a2ec9990dd1733"
+      "fingerprint": "sha256:b35deb98aaa0b98736673967be3b28005c798b3fbeaf3669c6d16652c6b8e2aa"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 180,
         "column": 11
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:3fe3890b887c9f5a3e56a5cb886ace0b72e56d5b1601b87ee9a2ec9990dd1733"
+      "fingerprint": "sha256:b35deb98aaa0b98736673967be3b28005c798b3fbeaf3669c6d16652c6b8e2aa"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
+        "file": "uds/client.go",
         "line": 181,
         "column": 11
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:3fe3890b887c9f5a3e56a5cb886ace0b72e56d5b1601b87ee9a2ec9990dd1733"
+      "fingerprint": "sha256:b35deb98aaa0b98736673967be3b28005c798b3fbeaf3669c6d16652c6b8e2aa"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client_test.go",
+        "file": "uds/client_test.go",
         "line": 120,
         "column": 18
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:9ab6a813de0f759eb5a2b0c9381326631355bae1f7b931c65748609bb2aa2b5c"
+      "fingerprint": "sha256:3017cef66a52850ac97828ae9422c4026307a188cbe70b2240faf5461bd25b48"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client_test.go",
+        "file": "uds/client_test.go",
         "line": 121,
         "column": 59
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:9ab6a813de0f759eb5a2b0c9381326631355bae1f7b931c65748609bb2aa2b5c"
+      "fingerprint": "sha256:3017cef66a52850ac97828ae9422c4026307a188cbe70b2240faf5461bd25b48"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client_test.go",
+        "file": "uds/client_test.go",
         "line": 162,
         "column": 54
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:9ab6a813de0f759eb5a2b0c9381326631355bae1f7b931c65748609bb2aa2b5c"
+      "fingerprint": "sha256:3017cef66a52850ac97828ae9422c4026307a188cbe70b2240faf5461bd25b48"
     },
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/uds/client_test.go",
+        "file": "uds/client_test.go",
         "line": 162,
         "column": 70
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
-      "fingerprint": "sha256:9ab6a813de0f759eb5a2b0c9381326631355bae1f7b931c65748609bb2aa2b5c"
+      "fingerprint": "sha256:3017cef66a52850ac97828ae9422c4026307a188cbe70b2240faf5461bd25b48"
     },
     {
       "ruleId": "CYBER017",
       "severity": "WARNING",
       "message": "os.WriteFile called with mode more permissive than 0640",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main_test.go",
+        "file": "cmd/cantool/main_test.go",
         "line": 137,
         "column": 12
       },
       "category": "security",
       "remediation": "use mode 0640 (owner rw, group r) or stricter",
-      "fingerprint": "sha256:8b2e7328579644f24b8fc05e1fad0b59ebb70776b20a94c2864dab2e172130d8"
+      "fingerprint": "sha256:be8147b0a7593e94016f11fefca3cc993442e76591e2ce8e27f480b77e125383"
     },
     {
       "ruleId": "CYBER017",
       "severity": "WARNING",
       "message": "os.WriteFile called with mode more permissive than 0640",
       "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main_test.go",
+        "file": "cmd/cantool/main_test.go",
         "line": 157,
         "column": 6
       },
       "category": "security",
       "remediation": "use mode 0640 (owner rw, group r) or stricter",
-      "fingerprint": "sha256:8b2e7328579644f24b8fc05e1fad0b59ebb70776b20a94c2864dab2e172130d8"
+      "fingerprint": "sha256:be8147b0a7593e94016f11fefca3cc993442e76591e2ce8e27f480b77e125383"
+    },
+    {
+      "ruleId": "HARA008",
+      "severity": "WARNING",
+      "message": "hazard H-001 declares risk.asil=ASIL-B but S=S2 E=E4 C=C2 derives ASIL-C per ISO 26262-3 Table 4 (DetermineASIL)",
+      "location": {
+        "file": ".fusa-hara.json"
+      },
+      "category": "safety",
+      "remediation": "update risk.asil for hazard H-001 in .fusa-hara.json to match its S/E/C rating, or correct the S/E/C rating if the ASIL is right and the inputs are wrong",
+      "fingerprint": "sha256:2730c9ebb628c2c83040deb0d073992b6ca3268f41c706e2e5e1ce7ddca065bb"
+    },
+    {
+      "ruleId": "HARA008",
+      "severity": "WARNING",
+      "message": "hazard H-002 declares risk.asil=ASIL-B but S=S2 E=E4 C=C2 derives ASIL-C per ISO 26262-3 Table 4 (DetermineASIL)",
+      "location": {
+        "file": ".fusa-hara.json"
+      },
+      "category": "safety",
+      "remediation": "update risk.asil for hazard H-002 in .fusa-hara.json to match its S/E/C rating, or correct the S/E/C rating if the ASIL is right and the inputs are wrong",
+      "fingerprint": "sha256:2730c9ebb628c2c83040deb0d073992b6ca3268f41c706e2e5e1ce7ddca065bb"
+    },
+    {
+      "ruleId": "HARA008",
+      "severity": "WARNING",
+      "message": "hazard H-004 declares risk.asil=ASIL-A but S=S2 E=E2 C=C3 derives ASIL-B per ISO 26262-3 Table 4 (DetermineASIL)",
+      "location": {
+        "file": ".fusa-hara.json"
+      },
+      "category": "safety",
+      "remediation": "update risk.asil for hazard H-004 in .fusa-hara.json to match its S/E/C rating, or correct the S/E/C rating if the ASIL is right and the inputs are wrong",
+      "fingerprint": "sha256:57dd2c93c3febeee426fd29dd25ba42013dcc806debc6562ef20b02d4b89fac9"
+    },
+    {
+      "ruleId": "HARA008",
+      "severity": "WARNING",
+      "message": "hazard H-005 declares risk.asil=ASIL-B but S=S1 E=E4 C=C2 derives ASIL-A per ISO 26262-3 Table 4 (DetermineASIL)",
+      "location": {
+        "file": ".fusa-hara.json"
+      },
+      "category": "safety",
+      "remediation": "update risk.asil for hazard H-005 in .fusa-hara.json to match its S/E/C rating, or correct the S/E/C rating if the ASIL is right and the inputs are wrong",
+      "fingerprint": "sha256:1b3507d25916ed735419c4bb841c30a1f8de3b9a33e5c586037a44f2716579b6"
     },
     {
       "ruleId": "LINT001",
@@ -5181,17 +5225,6 @@
       "fingerprint": "sha256:9ce79480d258dc596d5500f9f93bdd6a9dfa5be6db9f26294dd4b58e9c8d5c16"
     },
     {
-      "ruleId": "QUALIFY001",
-      "severity": "INFO",
-      "message": "qualify-report.json not found",
-      "location": {
-        "file": "/home/runner/work/go-CAN/go-CAN"
-      },
-      "category": "other",
-      "remediation": "Run 'gofusa qualify' to generate tool qualification evidence.",
-      "fingerprint": "sha256:9ab5481fef063ea35a4a3ddffb1c7bd0db311c2dbef34830f696b55fb7ecc5b1"
-    },
-    {
       "ruleId": "SLSA002",
       "severity": "INFO",
       "message": "provenance.json missing builder field — SLSA L2 requires the build system to be identified",
@@ -5215,10 +5248,10 @@
     }
   ],
   "summary": {
-    "total": 364,
+    "total": 367,
     "errors": 0,
-    "warnings": 222,
-    "infos": 142
+    "warnings": 226,
+    "infos": 141
   },
   "summaryTable": {
     "by_category": [
@@ -5258,18 +5291,18 @@
         "total": 87
       },
       {
+        "category": "HARA",
+        "errors": 0,
+        "warnings": 4,
+        "infos": 0,
+        "total": 4
+      },
+      {
         "category": "LINT",
         "errors": 0,
         "warnings": 124,
         "infos": 6,
         "total": 130
-      },
-      {
-        "category": "QUALIFY",
-        "errors": 0,
-        "warnings": 0,
-        "infos": 1,
-        "total": 1
       },
       {
         "category": "SLSA",
@@ -5321,6 +5354,11 @@
         "count": 4
       },
       {
+        "ruleId": "HARA008",
+        "severity": "WARNING",
+        "count": 4
+      },
+      {
         "ruleId": "ANA003",
         "severity": "WARNING",
         "count": 3
@@ -5351,11 +5389,6 @@
         "count": 1
       },
       {
-        "ruleId": "QUALIFY001",
-        "severity": "INFO",
-        "count": 1
-      },
-      {
         "ruleId": "SLSA002",
         "severity": "INFO",
         "count": 1
@@ -5366,6 +5399,6 @@
         "count": 1
       }
     ],
-    "file_count": 60
+    "file_count": 50
   }
 }

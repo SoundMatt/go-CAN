@@ -1,15 +1,15 @@
 {
-  "schemaVersion": "1.9",
+  "schemaVersion": "1.15.2",
   "kind": "provenance",
   "tool": "go-FuSa",
-  "toolVersion": "0.30.0",
+  "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-28T01:28:58.063709803Z",
+  "generatedAt": "2026-07-29T15:02:41.382721Z",
   "format": "x-FuSa provenance v1",
   "module": "github.com/SoundMatt/go-CAN",
-  "goVersion": "go1.25.12",
-  "goos": "linux",
-  "goarch": "amd64",
-  "vcsRevision": "bbb0c4ffa6a9b865206f278d5e00629a386a0d7d",
+  "goVersion": "go1.26.3",
+  "goos": "darwin",
+  "goarch": "arm64",
+  "vcsRevision": "49b8bf14b836818c251ca3f4b67f08058aa9b24f",
   "vcsModified": true
 }
