@@ -274,8 +274,8 @@ jobs:
       - name: relay conform --strict (fail on FAIL or WARN)
         run: relay conform --strict /tmp/go-can
 
-      - name: relay interop (behavioural equivalence vs reference, §20.2)
-        run: relay interop --protocol CAN /tmp/go-can
+      - name: relay interop --strict (behavioural equivalence vs reference, §20.2)
+        run: relay interop --protocol CAN --strict /tmp/go-can
 
       - name: relay compare (convert-driver self-check)
         run: relay compare /tmp/go-can /tmp/go-can
