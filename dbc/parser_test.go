@@ -110,6 +110,34 @@ func TestParseMalformed(t *testing.T) {
 	}
 }
 
+// TestParseRejectsZeroLengthSignal guards against a zero-length SG_
+// definition being accepted at parse time: Signal.Decode() would later
+// panic with a negative shift amount when decoding a signed zero-length
+// signal (1<<(0-1)).
+func TestParseRejectsZeroLengthSignal(t *testing.T) {
+	const input = `
+BO_ 256 EngineData: 8 ECU
+ SG_ Foo : 0|0@1- (1,0) [0|0] "" Vector__XXX
+`
+	_, err := dbc.Parse(strings.NewReader(input))
+	if err == nil {
+		t.Fatal("Parse with Length=0 signal: expected error, got nil")
+	}
+}
+
+// TestParseRejectsOversizeLength guards the upper bound: a CAN signal
+// cannot span more than 64 bits.
+func TestParseRejectsOversizeLength(t *testing.T) {
+	const input = `
+BO_ 256 EngineData: 8 ECU
+ SG_ Foo : 0|65@1+ (1,0) [0|1] "" Vector__XXX
+`
+	_, err := dbc.Parse(strings.NewReader(input))
+	if err == nil {
+		t.Fatal("Parse with Length=65 signal: expected error, got nil")
+	}
+}
+
 func FuzzParse(f *testing.F) {
 	f.Add(sampleDBC)
 	f.Fuzz(func(t *testing.T, s string) {
