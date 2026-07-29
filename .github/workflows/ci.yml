@@ -89,8 +89,18 @@ jobs:
         run: go test -fuzz=^FuzzParse$ -fuzztime=10s ./dbc/...
 
   # ── SocketCAN tests (Linux only, requires vcan) ───────────────────────────
-  # Uses vcan0 Linux virtual CAN interface. The test helpers skip gracefully
-  # if vcan0 is not available, so CI passes even without hardware.
+  # Uses vcan0 Linux virtual CAN interface. GitHub-hosted ubuntu-latest
+  # runners do NOT ship the vcan kernel module (confirmed: "modprobe: FATAL:
+  # Module vcan not found in directory /lib/modules/<runner kernel>" — it is
+  # simply absent from the runner image's kernel, not a permissions or
+  # capability issue modprobe flags/sudo can work around). This is a kernel-
+  # module-availability limitation of the hosted runner image itself, not
+  # fixable from within the workflow; a real fix would require a self-hosted
+  # runner (or a runner image GitHub ships with vcan built in, which does
+  # not currently exist). The test helpers skip gracefully when vcan0 is
+  # unavailable so this job stays green — but "green" here routinely means
+  # "skipped", not "passed", and that distinction must be loud, not just
+  # visible to someone who reads the raw log.
   test-socketcan:
     name: Test (socketcan, ubuntu-latest)
     runs-on: ubuntu-latest
@@ -110,7 +120,12 @@ jobs:
             echo "available=true" >> "$GITHUB_OUTPUT"
           else
             echo "available=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::vcan0 not available — socketcan tests will skip"
+            echo "::warning title=socketcan tests SKIPPED (not run)::vcan0 is unavailable on this runner (the vcan kernel module is not present on GitHub-hosted runner images) — the socketcan test suite's real assertions will NOT execute. A green check on this job means SKIPPED, not PASSED."
+            {
+              echo "## :warning: socketcan tests SKIPPED — vcan0 unavailable"
+              echo
+              echo "GitHub-hosted \`ubuntu-latest\` runners do not ship the \`vcan\` kernel module, so \`socketcan/*_test.go\`'s real assertions never ran in this job. **A green check here does not mean the socketcan transport was exercised.** See ROADMAP.md / this workflow's comments for background; fixing this for real requires a self-hosted runner with a vcan-capable kernel."
+            } >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: go vet (socketcan)
@@ -131,7 +146,11 @@ jobs:
   # `go test ./...` sweep and from the test-socketcan job above. Probes
   # vcan + can-utils availability first and skips cleanly (green, not red)
   # if either is unavailable, rather than hard-failing — same posture as the
-  # vcan probe in test-socketcan above.
+  # vcan probe in test-socketcan above. As with that job, GitHub-hosted
+  # runners never actually have vcan (see test-socketcan's comment above
+  # for the confirmed root cause), so this job routinely skips; the probe
+  # step below emits a loud ::warning:: + job-summary banner rather than a
+  # silent ::notice:: so "green" is never mistaken for "ran and passed".
   can-interop:
     name: CAN interop (two-process + can-utils third-party, ubuntu-latest)
     runs-on: ubuntu-latest
@@ -153,7 +172,12 @@ jobs:
             echo "available=true" >> "$GITHUB_OUTPUT"
           else
             echo "available=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::vcan0 or can-utils not available — CAN interop tests will skip"
+            echo "::warning title=CAN interop tests SKIPPED (not run)::vcan0 or can-utils is unavailable on this runner (GitHub-hosted runner images do not ship the vcan kernel module) — the live two-process + can-utils interop suite will NOT execute. A green check on this job means SKIPPED, not PASSED."
+            {
+              echo "## :warning: CAN interop tests SKIPPED — vcan0/can-utils unavailable"
+              echo
+              echo "GitHub-hosted \`ubuntu-latest\` runners do not ship the \`vcan\` kernel module, so the live two-process self-interop and can-utils third-party interop suites never ran in this job. **A green check here does not mean interop was exercised.** Fixing this for real requires a self-hosted runner with a vcan-capable kernel."
+            } >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: go vet (socketcan, cmd/can-interop-peer)
