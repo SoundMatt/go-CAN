@@ -45,7 +45,7 @@ scopes what the library itself defends against versus what it delegates.
 | T3 | Denial of Service | Hostile peer sends an unbounded/oversized ISO-TP transfer to exhaust memory | **Mitigated** — 4095-byte protocol cap on send and receive; bounded subscriber channels with explicit back-pressure ([REQ-SEC-003]). |
 | T4 | Tampering | Crafted DBC physical value wraps/truncates onto unintended bits | **Mitigated** — encoder clamps to the signal's representable range ([REQ-SEC-004]). |
 | T5 | Spoofing | A rogue bus node transmits frames with a legitimate node's arbitration ID | **Partially mitigated** — arbitration IDs cannot be authenticated at the data-link layer, but `safety.HmacSha256Auth` (HMAC-SHA256, [REQ-SEC-006]) lets the integrator authenticate the *payload* above go-CAN with a shared key, detecting forged content even when the ID is spoofed. Freshness (anti-replay) and key management remain the integrator's responsibility (AUTOSAR SecOC / ISO 21434). |
-| T6 | Denial of Service | Bus flooding / babbling-idiot node monopolises arbitration | **Delegated** — requires a hardware/transceiver-level mitigation (bus guardian, rate limiting). go-CAN surfaces drop/error metrics ([`MetricsProvider`](can_optional.go)) so the integrator can detect it. |
+| T6 | Denial of Service | Bus flooding / babbling-idiot node monopolises arbitration | **Delegated** — requires a hardware/transceiver-level mitigation (bus guardian, rate limiting). go-CAN surfaces drop/error metrics ([`MetricsProvider`](optional.go)) so the integrator can detect it. |
 | T7 | Information Disclosure | Passive bus sniffing reveals payloads | **Delegated** — CAN is a broadcast medium. Confidentiality, if required, is an application-layer concern. |
 | T8 | Repudiation | No record of frames sent/received | **Partially mitigated** — the `recorder` package provides candump-format capture for forensic logging; integrity of the log is the integrator's responsibility. |
 | T9 | Elevation of Privilege | UDS routines (e.g. ECUReset, WriteDataByIdentifier) invoked without authorisation | **Delegated** — go-CAN is the diagnostic *client*; SecurityAccess (SID 0x27) enforcement is an ECU-side responsibility. The client surfaces negative responses (NRC 0x33 securityAccessDenied) rather than masking them. |
@@ -77,6 +77,10 @@ go-CAN's `safety.HmacSha256Auth` mirrors the sibling
 [`rust-CAN`](https://github.com/SoundMatt/rust-CAN) `safety::hmac_auth`
 (`MessageAuthenticator` trait + `HmacSha256Auth`, REQ-SEC-006): same primitive
 (HMAC-SHA256, FIPS 198-1 / RFC 2104), same 32-byte tag, same constant-time
-verification, and a parallel test set. This keeps the CAN implementations
-behaviourally equivalent across languages for the authentication surface, as the
-shared RELAY contract intends.
+verification, and a parallel test set. Two divergences remain: rust-CAN gates
+its implementation behind the `hmac-auth` cargo feature (go-CAN always compiles
+it), and rust-CAN additionally cites ISO/SAE 21434 CAL-3 in its
+safety-classification framing. The authentication primitive is therefore
+behaviourally equivalent across languages, while build configuration and
+safety-classification wording differ, as noted here rather than in the shared
+RELAY contract.

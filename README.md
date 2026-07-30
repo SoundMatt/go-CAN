@@ -27,6 +27,26 @@ The `can.Bus` interface is stable. Implementations are swappable without changin
 go get github.com/SoundMatt/go-CAN
 ```
 
+## RELAY conformance
+
+go-CAN is a [RELAY](https://github.com/SoundMatt/RELAY) protocol implementation.
+It targets the RELAY spec version exported as `can.SpecVersion`
+(`= relay.SpecVersion`) and surfaced by the CLI's `version` and `capabilities`
+commands.
+
+- **Cross-protocol adapter** — `Adapt(bus can.Bus) relay.Node` (in `adapt.go`)
+  wraps any `can.Bus` as a `relay.Node`, and `ToMessage`/`FromMessage`
+  translate between `can.Frame` and the RELAY envelope (`relay.Message`).
+
+  ```go
+  node := can.Adapt(bus) // *can.Bus → relay.Node
+  ```
+
+- **Conformance binary** — `cmd/cantool` (built as `go-can`) is the
+  RELAY-conformant CLI. The mandatory commands are `version`, `capabilities`,
+  and `status`; it also provides `send`, `subscribe`, `dump`, `record`,
+  `replay`, and `convert`.
+
 ## Quick start
 
 ```go

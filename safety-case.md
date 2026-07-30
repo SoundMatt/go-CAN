@@ -14,7 +14,7 @@ argued by demonstrating compliance with the safety development lifecycle.
 |---|---|---|---|
 | Sn1 | Coding standard and static analysis checks | ✅ present | 367 findings (0 errors, 226 warnings) |
 | Sn2 | Requirements traceability matrix | ✅ present | 94 requirements |
-| Sn3 | Test evidence bundle | ✅ present | 213/213 tests passed |
+| Sn3 | Test evidence bundle | ✅ present | 169 `Test`/`Fuzz` functions, all passing (`go test ./...`); 376 pass records including subtests (`go test ./... -v`) |
 | Sn4 | Tool qualification report | ✅ present | 46/46 cases passed |
 | Sn5 | SBOM (SPDX 3.0.1) | ✅ present |  |
 | Sn6 | Build provenance | ✅ present |  |
