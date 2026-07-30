@@ -74,10 +74,10 @@ func DecodeID(id uint32) (priority Priority, pgn PGN, src byte) {
 	dp := byte((id >> 24) & 0x01)
 	if pf < 240 {
 		// Peer-to-peer: PS is destination, PGN does not include PS
-		pgn = PGN(uint32(dp)<<17 | uint32(pf)<<8)
+		pgn = PGN(uint32(dp)<<16 | uint32(pf)<<8)
 	} else {
 		// Broadcast: PS is group extension, part of PGN
-		pgn = PGN(uint32(dp)<<17 | uint32(pf)<<8 | uint32(ps))
+		pgn = PGN(uint32(dp)<<16 | uint32(pf)<<8 | uint32(ps))
 	}
 	return priority, pgn, src
 }
@@ -88,7 +88,7 @@ func DecodeID(id uint32) (priority Priority, pgn PGN, src byte) {
 func EncodeID(priority Priority, pgn PGN, src byte) uint32 {
 	pf := byte((pgn >> 8) & 0xFF)
 	ps := byte(pgn & 0xFF)
-	dp := byte((pgn >> 17) & 0x01)
+	dp := byte((pgn >> 16) & 0x01)
 	var id uint32
 	id |= uint32(priority&0x07) << 26
 	id |= uint32(dp) << 24

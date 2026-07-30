@@ -49,6 +49,45 @@ func TestDecodeEncodeRoundTrip(t *testing.T) {
 	}
 }
 
+func TestEncodeDecodeGolden(t *testing.T) {
+	// Golden vectors: (priority, PGN, src) → exact 29-bit CAN ID, computed
+	// by hand from the SAE J1939-21 bit layout (P·R·DP·PF·PS·SA). These
+	// decode independently of EncodeID, so a shared DP-shift bug in both
+	// directions cannot mask itself. Includes DP=1 PGNs (regression for
+	// the Data-Page bit being placed at PGN bit 17 instead of bit 16).
+	tests := []struct {
+		name     string
+		priority j1939.Priority
+		pgn      j1939.PGN
+		src      byte
+		wantID   uint32
+	}{
+		// DP=0 broadcast: PF=0xFE, PS=0xCA → PGN 0x0FECA.
+		{"DP=0 broadcast CCVS", 6, 0x0FECA, 0x00, 0x18FECA00},
+		// DP=1 broadcast: PF=0xF0, PS=0x04 → PGN 0x1F004.
+		{"DP=1 broadcast", 3, 0x1F004, 0x21, 0x0DF00421},
+		// DP=1 peer-to-peer: PF=0xE8 (<240), PGN carries no PS → 0x1E800.
+		{"DP=1 peer-to-peer", 6, 0x1E800, 0x01, 0x19E80001},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotID := j1939.EncodeID(tt.priority, tt.pgn, tt.src); gotID != tt.wantID {
+				t.Errorf("EncodeID: got 0x%08X, want 0x%08X", gotID, tt.wantID)
+			}
+			p, pgn, src := j1939.DecodeID(tt.wantID)
+			if p != tt.priority {
+				t.Errorf("DecodeID priority: got %d, want %d", p, tt.priority)
+			}
+			if pgn != tt.pgn {
+				t.Errorf("DecodeID pgn: got 0x%X, want 0x%X", pgn, tt.pgn)
+			}
+			if src != tt.src {
+				t.Errorf("DecodeID src: got 0x%X, want 0x%X", src, tt.src)
+			}
+		})
+	}
+}
+
 func TestIsPeerToPeer(t *testing.T) {
 	// PF=0xE8 (<240) → peer-to-peer
 	if !j1939.PGN(0x00E800).IsPeerToPeer() {
