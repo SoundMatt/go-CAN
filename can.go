@@ -25,7 +25,7 @@ package can
 import (
 	"context"
 
-	relay "github.com/SoundMatt/RELAY"
+	relay "github.com/SoundMatt/RELAY/v2"
 )
 
 //fusa:req REQ-CAN-001

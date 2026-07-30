@@ -33,13 +33,13 @@ import (
 	"syscall"
 	"time"
 
-	relay "github.com/SoundMatt/RELAY"
+	relay "github.com/SoundMatt/RELAY/v2"
 	can "github.com/SoundMatt/go-CAN"
 	"github.com/SoundMatt/go-CAN/recorder"
 	"github.com/SoundMatt/go-CAN/virtual"
 )
 
-const toolVersion = "0.11.0"
+const toolVersion = "0.12.1"
 
 func main() {
 	if len(os.Args) < 2 {

@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"time"
 
-	relay "github.com/SoundMatt/RELAY"
+	relay "github.com/SoundMatt/RELAY/v2"
 )
 
 // ToMessage converts a CAN Frame to a relay.Message for cross-protocol routing.
