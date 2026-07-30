@@ -35,7 +35,7 @@ func requireVCAN(t *testing.T) {
 
 func TestNew(t *testing.T) {
 	requireVCAN(t)
-	b, err := socketcan.New("vcan0")
+	b, err := socketcan.New(context.Background(), "vcan0")
 	if err != nil {
 		t.Fatalf("New: %v", err)
 	}
@@ -45,13 +45,13 @@ func TestNew(t *testing.T) {
 func TestSendReceive(t *testing.T) {
 	requireVCAN(t)
 
-	sender, err := socketcan.New("vcan0")
+	sender, err := socketcan.New(context.Background(), "vcan0")
 	if err != nil {
 		t.Fatalf("New (sender): %v", err)
 	}
 	defer sender.Close()
 
-	receiver, err := socketcan.New("vcan0")
+	receiver, err := socketcan.New(context.Background(), "vcan0")
 	if err != nil {
 		t.Fatalf("New (receiver): %v", err)
 	}
@@ -83,9 +83,9 @@ func TestSendReceive(t *testing.T) {
 func TestSendReceiveExtended(t *testing.T) {
 	requireVCAN(t)
 
-	sender, _ := socketcan.New("vcan0")
+	sender, _ := socketcan.New(context.Background(), "vcan0")
 	defer sender.Close()
-	receiver, _ := socketcan.New("vcan0")
+	receiver, _ := socketcan.New(context.Background(), "vcan0")
 	defer receiver.Close()
 
 	ch, _ := receiver.Subscribe(nil)
@@ -109,13 +109,13 @@ func TestSendReceiveFD(t *testing.T) {
 	requireVCAN(t)
 
 	// vcan0 supports CAN FD frames natively.
-	sender, err := socketcan.New("vcan0")
+	sender, err := socketcan.New(context.Background(), "vcan0")
 	if err != nil {
 		t.Fatalf("New (sender): %v", err)
 	}
 	defer sender.Close()
 
-	receiver, err := socketcan.New("vcan0")
+	receiver, err := socketcan.New(context.Background(), "vcan0")
 	if err != nil {
 		t.Fatalf("New (receiver): %v", err)
 	}
@@ -146,7 +146,7 @@ func TestSendReceiveFD(t *testing.T) {
 }
 
 func TestBadInterface(t *testing.T) {
-	_, err := socketcan.New("nosuchiface99")
+	_, err := socketcan.New(context.Background(), "nosuchiface99")
 	if err == nil {
 		t.Error("expected error for non-existent interface")
 	}

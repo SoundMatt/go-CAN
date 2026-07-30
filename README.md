@@ -61,8 +61,11 @@ import "github.com/SoundMatt/go-CAN/virtual"
 bus, err := virtual.New()
 
 // Linux hardware or vcan — real SocketCAN:
-import "github.com/SoundMatt/go-CAN/socketcan"
-bus, err := socketcan.New("can0")   // or "vcan0" for virtual CAN
+import (
+    "context"
+    "github.com/SoundMatt/go-CAN/socketcan"
+)
+bus, err := socketcan.New(context.Background(), "can0")   // or "vcan0" for virtual CAN
 ```
 
 Application code only references the `can.Bus` interface — swap the transport at the call site.

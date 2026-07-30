@@ -158,7 +158,7 @@ func fdPayload(n int) []byte {
 }
 
 func runWriter(iface string) report {
-	bus, err := socketcan.New(iface)
+	bus, err := socketcan.New(context.Background(), iface)
 	if err != nil {
 		return report{Role: "writer", OK: false, Error: err.Error()}
 	}
@@ -179,7 +179,7 @@ func runWriter(iface string) report {
 }
 
 func runReader(iface string, count int, timeout time.Duration) report {
-	bus, err := socketcan.New(iface)
+	bus, err := socketcan.New(context.Background(), iface)
 	if err != nil {
 		return report{Role: "reader", OK: false, Error: err.Error()}
 	}
