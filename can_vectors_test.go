@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	relay "github.com/SoundMatt/RELAY"
+	relay "github.com/SoundMatt/RELAY/v2"
 	can "github.com/SoundMatt/go-CAN"
 )
 

@@ -27,7 +27,7 @@ import (
 	"net"
 	"sync"
 
-	relay "github.com/SoundMatt/RELAY"
+	relay "github.com/SoundMatt/RELAY/v2"
 	can "github.com/SoundMatt/go-CAN"
 	"golang.org/x/sys/unix"
 )
