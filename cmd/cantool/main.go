@@ -119,7 +119,7 @@ func cmdCapabilities() error {
 		"spec_version": can.SpecVersion,
 		"commands":     []string{"version", "capabilities", "status", "send", "subscribe", "dump", "record", "replay", "convert"},
 		"transports":   []string{"socketcan", "virtual"},
-		"features":     []string{"fd", "xl"},
+		"features":     []string{"fd", "isotp", "j1939", "uds", "obdii"},
 		"interfaces":   []string{"Bus"},
 		// optional_interfaces reflects what the shipped virtual.Bus (the
 		// default transport, see openBus) implements — see
