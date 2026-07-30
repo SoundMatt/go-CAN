@@ -88,6 +88,10 @@ func (b *Bus) SendTP(ctx context.Context, f Frame, cfg TPConfig) error {
 	}
 
 	bamID := EncodeID(f.Priority, pgnTPCM, b.src)
+	// TP.CM is PDU1 (PF<240); EncodeID omits the PS byte, so set the
+	// destination explicitly. For BAM this MUST be the global address
+	// 0xFF (SAE J1939-21 §5.10.3).
+	bamID |= uint32(BroadcastAddr) << 8
 	if err := b.can.Send(ctx, can.Frame{
 		ID:   bamID,
 		Ext:  true,
@@ -98,6 +102,8 @@ func (b *Bus) SendTP(ctx context.Context, f Frame, cfg TPConfig) error {
 
 	// --- 2. Send TP.DT packets ---
 	dtBaseID := EncodeID(f.Priority, pgnTPDT, b.src)
+	// TP.DT is PDU1; carry the global destination 0xFF like TP.CM_BAM.
+	dtBaseID |= uint32(BroadcastAddr) << 8
 	for seq := 1; seq <= numPackets; seq++ {
 		if seq > 1 {
 			select {
@@ -189,6 +195,15 @@ func (b *Bus) SubscribeTP(ctx context.Context, pgns ...PGN) (<-chan Frame, error
 					}
 					totalSize := int(f.Data[1]) | int(f.Data[2])<<8
 					numPackets := int(f.Data[3])
+					// Bound the advertised transfer against J1939-21 limits
+					// before allocating, so a malformed/hostile TP.CM_BAM
+					// cannot request an oversized allocation per source
+					// address. BAM caps at 1785 bytes / 255 packets, and
+					// numPackets must equal ceil(totalSize/7).
+					if totalSize < 9 || totalSize > tpMaxDataBytes || numPackets == 0 ||
+						numPackets != (totalSize+tpBytesPerPacket-1)/tpBytesPerPacket {
+						continue
+					}
 					targetPGN := pgnFromBytes(f.Data[5], f.Data[6], f.Data[7])
 
 					// A new BAM for the same source replaces any stale session.
