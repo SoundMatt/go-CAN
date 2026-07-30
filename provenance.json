@@ -4,13 +4,13 @@
   "tool": "go-FuSa",
   "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-30T21:28:02.453998576Z",
+  "generatedAt": "2026-07-30T22:31:02.391900316Z",
   "format": "x-FuSa provenance v1",
   "module": "github.com/SoundMatt/go-CAN",
   "goVersion": "go1.25.12",
   "goos": "linux",
   "goarch": "amd64",
-  "vcsRevision": "d78520065a1997579fa4236288d6c14b1f3a03b7",
+  "vcsRevision": "3473da630d4e67e1f9018fb5197a374c07b24945",
   "vcsModified": true,
-  "builder": "github-actions:SoundMatt/go-CAN/.github/workflows/release.yml@refs/tags/v0.12.0"
+  "builder": "github-actions:SoundMatt/go-CAN/.github/workflows/release.yml@refs/tags/v0.12.1"
 }

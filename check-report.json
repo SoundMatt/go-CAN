@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-30T21:27:56.455528917Z",
+  "generatedAt": "2026-07-30T22:30:54.359617751Z",
   "projectRoot": "/home/runner/work/go-CAN/go-CAN",
   "standard": "iso26262",
   "asil": "ASIL-B",
@@ -5486,17 +5486,6 @@
       "fingerprint": "sha256:9ab5481fef063ea35a4a3ddffb1c7bd0db311c2dbef34830f696b55fb7ecc5b1"
     },
     {
-      "ruleId": "SLSA002",
-      "severity": "INFO",
-      "message": "provenance.json missing builder field — SLSA L2 requires the build system to be identified",
-      "location": {
-        "file": "provenance.json"
-      },
-      "category": "supply-chain",
-      "remediation": "add a builder field to provenance.json (e.g., via CI environment variable GITHUB_ACTIONS_URL) and regenerate with 'gofusa release'",
-      "fingerprint": "sha256:d97b45724292e3053889893ac14ef2a504b110a2cb919b7a2bdda0beae90af28"
-    },
-    {
       "ruleId": "SLSA003",
       "severity": "INFO",
       "message": "no CODEOWNERS file or branch-protection policy found — SLSA L3 requires documented two-party review",
@@ -5509,10 +5498,10 @@
     }
   ],
   "summary": {
-    "total": 386,
+    "total": 385,
     "errors": 0,
     "warnings": 233,
-    "infos": 153
+    "infos": 152
   },
   "summaryTable": {
     "by_category": [
@@ -5576,8 +5565,8 @@
         "category": "SLSA",
         "errors": 0,
         "warnings": 0,
-        "infos": 2,
-        "total": 2
+        "infos": 1,
+        "total": 1
       }
     ],
     "by_rule": [
@@ -5662,16 +5651,11 @@
         "count": 1
       },
       {
-        "ruleId": "SLSA002",
-        "severity": "INFO",
-        "count": 1
-      },
-      {
         "ruleId": "SLSA003",
         "severity": "INFO",
         "count": 1
       }
     ],
-    "file_count": 51
+    "file_count": 50
   }
 }

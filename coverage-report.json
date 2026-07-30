@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-30T21:28:02.397325317Z",
+  "generated": "2026-07-30T22:31:02.332015744Z",
   "dal": "DAL-B",
   "stmtTotal": 1429,
   "stmtCovered": 1126,
@@ -11,69 +11,15 @@
   "mcdcRequired": false,
   "files": [
     {
+      "file": "github.com/SoundMatt/go-CAN/j1939/pgn.go",
+      "stmts": 52,
+      "covered": 46,
+      "stmtPct": 88.46153846153847
+    },
+    {
       "file": "github.com/SoundMatt/go-CAN/optional.go",
       "stmts": 4,
       "covered": 4,
-      "stmtPct": 100
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/cmd/cantool/platform_linux.go",
-      "stmts": 1,
-      "covered": 1,
-      "stmtPct": 100
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/safety/e2e.go",
-      "stmts": 52,
-      "covered": 51,
-      "stmtPct": 98.07692307692308
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/adapt.go",
-      "stmts": 65,
-      "covered": 62,
-      "stmtPct": 95.38461538461539
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/can.go",
-      "stmts": 42,
-      "covered": 42,
-      "stmtPct": 100
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/cmd/can-interop-peer/main.go",
-      "stmts": 58,
-      "covered": 0,
-      "stmtPct": 0
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/examples/quickstart/main.go",
-      "stmts": 42,
-      "covered": 0,
-      "stmtPct": 0
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/examples/quickstart/receiver/main.go",
-      "stmts": 22,
-      "covered": 0,
-      "stmtPct": 0
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/obdii/client.go",
-      "stmts": 89,
-      "covered": 84,
-      "stmtPct": 94.38202247191012
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/isotp/transport.go",
-      "stmts": 129,
-      "covered": 113,
-      "stmtPct": 87.59689922480621
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/safety/auth.go",
-      "stmts": 7,
-      "covered": 7,
       "stmtPct": 100
     },
     {
@@ -89,16 +35,10 @@
       "stmtPct": 75.51020408163265
     },
     {
-      "file": "github.com/SoundMatt/go-CAN/mock/mock.go",
-      "stmts": 1,
-      "covered": 1,
-      "stmtPct": 100
-    },
-    {
-      "file": "github.com/SoundMatt/go-CAN/recorder/recorder.go",
-      "stmts": 126,
-      "covered": 117,
-      "stmtPct": 92.85714285714286
+      "file": "github.com/SoundMatt/go-CAN/obdii/client.go",
+      "stmts": 89,
+      "covered": 84,
+      "stmtPct": 94.38202247191012
     },
     {
       "file": "github.com/SoundMatt/go-CAN/virtual/bus.go",
@@ -113,10 +53,10 @@
       "stmtPct": 91.17647058823529
     },
     {
-      "file": "github.com/SoundMatt/go-CAN/j1939/pgn.go",
-      "stmts": 52,
-      "covered": 46,
-      "stmtPct": 88.46153846153847
+      "file": "github.com/SoundMatt/go-CAN/j1939/tp.go",
+      "stmts": 83,
+      "covered": 69,
+      "stmtPct": 83.13253012048193
     },
     {
       "file": "github.com/SoundMatt/go-CAN/dbc/encode.go",
@@ -125,34 +65,94 @@
       "stmtPct": 97.95918367346938
     },
     {
+      "file": "github.com/SoundMatt/go-CAN/cmd/can-interop-peer/main.go",
+      "stmts": 58,
+      "covered": 0,
+      "stmtPct": 0
+    },
+    {
+      "file": "github.com/SoundMatt/go-CAN/mock/mock.go",
+      "stmts": 1,
+      "covered": 1,
+      "stmtPct": 100
+    },
+    {
+      "file": "github.com/SoundMatt/go-CAN/safety/auth.go",
+      "stmts": 7,
+      "covered": 7,
+      "stmtPct": 100
+    },
+    {
+      "file": "github.com/SoundMatt/go-CAN/recorder/recorder.go",
+      "stmts": 126,
+      "covered": 117,
+      "stmtPct": 92.85714285714286
+    },
+    {
+      "file": "github.com/SoundMatt/go-CAN/adapt.go",
+      "stmts": 65,
+      "covered": 62,
+      "stmtPct": 95.38461538461539
+    },
+    {
+      "file": "github.com/SoundMatt/go-CAN/can.go",
+      "stmts": 42,
+      "covered": 42,
+      "stmtPct": 100
+    },
+    {
+      "file": "github.com/SoundMatt/go-CAN/examples/quickstart/main.go",
+      "stmts": 42,
+      "covered": 0,
+      "stmtPct": 0
+    },
+    {
       "file": "github.com/SoundMatt/go-CAN/examples/quickstart/sender/main.go",
       "stmts": 28,
       "covered": 0,
       "stmtPct": 0
     },
     {
-      "file": "github.com/SoundMatt/go-CAN/j1939/tp.go",
-      "stmts": 83,
-      "covered": 69,
-      "stmtPct": 83.13253012048193
+      "file": "github.com/SoundMatt/go-CAN/isotp/transport.go",
+      "stmts": 129,
+      "covered": 113,
+      "stmtPct": 87.59689922480621
+    },
+    {
+      "file": "github.com/SoundMatt/go-CAN/safety/e2e.go",
+      "stmts": 52,
+      "covered": 51,
+      "stmtPct": 98.07692307692308
+    },
+    {
+      "file": "github.com/SoundMatt/go-CAN/cmd/cantool/platform_linux.go",
+      "stmts": 1,
+      "covered": 1,
+      "stmtPct": 100
+    },
+    {
+      "file": "github.com/SoundMatt/go-CAN/examples/quickstart/receiver/main.go",
+      "stmts": 22,
+      "covered": 0,
+      "stmtPct": 0
     }
   ],
   "gaps": [
-    "github.com/SoundMatt/go-CAN/safety/e2e.go: 98.1% statement coverage",
-    "github.com/SoundMatt/go-CAN/adapt.go: 95.4% statement coverage",
-    "github.com/SoundMatt/go-CAN/cmd/can-interop-peer/main.go: 0.0% statement coverage",
-    "github.com/SoundMatt/go-CAN/examples/quickstart/main.go: 0.0% statement coverage",
-    "github.com/SoundMatt/go-CAN/examples/quickstart/receiver/main.go: 0.0% statement coverage",
-    "github.com/SoundMatt/go-CAN/obdii/client.go: 94.4% statement coverage",
-    "github.com/SoundMatt/go-CAN/isotp/transport.go: 87.6% statement coverage",
+    "github.com/SoundMatt/go-CAN/j1939/pgn.go: 88.5% statement coverage",
     "github.com/SoundMatt/go-CAN/dbc/parser.go: 87.7% statement coverage",
     "github.com/SoundMatt/go-CAN/cmd/cantool/main.go: 75.5% statement coverage",
-    "github.com/SoundMatt/go-CAN/recorder/recorder.go: 92.9% statement coverage",
+    "github.com/SoundMatt/go-CAN/obdii/client.go: 94.4% statement coverage",
     "github.com/SoundMatt/go-CAN/virtual/bus.go: 88.5% statement coverage",
     "github.com/SoundMatt/go-CAN/uds/client.go: 91.2% statement coverage",
-    "github.com/SoundMatt/go-CAN/j1939/pgn.go: 88.5% statement coverage",
+    "github.com/SoundMatt/go-CAN/j1939/tp.go: 83.1% statement coverage",
     "github.com/SoundMatt/go-CAN/dbc/encode.go: 98.0% statement coverage",
+    "github.com/SoundMatt/go-CAN/cmd/can-interop-peer/main.go: 0.0% statement coverage",
+    "github.com/SoundMatt/go-CAN/recorder/recorder.go: 92.9% statement coverage",
+    "github.com/SoundMatt/go-CAN/adapt.go: 95.4% statement coverage",
+    "github.com/SoundMatt/go-CAN/examples/quickstart/main.go: 0.0% statement coverage",
     "github.com/SoundMatt/go-CAN/examples/quickstart/sender/main.go: 0.0% statement coverage",
-    "github.com/SoundMatt/go-CAN/j1939/tp.go: 83.1% statement coverage"
+    "github.com/SoundMatt/go-CAN/isotp/transport.go: 87.6% statement coverage",
+    "github.com/SoundMatt/go-CAN/safety/e2e.go: 98.1% statement coverage",
+    "github.com/SoundMatt/go-CAN/examples/quickstart/receiver/main.go: 0.0% statement coverage"
   ]
 }

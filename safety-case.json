@@ -5,7 +5,7 @@
   "toolVersion": "0.47.0",
   "language": "go",
   "format": "go-FuSa Safety Case v1",
-  "generatedAt": "2026-07-30T21:28:02.430731004Z",
+  "generatedAt": "2026-07-30T22:31:02.368873269Z",
   "module": "github.com/SoundMatt/go-CAN",
   "standard": "generic",
   "evidence": [
@@ -14,7 +14,7 @@
       "description": "Coding standard and static analysis checks",
       "file": "check-report.json",
       "status": "present",
-      "detail": "386 findings (0 errors, 233 warnings)"
+      "detail": "385 findings (0 errors, 233 warnings)"
     },
     {
       "id": "trace",
@@ -125,7 +125,7 @@
     {
       "id": "Sn1",
       "type": "solution",
-      "text": "386 findings (0 errors, 233 warnings)",
+      "text": "385 findings (0 errors, 233 warnings)",
       "evidence": "check-report.json"
     },
     {

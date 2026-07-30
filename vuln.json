@@ -18,8 +18,8 @@
         "path": "github.com/SoundMatt/go-CAN"
       },
       {
-        "path": "github.com/SoundMatt/RELAY",
-        "version": "v1.11.0"
+        "path": "github.com/SoundMatt/RELAY/v2",
+        "version": "v2.0.4"
       },
       {
         "path": "golang.org/x/sys",
