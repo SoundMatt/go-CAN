@@ -47,7 +47,7 @@ protocol, with zero required dependencies in the core library.
 | v0.9.0 | RELAY spec v1.8 — crossbar spoke (streaming NDJSON send/subscribe) | shipped |
 | v0.10.0 | RELAY spec v1.10 — §13.7 cross-language library architecture + §20 continuous conformance | shipped |
 | v0.10.1 | Patch: per-subscription Seq counters, capabilities accuracy, RELAY spec v1.11, README fix | shipped |
-| v0.11.0 | Interop testing infrastructure — two-process self-interop + can-utils third-party interop over real `vcan0` (Milestone 19) | shipped |
+| v0.11.0 | Interop testing infrastructure — two-process self-interop + can-utils third-party interop over real `vcan0` (Milestone 14) | shipped |
 | v1.0.0 | API stability, full SocketCAN feature set, documentation complete | planned |
 | v1.1.0 | **Bridge — MQTT** (`bridge/mqtt/`) — publish/subscribe CAN frames over MQTT topics | planned |
 | v1.2.0 | **Bridge — SOME/IP** (`bridge/someip/`) — translate CAN frames to/from SOME/IP service events | planned |
@@ -128,7 +128,7 @@ See the [Milestones](#milestones) section below for what each shipped release ac
 - Replay in real-time or at scaled rate
 - candump-compatible text format option
 
-### 19 — Interop Testing Infrastructure
+### 14 — Interop Testing Infrastructure
 Real wire-level interop testing beyond in-process unit tests and RELAY's
 `relay conform`/`relay interop` (which only check the CLI's JSON output
 shape and RELAY-adapter equivalence — neither puts a frame on a real bus).
@@ -178,32 +178,32 @@ implement the same bidirectional pattern:
 - **Subscribe** direction: `can.Bus.Subscribe` → protocol publish
 - **Publish** direction: protocol receive → `can.Bus.Send`
 
-### 14 — Bridge: MQTT (`bridge/mqtt/`)
+### 15 — Bridge: MQTT (`bridge/mqtt/`)
 - Adapts any `can.Bus` to an MQTT broker
 - CAN frame → MQTT topic (configurable topic pattern, e.g. `can/{id}`)
 - MQTT message → CAN frame (with configurable QoS and retain)
 - Uses [paho.mqtt.golang](https://github.com/eclipse/paho.mqtt.golang) or Eclipse Paho v5
 - Bidirectional `Bridge` struct; `Run(ctx)` blocks until context cancelled
 
-### 15 — Bridge: SOME/IP (`bridge/someip/`)
+### 16 — Bridge: SOME/IP (`bridge/someip/`)
 - Translates CAN frames to/from SOME/IP service events
 - Compatible with go-SOMEIP
 - Each CAN message ID maps to a SOME/IP service/instance/event
 - Configurable via a mapping table (JSON or Go struct)
 
-### 16 — Bridge: DDS (`bridge/dds/`)
+### 17 — Bridge: DDS (`bridge/dds/`)
 - Distributes CAN frames as DDS topic samples
 - Compatible with go-DDS
 - Each CAN frame → typed DDS sample; configurable topic name and QoS profile
 - Useful for automotive middleware stacks mixing CAN and DDS domains
 
-### 17 — Bridge: gRPC (`bridge/grpc/`)
+### 18 — Bridge: gRPC (`bridge/grpc/`)
 - Bidirectional streaming RPC: client streams frames to/from a CAN bus
 - Protobuf message mirrors `can.Frame` (ID, Ext, FD, BRS, Data)
 - Server-side: wraps any `can.Bus`; client-side: implements `can.Bus` interface
 - TLS and mutual-TLS support via standard gRPC dial options
 
-### 18 — Bridge: REST (`bridge/rest/`)
+### 19 — Bridge: REST (`bridge/rest/`)
 - HTTP/REST gateway for environments where persistent connections are unavailable
 - `POST /frames` — send a CAN frame
 - `GET  /frames` — Server-Sent Events (SSE) stream of received frames
