@@ -429,6 +429,94 @@ func TestSendMultiFrameBlockSize(t *testing.T) {
 	}
 }
 
+// TestRecvBlockSizeFollowUpFC verifies the receiver emits a fresh Flow
+// Control at every BlockSize boundary, not just once after the First Frame.
+// Regression test: prior to the fix, Recv sent a single FC after the FF and
+// then only ever consumed Consecutive Frames, so a spec-conformant sender
+// pairing with a go-CAN receiver configured with BlockSize > 0 would stall
+// after the first block waiting for a FC that never came.
+func TestRecvBlockSizeFollowUpFC(t *testing.T) {
+	b, _ := virtual.New()
+	defer b.Close()
+
+	receiver, err := isotp.New(b, isotp.Config{TxID: 0x7E8, RxID: 0x7E0, BlockSize: 2, Timeout: 2 * time.Second})
+	if err != nil {
+		t.Fatalf("New receiver: %v", err)
+	}
+
+	// Tap frames the receiver transmits (its Flow Control frames).
+	fcCh, err := b.Subscribe([]can.Filter{{ID: 0x7E8, Mask: 0x7FF}})
+	if err != nil {
+		t.Fatalf("Subscribe tap: %v", err)
+	}
+
+	// 48-byte payload: FF carries 6, leaving 42 bytes = 6 Consecutive Frames
+	// of 7 bytes each. With BlockSize=2 the receiver must emit a follow-up FC
+	// after CF2 and again after CF4 (3 FCs total: initial + 2 follow-ups).
+	const payloadLen = 48
+	payload := make([]byte, payloadLen)
+	for i := range payload {
+		payload[i] = byte(i)
+	}
+
+	done := make(chan []byte, 1)
+	errCh := make(chan error, 1)
+	go func() {
+		got, err := receiver.Recv(context.Background())
+		if err != nil {
+			errCh <- err
+			return
+		}
+		done <- got
+	}()
+
+	// First Frame.
+	ff := make([]byte, 8)
+	ff[0] = 0x10 | byte(payloadLen>>8)
+	ff[1] = byte(payloadLen)
+	copy(ff[2:], payload[:6])
+	if err := b.Send(context.Background(), can.Frame{ID: 0x7E0, Data: ff}); err != nil {
+		t.Fatalf("send FF: %v", err)
+	}
+	waitTxType(t, fcCh, 0x30) // initial FC
+
+	rest := payload[6:]
+	sn := byte(1)
+	sendCF := func() {
+		chunk := rest[:7]
+		rest = rest[7:]
+		cf := make([]byte, 8)
+		cf[0] = 0x20 | (sn & 0x0F)
+		copy(cf[1:], chunk)
+		if err := b.Send(context.Background(), can.Frame{ID: 0x7E0, Data: cf}); err != nil {
+			t.Fatalf("send CF %d: %v", sn, err)
+		}
+		sn++
+	}
+
+	sendCF() // CF1
+	sendCF() // CF2 — block boundary, expect follow-up FC
+	waitTxType(t, fcCh, 0x30)
+
+	sendCF() // CF3
+	sendCF() // CF4 — block boundary, expect another follow-up FC
+	waitTxType(t, fcCh, 0x30)
+
+	sendCF() // CF5
+	sendCF() // CF6 — transfer complete, no further FC expected
+
+	select {
+	case got := <-done:
+		if string(got) != string(payload) {
+			t.Errorf("payload mismatch: got %d bytes, want %d", len(got), len(payload))
+		}
+	case err := <-errCh:
+		t.Fatalf("Recv: %v", err)
+	case <-time.After(2 * time.Second):
+		t.Fatal("timeout waiting for Recv to complete")
+	}
+}
+
 // TestSendMultiFrameOverflow verifies a flow control with overflow status
 // aborts the transfer with an error.
 func TestSendMultiFrameOverflow(t *testing.T) {

@@ -5,7 +5,11 @@
 
 // Package isotp implements the ISO 15765-2 (ISO-TP) transport protocol
 // for CAN. ISO-TP enables multi-frame message transfer over CAN, supporting
-// payloads of up to 4095 bytes (classic) or larger with extended addressing.
+// payloads of up to 4095 bytes using normal addressing.
+//
+// Scope: only the classic 12-bit FF_DL and normal addressing are
+// implemented. The 32-bit FF_DL escape sequence, CAN FD length encoding,
+// and extended/mixed/normal-fixed addressing are not supported.
 //
 // ISO-TP is widely used for UDS (ISO 14229) diagnostic communication and
 // OBD-II (ISO 15031).
@@ -254,6 +258,7 @@ func (c *Conn) Recv(ctx context.Context) ([]byte, error) {
 		}
 
 		sn := byte(1)
+		cfInBlock := 0
 		for len(buf) < length {
 			cf, err := c.recvCF(ctx)
 			if err != nil {
@@ -269,6 +274,21 @@ func (c *Conn) Recv(ctx context.Context) ([]byte, error) {
 			}
 			buf = append(buf, chunk...)
 			sn++
+
+			// With a non-zero BlockSize the sender transmits at most
+			// BlockSize CFs per block and then blocks waiting for the next
+			// Flow Control (ISO 15765-2). Emit a fresh CTS at each block
+			// boundary when more data is still expected.
+			if c.cfg.BlockSize != 0 {
+				cfInBlock++
+				if cfInBlock == int(c.cfg.BlockSize) && len(buf) < length {
+					cfInBlock = 0
+					fc := c.frame([]byte{typeFC | fcContinueToSend, c.cfg.BlockSize, c.cfg.STmin})
+					if err := c.bus.Send(ctx, fc); err != nil {
+						return nil, fmt.Errorf("isotp: send FC: %w", err)
+					}
+				}
+			}
 		}
 		return buf, nil
 
