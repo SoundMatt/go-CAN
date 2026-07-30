@@ -4,10 +4,10 @@
   "tool": "go-FuSa",
   "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-29T15:02:41.353448Z",
+  "generatedAt": "2026-07-30T21:28:02.409203968Z",
   "project": "go-CAN",
   "version": "1",
-  "generated": "2026-07-29T15:02:41.353448Z",
+  "generated": "2026-07-30T21:28:02.409203968Z",
   "items": [
     {
       "name": "Software Development Plan",
@@ -21,7 +21,7 @@
       "name": "Software Verification Plan",
       "file": "SVP.md",
       "class": "Plan",
-      "sha256": "0e57facb1a9ef1312c04cb162d764450694feb4e7c0e7d8d2dc2060f675df8ba",
+      "sha256": "67777b11f0b5ddd81f949ab7326acb8e727857c96ddcd55851ba13e6d59743d1",
       "present": true,
       "note": "DO-178C §11.3"
     },
@@ -59,7 +59,7 @@
       "name": "SBOM (SPDX 3.0.1)",
       "file": "sbom.json",
       "class": "Configuration Management",
-      "sha256": "42b12de69c2e069d5c83461387ea493164b393d35b2505423de529a669c6a2db",
+      "sha256": "5a21db5b4dbfcda0e17624880655ed5e356f01872a0a7551d42d8c491915d8af",
       "present": true,
       "note": "DO-178C §11.15, NTIA SBOM"
     },
@@ -67,7 +67,7 @@
       "name": "Build Provenance",
       "file": "provenance.json",
       "class": "Configuration Management",
-      "sha256": "bbc3f186d331bd335cf35ae5f4688a38c53ed9eda3d83dcd55f4d2a914be3d26",
+      "sha256": "0402a7074b2664155086c93440346a0c22a1fc37f9ae38e5581ae49fc9417de7",
       "present": true,
       "note": "SLSA L2"
     },
@@ -82,7 +82,7 @@
       "name": "Test Evidence Bundle",
       "file": ".fusa-evidence.json",
       "class": "Verification",
-      "sha256": "2d621154214a3ac835fbf997a13f51642eaf59457db3d8c6f824918f67ff87ea",
+      "sha256": "81cdf68b68bb7e7df9c50d24f0dffc5f17a0f4feb0f1e259a70649b54cd96f1d",
       "present": true,
       "note": "DO-178C §11.14"
     },
@@ -90,7 +90,7 @@
       "name": "Vulnerability Report",
       "file": "vuln.json",
       "class": "Verification",
-      "sha256": "68d4849be5bef5cd5d8e76612c0bf43bec989f933146cf4c03ecef2e382cbda2",
+      "sha256": "f499b1db5ca346178aa3985a43d3ba0a440f1ce34a5936851cdc381b20829b7e",
       "present": true,
       "note": "ISO 21434 / OSV"
     },
@@ -98,7 +98,7 @@
       "name": "FMEA Table",
       "file": "fmea.json",
       "class": "Verification",
-      "sha256": "8494350b436a54b462c56c18d3b22d83272e2113b5c3683a4e8024f00c45fddd",
+      "sha256": "eb67c1643d8b6aaa5c3e299fef2d6d7c33b0261d8a8b9ec67340fa4ecea783ca",
       "present": true,
       "note": "DO-178C §11.9 (safety analysis)"
     },
@@ -106,7 +106,7 @@
       "name": "TARA Report",
       "file": "tara.json",
       "class": "Verification",
-      "sha256": "c6322335313bcf1e0a475bf88076263416ca968aa62654e001f0e17c5526bb35",
+      "sha256": "f8e40ebbe4204261c38d6601d9a64fbd309ba71a92d6613f386b3feecdc0474d",
       "present": true,
       "note": "ISO 21434 §9"
     },
@@ -114,7 +114,7 @@
       "name": "TARA Markdown",
       "file": "tara.md",
       "class": "Verification",
-      "sha256": "9c8d0c42914f0975f14eb53340cab7b5498c84c50a70ee9e6e11c70efa4a5993",
+      "sha256": "eb6c3bc9330f101e5bea66df90442ee46f351a2dbf467ab28e0ee09f9b75900f",
       "present": true,
       "note": "ISO 21434 §9"
     },
@@ -122,7 +122,7 @@
       "name": "Boundary Diagram",
       "file": "boundary.mermaid",
       "class": "Verification",
-      "sha256": "283053ccde968aa8c405c84f249e384d66c02f5d64c88683487bd678ae07a8ef",
+      "sha256": "8e03dec90edcd658e6d0f934f4b3fc730c429e769bda4e177f8742631130c0ea",
       "present": true,
       "note": "DO-178C §11.10 (architecture)"
     },
@@ -130,7 +130,7 @@
       "name": "Cyber Report",
       "file": "cyber-report.json",
       "class": "Verification",
-      "sha256": "25d2494fb4ab05b2199ea17d1d9ae7363b95f7be95bbc721b578332e5dde6aa4",
+      "sha256": "e60dfc9eefe4306fc65ef08f42723dac809845896497873e68cb7756c9659de4",
       "present": true,
       "note": "ISO 21434 §11"
     },
@@ -138,15 +138,14 @@
       "name": "Tool Qualification Report",
       "file": "qualify-report.json",
       "class": "Quality Assurance",
-      "sha256": "15d07c0c2e55781924ebc0b0ecbfec0df9fe4b5f1bf6a183dd05b02a682a25f8",
-      "present": true,
+      "present": false,
       "note": "DO-178C §12 / DO-330"
     },
     {
       "name": "Safety Case",
       "file": "safety-case.json",
       "class": "Accomplishment Summary",
-      "sha256": "458e266fb0998d2859f636e013636b05821aea128a67fcbc28efd5364d3d8ac2",
+      "sha256": "11e170c0246cdce373048233701790ec65c1d74521035827cc0b1e0cf6dc7af0",
       "present": true,
       "note": "DO-178C §11.20 (SAS input)"
     },
@@ -191,7 +190,7 @@
       "name": "CI Workflow",
       "file": ".github/workflows/ci.yml",
       "class": "Configuration Management",
-      "sha256": "091991877905bdfe7f0f1acf472301ff453570f7601f309607e792bdb1880a36",
+      "sha256": "003dbe61c2207d4d95b8acd4ec0da03a09982b5b0eaa3984ae535ab52c8ac11e",
       "present": true,
       "note": "DO-178C §12.2 (tool env)"
     },
@@ -220,7 +219,7 @@
     },
     {
       "file": "SVP.md",
-      "hash": "sha256:0e57facb1a9ef1312c04cb162d764450694feb4e7c0e7d8d2dc2060f675df8ba",
+      "hash": "sha256:67777b11f0b5ddd81f949ab7326acb8e727857c96ddcd55851ba13e6d59743d1",
       "version": "1"
     },
     {
@@ -235,57 +234,52 @@
     },
     {
       "file": "sbom.json",
-      "hash": "sha256:42b12de69c2e069d5c83461387ea493164b393d35b2505423de529a669c6a2db",
+      "hash": "sha256:5a21db5b4dbfcda0e17624880655ed5e356f01872a0a7551d42d8c491915d8af",
       "version": "1"
     },
     {
       "file": "provenance.json",
-      "hash": "sha256:bbc3f186d331bd335cf35ae5f4688a38c53ed9eda3d83dcd55f4d2a914be3d26",
+      "hash": "sha256:0402a7074b2664155086c93440346a0c22a1fc37f9ae38e5581ae49fc9417de7",
       "version": "1"
     },
     {
       "file": ".fusa-evidence.json",
-      "hash": "sha256:2d621154214a3ac835fbf997a13f51642eaf59457db3d8c6f824918f67ff87ea",
+      "hash": "sha256:81cdf68b68bb7e7df9c50d24f0dffc5f17a0f4feb0f1e259a70649b54cd96f1d",
       "version": "1"
     },
     {
       "file": "vuln.json",
-      "hash": "sha256:68d4849be5bef5cd5d8e76612c0bf43bec989f933146cf4c03ecef2e382cbda2",
+      "hash": "sha256:f499b1db5ca346178aa3985a43d3ba0a440f1ce34a5936851cdc381b20829b7e",
       "version": "1"
     },
     {
       "file": "fmea.json",
-      "hash": "sha256:8494350b436a54b462c56c18d3b22d83272e2113b5c3683a4e8024f00c45fddd",
+      "hash": "sha256:eb67c1643d8b6aaa5c3e299fef2d6d7c33b0261d8a8b9ec67340fa4ecea783ca",
       "version": "1"
     },
     {
       "file": "tara.json",
-      "hash": "sha256:c6322335313bcf1e0a475bf88076263416ca968aa62654e001f0e17c5526bb35",
+      "hash": "sha256:f8e40ebbe4204261c38d6601d9a64fbd309ba71a92d6613f386b3feecdc0474d",
       "version": "1"
     },
     {
       "file": "tara.md",
-      "hash": "sha256:9c8d0c42914f0975f14eb53340cab7b5498c84c50a70ee9e6e11c70efa4a5993",
+      "hash": "sha256:eb6c3bc9330f101e5bea66df90442ee46f351a2dbf467ab28e0ee09f9b75900f",
       "version": "1"
     },
     {
       "file": "boundary.mermaid",
-      "hash": "sha256:283053ccde968aa8c405c84f249e384d66c02f5d64c88683487bd678ae07a8ef",
+      "hash": "sha256:8e03dec90edcd658e6d0f934f4b3fc730c429e769bda4e177f8742631130c0ea",
       "version": "1"
     },
     {
       "file": "cyber-report.json",
-      "hash": "sha256:25d2494fb4ab05b2199ea17d1d9ae7363b95f7be95bbc721b578332e5dde6aa4",
-      "version": "1"
-    },
-    {
-      "file": "qualify-report.json",
-      "hash": "sha256:15d07c0c2e55781924ebc0b0ecbfec0df9fe4b5f1bf6a183dd05b02a682a25f8",
+      "hash": "sha256:e60dfc9eefe4306fc65ef08f42723dac809845896497873e68cb7756c9659de4",
       "version": "1"
     },
     {
       "file": "safety-case.json",
-      "hash": "sha256:458e266fb0998d2859f636e013636b05821aea128a67fcbc28efd5364d3d8ac2",
+      "hash": "sha256:11e170c0246cdce373048233701790ec65c1d74521035827cc0b1e0cf6dc7af0",
       "version": "1"
     },
     {
@@ -300,7 +294,7 @@
     },
     {
       "file": ".github/workflows/ci.yml",
-      "hash": "sha256:091991877905bdfe7f0f1acf472301ff453570f7601f309607e792bdb1880a36",
+      "hash": "sha256:003dbe61c2207d4d95b8acd4ec0da03a09982b5b0eaa3984ae535ab52c8ac11e",
       "version": "1"
     },
     {

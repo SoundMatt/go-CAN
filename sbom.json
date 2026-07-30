@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-29T15:02:41.366297Z",
+  "generatedAt": "2026-07-30T21:28:02.449105133Z",
   "format": "x-FuSa SBOM v1",
   "module": "github.com/SoundMatt/go-CAN",
   "goVersion": "1.25.0",

@@ -4,8 +4,8 @@
   "tool": "go-FuSa",
   "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-29T15:02:38.998154Z",
-  "projectRoot": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN",
+  "generatedAt": "2026-07-30T21:27:56.455528917Z",
+  "projectRoot": "/home/runner/work/go-CAN/go-CAN",
   "standard": "iso26262",
   "asil": "ASIL-B",
   "findings": [
@@ -60,9 +60,9 @@
       "message": "goroutine launched without visible termination signal",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 326,
+        "line": 373,
         "column": 2,
-        "endLine": 329,
+        "endLine": 376,
         "endColumn": 5
       },
       "category": "safety",
@@ -75,9 +75,9 @@
       "message": "goroutine launched without visible termination signal",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 348,
+        "line": 395,
         "column": 3,
-        "endLine": 351,
+        "endLine": 398,
         "endColumn": 6
       },
       "category": "safety",
@@ -90,9 +90,9 @@
       "message": "goroutine launched without visible termination signal",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 376,
+        "line": 423,
         "column": 2,
-        "endLine": 379,
+        "endLine": 426,
         "endColumn": 5
       },
       "category": "safety",
@@ -105,9 +105,9 @@
       "message": "goroutine launched without visible termination signal",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 416,
+        "line": 551,
         "column": 2,
-        "endLine": 419,
+        "endLine": 554,
         "endColumn": 5
       },
       "category": "safety",
@@ -210,9 +210,9 @@
       "message": "goroutine spawned inside range loop — potential unbounded goroutine creation",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 338,
+        "line": 385,
         "column": 2,
-        "endLine": 355,
+        "endLine": 402,
         "endColumn": 3
       },
       "category": "safety",
@@ -537,12 +537,27 @@
     {
       "ruleId": "ANA006",
       "severity": "INFO",
+      "message": "fmt.Errorf format string \"dbc: signal %q has invalid length %d (must be 1-64): %q\" does not wrap error with %w",
+      "location": {
+        "file": "dbc/parser.go",
+        "line": 269,
+        "column": 15,
+        "endLine": 269,
+        "endColumn": 106
+      },
+      "category": "safety",
+      "remediation": "add %w to the format string to preserve the error chain for errors.Is/As",
+      "fingerprint": "sha256:574ff6cb0c6ac1efc9c2583b3598213f5b28aa9646ed1e6d3c647bf23130e25e"
+    },
+    {
+      "ruleId": "ANA006",
+      "severity": "INFO",
       "message": "fmt.Errorf format string \"dbc: malformed order+sign: %q\" does not wrap error with %w",
       "location": {
         "file": "dbc/parser.go",
-        "line": 270,
+        "line": 273,
         "column": 15,
-        "endLine": 270,
+        "endLine": 273,
         "endColumn": 69
       },
       "category": "safety",
@@ -555,9 +570,9 @@
       "message": "fmt.Errorf format string \"dbc: malformed factor/offset: %q\" does not wrap error with %w",
       "location": {
         "file": "dbc/parser.go",
-        "line": 283,
+        "line": 286,
         "column": 15,
-        "endLine": 283,
+        "endLine": 286,
         "endColumn": 78
       },
       "category": "safety",
@@ -570,9 +585,9 @@
       "message": "fmt.Errorf format string \"dbc: malformed VAL_ line: %q\" does not wrap error with %w",
       "location": {
         "file": "dbc/parser.go",
-        "line": 344,
+        "line": 347,
         "column": 10,
-        "endLine": 344,
+        "endLine": 347,
         "endColumn": 58
       },
       "category": "safety",
@@ -585,9 +600,9 @@
       "message": "fmt.Errorf format string \"isotp: payload too large (%d bytes, max 4095)\" does not wrap error with %w",
       "location": {
         "file": "isotp/transport.go",
-        "line": 121,
+        "line": 125,
         "column": 10,
-        "endLine": 121,
+        "endLine": 125,
         "endColumn": 83
       },
       "category": "safety",
@@ -600,9 +615,9 @@
       "message": "fmt.Errorf format string \"isotp: invalid SF length %d\" does not wrap error with %w",
       "location": {
         "file": "isotp/transport.go",
-        "line": 231,
+        "line": 235,
         "column": 16,
-        "endLine": 231,
+        "endLine": 235,
         "endColumn": 65
       },
       "category": "safety",
@@ -615,9 +630,9 @@
       "message": "fmt.Errorf format string \"isotp: unexpected SN %d (want %d)\" does not wrap error with %w",
       "location": {
         "file": "isotp/transport.go",
-        "line": 256,
+        "line": 268,
         "column": 17,
-        "endLine": 256,
+        "endLine": 268,
         "endColumn": 90
       },
       "category": "safety",
@@ -630,9 +645,9 @@
       "message": "fmt.Errorf format string \"isotp: unexpected frame type 0x%X\" does not wrap error with %w",
       "location": {
         "file": "isotp/transport.go",
-        "line": 269,
+        "line": 296,
         "column": 15,
-        "endLine": 269,
+        "endLine": 296,
         "endColumn": 73
       },
       "category": "safety",
@@ -1350,9 +1365,39 @@
       "message": "value \"b\" from function call used before checking err — potential nil dereference",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 251,
+        "line": 254,
         "column": 2,
-        "endLine": 251,
+        "endLine": 254,
+        "endColumn": 23
+      },
+      "category": "safety",
+      "remediation": "check err != nil before using the returned value",
+      "fingerprint": "sha256:7f52b062142bd3a5bd3209af25949341945489ee0cec450b6703aa62659b4c05"
+    },
+    {
+      "ruleId": "ANA007",
+      "severity": "WARNING",
+      "message": "value \"got\" from function call used before checking err — potential nil dereference",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 267,
+        "column": 3,
+        "endLine": 267,
+        "endColumn": 50
+      },
+      "category": "safety",
+      "remediation": "check err != nil before using the returned value",
+      "fingerprint": "sha256:4afa3f7f4780047d5b3e73db39280015960f349a87a0a825cc73b0323a4c2b8d"
+    },
+    {
+      "ruleId": "ANA007",
+      "severity": "WARNING",
+      "message": "value \"b\" from function call used before checking err — potential nil dereference",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 298,
+        "column": 2,
+        "endLine": 298,
         "endColumn": 23
       },
       "category": "safety",
@@ -1365,44 +1410,14 @@
       "message": "value \"b\" from function call used before checking err — potential nil dereference",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 296,
+        "line": 343,
         "column": 2,
-        "endLine": 296,
+        "endLine": 343,
         "endColumn": 23
       },
       "category": "safety",
       "remediation": "check err != nil before using the returned value",
       "fingerprint": "sha256:7f52b062142bd3a5bd3209af25949341945489ee0cec450b6703aa62659b4c05"
-    },
-    {
-      "ruleId": "ANA007",
-      "severity": "WARNING",
-      "message": "value \"b\" from function call used before checking err — potential nil dereference",
-      "location": {
-        "file": "isotp/transport_test.go",
-        "line": 428,
-        "column": 2,
-        "endLine": 428,
-        "endColumn": 23
-      },
-      "category": "safety",
-      "remediation": "check err != nil before using the returned value",
-      "fingerprint": "sha256:7f52b062142bd3a5bd3209af25949341945489ee0cec450b6703aa62659b4c05"
-    },
-    {
-      "ruleId": "ANA007",
-      "severity": "WARNING",
-      "message": "value \"sender\" from function call used before checking err — potential nil dereference",
-      "location": {
-        "file": "isotp/transport_test.go",
-        "line": 430,
-        "column": 2,
-        "endLine": 430,
-        "endColumn": 99
-      },
-      "category": "safety",
-      "remediation": "check err != nil before using the returned value",
-      "fingerprint": "sha256:05bf864245d8f8434483113b3061d57a78003765e3043e852cda21d81dbb652d"
     },
     {
       "ruleId": "ANA007",
@@ -1424,10 +1439,55 @@
       "severity": "WARNING",
       "message": "value \"b\" from function call used before checking err — potential nil dereference",
       "location": {
-        "file": "j1939/pgn_test.go",
-        "line": 64,
+        "file": "isotp/transport_test.go",
+        "line": 563,
         "column": 2,
-        "endLine": 64,
+        "endLine": 563,
+        "endColumn": 23
+      },
+      "category": "safety",
+      "remediation": "check err != nil before using the returned value",
+      "fingerprint": "sha256:7f52b062142bd3a5bd3209af25949341945489ee0cec450b6703aa62659b4c05"
+    },
+    {
+      "ruleId": "ANA007",
+      "severity": "WARNING",
+      "message": "value \"sender\" from function call used before checking err — potential nil dereference",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 565,
+        "column": 2,
+        "endLine": 565,
+        "endColumn": 99
+      },
+      "category": "safety",
+      "remediation": "check err != nil before using the returned value",
+      "fingerprint": "sha256:05bf864245d8f8434483113b3061d57a78003765e3043e852cda21d81dbb652d"
+    },
+    {
+      "ruleId": "ANA007",
+      "severity": "WARNING",
+      "message": "value \"b\" from function call used before checking err — potential nil dereference",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 574,
+        "column": 2,
+        "endLine": 574,
+        "endColumn": 23
+      },
+      "category": "safety",
+      "remediation": "check err != nil before using the returned value",
+      "fingerprint": "sha256:7f52b062142bd3a5bd3209af25949341945489ee0cec450b6703aa62659b4c05"
+    },
+    {
+      "ruleId": "ANA007",
+      "severity": "WARNING",
+      "message": "value \"b\" from function call used before checking err — potential nil dereference",
+      "location": {
+        "file": "j1939/pgn_test.go",
+        "line": 103,
+        "column": 2,
+        "endLine": 103,
         "endColumn": 23
       },
       "category": "safety",
@@ -1503,7 +1563,7 @@
         "line": 86,
         "column": 2,
         "endLine": 86,
-        "endColumn": 37
+        "endColumn": 59
       },
       "category": "safety",
       "remediation": "check err != nil before using the returned value",
@@ -1518,7 +1578,7 @@
         "line": 88,
         "column": 2,
         "endLine": 88,
-        "endColumn": 39
+        "endColumn": 61
       },
       "category": "safety",
       "remediation": "check err != nil before using the returned value",
@@ -1840,264 +1900,264 @@
       "severity": "WARNING",
       "message": "function FromMessage has cyclomatic complexity 12 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/adapt.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/adapt.go",
         "line": 65
       },
       "category": "other",
       "remediation": "refactor FromMessage to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:c65a1c6b217ed130dcd5d538fabb67dc74e0a6a40aca9c8b0599742b7dd74236"
+      "fingerprint": "sha256:14263a031d56730ee0cc7149211386525f34deea3b17e19b6ecb06d2f8eabda3"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function ValidateFrame has cyclomatic complexity 37 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
         "line": 201
       },
       "category": "other",
       "remediation": "refactor ValidateFrame to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:8e17028dae1813d40117ec15c3072f13f48c08da64f3b00c0c372f1298a55997"
+      "fingerprint": "sha256:a87449ba15a44293b971c676711d37d3a74a43a5b1cf62fd6b453a19fea6516d"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function main has cyclomatic complexity 13 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/cmd/cantool/main.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
         "line": 44
       },
       "category": "other",
       "remediation": "refactor main to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:ee908d43dc22721f487dcfa0a45dea136662af841286117474bfeeaa65e7cf0a"
+      "fingerprint": "sha256:7879192cd01d40f413fccb1c8fc658d3c496184949acd37a4cf6cb9eee06b209"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function cmdSubscribe has cyclomatic complexity 11 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/cmd/cantool/main.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
         "line": 361
       },
       "category": "other",
       "remediation": "refactor cmdSubscribe to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:a6b4620d682a4cca9bea6dd8116b5f22444bada741440360a050b4bfb2eace9a"
+      "fingerprint": "sha256:1f7606ca58fd664509a80c09556aaeb1a8991d68b93d19344a209fec3fc5e383"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function runConvert has cyclomatic complexity 12 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/cmd/cantool/main.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/cmd/cantool/main.go",
         "line": 446
       },
       "category": "other",
       "remediation": "refactor runConvert to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:34e1921c4f152abbfed105ec48e7a41b65bbcd30b3788c330358911823489644"
+      "fingerprint": "sha256:053c256e3cfc7173b56d4944db9ac694062ba906a5d0041da0986b937a5184dc"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Parse has cyclomatic complexity 14 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/dbc/parser.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
         "line": 95
       },
       "category": "other",
       "remediation": "refactor Parse to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:b1e4aebb59c70ea9dc985a18b2aa25e6f053382790fa2421104100397fb237a2"
+      "fingerprint": "sha256:b0c9da9a8868e905ffbdcbd6437d84db2c21cf40af5d20f529214786dd7c5e44"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
-      "message": "function parseSignal has cyclomatic complexity 15 (threshold 10) — DO-178C §6.3.4",
+      "message": "function parseSignal has cyclomatic complexity 18 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/dbc/parser.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
         "line": 235
       },
       "category": "other",
       "remediation": "refactor parseSignal to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:40efc70a95d5a5e6403b34ae36149a584200feb384e583a00e57c76db9e2a239"
+      "fingerprint": "sha256:74c18bf13541b81baf42da6c2faa98cbb7c5501672964eff7fa7a54152d0c657"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function tokeniseVAL has cyclomatic complexity 13 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/dbc/parser.go",
-        "line": 379
+        "file": "/home/runner/work/go-CAN/go-CAN/dbc/parser.go",
+        "line": 382
       },
       "category": "other",
       "remediation": "refactor tokeniseVAL to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:3ffc561627283ef8b0b66e9a0cd6043b9ae4c3d955d3a9970e67317caeaf4196"
+      "fingerprint": "sha256:7a7631b17eca179a811471a54e6f8a249d2cb613672240f10d0d06ee7d095f75"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Conn.sendMultiFrame has cyclomatic complexity 14 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/isotp/transport.go",
-        "line": 137
+        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "line": 141
       },
       "category": "other",
       "remediation": "refactor Conn.sendMultiFrame to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:d60dc375858f8dac3f10e423c25739666d540bb9609d653460dc4ce8eac811fe"
+      "fingerprint": "sha256:4bfe0e1fb9b8a8dec3eef6a7a8d8e8b8c15b9004574bea8501fcda706d2ca2e7"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
-      "message": "function Conn.Recv has cyclomatic complexity 17 (threshold 10) — DO-178C §6.3.4",
+      "message": "function Conn.Recv has cyclomatic complexity 23 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/isotp/transport.go",
-        "line": 207
+        "file": "/home/runner/work/go-CAN/go-CAN/isotp/transport.go",
+        "line": 211
       },
       "category": "other",
       "remediation": "refactor Conn.Recv to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:26ff005dac48a7cb16c6b88d2655e454c1aaa74ae24abae5c62c30956fb6b21b"
+      "fingerprint": "sha256:6c9d217c4bcceff7c9bc3c3d52d8ff7c6ef5490954ef81e4b8496110597fa3c0"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Bus.SendTP has cyclomatic complexity 11 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/j1939/tp.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
         "line": 65
       },
       "category": "other",
       "remediation": "refactor Bus.SendTP to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:7e525e0cc283628853cb621d18899f3375a815feedbf55322b01df2335c91f96"
+      "fingerprint": "sha256:2d7a4db6b3fde10ecd9ef0e63f59f955c9d6db76675cc02fbb2aa9f50de80c87"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
-      "message": "function Bus.SubscribeTP has cyclomatic complexity 24 (threshold 10) — DO-178C §6.3.4",
+      "message": "function Bus.SubscribeTP has cyclomatic complexity 32 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/j1939/tp.go",
-        "line": 144
+        "file": "/home/runner/work/go-CAN/go-CAN/j1939/tp.go",
+        "line": 150
       },
       "category": "other",
       "remediation": "refactor Bus.SubscribeTP to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:1ae0822ccfc82a4f8a93674f787def663a4d6cf4f52757d85b1c7af5e8745232"
+      "fingerprint": "sha256:bc34350bfb461c82fb4f1701df3bb960d6a0f6f8f15bf7849c1fb471702db13c"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function decode01 has cyclomatic complexity 31 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/obdii/client.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/obdii/client.go",
         "line": 172
       },
       "category": "other",
       "remediation": "refactor decode01 to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:38858ef12a4070e0e5a0334460ec2927cb8ceb5703aa0ff4b79e4c74a654ff72"
+      "fingerprint": "sha256:8bb72ef7091c48dbf74a7ec4a2a05a1c0892dca39aaf5ebda880c681eddfed35"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Replay has cyclomatic complexity 14 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/recorder/recorder.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
         "line": 71
       },
       "category": "other",
       "remediation": "refactor Replay to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:a5569eebfb9a9f5a6348d70a615c9db55b0a0236bde875559a3478fc6ed1dfbc"
+      "fingerprint": "sha256:eb0682a615587e55fda393879abb20a75ffee937711f9360a01c8ef220c05066"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function ParseLine has cyclomatic complexity 21 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/recorder/recorder.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/recorder/recorder.go",
         "line": 138
       },
       "category": "other",
       "remediation": "refactor ParseLine to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:0c830410a205866ff4b4625eceddaf8833e6ff8a126cb4991b071b67331585bb"
+      "fingerprint": "sha256:87e9b41fd9dc76de8517ff1558bc0232a3f6695c7a5e0b640888159c5b84f0ba"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function Client.request has cyclomatic complexity 12 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/uds/client.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
         "line": 212
       },
       "category": "other",
       "remediation": "refactor Client.request to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:50996e6e61300cc1de997fd043f3f653eb7032a1bad7d68655fd14b12df9d333"
+      "fingerprint": "sha256:234bf49d94d51757e5d754c9f2e3cc440c771560a7958298d50b5663689dc7d8"
     },
     {
       "ruleId": "COMP001",
       "severity": "WARNING",
       "message": "function nrcString has cyclomatic complexity 11 (threshold 10) — DO-178C §6.3.4",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/uds/client.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/uds/client.go",
         "line": 239
       },
       "category": "other",
       "remediation": "refactor nrcString to reduce branching; consider extracting helper functions",
-      "fingerprint": "sha256:8e30d3099bf85a7dc8fc44c8cd9dc677e4d66e0862b96bb4bbf5d87de9d5624e"
+      "fingerprint": "sha256:00ff9cbce75c5ccb1057a17022f65275271e506b029e689ae51f9b7b1a894e4f"
     },
     {
       "ruleId": "COUP001",
       "severity": "INFO",
       "message": "exported var \"ErrClosed\" creates data coupling — callers can read/write shared state directly",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
         "line": 58
       },
       "category": "other",
       "remediation": "replace exported vars with accessor functions or encapsulate in a struct to control coupling",
-      "fingerprint": "sha256:0507104dcb56461ec87336e2bc5b9e5d0e865afa7b2e30fabbdd70c4fbe43721"
+      "fingerprint": "sha256:39c74a8bac12cf4b5743b705c1333f3bf80cb852e98111335fe25e08e7f1b1e5"
     },
     {
       "ruleId": "COUP001",
       "severity": "INFO",
       "message": "exported var \"ErrNotConnected\" creates data coupling — callers can read/write shared state directly",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
         "line": 59
       },
       "category": "other",
       "remediation": "replace exported vars with accessor functions or encapsulate in a struct to control coupling",
-      "fingerprint": "sha256:729c49c8dc04036e2147fd02a5cdd29a7996f5105da5f4ae0f85299fc7222337"
+      "fingerprint": "sha256:7c6ebf5b3ffd9bb1e44e3fc9cabba08304ff0f6904b025e258e48a17d0639f64"
     },
     {
       "ruleId": "COUP001",
       "severity": "INFO",
       "message": "exported var \"ErrTimeout\" creates data coupling — callers can read/write shared state directly",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
         "line": 60
       },
       "category": "other",
       "remediation": "replace exported vars with accessor functions or encapsulate in a struct to control coupling",
-      "fingerprint": "sha256:9e6369a8f827eee7ac30fb013286d7fbc89e74c3fc323fcdae8e2fa88523fddc"
+      "fingerprint": "sha256:7120ed56827b41eb04e0b24a2e06ef5113fa5fd6c29af276060dde9defc77ea6"
     },
     {
       "ruleId": "COUP001",
       "severity": "INFO",
       "message": "exported var \"ErrPayloadTooLarge\" creates data coupling — callers can read/write shared state directly",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/can.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/can.go",
         "line": 61
       },
       "category": "other",
       "remediation": "replace exported vars with accessor functions or encapsulate in a struct to control coupling",
-      "fingerprint": "sha256:1952413bbf5ae26bb4bdc563419bd5a1e9c10eb26160a020b9cbd01b9a9cf699"
+      "fingerprint": "sha256:e8734e7181c1dabbcc8eefe15151648d41d9379f724966f0a253b00cc001cf95"
     },
     {
       "ruleId": "COUP002",
       "severity": "INFO",
       "message": "exported function \"NewLoanedFrame\" accepts func/interface parameter — documents control coupling",
       "location": {
-        "file": "/private/tmp/claude-501/-Users-matt-Documents-Coding-SoundMatt-RELAY/740afe1a-f05d-4465-aee5-cfe7e81c33aa/scratchpad/work/go-CAN/optional.go",
+        "file": "/home/runner/work/go-CAN/go-CAN/optional.go",
         "line": 21
       },
       "category": "other",
       "remediation": "document coupling in requirements traceability and verify all injected implementations",
-      "fingerprint": "sha256:dcac82da15951dce35aa71a4b967135ab65722c90f3492fc61dafc2f1f7047e3"
+      "fingerprint": "sha256:0d36f99d29673aa93f96eb78c25d81a65e70c34cde8db8c1622130a9092750da"
     },
     {
       "ruleId": "CYBER005",
@@ -2235,7 +2295,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "dbc/parser.go",
-        "line": 351,
+        "line": 354,
         "column": 25
       },
       "category": "security",
@@ -2274,7 +2334,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport.go",
-        "line": 132,
+        "line": 136,
         "column": 21
       },
       "category": "security",
@@ -2287,7 +2347,7 @@
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport.go",
-        "line": 140,
+        "line": 144,
         "column": 38
       },
       "category": "security",
@@ -2300,7 +2360,7 @@
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport.go",
-        "line": 140,
+        "line": 144,
         "column": 56
       },
       "category": "security",
@@ -2313,7 +2373,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport.go",
-        "line": 183,
+        "line": 187,
         "column": 19
       },
       "category": "security",
@@ -2339,8 +2399,47 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 316,
+        "line": 363,
         "column": 16
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:c9ee679a222117dde867c42395a90906b2886d8467acfacec1f44b69819993cc"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 459,
+        "column": 16
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:c9ee679a222117dde867c42395a90906b2886d8467acfacec1f44b69819993cc"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 475,
+        "column": 17
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:c9ee679a222117dde867c42395a90906b2886d8467acfacec1f44b69819993cc"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 476,
+        "column": 10
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
@@ -2648,10 +2747,36 @@
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
+      "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp.go",
+        "line": 94,
+        "column": 11
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:4dbc61b925070e25ab8b942d7febe8e324bbeeeae7d16effbab42b661c2cbc0b"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp.go",
+        "line": 106,
+        "column": 14
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:4dbc61b925070e25ab8b942d7febe8e324bbeeeae7d16effbab42b661c2cbc0b"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 111,
+        "line": 117,
         "column": 12
       },
       "category": "security",
@@ -2664,7 +2789,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 252,
+        "line": 278,
         "column": 17
       },
       "category": "security",
@@ -2677,7 +2802,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 252,
+        "line": 278,
         "column": 26
       },
       "category": "security",
@@ -2690,7 +2815,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 252,
+        "line": 278,
         "column": 40
       },
       "category": "security",
@@ -2703,7 +2828,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 257,
+        "line": 283,
         "column": 13
       },
       "category": "security",
@@ -2716,7 +2841,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 257,
+        "line": 283,
         "column": 26
       },
       "category": "security",
@@ -2729,7 +2854,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 257,
+        "line": 283,
         "column": 42
       },
       "category": "security",
@@ -2742,8 +2867,73 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp_test.go",
-        "line": 37,
+        "line": 38,
         "column": 10
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:d0345fe9068ae160df03e1f64eecf5b044f8d902d2d2415c59bd14827fdc7e88"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 338,
+        "column": 3
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:d0345fe9068ae160df03e1f64eecf5b044f8d902d2d2415c59bd14827fdc7e88"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 338,
+        "column": 27
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:d0345fe9068ae160df03e1f64eecf5b044f8d902d2d2415c59bd14827fdc7e88"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 341,
+        "column": 3
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:d0345fe9068ae160df03e1f64eecf5b044f8d902d2d2415c59bd14827fdc7e88"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 341,
+        "column": 18
+      },
+      "category": "security",
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
+      "fingerprint": "sha256:d0345fe9068ae160df03e1f64eecf5b044f8d902d2d2415c59bd14827fdc7e88"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 341,
+        "column": 38
       },
       "category": "security",
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic",
@@ -3028,7 +3218,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "socketcan/bus_linux.go",
-        "line": 189,
+        "line": 199,
         "column": 12
       },
       "category": "security",
@@ -3041,7 +3231,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "socketcan/bus_linux.go",
-        "line": 199,
+        "line": 212,
         "column": 11
       },
       "category": "security",
@@ -3760,9 +3950,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "dbc/parser.go",
-        "line": 300,
+        "line": 303,
         "column": 3,
-        "endLine": 300,
+        "endLine": 303,
         "endColumn": 49
       },
       "category": "lint",
@@ -3775,9 +3965,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "dbc/parser.go",
-        "line": 301,
+        "line": 304,
         "column": 3,
-        "endLine": 301,
+        "endLine": 304,
         "endColumn": 49
       },
       "category": "lint",
@@ -3850,9 +4040,39 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "dbc/parser_test.go",
-        "line": 117,
+        "line": 122,
+        "column": 2,
+        "endLine": 122,
+        "endColumn": 47
+      },
+      "category": "lint",
+      "remediation": "assign all return values to named variables and handle each explicitly",
+      "fingerprint": "sha256:db78045cc5cea265a497d8fec94b4994c737ff171397c61e1cb426745c6daf98"
+    },
+    {
+      "ruleId": "LINT001",
+      "severity": "WARNING",
+      "message": "return value discarded with blank identifier in multi-value call",
+      "location": {
+        "file": "dbc/parser_test.go",
+        "line": 135,
+        "column": 2,
+        "endLine": 135,
+        "endColumn": 47
+      },
+      "category": "lint",
+      "remediation": "assign all return values to named variables and handle each explicitly",
+      "fingerprint": "sha256:db78045cc5cea265a497d8fec94b4994c737ff171397c61e1cb426745c6daf98"
+    },
+    {
+      "ruleId": "LINT001",
+      "severity": "WARNING",
+      "message": "return value discarded with blank identifier in multi-value call",
+      "location": {
+        "file": "dbc/parser_test.go",
+        "line": 145,
         "column": 3,
-        "endLine": 117,
+        "endLine": 145,
         "endColumn": 41
       },
       "category": "lint",
@@ -4150,9 +4370,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 251,
+        "line": 254,
         "column": 2,
-        "endLine": 251,
+        "endLine": 254,
         "endColumn": 23
       },
       "category": "lint",
@@ -4165,9 +4385,24 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 254,
+        "line": 298,
         "column": 2,
-        "endLine": 254,
+        "endLine": 298,
+        "endColumn": 23
+      },
+      "category": "lint",
+      "remediation": "assign all return values to named variables and handle each explicitly",
+      "fingerprint": "sha256:7b45b5845564f3dc189ddcd007189eea8bababfc3714e945cf907030dff675b7"
+    },
+    {
+      "ruleId": "LINT001",
+      "severity": "WARNING",
+      "message": "return value discarded with blank identifier in multi-value call",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 301,
+        "column": 2,
+        "endLine": 301,
         "endColumn": 91
       },
       "category": "lint",
@@ -4180,9 +4415,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 258,
+        "line": 305,
         "column": 3,
-        "endLine": 258,
+        "endLine": 305,
         "endColumn": 48
       },
       "category": "lint",
@@ -4195,40 +4430,10 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 296,
+        "line": 343,
         "column": 2,
-        "endLine": 296,
+        "endLine": 343,
         "endColumn": 23
-      },
-      "category": "lint",
-      "remediation": "assign all return values to named variables and handle each explicitly",
-      "fingerprint": "sha256:7b45b5845564f3dc189ddcd007189eea8bababfc3714e945cf907030dff675b7"
-    },
-    {
-      "ruleId": "LINT001",
-      "severity": "WARNING",
-      "message": "return value discarded with blank identifier in multi-value call",
-      "location": {
-        "file": "isotp/transport_test.go",
-        "line": 428,
-        "column": 2,
-        "endLine": 428,
-        "endColumn": 23
-      },
-      "category": "lint",
-      "remediation": "assign all return values to named variables and handle each explicitly",
-      "fingerprint": "sha256:7b45b5845564f3dc189ddcd007189eea8bababfc3714e945cf907030dff675b7"
-    },
-    {
-      "ruleId": "LINT001",
-      "severity": "WARNING",
-      "message": "return value discarded with blank identifier in multi-value call",
-      "location": {
-        "file": "isotp/transport_test.go",
-        "line": 430,
-        "column": 2,
-        "endLine": 430,
-        "endColumn": 99
       },
       "category": "lint",
       "remediation": "assign all return values to named variables and handle each explicitly",
@@ -4255,9 +4460,54 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 441,
+        "line": 563,
+        "column": 2,
+        "endLine": 563,
+        "endColumn": 23
+      },
+      "category": "lint",
+      "remediation": "assign all return values to named variables and handle each explicitly",
+      "fingerprint": "sha256:7b45b5845564f3dc189ddcd007189eea8bababfc3714e945cf907030dff675b7"
+    },
+    {
+      "ruleId": "LINT001",
+      "severity": "WARNING",
+      "message": "return value discarded with blank identifier in multi-value call",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 565,
+        "column": 2,
+        "endLine": 565,
+        "endColumn": 99
+      },
+      "category": "lint",
+      "remediation": "assign all return values to named variables and handle each explicitly",
+      "fingerprint": "sha256:7b45b5845564f3dc189ddcd007189eea8bababfc3714e945cf907030dff675b7"
+    },
+    {
+      "ruleId": "LINT001",
+      "severity": "WARNING",
+      "message": "return value discarded with blank identifier in multi-value call",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 574,
+        "column": 2,
+        "endLine": 574,
+        "endColumn": 23
+      },
+      "category": "lint",
+      "remediation": "assign all return values to named variables and handle each explicitly",
+      "fingerprint": "sha256:7b45b5845564f3dc189ddcd007189eea8bababfc3714e945cf907030dff675b7"
+    },
+    {
+      "ruleId": "LINT001",
+      "severity": "WARNING",
+      "message": "return value discarded with blank identifier in multi-value call",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 576,
         "column": 5,
-        "endLine": 441,
+        "endLine": 576,
         "endColumn": 67
       },
       "category": "lint",
@@ -4270,9 +4520,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "j1939/pgn_test.go",
-        "line": 64,
+        "line": 103,
         "column": 2,
-        "endLine": 64,
+        "endLine": 103,
         "endColumn": 23
       },
       "category": "lint",
@@ -4585,9 +4835,9 @@
       "message": "return value discarded with blank identifier in multi-value call",
       "location": {
         "file": "socketcan/bus_linux.go",
-        "line": 108,
+        "line": 118,
         "column": 2,
-        "endLine": 108,
+        "endLine": 118,
         "endColumn": 33
       },
       "category": "lint",
@@ -4618,7 +4868,7 @@
         "line": 86,
         "column": 2,
         "endLine": 86,
-        "endColumn": 37
+        "endColumn": 59
       },
       "category": "lint",
       "remediation": "assign all return values to named variables and handle each explicitly",
@@ -4633,7 +4883,7 @@
         "line": 88,
         "column": 2,
         "endLine": 88,
-        "endColumn": 39
+        "endColumn": 61
       },
       "category": "lint",
       "remediation": "assign all return values to named variables and handle each explicitly",
@@ -4678,7 +4928,7 @@
         "line": 149,
         "column": 2,
         "endLine": 149,
-        "endColumn": 42
+        "endColumn": 64
       },
       "category": "lint",
       "remediation": "assign all return values to named variables and handle each explicitly",
@@ -5225,6 +5475,17 @@
       "fingerprint": "sha256:9ce79480d258dc596d5500f9f93bdd6a9dfa5be6db9f26294dd4b58e9c8d5c16"
     },
     {
+      "ruleId": "QUALIFY001",
+      "severity": "INFO",
+      "message": "qualify-report.json not found",
+      "location": {
+        "file": "/home/runner/work/go-CAN/go-CAN"
+      },
+      "category": "other",
+      "remediation": "Run 'gofusa qualify' to generate tool qualification evidence.",
+      "fingerprint": "sha256:9ab5481fef063ea35a4a3ddffb1c7bd0db311c2dbef34830f696b55fb7ecc5b1"
+    },
+    {
       "ruleId": "SLSA002",
       "severity": "INFO",
       "message": "provenance.json missing builder field — SLSA L2 requires the build system to be identified",
@@ -5248,19 +5509,19 @@
     }
   ],
   "summary": {
-    "total": 367,
+    "total": 386,
     "errors": 0,
-    "warnings": 226,
-    "infos": 141
+    "warnings": 233,
+    "infos": 153
   },
   "summaryTable": {
     "by_category": [
       {
         "category": "ANA",
         "errors": 0,
-        "warnings": 77,
-        "infos": 44,
-        "total": 121
+        "warnings": 80,
+        "infos": 45,
+        "total": 125
       },
       {
         "category": "AUDITPACK",
@@ -5287,8 +5548,8 @@
         "category": "CYBER",
         "errors": 0,
         "warnings": 4,
-        "infos": 83,
-        "total": 87
+        "infos": 93,
+        "total": 97
       },
       {
         "category": "HARA",
@@ -5300,9 +5561,16 @@
       {
         "category": "LINT",
         "errors": 0,
-        "warnings": 124,
+        "warnings": 128,
         "infos": 6,
-        "total": 130
+        "total": 134
+      },
+      {
+        "category": "QUALIFY",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "total": 1
       },
       {
         "category": "SLSA",
@@ -5316,22 +5584,22 @@
       {
         "ruleId": "LINT001",
         "severity": "WARNING",
-        "count": 124
+        "count": 128
       },
       {
         "ruleId": "CYBER009",
         "severity": "INFO",
-        "count": 83
+        "count": 93
       },
       {
         "ruleId": "ANA007",
         "severity": "WARNING",
-        "count": 59
+        "count": 62
       },
       {
         "ruleId": "ANA006",
         "severity": "INFO",
-        "count": 44
+        "count": 45
       },
       {
         "ruleId": "COMP001",
@@ -5389,6 +5657,11 @@
         "count": 1
       },
       {
+        "ruleId": "QUALIFY001",
+        "severity": "INFO",
+        "count": 1
+      },
+      {
         "ruleId": "SLSA002",
         "severity": "INFO",
         "count": 1
@@ -5399,6 +5672,6 @@
         "count": 1
       }
     ],
-    "file_count": 50
+    "file_count": 51
   }
 }

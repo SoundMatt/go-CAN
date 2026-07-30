@@ -5,7 +5,7 @@
   "toolVersion": "0.47.0",
   "language": "go",
   "format": "go-FuSa Safety Case v1",
-  "generatedAt": "2026-07-29T15:02:41.360711Z",
+  "generatedAt": "2026-07-30T21:28:02.430731004Z",
   "module": "github.com/SoundMatt/go-CAN",
   "standard": "generic",
   "evidence": [
@@ -14,7 +14,7 @@
       "description": "Coding standard and static analysis checks",
       "file": "check-report.json",
       "status": "present",
-      "detail": "367 findings (0 errors, 226 warnings)"
+      "detail": "386 findings (0 errors, 233 warnings)"
     },
     {
       "id": "trace",
@@ -28,14 +28,14 @@
       "description": "Test evidence bundle",
       "file": ".fusa-evidence.json",
       "status": "present",
-      "detail": "213/213 tests passed"
+      "detail": "223/231 tests passed"
     },
     {
       "id": "qualify",
       "description": "Tool qualification report",
       "file": "qualify-report.json",
-      "status": "present",
-      "detail": "46/46 cases passed"
+      "status": "absent",
+      "detail": "run 'gofusa qualify' to generate"
     },
     {
       "id": "sbom",
@@ -93,7 +93,9 @@
       ]
     }
   ],
-  "gaps": null,
+  "gaps": [
+    "qualify"
+  ],
   "nodes": [
     {
       "id": "G1",
@@ -123,7 +125,7 @@
     {
       "id": "Sn1",
       "type": "solution",
-      "text": "367 findings (0 errors, 226 warnings)",
+      "text": "386 findings (0 errors, 233 warnings)",
       "evidence": "check-report.json"
     },
     {
@@ -145,19 +147,13 @@
     {
       "id": "Sn3",
       "type": "solution",
-      "text": "213/213 tests passed",
+      "text": "223/231 tests passed",
       "evidence": ".fusa-evidence.json"
     },
     {
       "id": "G5",
       "type": "goal",
       "text": "Tool qualification report is present and satisfactory for github.com/SoundMatt/go-CAN."
-    },
-    {
-      "id": "Sn4",
-      "type": "solution",
-      "text": "46/46 cases passed",
-      "evidence": "qualify-report.json"
     },
     {
       "id": "G6",
@@ -234,11 +230,6 @@
       "type": "supportedBy"
     },
     {
-      "from": "G5",
-      "to": "Sn4",
-      "type": "supportedBy"
-    },
-    {
       "from": "St1",
       "to": "G6",
       "type": "supportedBy"
@@ -261,7 +252,7 @@
   ],
   "completeness": {
     "totalGoals": 7,
-    "goalsWithEvidence": 6,
-    "undeveloped": 0
+    "goalsWithEvidence": 5,
+    "undeveloped": 1
   }
 }

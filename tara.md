@@ -1,7 +1,7 @@
 # Threat Analysis and Risk Assessment (TARA)
 
 **Module:** github.com/SoundMatt/go-CAN  
-**Generated:** 2026-07-29T15:02:39Z  
+**Generated:** 2026-07-30T21:27:56Z  
 **Standard:** ISO/SAE 21434:2021 Clause 15  
 **Coverage:** 14 / 24 assets (58.3%)
 
@@ -51,8 +51,8 @@
 | TARA-042 | tp.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-043 | tp.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-044 | tp.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-045 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-046 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-045 | tp.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-046 | tp.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-047 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-048 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-049 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
@@ -65,15 +65,17 @@
 | TARA-056 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-057 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-058 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-059 | recorder.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-060 | recorder.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-061 | e2e.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-062 | e2e.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-063 | bus_linux.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-064 | bus_linux.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-065 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
-| TARA-066 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-059 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-060 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-061 | recorder.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-062 | recorder.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-063 | e2e.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-064 | e2e.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-065 | bus_linux.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-066 | bus_linux.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-067 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-068 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-069 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
 | TARA-070 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-071 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |
+| TARA-072 | client.go | Integer narrowing conversion causes silent data truncation | T/D | CWE-190 | Local | low | moderate/negligible/moderate/negligible | low | mitigate | 1 | Add range check before conversion |

@@ -118,7 +118,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "dbc/parser.go",
-        "line": 351,
+        "line": 354,
         "column": 25
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -151,7 +151,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport.go",
-        "line": 132,
+        "line": 136,
         "column": 21
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -162,7 +162,7 @@
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport.go",
-        "line": 140,
+        "line": 144,
         "column": 38
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -173,7 +173,7 @@
       "message": "uint16(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport.go",
-        "line": 140,
+        "line": 144,
         "column": 56
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -184,7 +184,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport.go",
-        "line": 183,
+        "line": 187,
         "column": 19
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -206,8 +206,41 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "isotp/transport_test.go",
-        "line": 316,
+        "line": 363,
         "column": 16
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 459,
+        "column": 16
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 475,
+        "column": 17
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "isotp/transport_test.go",
+        "line": 476,
+        "column": 10
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
     },
@@ -467,10 +500,32 @@
     {
       "ruleId": "CYBER009",
       "severity": "INFO",
+      "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp.go",
+        "line": 94,
+        "column": 11
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp.go",
+        "line": 106,
+        "column": 14
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 111,
+        "line": 117,
         "column": 12
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -481,7 +536,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 252,
+        "line": 278,
         "column": 17
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -492,7 +547,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 252,
+        "line": 278,
         "column": 26
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -503,7 +558,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 252,
+        "line": 278,
         "column": 40
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -514,7 +569,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 257,
+        "line": 283,
         "column": 13
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -525,7 +580,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 257,
+        "line": 283,
         "column": 26
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -536,7 +591,7 @@
       "message": "uint32(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp.go",
-        "line": 257,
+        "line": 283,
         "column": 42
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -547,8 +602,63 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "j1939/tp_test.go",
-        "line": 37,
+        "line": 38,
         "column": 10
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 338,
+        "column": 3
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 338,
+        "column": 27
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 341,
+        "column": 3
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 341,
+        "column": 18
+      },
+      "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
+    },
+    {
+      "ruleId": "CYBER009",
+      "severity": "INFO",
+      "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
+      "location": {
+        "file": "j1939/tp_test.go",
+        "line": 341,
+        "column": 38
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
     },
@@ -789,7 +899,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "socketcan/bus_linux.go",
-        "line": 189,
+        "line": 199,
         "column": 12
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"
@@ -800,7 +910,7 @@
       "message": "byte(x) — explicit narrowing conversion may silently truncate bits if x exceeds the target type's range",
       "location": {
         "file": "socketcan/bus_linux.go",
-        "line": 199,
+        "line": 212,
         "column": 11
       },
       "remediation": "add an explicit range check before the conversion, or use math/bits or saturating arithmetic"

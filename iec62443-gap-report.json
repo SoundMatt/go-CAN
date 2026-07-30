@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-29T15:02:43.749631Z",
+  "generatedAt": "2026-07-30T21:28:08.960319421Z",
   "projectRoot": "go-CAN",
   "standard": "iec62443-4-2",
   "objectives": [
@@ -48,10 +48,7 @@
       "id": "IEC62443-CR-1.4",
       "title": "Software update documentation (provenance.json with builder field)",
       "clause": "CR 1.4",
-      "status": "gap",
-      "findings": [
-        "provenance.json missing builder field — run 'gofusa release' from CI (auto-detected via GITHUB_ACTIONS/GITHUB_WORKFLOW_REF or FUSA_BUILDER), or pass --builder explicitly"
-      ]
+      "status": "satisfied"
     },
     {
       "id": "IEC62443-CR-3.1",
@@ -86,8 +83,8 @@
   ],
   "summary": {
     "total": 12,
-    "satisfied": 9,
+    "satisfied": 10,
     "partial": 2,
-    "gaps": 1
+    "gaps": 0
   }
 }

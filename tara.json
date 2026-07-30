@@ -4,7 +4,7 @@
   "tool": "go-FuSa",
   "toolVersion": "0.47.0",
   "language": "go",
-  "generatedAt": "2026-07-29T15:02:39.241134Z",
+  "generatedAt": "2026-07-30T21:27:56.961841266Z",
   "format": "go-FuSa TARA v1",
   "module": "github.com/SoundMatt/go-CAN",
   "threats": [
@@ -274,11 +274,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "dbc/parser.go",
-        "line": 351
+        "line": 354
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "dbc/parser.go",
-      "sourceLine": 351
+      "sourceLine": 354
     },
     {
       "id": "TARA-009",
@@ -376,11 +376,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "isotp/transport.go",
-        "line": 132
+        "line": 136
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "isotp/transport.go",
-      "sourceLine": 132
+      "sourceLine": 136
     },
     {
       "id": "TARA-012",
@@ -410,11 +410,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "isotp/transport.go",
-        "line": 140
+        "line": 144
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "isotp/transport.go",
-      "sourceLine": 140
+      "sourceLine": 144
     },
     {
       "id": "TARA-013",
@@ -444,11 +444,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "isotp/transport.go",
-        "line": 140
+        "line": 144
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "isotp/transport.go",
-      "sourceLine": 140
+      "sourceLine": 144
     },
     {
       "id": "TARA-014",
@@ -478,11 +478,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "isotp/transport.go",
-        "line": 183
+        "line": 187
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "isotp/transport.go",
-      "sourceLine": 183
+      "sourceLine": 187
     },
     {
       "id": "TARA-015",
@@ -1294,11 +1294,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "j1939/tp.go",
-        "line": 111
+        "line": 94
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "j1939/tp.go",
-      "sourceLine": 111
+      "sourceLine": 94
     },
     {
       "id": "TARA-039",
@@ -1328,11 +1328,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "j1939/tp.go",
-        "line": 252
+        "line": 106
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "j1939/tp.go",
-      "sourceLine": 252
+      "sourceLine": 106
     },
     {
       "id": "TARA-040",
@@ -1362,11 +1362,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "j1939/tp.go",
-        "line": 252
+        "line": 117
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "j1939/tp.go",
-      "sourceLine": 252
+      "sourceLine": 117
     },
     {
       "id": "TARA-041",
@@ -1396,11 +1396,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "j1939/tp.go",
-        "line": 252
+        "line": 278
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "j1939/tp.go",
-      "sourceLine": 252
+      "sourceLine": 278
     },
     {
       "id": "TARA-042",
@@ -1430,11 +1430,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "j1939/tp.go",
-        "line": 257
+        "line": 278
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "j1939/tp.go",
-      "sourceLine": 257
+      "sourceLine": 278
     },
     {
       "id": "TARA-043",
@@ -1464,11 +1464,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "j1939/tp.go",
-        "line": 257
+        "line": 278
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "j1939/tp.go",
-      "sourceLine": 257
+      "sourceLine": 278
     },
     {
       "id": "TARA-044",
@@ -1498,15 +1498,15 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "j1939/tp.go",
-        "line": 257
+        "line": 283
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "j1939/tp.go",
-      "sourceLine": 257
+      "sourceLine": 283
     },
     {
       "id": "TARA-045",
-      "asset": "client.go",
+      "asset": "tp.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
         "T",
@@ -1531,16 +1531,16 @@
       "currentControl": "Add range check before conversion",
       "residualRisk": "Low after remediation",
       "location": {
-        "file": "obdii/client.go",
-        "line": 146
+        "file": "j1939/tp.go",
+        "line": 283
       },
       "cyberRuleId": "CYBER009",
-      "sourceFile": "obdii/client.go",
-      "sourceLine": 146
+      "sourceFile": "j1939/tp.go",
+      "sourceLine": 283
     },
     {
       "id": "TARA-046",
-      "asset": "client.go",
+      "asset": "tp.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
         "T",
@@ -1565,12 +1565,12 @@
       "currentControl": "Add range check before conversion",
       "residualRisk": "Low after remediation",
       "location": {
-        "file": "obdii/client.go",
-        "line": 146
+        "file": "j1939/tp.go",
+        "line": 283
       },
       "cyberRuleId": "CYBER009",
-      "sourceFile": "obdii/client.go",
-      "sourceLine": 146
+      "sourceFile": "j1939/tp.go",
+      "sourceLine": 283
     },
     {
       "id": "TARA-047",
@@ -1668,11 +1668,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "obdii/client.go",
-        "line": 177
+        "line": 146
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "obdii/client.go",
-      "sourceLine": 177
+      "sourceLine": 146
     },
     {
       "id": "TARA-050",
@@ -1702,11 +1702,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "obdii/client.go",
-        "line": 177
+        "line": 146
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "obdii/client.go",
-      "sourceLine": 177
+      "sourceLine": 146
     },
     {
       "id": "TARA-051",
@@ -1736,11 +1736,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "obdii/client.go",
-        "line": 212
+        "line": 177
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "obdii/client.go",
-      "sourceLine": 212
+      "sourceLine": 177
     },
     {
       "id": "TARA-052",
@@ -1770,11 +1770,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "obdii/client.go",
-        "line": 212
+        "line": 177
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "obdii/client.go",
-      "sourceLine": 212
+      "sourceLine": 177
     },
     {
       "id": "TARA-053",
@@ -1804,11 +1804,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "obdii/client.go",
-        "line": 237
+        "line": 212
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "obdii/client.go",
-      "sourceLine": 237
+      "sourceLine": 212
     },
     {
       "id": "TARA-054",
@@ -1838,11 +1838,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "obdii/client.go",
-        "line": 237
+        "line": 212
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "obdii/client.go",
-      "sourceLine": 237
+      "sourceLine": 212
     },
     {
       "id": "TARA-055",
@@ -1872,11 +1872,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "obdii/client.go",
-        "line": 242
+        "line": 237
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "obdii/client.go",
-      "sourceLine": 242
+      "sourceLine": 237
     },
     {
       "id": "TARA-056",
@@ -1906,11 +1906,11 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "obdii/client.go",
-        "line": 242
+        "line": 237
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "obdii/client.go",
-      "sourceLine": 242
+      "sourceLine": 237
     },
     {
       "id": "TARA-057",
@@ -1940,14 +1940,48 @@
       "residualRisk": "Low after remediation",
       "location": {
         "file": "obdii/client.go",
-        "line": 247
+        "line": 242
       },
       "cyberRuleId": "CYBER009",
       "sourceFile": "obdii/client.go",
-      "sourceLine": 247
+      "sourceLine": 242
     },
     {
       "id": "TARA-058",
+      "asset": "client.go",
+      "threat": "Integer narrowing conversion causes silent data truncation",
+      "stride": [
+        "T",
+        "D"
+      ],
+      "cwe": "CWE-190",
+      "standard": "MISRA Rule 10.3",
+      "attackVector": "Local",
+      "attackFeasibility": "low",
+      "impact": {
+        "safety": "moderate",
+        "financial": "negligible",
+        "operational": "moderate",
+        "privacy": "negligible"
+      },
+      "risk": "low",
+      "treatment": "mitigate",
+      "securityLevel": 1,
+      "mitigations": [
+        "Add range check before conversion"
+      ],
+      "currentControl": "Add range check before conversion",
+      "residualRisk": "Low after remediation",
+      "location": {
+        "file": "obdii/client.go",
+        "line": 242
+      },
+      "cyberRuleId": "CYBER009",
+      "sourceFile": "obdii/client.go",
+      "sourceLine": 242
+    },
+    {
+      "id": "TARA-059",
       "asset": "client.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -1981,7 +2015,41 @@
       "sourceLine": 247
     },
     {
-      "id": "TARA-059",
+      "id": "TARA-060",
+      "asset": "client.go",
+      "threat": "Integer narrowing conversion causes silent data truncation",
+      "stride": [
+        "T",
+        "D"
+      ],
+      "cwe": "CWE-190",
+      "standard": "MISRA Rule 10.3",
+      "attackVector": "Local",
+      "attackFeasibility": "low",
+      "impact": {
+        "safety": "moderate",
+        "financial": "negligible",
+        "operational": "moderate",
+        "privacy": "negligible"
+      },
+      "risk": "low",
+      "treatment": "mitigate",
+      "securityLevel": 1,
+      "mitigations": [
+        "Add range check before conversion"
+      ],
+      "currentControl": "Add range check before conversion",
+      "residualRisk": "Low after remediation",
+      "location": {
+        "file": "obdii/client.go",
+        "line": 247
+      },
+      "cyberRuleId": "CYBER009",
+      "sourceFile": "obdii/client.go",
+      "sourceLine": 247
+    },
+    {
+      "id": "TARA-061",
       "asset": "recorder.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2015,7 +2083,7 @@
       "sourceLine": 199
     },
     {
-      "id": "TARA-060",
+      "id": "TARA-062",
       "asset": "recorder.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2049,7 +2117,7 @@
       "sourceLine": 232
     },
     {
-      "id": "TARA-061",
+      "id": "TARA-063",
       "asset": "e2e.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2083,7 +2151,7 @@
       "sourceLine": 188
     },
     {
-      "id": "TARA-062",
+      "id": "TARA-064",
       "asset": "e2e.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2117,41 +2185,7 @@
       "sourceLine": 203
     },
     {
-      "id": "TARA-063",
-      "asset": "bus_linux.go",
-      "threat": "Integer narrowing conversion causes silent data truncation",
-      "stride": [
-        "T",
-        "D"
-      ],
-      "cwe": "CWE-190",
-      "standard": "MISRA Rule 10.3",
-      "attackVector": "Local",
-      "attackFeasibility": "low",
-      "impact": {
-        "safety": "moderate",
-        "financial": "negligible",
-        "operational": "moderate",
-        "privacy": "negligible"
-      },
-      "risk": "low",
-      "treatment": "mitigate",
-      "securityLevel": 1,
-      "mitigations": [
-        "Add range check before conversion"
-      ],
-      "currentControl": "Add range check before conversion",
-      "residualRisk": "Low after remediation",
-      "location": {
-        "file": "socketcan/bus_linux.go",
-        "line": 189
-      },
-      "cyberRuleId": "CYBER009",
-      "sourceFile": "socketcan/bus_linux.go",
-      "sourceLine": 189
-    },
-    {
-      "id": "TARA-064",
+      "id": "TARA-065",
       "asset": "bus_linux.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2185,7 +2219,41 @@
       "sourceLine": 199
     },
     {
-      "id": "TARA-065",
+      "id": "TARA-066",
+      "asset": "bus_linux.go",
+      "threat": "Integer narrowing conversion causes silent data truncation",
+      "stride": [
+        "T",
+        "D"
+      ],
+      "cwe": "CWE-190",
+      "standard": "MISRA Rule 10.3",
+      "attackVector": "Local",
+      "attackFeasibility": "low",
+      "impact": {
+        "safety": "moderate",
+        "financial": "negligible",
+        "operational": "moderate",
+        "privacy": "negligible"
+      },
+      "risk": "low",
+      "treatment": "mitigate",
+      "securityLevel": 1,
+      "mitigations": [
+        "Add range check before conversion"
+      ],
+      "currentControl": "Add range check before conversion",
+      "residualRisk": "Low after remediation",
+      "location": {
+        "file": "socketcan/bus_linux.go",
+        "line": 212
+      },
+      "cyberRuleId": "CYBER009",
+      "sourceFile": "socketcan/bus_linux.go",
+      "sourceLine": 212
+    },
+    {
+      "id": "TARA-067",
       "asset": "client.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2219,7 +2287,7 @@
       "sourceLine": 125
     },
     {
-      "id": "TARA-066",
+      "id": "TARA-068",
       "asset": "client.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2253,7 +2321,7 @@
       "sourceLine": 139
     },
     {
-      "id": "TARA-067",
+      "id": "TARA-069",
       "asset": "client.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2287,7 +2355,7 @@
       "sourceLine": 157
     },
     {
-      "id": "TARA-068",
+      "id": "TARA-070",
       "asset": "client.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2321,7 +2389,7 @@
       "sourceLine": 158
     },
     {
-      "id": "TARA-069",
+      "id": "TARA-071",
       "asset": "client.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
@@ -2355,7 +2423,7 @@
       "sourceLine": 180
     },
     {
-      "id": "TARA-070",
+      "id": "TARA-072",
       "asset": "client.go",
       "threat": "Integer narrowing conversion causes silent data truncation",
       "stride": [
