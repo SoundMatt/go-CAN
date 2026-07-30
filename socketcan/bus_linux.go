@@ -60,12 +60,17 @@ type subscription struct {
 
 // New opens a raw CAN socket on the named network interface (e.g. "can0", "vcan0").
 // CAN FD frames are enabled automatically; the interface must support FD for FD
-// frames to be transmitted without error.
+// frames to be transmitted without error. The context bounds connection
+// establishment (RELAY §7 Form 1); if it is already cancelled, New returns
+// its error without opening a socket.
 //
 //fusa:req REQ-SCAN-001
 //fusa:req REQ-SCAN-002
 //fusa:req REQ-SCAN-006
-func New(iface string) (*Bus, error) {
+func New(ctx context.Context, iface string) (*Bus, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
 	fd, err := unix.Socket(unix.AF_CAN, unix.SOCK_RAW, unix.CAN_RAW)
 	if err != nil {
 		return nil, fmt.Errorf("socketcan: socket: %w", err)
@@ -75,6 +80,11 @@ func New(iface string) (*Bus, error) {
 	if fdErr := enableFD(fd); fdErr != nil {
 		// Non-fatal: classic-only interfaces don't support this option.
 		_ = fdErr
+	}
+
+	if err := ctx.Err(); err != nil {
+		_ = unix.Close(fd)
+		return nil, err
 	}
 
 	ifIdx, err := ifaceIndex(iface)
@@ -190,6 +200,9 @@ func encodeFrame(f can.Frame) []byte {
 		if f.BRS {
 			raw[5] |= canFDBRSFlag
 		}
+		if f.ESI {
+			raw[5] |= canFDESIFlag
+		}
 		copy(raw[8:], f.Data)
 		return raw
 	}
@@ -226,6 +239,7 @@ func decodeFrame(raw []byte) can.Frame {
 			Ext:  ext,
 			FD:   true,
 			BRS:  flags&canFDBRSFlag != 0,
+			ESI:  flags&canFDESIFlag != 0,
 			Data: data,
 		}
 	}

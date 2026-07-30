@@ -6,10 +6,12 @@
 package main
 
 import (
+	"context"
+
 	can "github.com/SoundMatt/go-CAN"
 	"github.com/SoundMatt/go-CAN/socketcan"
 )
 
 func openPlatformBus(iface string) (can.Bus, error) {
-	return socketcan.New(iface)
+	return socketcan.New(context.Background(), iface)
 }
