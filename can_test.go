@@ -42,6 +42,20 @@ func TestValidateFrame(t *testing.T) {
 		{name: "CAN data too long", frame: can.Frame{ID: 0x100, Data: make([]byte, 9)}, wantErr: true},
 		{name: "FD data too long", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 65)}, wantErr: true},
 		{name: "BRS without FD", frame: can.Frame{ID: 0x100, BRS: true, Data: []byte{1}}, wantErr: true},
+		// CAN FD (ISO 11898-1 / Bosch CAN FD) carries only the discrete
+		// wire-representable lengths 0-8, 12, 16, 20, 24, 32, 48, 64 (DLC
+		// codes 9-15 map to 12/16/20/24/32/48/64). Non-canonical lengths
+		// like 9, 10, 11 cannot be represented on the wire and would be
+		// silently padded by the controller, so the sender's declared
+		// length would never match what the receiver observes.
+		{name: "FD length 9 non-canonical", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 9)}, wantErr: true},
+		{name: "FD length 10 non-canonical", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 10)}, wantErr: true},
+		{name: "FD length 11 non-canonical", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 11)}, wantErr: true},
+		{name: "FD length 13 non-canonical", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 13)}, wantErr: true},
+		{name: "FD length 15 non-canonical", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 15)}, wantErr: true},
+		{name: "FD length 12 canonical", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 12)}, wantErr: false},
+		{name: "FD length 20 canonical", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 20)}, wantErr: false},
+		{name: "FD length 48 canonical", frame: can.Frame{ID: 0x100, FD: true, Data: make([]byte, 48)}, wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

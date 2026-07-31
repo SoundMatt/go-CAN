@@ -114,6 +114,13 @@ func (b *Bus) Send(_ context.Context, f can.Frame) error {
 	if err := can.ValidateFrame(f); err != nil {
 		return err
 	}
+	// The Linux CAN_RAW socket API carries only classic CAN and CAN FD
+	// frames (can_frame / canfd_frame). CAN XL is not representable here;
+	// encodeFrame would silently emit a truncated, mislabelled classic
+	// frame. Reject XL explicitly rather than corrupt the wire.
+	if f.XL {
+		return &can.ErrInvalidFrame{Reason: "socketcan (CAN_RAW) does not support CAN XL frames"}
+	}
 	raw := encodeFrame(f)
 	_, err := unix.Write(b.fd, raw)
 	if err != nil {

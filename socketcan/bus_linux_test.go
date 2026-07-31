@@ -145,6 +145,29 @@ func TestSendReceiveFD(t *testing.T) {
 	}
 }
 
+// TestSendRejectsXL guards against CAN XL frames being silently mis-encoded
+// as truncated/corrupted classic CAN on the wire. The Linux CAN_RAW socket
+// API (can_frame / canfd_frame) cannot represent CAN XL at all: prior to
+// this fix, encodeFrame's classic-CAN fallback path would truncate the
+// length byte (e.g. 2048 -> 0 mod 256) and copy at most 8 of up to 2048
+// data bytes, transmitting a corrupt frame with no error returned. Send
+// must now reject f.XL outright.
+func TestSendRejectsXL(t *testing.T) {
+	requireVCAN(t)
+
+	sender, err := socketcan.New(context.Background(), "vcan0")
+	if err != nil {
+		t.Fatalf("New: %v", err)
+	}
+	defer sender.Close()
+
+	f := can.Frame{ID: 0x100, XL: true, Data: make([]byte, 64)}
+	err = sender.Send(context.Background(), f)
+	if err == nil {
+		t.Fatal("Send with XL=true: expected error, got nil")
+	}
+}
+
 func TestBadInterface(t *testing.T) {
 	_, err := socketcan.New(context.Background(), "nosuchiface99")
 	if err == nil {
