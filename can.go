@@ -188,6 +188,21 @@ func MaxDataLen(fd bool) int {
 	return CANMaxDataLen
 }
 
+// validFDDataLen reports whether n is a valid CAN FD payload length. CAN FD
+// (ISO 11898-1) carries only these discrete lengths; DLC codes 9–15 map to
+// 12/16/20/24/32/48/64. Non-canonical lengths (e.g. 9, 10, 11) cannot be
+// represented on the wire and would be silently padded by the controller.
+func validFDDataLen(n int) bool {
+	switch {
+	case n <= 8:
+		return true
+	case n == 12 || n == 16 || n == 20 || n == 24 || n == 32 || n == 48 || n == 64:
+		return true
+	default:
+		return false
+	}
+}
+
 // ValidateFrame checks that f satisfies CAN protocol constraints.
 //
 //fusa:req REQ-CAN-009
@@ -248,6 +263,9 @@ func ValidateFrame(f Frame) error {
 	}
 	if f.FD && len(f.Data) > CANFDMaxDataLen {
 		return &ErrInvalidFrame{Reason: "CAN FD frame data exceeds 64 bytes"}
+	}
+	if f.FD && !validFDDataLen(len(f.Data)) {
+		return &ErrInvalidFrame{Reason: "CAN FD frame data length is not a valid DLC-mapped length"}
 	}
 	if f.BRS && !f.FD {
 		return &ErrInvalidFrame{Reason: "BRS requires FD=true"}

@@ -267,6 +267,15 @@ func (c *Conn) Recv(ctx context.Context) ([]byte, error) {
 			if cf.Data[0]&0x0F != sn&0x0F {
 				return nil, fmt.Errorf("isotp: unexpected SN %d (want %d)", cf.Data[0]&0x0F, sn&0x0F)
 			}
+			if len(cf.Data) < 2 {
+				// A Consecutive Frame carrying only the PCI byte has no
+				// payload. Accepting it would let a peer send correctly
+				// -incrementing SNs with zero-length payloads forever,
+				// stalling reassembly (buf never grows) without tripping
+				// any per-CF timeout as long as frames keep arriving.
+				// ISO 15765-2 CFs must carry at least one payload byte.
+				return nil, errors.New("isotp: empty consecutive frame payload")
+			}
 			remaining := length - len(buf)
 			chunk := cf.Data[1:]
 			if len(chunk) > remaining {
@@ -340,6 +349,15 @@ func (c *Conn) frame(data []byte) can.Frame {
 }
 
 // stminToDuration converts an STmin byte value to a time.Duration.
+//
+// ISO 15765-2 defines 0x00-0x7F as 0-127ms and 0xF1-0xF9 as 100-900us;
+// 0x80-0xF0 and 0xFA-0xFF are reserved. Reserved values are mapped to the
+// maximum 127ms delay (rather than 0/no delay) as a fail-safe: treating an
+// undefined value as "no minimum separation" risks flooding the receiver,
+// while treating it as the max standard delay never violates the peer's
+// real (unknown) pacing requirement. This matches the conventional
+// interpretation used by reference ISO-TP implementations (e.g. the Linux
+// kernel's isotp.c).
 func stminToDuration(stmin byte) time.Duration {
 	switch {
 	case stmin <= 0x7F:
@@ -347,6 +365,6 @@ func stminToDuration(stmin byte) time.Duration {
 	case stmin >= 0xF1 && stmin <= 0xF9:
 		return time.Duration(stmin-0xF0) * 100 * time.Microsecond
 	default:
-		return 0
+		return 127 * time.Millisecond
 	}
 }

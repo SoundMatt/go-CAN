@@ -49,6 +49,7 @@ protocol, with zero required dependencies in the core library.
 | v0.10.1 | Patch: per-subscription Seq counters, capabilities accuracy, RELAY spec v1.11, README fix | shipped |
 | v0.11.0 | Interop testing infrastructure — two-process self-interop + can-utils third-party interop over real `vcan0` (Milestone 14) | shipped |
 | v0.12.1 | Patch: RELAY dependency bump v1.11.0 → `github.com/SoundMatt/RELAY/v2` v2.0.4 (module-path change per RELAY #70; spec v1.12–v1.14 + v2.0 reviewed for conformance impact, none applicable to CAN — verified live against the built `relay` v2.0.4 CLI) | shipped |
+| v0.12.2 | Patch: conformance-audit fixes — DBC parser rejects negative/oversize StartBit (ISO 11898-1, panic hardening); socketcan `Send` rejects CAN XL frames instead of silently corrupting the wire as truncated classic CAN; `ValidateFrame` rejects non-canonical CAN FD payload lengths (Bosch CAN FD DLC-mapped set); ISO-TP rejects empty-payload Consecutive Frames instead of stalling reassembly, reserved STmin values now map to the 127 ms fail-safe max instead of 0; CI third-party actions pinned to commit SHAs | shipped |
 | v1.0.0 | API stability, full SocketCAN feature set, documentation complete | planned |
 | v1.1.0 | **Bridge — MQTT** (`bridge/mqtt/`) — publish/subscribe CAN frames over MQTT topics | planned |
 | v1.2.0 | **Bridge — SOME/IP** (`bridge/someip/`) — translate CAN frames to/from SOME/IP service events | planned |

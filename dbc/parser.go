@@ -268,6 +268,12 @@ func parseSignal(line string) (*Signal, error) {
 	if length < 1 || length > 64 {
 		return nil, fmt.Errorf("dbc: signal %q has invalid length %d (must be 1-64): %q", name, length, bitDef)
 	}
+	if startBit < 0 || startBit > 511 {
+		// Bit positions must be non-negative and within a 64-byte (512-bit)
+		// CAN FD payload. A negative start bit produces a negative bit index
+		// and panics ("negative shift amount") in extractRaw/packRaw.
+		return nil, fmt.Errorf("dbc: signal %q has invalid start bit %d (must be 0-511): %q", name, startBit, bitDef)
+	}
 	orderSign := bitDef[atIdx+1:]
 	if len(orderSign) < 2 {
 		return nil, fmt.Errorf("dbc: malformed order+sign: %q", orderSign)

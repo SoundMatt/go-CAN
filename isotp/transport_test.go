@@ -320,6 +320,53 @@ func TestRecvEmptyFrame(t *testing.T) {
 	}
 }
 
+// TestRecvRejectsEmptyConsecutiveFrame verifies that a Consecutive Frame
+// carrying only the PCI byte (no payload) is rejected during reassembly
+// instead of silently stalling. Before this fix, a peer sending correctly
+// -incrementing SNs with zero-length CF payloads forever would leave buf
+// unable to grow, spinning the reassembly loop indefinitely without
+// tripping any per-CF timeout as long as frames kept arriving (ISO
+// 15765-2 CFs must carry at least one payload byte).
+func TestRecvRejectsEmptyConsecutiveFrame(t *testing.T) {
+	b, _ := virtual.New()
+	defer b.Close()
+
+	receiver, err := isotp.New(b, isotp.Config{TxID: 0x7E8, RxID: 0x7E0, Timeout: time.Second})
+	if err != nil {
+		t.Fatalf("New: %v", err)
+	}
+
+	done := make(chan error, 1)
+	go func() {
+		_, err := receiver.Recv(context.Background())
+		done <- err
+	}()
+
+	ctx := context.Background()
+	// First Frame: total length 20, carrying the first 6 payload bytes.
+	ff := can.Frame{ID: 0x7E0, Data: []byte{0x10, 20, 1, 2, 3, 4, 5, 6}}
+	if err := b.Send(ctx, ff); err != nil {
+		t.Fatalf("send FF: %v", err)
+	}
+	// Consecutive Frame with the correct SN but no payload bytes at all.
+	emptyCF := can.Frame{ID: 0x7E0, Data: []byte{0x21}}
+	if err := b.Send(ctx, emptyCF); err != nil {
+		t.Fatalf("send CF: %v", err)
+	}
+
+	select {
+	case err := <-done:
+		if err == nil {
+			t.Fatal("expected empty-consecutive-frame error")
+		}
+		if !strings.Contains(err.Error(), "empty consecutive frame") {
+			t.Errorf("error = %v, want 'empty consecutive frame'", err)
+		}
+	case <-time.After(2 * time.Second):
+		t.Fatal("Recv did not return (empty CF stalled reassembly)")
+	}
+}
+
 // waitTxType reads the next frame on txCh whose type nibble matches want,
 // failing on timeout. Returns the matched frame.
 func waitTxType(t *testing.T, txCh <-chan can.Frame, want byte) can.Frame {
@@ -380,9 +427,10 @@ func TestSendMultiFrameWithSTmin(t *testing.T) {
 }
 
 // TestSendMultiFrameMicroSTmin exercises the stminToDuration 0xF1–0xF9
-// (100–900 µs) branch and the default (invalid) branch.
+// (100–900 µs) branch and the reserved/default branch (mapped to the
+// fail-safe 127 ms maximum, not 0/no-delay — see stminToDuration).
 func TestSendMultiFrameMicroSTmin(t *testing.T) {
-	for _, stmin := range []byte{0xF1, 0x80} { // 0xF1 = 100 µs; 0x80 = reserved → 0
+	for _, stmin := range []byte{0xF1, 0x80} { // 0xF1 = 100 µs; 0x80 = reserved → 127 ms fail-safe
 		sender, b, tx := newSenderWithTap(t)
 		payload := make([]byte, 20)
 		done := make(chan error, 1)

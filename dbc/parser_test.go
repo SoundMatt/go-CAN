@@ -138,8 +138,37 @@ BO_ 256 EngineData: 8 ECU
 	}
 }
 
+// TestParseRejectsNegativeStartBit guards against a negative StartBit being
+// accepted at parse time. Without this check, the first call to
+// Signal.Decode/DB.Decode or packRaw computes a negative bit index and
+// panics with "runtime error: negative shift amount" (1 << (-1)).
+func TestParseRejectsNegativeStartBit(t *testing.T) {
+	const input = `
+BO_ 256 EngineData: 8 ECU
+ SG_ Foo : -1|8@1+ (1,0) [0|1] "" Vector__XXX
+`
+	_, err := dbc.Parse(strings.NewReader(input))
+	if err == nil {
+		t.Fatal("Parse with StartBit=-1 signal: expected error, got nil")
+	}
+}
+
+// TestParseRejectsOversizeStartBit guards the upper bound: a start bit must
+// lie within a 64-byte (512-bit) CAN FD payload.
+func TestParseRejectsOversizeStartBit(t *testing.T) {
+	const input = `
+BO_ 256 EngineData: 8 ECU
+ SG_ Foo : 512|8@1+ (1,0) [0|1] "" Vector__XXX
+`
+	_, err := dbc.Parse(strings.NewReader(input))
+	if err == nil {
+		t.Fatal("Parse with StartBit=512 signal: expected error, got nil")
+	}
+}
+
 func FuzzParse(f *testing.F) {
 	f.Add(sampleDBC)
+	f.Add("BO_ 256 EngineData: 8 ECU\n SG_ Foo : -1|8@1+ (1,0) [0|1] \"\" Vector__XXX\n")
 	f.Fuzz(func(t *testing.T, s string) {
 		// Must not panic
 		_, _ = dbc.Parse(strings.NewReader(s))
